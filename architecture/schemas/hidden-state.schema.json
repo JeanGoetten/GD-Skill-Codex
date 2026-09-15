@@ -1,0 +1,57 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/hidden-state.schema.json",
+    "title":  "GD Skill Codex hidden state",
+    "type":  "object",
+    "properties":  {
+                       "variables":  {
+                                         "type":  "object"
+                                     },
+                       "beliefs":  {
+                                       "type":  "array"
+                                   },
+                       "visibility":  {
+                                          "type":  "object"
+                                      },
+                       "resource_flow":  {
+                                             "$ref":  "https://gd-skill-codex.local/schemas/resource-flow-economy.schema.json"
+                                      },
+                       "petri_net":  {
+                                         "$ref":  "https://gd-skill-codex.local/schemas/petri-net.schema.json"
+                                     },
+                       "frame_timing":  {
+                                            "$ref":  "https://gd-skill-codex.local/schemas/frame-timing.schema.json"
+                                        },
+                       "era":  {
+                                   "$ref":  "https://gd-skill-codex.local/schemas/procedural-expressive-range-analysis.schema.json"
+                                     },
+                       "macroeconomic_conversion":  {
+                                                          "$ref":  "https://gd-skill-codex.local/schemas/macroeconomic-conversion.schema.json"
+                                                      },
+                       "progression_analysis":  {
+                                                    "$ref":  "https://gd-skill-codex.local/schemas/progression-analysis.schema.json"
+                                                      },
+                       "risk_reward_actions":  {
+                                                    "$ref":  "https://gd-skill-codex.local/schemas/risk-reward-action.schema.json"
+                                                },
+                       "epistemic_progression":  {
+                                                     "$ref":  "https://gd-skill-codex.local/schemas/epistemic-progression.schema.json"
+                                                },
+                       "cognitive_schema_disruption":  {
+                                                            "$ref":  "https://gd-skill-codex.local/schemas/cognitive-schema-disruption.schema.json"
+                                                },
+                       "competitive_feedback":  {
+                                                    "$ref":  "https://gd-skill-codex.local/schemas/competitive-feedback.schema.json"
+                                                },
+                       "spatial_pacing":  {
+                                               "$ref":  "https://gd-skill-codex.local/schemas/spatial-pacing.schema.json"
+                                                },
+                       "emergent_agency_composition":  {
+                                                            "$ref":  "https://gd-skill-codex.local/schemas/emergent-agency-composition.schema.json"
+                                                },
+                       "nested_gameplay_loop_architecture":  {
+                                                                  "$ref":  "https://gd-skill-codex.local/schemas/nested-gameplay-loop-architecture.schema.json"
+                                                               }
+                   },
+    "additionalProperties":  true
+}

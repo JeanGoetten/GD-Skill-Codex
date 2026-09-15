@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/frame-timing.schema.json",
+  "title": "GD Skill Codex frame timing model",
+  "type": "object",
+  "required": ["tick_rate_hz", "actions"],
+  "properties": {
+    "tick_rate_hz": { "type": "number", "exclusiveMinimum": 0 },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "startup", "active", "recovery"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "startup": { "type": "integer", "minimum": 0 },
+          "active": { "type": "integer", "minimum": 0 },
+          "recovery": { "type": "integer", "minimum": 0 },
+          "hit_frame": { "type": "integer", "minimum": 1 },
+          "hit_stun": { "type": "integer", "minimum": 0 },
+          "block_stun": { "type": "integer", "minimum": 0 },
+          "repeatable": { "type": "boolean" },
+          "contact_condition": { "type": "boolean" },
+          "resource_condition": { "type": "boolean" },
+          "escape_condition": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": true
+}

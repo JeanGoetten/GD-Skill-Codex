@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/petri-net.schema.json",
+  "title": "GD Skill Codex Petri net",
+  "type": "object",
+  "required": ["places", "transitions"],
+  "properties": {
+    "places": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "tokens"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "tokens": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "inputs", "outputs"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "inputs": { "type": "array" },
+          "outputs": { "type": "array" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

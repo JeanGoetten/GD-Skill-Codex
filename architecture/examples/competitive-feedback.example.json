@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "competitive_feedback": {
+      "player_positions": [
+        { "player_id": "alpha", "rank": 1, "score": 100 },
+        { "player_id": "beta", "rank": 2, "score": 80 },
+        { "player_id": "gamma", "rank": 3, "score": 55 }
+      ],
+      "feedback_rules": {
+        "leader_drag": 0.1,
+        "last_place_effect": 15,
+        "leader_perfect_execution_advantage": 30,
+        "resource_expected_value_by_rank": { "1": 2, "2": 5, "3": 8 },
+        "leader_history": ["alpha", "beta", "alpha", "beta", "alpha"]
+      }
+    }
+  }
+}

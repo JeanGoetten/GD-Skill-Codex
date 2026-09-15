@@ -1,0 +1,83 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/handoff-contract.schema.json",
+    "title":  "GD Skill Codex HandoffContract",
+    "type":  "object",
+    "required":  [
+                     "source",
+                     "target",
+                     "relation",
+                     "when",
+                     "input",
+                     "expected_output",
+                     "return_to",
+                     "iteration",
+                     "input_schema",
+                     "output_schema"
+                 ],
+    "properties":  {
+                       "schema_version":  {
+                                              "type":  "string",
+                                              "pattern":  "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+                                          },
+                       "source":  {
+                                      "$ref":  "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId"
+                                  },
+                       "target":  {
+                                      "$ref":  "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId"
+                                  },
+                       "relation":  {
+                                        "enum":  [
+                                                     "complementary",
+                                                     "downstream",
+                                                     "iterative"
+                                                 ]
+                                    },
+                       "when":  {
+                                    "items":  {
+                                                  "type":  "string"
+                                              },
+                                    "type":  "array"
+                                },
+                       "input":  {
+                                     "items":  {
+                                                   "type":  "string"
+                                               },
+                                     "type":  "array"
+                                 },
+                       "expected_output":  {
+                                               "items":  {
+                                                             "type":  "string"
+                                                         },
+                                               "type":  "array"
+                                           },
+                       "return_to":  {
+                                         "$ref":  "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId"
+                                     },
+                       "iteration":  {
+                                         "additionalProperties":  true,
+                                         "properties":  {
+                                                            "max_cycles":  {
+                                                                               "type":  "integer",
+                                                                               "minimum":  1
+                                                                           },
+                                                            "convergence_metric":  {
+                                                                                       "minLength":  1,
+                                                                                       "type":  "string"
+                                                                                   }
+                                                        },
+                                         "type":  "object",
+                                         "required":  [
+                                                          "max_cycles",
+                                                          "convergence_metric"
+                                                      ]
+                                     },
+                       "input_schema":  {
+                                            "$ref":  "https://gd-skill-codex.local/schemas/skill-input.schema.json"
+                                        },
+                       "output_schema":  {
+                                             "$ref":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                                         }
+                   },
+    "additionalProperties":  true
+}

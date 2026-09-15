@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/playtest-observation.schema.json",
+  "title": "GD Skill Codex playtest observation",
+  "type": "object",
+  "required": ["id", "hypothesis_id", "metric", "value", "sample_size", "collected_at", "status"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "hypothesis_id": { "type": "string", "minLength": 1 },
+    "metric": { "type": "string", "minLength": 1 },
+    "value": { "type": ["number", "string", "boolean"] },
+    "sample_size": { "type": "integer", "minimum": 1 },
+    "collected_at": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["observed", "partial"] },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "source_uri": { "type": "string" }
+  },
+  "additionalProperties": false
+}

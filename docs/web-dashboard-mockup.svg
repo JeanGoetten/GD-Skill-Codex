@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc">
+  <title id="title">Maquete do painel GD Skill Codex</title>
+  <desc id="desc">Painel de análise de sistemas de jogo com cards de resumo, gráfico de progressão, fluxo de recursos e grafo de sistemas interconectados.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#151d32"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#172440"/>
+      <stop offset="1" stop-color="#202d50"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38e8d1"/>
+      <stop offset="1" stop-color="#3da5ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#020617" flood-opacity=".35"/>
+    </filter>
+    <style>
+      .text { font-family: Inter, ui-sans-serif, system-ui, sans-serif; fill: #e8eefc; }
+      .muted { font-family: Inter, ui-sans-serif, system-ui, sans-serif; fill: #93a4c7; }
+      .label { font-family: Inter, ui-sans-serif, system-ui, sans-serif; fill: #6f82aa; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; }
+      .small { font-family: Inter, ui-sans-serif, system-ui, sans-serif; fill: #a9b7d3; font-size: 13px; }
+      .grid { stroke: #293754; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="960" fill="url(#bg)"/>
+  <rect x="0" y="0" width="236" height="960" fill="#0a1020"/>
+  <path d="M236 0H1440V960H236Z" fill="url(#bg)"/>
+
+  <g transform="translate(30 34)">
+    <rect width="40" height="40" rx="12" fill="url(#cyan)"/>
+    <path d="M12 27V13h5l3 5 3-5h5v14h-5v-7l-3 5-3-5v7z" fill="#071323"/>
+    <text class="text" x="53" y="18" font-size="16" font-weight="800">GD Skill</text>
+    <text class="muted" x="53" y="37" font-size="14">Codex</text>
+  </g>
+  <g transform="translate(24 132)">
+    <rect x="0" y="0" width="188" height="42" rx="10" fill="#17243d"/>
+    <rect x="12" y="13" width="16" height="16" rx="4" fill="#38e8d1"/>
+    <text class="text" x="42" y="27" font-size="14" font-weight="700">Visao geral</text>
+    <text class="muted" x="18" y="77" font-size="14">Dependencias</text>
+    <text class="muted" x="18" y="125" font-size="14">Metricas</text>
+    <text class="muted" x="18" y="173" font-size="14">Recomendacoes</text>
+    <text class="muted" x="18" y="221" font-size="14">Dados de entrada</text>
+  </g>
+  <g transform="translate(24 830)">
+    <text class="label" x="0" y="0">PROJETO ATIVO</text>
+    <text class="text" x="0" y="28" font-size="14" font-weight="700">Nebula Frontier</text>
+    <text class="muted" x="0" y="50" font-size="12">nome provis&#243;rio</text>
+    <circle cx="10" cy="78" r="5" fill="#45e0a8"/>
+    <text class="muted" x="23" y="82" font-size="12">Analise sincronizada</text>
+  </g>
+
+  <g transform="translate(278 35)">
+    <text class="muted" x="0" y="16" font-size="13">PROJETO / ANALISE DE SISTEMAS</text>
+    <text class="text" x="0" y="58" font-size="30" font-weight="800">Nebula Frontier</text>
+    <text class="muted" x="0" y="84" font-size="14">Visao integrada das mecanicas informadas pelo jogador</text>
+    <rect x="1008" y="24" width="104" height="36" rx="18" fill="#153c3a" stroke="#2acdb4"/>
+    <circle cx="1030" cy="42" r="5" fill="#45e0a8"/>
+    <text class="text" x="1043" y="47" font-size="12" font-weight="700">ESTAVEL</text>
+    <rect x="1124" y="24" width="112" height="36" rx="18" fill="#202d4a"/>
+    <text class="text" x="1143" y="47" font-size="12" font-weight="700">Exportar</text>
+  </g>
+
+  <g transform="translate(278 152)" filter="url(#shadow)">
+    <rect width="1130" height="118" rx="18" fill="url(#hero)" stroke="#2b3b5d"/>
+    <rect x="24" y="25" width="68" height="68" rx="16" fill="#24385e"/>
+    <circle cx="58" cy="59" r="21" fill="none" stroke="#51e0cd" stroke-width="4"/>
+    <path d="M58 38v21l14 9" fill="none" stroke="#51e0cd" stroke-width="4" stroke-linecap="round"/>
+    <text class="label" x="116" y="32">RESUMO DA ANALISE</text>
+    <text class="text" x="116" y="63" font-size="20" font-weight="750">Sistema coerente, com dois pontos de risco</text>
+    <text class="muted" x="116" y="88" font-size="13">15 skills avaliadas &#183; 42 evidencias &#183; ultima atualizacao ha 4 min</text>
+    <rect x="872" y="30" width="218" height="58" rx="14" fill="#101c32"/>
+    <text class="label" x="892" y="53">CONFIANCA MEDIA</text>
+    <text class="text" x="892" y="76" font-size="20" font-weight="800">78%</text>
+    <path d="M1010 75h55" stroke="#38e8d1" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(278 296)">
+    <g filter="url(#shadow)">
+      <rect width="265" height="118" rx="16" fill="#131f35" stroke="#293a5c"/>
+      <rect x="22" y="23" width="38" height="38" rx="11" fill="#183c4b"/>
+      <path d="M34 49l7-8 6 5 9-13" fill="none" stroke="#42e2ca" stroke-width="3" stroke-linecap="round"/>
+      <text class="label" x="78" y="34">SAUDE DO SISTEMA</text>
+      <text class="text" x="22" y="91" font-size="28" font-weight="800">84<span font-size="16">/100</span></text>
+      <text class="muted" x="160" y="91" font-size="12">+6 vs. ultima versao</text>
+    </g>
+    <g transform="translate(288)" filter="url(#shadow)">
+      <rect width="265" height="118" rx="16" fill="#131f35" stroke="#293a5c"/>
+      <rect x="22" y="23" width="38" height="38" rx="11" fill="#44351e"/>
+      <path d="M41 31l10 19H31z" fill="none" stroke="#f4bb56" stroke-width="3"/>
+      <text class="label" x="78" y="34">RISCOS PRIORITARIOS</text>
+      <text class="text" x="22" y="91" font-size="28" font-weight="800">02</text>
+      <text class="muted" x="82" y="91" font-size="12">requerem playtest</text>
+    </g>
+    <g transform="translate(576)" filter="url(#shadow)">
+      <rect width="265" height="118" rx="16" fill="#131f35" stroke="#293a5c"/>
+      <rect x="22" y="23" width="38" height="38" rx="11" fill="#273052"/>
+      <path d="M31 49h20M31 42h20M31 35h12" stroke="#8e9fff" stroke-width="3" stroke-linecap="round"/>
+      <text class="label" x="78" y="34">COBERTURA</text>
+      <text class="text" x="22" y="91" font-size="28" font-weight="800">15<span font-size="16"> skills</span></text>
+      <text class="muted" x="166" y="91" font-size="12">3 handoffs ativos</text>
+    </g>
+    <g transform="translate(864)" filter="url(#shadow)">
+      <rect width="266" height="118" rx="16" fill="#131f35" stroke="#293a5c"/>
+      <rect x="22" y="23" width="38" height="38" rx="11" fill="#3e2949"/>
+      <path d="M31 51l8-9 6 5 10-14" fill="none" stroke="#dd82ea" stroke-width="3" stroke-linecap="round"/>
+      <text class="label" x="78" y="34">PROGRESSAO</text>
+      <text class="text" x="22" y="91" font-size="28" font-weight="800">1.8x</text>
+      <text class="muted" x="116" y="91" font-size="12">pico de dificuldade</text>
+    </g>
+  </g>
+
+  <g transform="translate(278 446)" filter="url(#shadow)">
+    <rect width="550" height="348" rx="16" fill="#131f35" stroke="#293a5c"/>
+    <text class="text" x="24" y="34" font-size="16" font-weight="750">Curva de progressao</text>
+    <text class="muted" x="24" y="57" font-size="12">custo marginal e poder do jogador</text>
+    <rect x="24" y="78" width="502" height="220" rx="10" fill="#101a2d"/>
+    <path class="grid" d="M50 110H500M50 155H500M50 200H500M50 245H500M50 290H500M50 110V290M162 110V290M275 110V290M387 110V290M500 110V290"/>
+    <path d="M50 270 C130 260 145 226 195 232 S264 190 315 184 S371 137 420 150 S463 116 500 120" fill="none" stroke="#43e1ca" stroke-width="4"/>
+    <path d="M50 270 C130 260 145 226 195 232 S264 190 315 184 S371 137 420 150 S463 116 500 120 L500 290 L50 290Z" fill="#39dabe" opacity=".09"/>
+    <path d="M50 267 C130 252 160 250 195 244 S260 226 315 210 S377 193 420 168 S465 149 500 137" fill="none" stroke="#788bff" stroke-width="3" stroke-dasharray="7 7"/>
+    <circle cx="420" cy="150" r="6" fill="#43e1ca" stroke="#d8fff8" stroke-width="2"/>
+    <text class="muted" x="48" y="316" font-size="11">Inicio</text><text class="muted" x="468" y="316" font-size="11">Endgame</text>
+    <rect x="355" y="92" width="12" height="3" fill="#43e1ca"/><text class="muted" x="374" y="97" font-size="11">poder</text>
+    <rect x="425" y="92" width="12" height="3" fill="#788bff"/><text class="muted" x="444" y="97" font-size="11">custo</text>
+  </g>
+
+  <g transform="translate(858 446)" filter="url(#shadow)">
+    <rect width="550" height="348" rx="16" fill="#131f35" stroke="#293a5c"/>
+    <text class="text" x="24" y="34" font-size="16" font-weight="750">Mapa de sistemas</text>
+    <text class="muted" x="24" y="57" font-size="12">selecione um no para filtrar os resultados</text>
+    <rect x="24" y="78" width="502" height="220" rx="10" fill="#101a2d"/>
+    <path d="M145 160L265 125M145 160L257 230M265 125L390 160M257 230L390 160M390 160L456 232M265 125L456 232" fill="none" stroke="#3d547d" stroke-width="2"/>
+    <path d="M145 160L257 230" fill="none" stroke="#43e1ca" stroke-width="3"/>
+    <circle cx="145" cy="160" r="31" fill="#263d63" stroke="#43e1ca" stroke-width="3"/>
+    <circle cx="265" cy="125" r="31" fill="#382e61" stroke="#9589ff" stroke-width="2"/>
+    <circle cx="257" cy="230" r="31" fill="#194a4d" stroke="#43e1ca" stroke-width="2"/>
+    <circle cx="390" cy="160" r="31" fill="#44361e" stroke="#f4bb56" stroke-width="2"/>
+    <circle cx="456" cy="232" r="27" fill="#303b57" stroke="#7589ac" stroke-width="2"/>
+    <text class="text" x="112" y="164" font-size="11" font-weight="700">COMBATE</text>
+    <text class="text" x="236" y="129" font-size="11" font-weight="700">LOOP</text>
+    <text class="text" x="231" y="234" font-size="11" font-weight="700">ECONOMIA</text>
+    <text class="text" x="368" y="164" font-size="11" font-weight="700">RISCO</text>
+    <text class="text" x="436" y="236" font-size="10" font-weight="700">MAPA</text>
+    <text class="muted" x="38" y="319" font-size="11">verde: consistente  &#183;  amarelo: revisar  &#183;  linha: handoff</text>
+  </g>
+
+  <g transform="translate(278 822)">
+    <rect width="1130" height="96" rx="16" fill="#17243b" stroke="#293a5c"/>
+    <rect x="22" y="22" width="5" height="52" rx="2" fill="#f4bb56"/>
+    <text class="label" x="45" y="35">RECOMENDACAO PRINCIPAL</text>
+    <text class="text" x="45" y="62" font-size="15" font-weight="700">Teste a transicao entre economia e risco antes de ajustar a curva de progressao.</text>
+    <text class="muted" x="45" y="82" font-size="12">Origem: resource-flow-economy &#183; encaminhamento: committed-risk-reward-actions</text>
+    <rect x="938" y="30" width="164" height="36" rx="18" fill="#263a60"/>
+    <text class="text" x="963" y="53" font-size="12" font-weight="700">Ver evidencias  &#8594;</text>
+  </g>
+</svg>

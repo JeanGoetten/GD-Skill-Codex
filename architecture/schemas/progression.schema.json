@@ -1,0 +1,68 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/progression.schema.json",
+    "title":  "GD Skill Codex progression model",
+    "type":  "object",
+    "properties":  {
+                       "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" },
+                       "world_model_version": { "type": "string", "minLength": 1 },
+                       "analysis_version": { "type": "string", "minLength": 1 },
+                       "skill_version": { "type": "string", "minLength": 1 },
+                       "input_hash": { "type": "string", "minLength": 1 },
+                       "stages":  {
+                                      "items":  {
+                                                  "type": "object",
+                                                  "required": ["id", "order"],
+                                                  "properties": {
+                                                      "id": { "type": "string", "minLength": 1 },
+                                                      "order": { "type": "integer", "minimum": 0 },
+                                                      "requirements": { "type": "array" },
+                                                      "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                                  }
+                                              },
+                                      "type":  "array"
+                                  },
+                       "gates":  {
+                                      "items":  {
+                                                  "type": "object",
+                                                  "required": ["id"],
+                                                  "properties": {
+                                                      "id": { "type": "string", "minLength": 1 },
+                                                      "requires": { "type": "array" },
+                                                      "unlocks": { "type": "array" },
+                                                      "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                                  }
+                                              },
+                                      "type":  "array"
+                                  },
+                       "milestones":  {
+                                          "items":  {
+                                                      "type": "object",
+                                                      "properties": {
+                                                          "id": { "type": "string", "minLength": 1 },
+                                                          "order": { "type": "integer" },
+                                                          "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                                      }
+                                                  },
+                                          "type":  "array"
+                                      },
+                       "current":  {
+                                        "type":  "string",
+                                        "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+                                    },
+                       "knowledge_requirements":  {
+                                          "type":  "array",
+                                          "items": {
+                                              "type": "object",
+                                              "required": ["id", "content", "epistemic_status"],
+                                              "properties": {
+                                                  "id": { "type": "string", "minLength": 1 },
+                                                  "content": { "type": "string", "minLength": 1 },
+                                                  "source": { "type": "string" },
+                                                  "epistemic_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                              }
+                                          }
+                                      }
+                   },
+    "additionalProperties":  false
+}

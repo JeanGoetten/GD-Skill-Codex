@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/spatial-pacing.schema.json",
+  "title": "GD Skill Codex spatial topology and learning pacing model",
+  "type": "object",
+  "required": ["nodes", "edges"],
+  "properties": {
+    "start_nodes": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "tension"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "mechanics": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "phase": { "enum": ["introduce", "develop", "twist", "combine", "rest"] },
+          "tension": { "type": "number", "minimum": 0, "maximum": 1 },
+          "death_risk": { "type": "boolean" },
+          "accessible_at_start": { "type": "boolean" },
+          "is_decompression": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": { "type": "string", "minLength": 1 },
+          "to": { "type": "string", "minLength": 1 },
+          "requires": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

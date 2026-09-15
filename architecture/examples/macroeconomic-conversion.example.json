@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "macroeconomic_conversion": {
+      "time_basis": "daily_tick",
+      "resources": [{ "id": "ore" }, { "id": "coal" }],
+      "products": [{ "id": "steel" }],
+      "conversions": [
+        {
+          "id": "smelt_steel",
+          "product": "steel",
+          "inputs": { "ore": 2, "coal": 1 },
+          "planned_output": 100,
+          "efficiency": 0.8
+        }
+      ],
+      "money": {
+        "source": 1000,
+        "drain": 700,
+        "supply": 10000,
+        "demand": 11000,
+        "price": 10
+      }
+    }
+  }
+}

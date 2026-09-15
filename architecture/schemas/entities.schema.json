@@ -1,0 +1,48 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/entities.schema.json",
+    "title":  "GD Skill Codex entities",
+    "type":  "array",
+    "items":  {
+                  "type":  "object",
+                  "required":  [
+                               "id"
+                           ],
+                  "properties":  {
+                                     "id":  {
+                                                "type":  "string",
+                                                "pattern":  "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                                            },
+                                     "name":  {
+                                                "minLength":  1,
+                                                "type":  "string"
+                                            },
+                                     "tags":  {
+                                                "items":  {
+                                                            "type":  "string"
+                                                        },
+                                                "type":  "array"
+                                            },
+                                     "metadata":  {
+                                                    "type":  "object",
+                                                    "properties": {
+                                                        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" },
+                                                        "source": { "type": "string", "minLength": 1 },
+                                                        "created_timestamp": { "type": "string", "format": "date-time" }
+                                                    }
+                                                },
+                                     "kind":  {
+                                                "type":  "string",
+                                                "enum": ["actor", "resource", "state", "capability", "knowledge_unit"]
+                                            },
+                                     "state":  {
+                                                    "type":  "object",
+                                                    "properties": {
+                                                        "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] },
+                                                        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" }
+                                                    }
+                                                }
+                                  },
+                  "additionalProperties":  false
+              }
+}

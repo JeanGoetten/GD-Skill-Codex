@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/simulation-report.schema.json",
+  "title": "GD Skill Codex simulation report",
+  "type": "object",
+  "required": ["schema_version", "runner", "executor_id", "world_model_hash", "seed", "repeats", "runs", "time_series", "events", "agents", "evidence_status", "aggregate"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "runner": { "const": "architecture/simulation_runner.ps1" },
+    "executor_id": { "type": "string", "minLength": 1 },
+    "world_model_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "seed": { "type": "integer" },
+    "repeats": { "type": "integer", "minimum": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["run_id", "seed", "status", "output"],
+        "properties": {
+          "run_id": { "type": "string", "minLength": 1 },
+          "seed": { "type": "integer" },
+          "status": { "enum": ["success", "partial", "blocked", "failed"] },
+          "output": { "type": "object" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "time_series": {
+      "type": "object",
+      "required": ["ticks", "metrics"],
+      "properties": {
+        "ticks": { "type": "array" },
+        "metrics": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "events": { "type": "array" },
+    "agents": { "type": "array" },
+    "evidence_status": { "enum": ["derived_from_simulation", "INSUFFICIENT_EVIDENCE"] },
+    "aggregate": {
+      "type": "object",
+      "required": ["successful_runs", "partial_runs", "failed_runs", "metric_names"],
+      "properties": {
+        "successful_runs": { "type": "integer", "minimum": 0 },
+        "partial_runs": { "type": "integer", "minimum": 0 },
+        "failed_runs": { "type": "integer", "minimum": 0 },
+        "metric_names": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/macroeconomic-conversion.schema.json",
+  "title": "GD Skill Codex macroeconomic conversion model",
+  "type": "object",
+  "required": ["resources", "products", "conversions"],
+  "properties": {
+    "time_basis": { "type": "string", "minLength": 1 },
+    "resources": { "type": "array", "minItems": 1 },
+    "products": { "type": "array", "minItems": 1 },
+    "conversions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "product", "inputs", "planned_output"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "product": { "type": "string", "minLength": 1 },
+          "inputs": { "type": "object" },
+          "planned_output": { "type": "number", "minimum": 0 },
+          "efficiency": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+        },
+        "additionalProperties": true
+      }
+    },
+    "money": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "number" },
+        "drain": { "type": "number" },
+        "supply": { "type": "number", "minimum": 0 },
+        "demand": { "type": "number", "minimum": 0 },
+        "price": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "risk_reward_actions": {
+      "reaction_min_frames": 10,
+      "action_contracts": [
+        {
+          "id": "heavy_slam",
+          "stamina_cost": 40,
+          "max_stamina": 100,
+          "dodge_cost": 20,
+          "recovery": 5,
+          "damage": 80,
+          "average_damage": 30,
+          "punishment_multiplier": 1.5,
+          "hitbox_area": 2,
+          "hurtbox_area": 5
+        },
+        {
+          "id": "safe_jab",
+          "stamina_cost": 5,
+          "max_stamina": 100,
+          "dodge_cost": 20,
+          "recovery": 12,
+          "damage": 10,
+          "average_damage": 30,
+          "punishment_multiplier": 1.2,
+          "hitbox_area": 1,
+          "hurtbox_area": 1.5
+        }
+      ]
+    }
+  }
+}

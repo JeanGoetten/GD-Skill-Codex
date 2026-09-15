@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/playtest-hypothesis.schema.json",
+  "title": "GD Skill Codex playtest hypothesis",
+  "type": "object",
+  "required": ["id", "hypothesis", "population", "metric", "protocol", "sample_size", "success_criterion"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "hypothesis": { "type": "string", "minLength": 1 },
+    "population": { "type": "string", "minLength": 1 },
+    "metric": { "type": "string", "minLength": 1 },
+    "protocol": { "type": "string", "minLength": 1 },
+    "sample_size": { "type": "integer", "minimum": 1 },
+    "success_criterion": { "type": "string", "minLength": 1 },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

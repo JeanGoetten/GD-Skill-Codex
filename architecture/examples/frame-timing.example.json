@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "frame_timing": {
+      "tick_rate_hz": 60,
+      "actions": [
+        {
+          "id": "heavy_strike",
+          "startup": 10,
+          "active": 3,
+          "recovery": 20,
+          "hit_frame": 11,
+          "hit_stun": 25,
+          "block_stun": 15,
+          "repeatable": true,
+          "contact_condition": true,
+          "resource_condition": true,
+          "escape_condition": true
+        }
+      ]
+    }
+  }
+}

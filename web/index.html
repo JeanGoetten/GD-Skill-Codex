@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Console de dados e simulação do GD Skill Codex">
+    <title>GD Skill Codex · Console</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="GD Skill Codex">
+        <span class="brand-mark">GD</span>
+        <span class="brand-text"><strong>Skill Codex</strong><small>console de dados</small></span>
+      </a>
+      <div class="topbar-right">
+        <span id="conn-status" class="conn on">● API local</span>
+        <nav aria-label="Seções">
+          <a href="#console">Execução</a>
+          <a href="#world-state">World state</a>
+          <a href="#catalog">Catálogo</a>
+          <a href="#topology">Topologia</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="section" id="console">
+        <div class="section-heading">
+          <div><p class="eyebrow">EXECUÇÃO · SIMULAÇÃO</p><h2>Console de execução</h2></div>
+          <p class="muted">Selecione executor e world model, defina seed e repetições, e rode a simulação.</p>
+        </div>
+        <div class="panel console-panel">
+          <div class="console-toolbar">
+            <label class="field">Executor
+              <select id="executor-select"></select>
+            </label>
+            <label class="field">World model
+              <select id="worldmodel-select"></select>
+            </label>
+            <label class="field">Seed
+              <input id="seed-input" type="number" value="42" min="0" step="1">
+            </label>
+            <label class="field">Repeats
+              <input id="repeats-input" type="number" value="1" min="1" max="10" step="1">
+            </label>
+            <button id="run-btn" class="btn btn-primary" type="button">● Executar</button>
+            <button id="load-btn" class="btn btn-secondary" type="button">Carregar JSON</button>
+            <input id="execution-file" type="file" accept=".json,application/json" hidden>
+          </div>
+          <div class="console-status">
+            <span id="execution-summary" class="status-line">idle · nenhuma execução carregada · status: not executed</span>
+          </div>
+          <div id="execution-error" class="error-line"></div>
+          <div id="execution-details" class="console-output"></div>
+          <div id="simulation-details" class="console-output"></div>
+        </div>
+      </section>
+
+      <section class="section" id="world-state">
+        <div class="section-heading">
+          <div><p class="eyebrow">ONTOLOGIA</p><h2>World state compartilhado</h2></div>
+          <span class="badge badge-blue">schema</span>
+        </div>
+        <div class="world-grid" id="world-fields"></div>
+      </section>
+
+      <section class="section" id="catalog">
+        <div class="section-heading">
+          <div><p class="eyebrow">CATÁLOGO</p><h2>Lentes de análise</h2></div>
+          <p id="result-count" class="muted"></p>
+        </div>
+        <div class="toolbar">
+          <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="buscar por skill, conceito ou saída..." aria-label="Buscar skills"></label>
+          <label class="field">Tipo
+            <select id="type-filter">
+              <option value="all">Todos</option>
+              <option value="formal">Formal</option>
+              <option value="design">Design</option>
+              <option value="hybrid">Híbrida</option>
+            </select>
+          </label>
+          <label class="field">Evidência
+            <select id="evidence-filter">
+              <option value="all">Todos</option>
+              <option value="formal">Formal</option>
+              <option value="derived">Derivada</option>
+              <option value="heuristic">Heurística</option>
+              <option value="empirical">Empírica</option>
+            </select>
+          </label>
+        </div>
+        <div class="catalog-layout">
+          <div class="skill-list" id="skill-list" aria-live="polite"></div>
+          <aside class="detail panel" id="detail-panel">
+            <p class="eyebrow">DETALHE</p>
+            <p class="muted">Selecione uma lente para ver contrato, saídas e handoffs.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="topology">
+        <div class="section-heading">
+          <div><p class="eyebrow">ROTEAMENTO</p><h2>Mapa de handoffs</h2></div>
+        </div>
+        <div class="panel graph-panel">
+          <svg id="graph" role="img" aria-label="Grafo de conexões entre skills" viewBox="0 0 1000 470"></svg>
+          <div id="graph-text" class="muted"></div>
+          <div class="graph-legend"><span><i class="dot formal"></i>formal</span><span><i class="dot design"></i>design</span><span><i class="dot hybrid"></i>híbrida</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>GD Skill Codex</span><span>dados locais · sem dependências externas</span></footer>
+    <script src="data.js"></script>
+    <script src="simulation-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

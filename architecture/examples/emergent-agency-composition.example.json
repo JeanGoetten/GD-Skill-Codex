@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "entities": [], "resources": [], "spatial": {}, "temporal": {}, "rules": [],
+  "knowledge": {}, "progression": {}, "economy": {}, "actors": [], "actions": [], "goals": [],
+  "hidden_state": {
+    "emergent_agency_composition": {
+      "version": "1.0.0",
+      "max_chain_depth": 8,
+      "energy_drain_per_trigger": 0,
+      "atomic_verbs": [
+        { "id": "ignite", "preconditions": ["flammable"], "effects": ["burning"], "cost": 2, "challenge_coverage": 0.4, "triggers": ["conduct"], "target_property": "flammable" },
+        { "id": "conduct", "preconditions": ["conductive"], "effects": ["shock"], "cost": 3, "challenge_coverage": 0.5, "triggers": ["ignite"], "target_property": "conductive" },
+        { "id": "freeze", "preconditions": ["liquid"], "effects": ["solid"], "cost": 4, "challenge_coverage": 0.3, "triggers": [], "target_property": "freezable" }
+      ],
+      "properties_matrix": [
+        { "entity_id": "oil_barrel", "properties": { "flammable": true, "conductive": false }, "susceptibilities": ["ignite"] },
+        { "entity_id": "water_pool", "properties": { "flammable": false, "conductive": true, "liquid": true }, "susceptibilities": ["conduct", "freeze"] }
+      ],
+      "compositions": [
+        { "id": "fire_shock", "first_verb": "ignite", "second_verb": "conduct", "connection_preconditions": ["conductive"], "result": "area_shock", "synergy_factor": 1.5, "effect_radius": 3, "novel_affordance": true, "reward": 10, "destructive_collateral": true, "reverse_result": "shock_fire" },
+        { "id": "ice_bridge", "first_verb": "freeze", "second_verb": "conduct", "connection_preconditions": ["solid"], "result": "walkable_surface", "synergy_factor": 1.2, "effect_radius": 2, "novel_affordance": true, "reward": 5 }
+      ]
+    }
+  }
+}

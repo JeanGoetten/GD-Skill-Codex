@@ -1,0 +1,33 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/metric.schema.json",
+    "title":  "GD Skill Codex Metric",
+    "type":  "object",
+    "required":  [
+                     "name",
+                     "value"
+                 ],
+    "properties":  {
+                       "name":  {
+                                    "minLength":  1,
+                                    "type":  "string"
+                                },
+                       "value":  {
+                                     "type":  [
+                                                  "number",
+                                                  "string",
+                                                  "boolean"
+                                              ]
+                                 },
+                       "unit":  {
+                                    "type":  "string"
+                                },
+                       "threshold":  {
+                                         "type":  "number"
+                                     },
+                       "status":  {
+                                      "type":  "string"
+                                  }
+                   },
+    "additionalProperties":  true
+}

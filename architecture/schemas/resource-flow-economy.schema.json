@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/resource-flow-economy.schema.json",
+  "title": "GD Skill Codex discrete resource-flow economy",
+  "type": "object",
+  "required": ["version", "flows"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+    },
+    "time_basis": { "type": "string", "minLength": 1 },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "initial_quantity": { "type": "number" },
+          "capacity": { "type": ["number", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "flows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "resource_id", "direction", "quantity"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "resource_id": { "type": "string", "minLength": 1 },
+          "direction": { "enum": ["source", "sink"] },
+          "quantity": { "type": "number", "minimum": 0 },
+          "node": { "type": "string" },
+          "active": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

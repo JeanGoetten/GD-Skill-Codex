@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/competitive-feedback.schema.json",
+  "title": "GD Skill Codex competitive negative feedback model",
+  "type": "object",
+  "required": ["player_positions", "feedback_rules"],
+  "properties": {
+    "player_positions": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["player_id", "rank", "score"],
+        "properties": {
+          "player_id": { "type": "string", "minLength": 1 },
+          "rank": { "type": "integer", "minimum": 1 },
+          "score": { "type": "number" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "feedback_rules": {
+      "type": "object",
+      "required": ["leader_drag", "last_place_effect"],
+      "properties": {
+        "leader_drag": { "type": "number", "minimum": 0 },
+        "last_place_effect": { "type": "number", "minimum": 0 },
+        "leader_perfect_execution_advantage": { "type": "number", "minimum": 0 },
+        "resource_expected_value_by_rank": { "type": "object" },
+        "leader_history": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

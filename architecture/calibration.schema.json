@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/calibration.schema.json",
+  "title": "Empirical calibration record",
+  "type": "object",
+  "required": ["parameter", "value", "status", "confidence", "requires_validation"],
+  "properties": {
+    "parameter": { "type": "string", "minLength": 1 },
+    "value": {},
+    "status": { "enum": ["system_constant", "design_parameter", "derived_metric", "formal", "derived", "heuristic", "empirical", "observed", "assumed", "unknown", "contradicted", "validated"] },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "sample_size": { "type": "integer", "minimum": 0 },
+    "evidence": { "type": "array", "items": { "type": "string" } },
+    "requires_validation": { "type": "boolean" },
+    "context": { "type": "string" }
+  },
+  "additionalProperties": false
+}

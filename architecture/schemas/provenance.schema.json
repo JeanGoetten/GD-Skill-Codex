@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/provenance.schema.json",
+  "title": "GD Skill Codex claim provenance",
+  "type": "object",
+  "required": ["input_hash", "world_model_version", "skill_version", "source_kind"],
+  "properties": {
+    "input_hash": { "type": "string", "minLength": 1 },
+    "world_model_version": { "type": "string", "minLength": 1 },
+    "skill_version": { "type": "string", "minLength": 1 },
+    "source_kind": { "enum": ["derived_from_declared_model", "derived_from_simulation", "empirical_observation", "INSUFFICIENT_EVIDENCE"] },
+    "dependencies": { "type": "array", "items": { "type": "string" } },
+    "conflicts": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

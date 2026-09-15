@@ -1,0 +1,667 @@
+﻿{
+    "version":  "1.0.0",
+    "activation_schema":  {
+                              "explicit":  "termos do formalismo ou domÃ­nio nomeados pelo usuÃ¡rio",
+                              "semantic":  "descriÃ§Ãµes do problema que nÃ£o dependem de jargÃ£o",
+                              "structural":  "propriedades observÃ¡veis do sistema",
+                              "anti_signals":  "evidÃªncias que reduzem ou bloqueiam a ativaÃ§Ã£o"
+                          },
+    "skills":  [
+                   {
+                       "id":  "discrete-state-machine-verification",
+                       "priority":  0.95,
+                       "formalism":  "FSM",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "FSM",
+                                                           "automaton",
+                                                           "invariant",
+                                                           "reachability"
+                                                       ],
+                                          "semantic":  [
+                                                           "estado impossÃ­vel",
+                                                           "transiÃ§Ã£o invÃ¡lida",
+                                                           "caminho inalcanÃ§Ã¡vel"
+                                                       ],
+                                          "structural":  [
+                                                             "controle sequencial",
+                                                             "estado inicial e final"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "processos simultÃ¢neos como restriÃ§Ã£o principal"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "world_state.rules",
+                                      "world_state.actions",
+                                      "state_variables"
+                                  ],
+                       "outputs":  [
+                                       "reachable_states",
+                                       "invariants",
+                                       "trajectory_anomalies"
+                                   ],
+                       "complements":  [
+                                           "concurrent-gameplay-processes",
+                                           "frame-based-combat-timing"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "concurrent-gameplay-processes",
+                       "priority":  0.94,
+                       "formalism":  "Petri Net",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "Petri net",
+                                                           "token",
+                                                           "deadlock",
+                                                           "liveness"
+                                                       ],
+                                          "semantic":  [
+                                                           "mÃ¡quinas operam simultaneamente",
+                                                           "mÃ¡quinas operem simultaneamente",
+                                                           "recursos ficam presos",
+                                                           "recursos presos",
+                                                           "sincronizaÃ§Ã£o"
+                                                       ],
+                                          "structural":  [
+                                                             "aÃ§Ãµes paralelas",
+                                                             "recurso compartilhado"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "sistema puramente sequencial"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "world_state.rules",
+                                      "world_state.actions",
+                                      "resource_list"
+                                  ],
+                       "outputs":  [
+                                       "places",
+                                       "transitions",
+                                       "deadlock_candidates"
+                                   ],
+                       "complements":  [
+                                           "resource-flow-economy",
+                                           "discrete-state-machine-verification"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "procedural-level-constraint-solving",
+                       "priority":  0.93,
+                       "formalism":  "CSP",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "CSP",
+                                                           "AC-3",
+                                                           "backtracking",
+                                                           "constraint"
+                                                       ],
+                                          "semantic":  [
+                                                           "fase gerada impossÃ­vel",
+                                                           "mapa sem soluÃ§Ã£o",
+                                                           "caminho crÃ­tico bloqueado"
+                                                       ],
+                                          "structural":  [
+                                                             "geraÃ§Ã£o procedural",
+                                                             "restriÃ§Ãµes duras",
+                                                             "requisito de solvabilidade"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "conteÃºdo inteiramente autoral e fixo"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "domains",
+                                      "constraints",
+                                      "world_state.spatial"
+                                  ],
+                       "outputs":  [
+                                       "solvability_status",
+                                       "domains",
+                                       "constraint_conflicts"
+                                   ],
+                       "complements":  [
+                                           "procedural-expressive-range-analysis",
+                                           "spatial-topology-and-learning-pacing"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "procedural-expressive-range-analysis",
+                       "priority":  0.7,
+                       "formalism":  "ERA",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "expressive range",
+                                                           "entropy",
+                                                           "KL divergence"
+                                                       ],
+                                          "semantic":  [
+                                                           "conteÃºdo procedural repetitivo",
+                                                           "gerador enviesado",
+                                                           "baixa variedade"
+                                                       ],
+                                          "structural":  [
+                                                             "amostras geradas",
+                                                             "distribuiÃ§Ã£o de variantes"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "solvabilidade ainda nÃ£o verificada"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "generated_samples",
+                                      "solvability_status"
+                                  ],
+                       "outputs":  [
+                                       "coverage_metrics",
+                                       "distribution_bias",
+                                       "generator_adjustments"
+                                   ],
+                       "complements":  [
+                                           "procedural-level-constraint-solving"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "validator",
+                       "routing_role":  "validator_candidate"
+                   },
+                   {
+                       "id":  "resource-flow-economy",
+                       "priority":  0.9,
+                       "formalism":  "stock-flow",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "stock",
+                                                           "flow",
+                                                           "source",
+                                                           "sink",
+                                                           "bottleneck"
+                                                       ],
+                                          "semantic":  [
+                                                           "recurso acumula ou esgota",
+                                                           "produÃ§Ã£o nÃ£o acompanha consumo",
+                                                           "gargalo"
+                                                       ],
+                                          "structural":  [
+                                                             "estoques",
+                                                             "taxas",
+                                                             "fontes e sinks"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "sem mudanÃ§a quantitativa de recursos"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "resource_list",
+                                      "source_rates",
+                                      "sink_rates"
+                                  ],
+                       "outputs":  [
+                                       "balance_equation",
+                                       "bottlenecks",
+                                       "stability_status"
+                                   ],
+                       "complements":  [
+                                           "macroeconomic-resource-conversion",
+                                           "exponential-progression-and-prestige"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "macroeconomic-resource-conversion",
+                       "priority":  0.82,
+                       "formalism":  "input-output matrix",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "input-output matrix",
+                                                           "production chain",
+                                                           "multiplier"
+                                                       ],
+                                          "semantic":  [
+                                                           "recursos convertidos em mÃºltiplos estÃ¡gios",
+                                                           "cadeia produtiva",
+                                                           "choque de oferta"
+                                                       ],
+                                          "structural":  [
+                                                             "bens intermediÃ¡rios",
+                                                             "mais de uma conversÃ£o"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "apenas um estoque com fonte e sink simples"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "stocks",
+                                      "conversion_rates",
+                                      "production_chain"
+                                  ],
+                       "outputs":  [
+                                       "input_output_matrix",
+                                       "production_chain",
+                                       "sustainability_status"
+                                   ],
+                       "complements":  [
+                                           "resource-flow-economy",
+                                           "exponential-progression-and-prestige"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "frame-based-combat-timing",
+                       "priority":  0.9,
+                       "formalism":  "discrete frame timeline",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "frames",
+                                                           "startup",
+                                                           "active",
+                                                           "recovery",
+                                                           "cancel"
+                                                       ],
+                                          "semantic":  [
+                                                           "janela de parry",
+                                                           "ataque tem recuperaÃ§Ã£o",
+                                                           "timing preciso"
+                                                       ],
+                                          "structural":  [
+                                                             "tick rate",
+                                                             "janelas temporais discretas"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "aÃ§Ã£o sem timing ou execuÃ§Ã£o temporal relevante"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "frame_timeline",
+                                      "input_windows",
+                                      "cancel_rules"
+                                  ],
+                       "outputs":  [
+                                       "frame_timeline",
+                                       "input_windows",
+                                       "execution_contracts"
+                                   ],
+                       "complements":  [
+                                           "committed-risk-reward-actions",
+                                           "discrete-state-machine-verification"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "committed-risk-reward-actions",
+                       "priority":  0.88,
+                       "formalism":  "action contract",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "commitment",
+                                                           "risk-reward",
+                                                           "exposure"
+                                                       ],
+                                          "semantic":  [
+                                                           "aÃ§Ã£o pesada pune erro",
+                                                           "escolha irreversÃ­vel",
+                                                           "janela de escape"
+                                                       ],
+                                          "structural":  [
+                                                             "precondiÃ§Ãµes",
+                                                             "custo",
+                                                             "consequÃªncia"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "aÃ§Ã£o sem custo ou compromisso"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "action_contracts",
+                                      "preconditions",
+                                      "frame_timeline"
+                                  ],
+                       "outputs":  [
+                                       "risk_matrix",
+                                       "escape_windows",
+                                       "agency_constraints"
+                                   ],
+                       "complements":  [
+                                           "frame-based-combat-timing",
+                                           "emergent-agency-composition"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "primary",
+                       "routing_role":  "primary_candidate"
+                   },
+                   {
+                       "id":  "emergent-agency-composition",
+                       "priority":  0.8,
+                       "formalism":  "action composition",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "affordance",
+                                                           "verb composition",
+                                                           "emergent agency"
+                                                       ],
+                                          "semantic":  [
+                                                           "combinar habilidades",
+                                                           "mÃºltiplas soluÃ§Ãµes",
+                                                           "aÃ§Ã£o emergente"
+                                                       ],
+                                          "structural":  [
+                                                             "aÃ§Ãµes composÃ¡veis",
+                                                             "efeitos combinatÃ³rios"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "sequÃªncia Ãºnica obrigatÃ³ria"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "world_state.actions",
+                                      "affordances",
+                                      "rules"
+                                  ],
+                       "outputs":  [
+                                       "action_grammar",
+                                       "compositions",
+                                       "agency_limits"
+                                   ],
+                       "complements":  [
+                                           "committed-risk-reward-actions",
+                                           "discrete-state-machine-verification"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "design",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "spatial-topology-and-learning-pacing",
+                       "priority":  0.79,
+                       "formalism":  "spatial graph",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "topology",
+                                                           "pacing",
+                                                           "gating",
+                                                           "affordance"
+                                                       ],
+                                          "semantic":  [
+                                                           "jogador aprende pelo espaÃ§o",
+                                                           "ritmo de salas",
+                                                           "Ã¡rea acessÃ­vel"
+                                                       ],
+                                          "structural":  [
+                                                             "grafo de salas",
+                                                             "gates",
+                                                             "learning beats"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "problema exclusivamente econÃ´mico"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "world_state.spatial",
+                                      "gates",
+                                      "learning_beats"
+                                  ],
+                       "outputs":  [
+                                       "spatial_graph",
+                                       "learning_curve",
+                                       "pacing_risks"
+                                   ],
+                       "complements":  [
+                                           "epistemic-holarchic-progression",
+                                           "cognitive-schema-disruption"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "design",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "epistemic-holarchic-progression",
+                       "priority":  0.78,
+                       "formalism":  "knowledge graph",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "knowledge graph",
+                                                           "epistemic",
+                                                           "clue dependency"
+                                                       ],
+                                          "semantic":  [
+                                                           "jogador precisa descobrir",
+                                                           "pistas desbloqueiam interpretaÃ§Ã£o",
+                                                           "conhecimento opcional"
+                                                       ],
+                                          "structural":  [
+                                                             "grafo fÃ­sico e grafo de conhecimento"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "progressÃ£o somente numÃ©rica"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "knowledge_graph",
+                                      "clue_dependencies",
+                                      "world_state.knowledge"
+                                  ],
+                       "outputs":  [
+                                       "knowledge_graph",
+                                       "evidence_gaps",
+                                       "interpretation_paths"
+                                   ],
+                       "complements":  [
+                                           "cognitive-schema-disruption",
+                                           "spatial-topology-and-learning-pacing"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "design",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "cognitive-schema-disruption",
+                       "priority":  0.72,
+                       "formalism":  "prediction model",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "prediction error",
+                                                           "schema",
+                                                           "Bayesian update"
+                                                       ],
+                                          "semantic":  [
+                                                           "subverter expectativa",
+                                                           "surpresa vira descoberta",
+                                                           "regra parece bug"
+                                                       ],
+                                          "structural":  [
+                                                             "convenÃ§Ã£o repetida",
+                                                             "pistas retrospectivas"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "aleatoriedade sem coerÃªncia oculta"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "expected_schema",
+                                      "knowledge_graph",
+                                      "hidden_coherence"
+                                  ],
+                       "outputs":  [
+                                       "disruption_points",
+                                       "calibration_hypotheses",
+                                       "rejection_risks"
+                                   ],
+                       "complements":  [
+                                           "epistemic-holarchic-progression",
+                                           "spatial-topology-and-learning-pacing"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "design",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "competitive-negative-feedback",
+                       "priority":  0.68,
+                       "formalism":  "dynamic feedback",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "rubber-banding",
+                                                           "catch-up",
+                                                           "negative feedback"
+                                                       ],
+                                          "semantic":  [
+                                                           "lÃ­der deve ser contido",
+                                                           "competiÃ§Ã£o snowball",
+                                                           "compensaÃ§Ã£o"
+                                                       ],
+                                          "structural":  [
+                                                             "posiÃ§Ã£o relativa",
+                                                             "taxa de recuperaÃ§Ã£o"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "sistema single-player sem comparaÃ§Ã£o"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "player_positions",
+                                      "feedback_rules",
+                                      "resource_rates"
+                                  ],
+                       "outputs":  [
+                                       "compensation_curve",
+                                       "stability_status",
+                                       "fairness_hypotheses"
+                                   ],
+                       "complements":  [
+                                           "resource-flow-economy"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "design",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "exponential-progression-and-prestige",
+                       "priority":  0.75,
+                       "formalism":  "progression curve",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "exponential",
+                                                           "prestige",
+                                                           "marginal cost"
+                                                       ],
+                                          "semantic":  [
+                                                           "custo cresce por nÃ­vel",
+                                                           "reset com bÃ´nus",
+                                                           "progressÃ£o desacelera"
+                                                       ],
+                                          "structural":  [
+                                                             "nÃ­veis",
+                                                             "custos",
+                                                             "resets"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "sem progressÃ£o ou mudanÃ§a de escala"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "progression_level",
+                                      "acquisition_cost",
+                                      "time_series"
+                                  ],
+                       "outputs":  [
+                                       "curve_family",
+                                       "marginal_gain",
+                                       "acquisition_time"
+                                   ],
+                       "complements":  [
+                                           "resource-flow-economy",
+                                           "nested-gameplay-loop-architecture"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "formal",
+                       "routing_role":  "secondary_candidate"
+                   },
+                   {
+                       "id":  "nested-gameplay-loop-architecture",
+                       "priority":  0.67,
+                       "formalism":  "temporal loop hierarchy",
+                       "activation":  {
+                                          "explicit":  [
+                                                           "nested loop",
+                                                           "micro loop",
+                                                           "macro loop"
+                                                       ],
+                                          "semantic":  [
+                                                           "atividades em vÃ¡rias escalas",
+                                                           "retorno entre ciclos",
+                                                           "ritmo temporal"
+                                                       ],
+                                          "structural":  [
+                                                             "loops aninhados",
+                                                             "exit points"
+                                                         ],
+                                          "anti_signals":  [
+                                                               "evento isolado sem repetiÃ§Ã£o"
+                                                           ]
+                                      },
+                       "inputs":  [
+                                      "temporal_loops",
+                                      "exit_points",
+                                      "feedback_rules"
+                                  ],
+                       "outputs":  [
+                                       "loop_hierarchy",
+                                       "cadence",
+                                       "scale_conflicts"
+                                   ],
+                       "complements":  [
+                                           "spatial-topology-and-learning-pacing",
+                                           "exponential-progression-and-prestige"
+                                       ],
+                       "conflicts":  [
+
+                                     ],
+                       "domain_role":  "design",
+                       "routing_role":  "secondary_candidate"
+                   }
+               ]
+}

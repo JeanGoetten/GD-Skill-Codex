@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "progression_analysis": {
+      "time_basis": "discrete_tick",
+      "initial_value": 10,
+      "base_rate": 0.08,
+      "feedback_exponent": 1,
+      "periods": 20,
+      "time_step": 1,
+      "max_value": 1.0e+100,
+      "prestige": {
+        "threshold": 100000,
+        "exponent": 0.5,
+        "multiplier_per_prestige": 0.1
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "petri_net": {
+      "places": [
+        { "id": "raw_material", "tokens": 1 },
+        { "id": "product", "tokens": 0 }
+      ],
+      "transitions": [
+        {
+          "id": "craft",
+          "inputs": [{ "place": "raw_material", "weight": 1 }],
+          "outputs": [{ "place": "product", "weight": 1 }]
+        }
+      ]
+    }
+  }
+}

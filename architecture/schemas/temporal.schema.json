@@ -1,0 +1,47 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/temporal.schema.json",
+    "title":  "GD Skill Codex temporal model",
+    "type":  "object",
+    "properties":  {
+                       "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" },
+                       "world_model_version": { "type": "string", "minLength": 1 },
+                       "analysis_version": { "type": "string", "minLength": 1 },
+                       "skill_version": { "type": "string", "minLength": 1 },
+"clock":  {
+                                     "type": "string",
+                                     "pattern": "^[0-9]+(\\.[0-9]+)?$"
+                                 },
+                       "tick":  {
+                                     "type": "integer",
+                                     "minimum":  0,
+                                     "description": "Current tick number in the temporal system"
+                                 },
+                       "events":  {
+                                     "type": "array",
+                                     "items": {
+                                        "type": "object",
+                                        "required": ["id", "timestamp"],
+                                        "properties": {
+                                            "id": { "type": "string", "minLength": 1 },
+                                            "timestamp": { "type": "string", "pattern": "^[0-9]+(\\.[0-9]+)?$" },
+                                            "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                        }
+                                     }
+                                 },
+                       "phases":  {
+                                     "type": "array",
+                                     "items": {
+                                        "type": "object",
+                                        "required": ["id", "start_tick", "end_tick"],
+                                        "properties": {
+                                            "id": { "type": "string", "minLength": 1 },
+                                            "start_tick": { "type": "integer", "minimum": 0 },
+                                            "end_tick": { "type": "integer", "minimum": 0 },
+                                            "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                        }
+                                     }
+                                 }
+                   },
+    "additionalProperties":  false
+}

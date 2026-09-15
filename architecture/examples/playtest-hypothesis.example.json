@@ -1,0 +1,10 @@
+{
+  "id": "spatial-learning-h1",
+  "hypothesis": "Jogadores novatos completam a introdução sem instrução textual.",
+  "population": "novatos sem contato prévio com o protótipo",
+  "metric": "taxa de conclusão e erros por sala",
+  "protocol": "executar a rota inicial e registrar eventos sem intervenção",
+  "sample_size": 12,
+  "success_criterion": ">= 0.8 de conclusão e <= 2 erros medianos",
+  "limitations": ["A amostra não representa todos os jogadores."]
+}

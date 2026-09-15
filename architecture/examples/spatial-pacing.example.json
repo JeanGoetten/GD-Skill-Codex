@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "spatial_pacing": {
+      "start_nodes": ["intro_jump"],
+      "nodes": [
+        { "id": "intro_jump", "phase": "introduce", "mechanics": ["jump"], "tension": 0.1, "death_risk": false },
+        { "id": "develop_jump", "phase": "develop", "mechanics": ["jump"], "tension": 0.35, "death_risk": false },
+        { "id": "twist_jump", "phase": "twist", "mechanics": ["jump"], "tension": 0.65, "death_risk": false },
+        { "id": "combine_jump_dash", "phase": "combine", "mechanics": ["jump", "dash"], "tension": 0.9, "death_risk": true },
+        { "id": "rest", "phase": "rest", "mechanics": [], "tension": 0.1, "death_risk": false, "is_decompression": true }
+      ],
+      "edges": [
+        { "from": "intro_jump", "to": "develop_jump" },
+        { "from": "develop_jump", "to": "twist_jump" },
+        { "from": "twist_jump", "to": "combine_jump_dash" },
+        { "from": "combine_jump_dash", "to": "rest" }
+      ]
+    }
+  }
+}

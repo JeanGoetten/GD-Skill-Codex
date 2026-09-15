@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "csp_system": {
+      "variables": [
+        { "id": "start_room", "domain": ["A", "B"] },
+        { "id": "end_room", "domain": ["B", "C"] }
+      ],
+      "constraints": [
+        { "left": "start_room", "right": "end_room", "relation": "different", "hard": true }
+      ]
+    }
+  }
+}

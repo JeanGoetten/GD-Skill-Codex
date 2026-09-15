@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/nested-gameplay-loop-architecture.schema.json",
+  "title": "GD Skill Codex nested gameplay loop architecture model",
+  "type": "object",
+  "required": ["version", "loops"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "time_unit": { "enum": ["seconds", "minutes", "hours"] },
+    "minimum_completion_offset_seconds": { "type": "number", "minimum": 0 },
+    "retention_pressure_target": { "type": "number", "minimum": 0, "maximum": 1 },
+    "loops": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "level", "duration_seconds"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "level": { "enum": ["micro", "meso", "macro"] },
+          "duration_seconds": { "type": "number", "exclusiveMinimum": 0 },
+          "weight": { "type": "number", "minimum": 0 },
+          "action": { "type": "string" },
+          "objective": { "type": "string" },
+          "generated_input": { "type": "string" },
+          "destination_loop": { "type": "string" },
+          "contributes_to": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "receives_from": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "completion_times_seconds": { "type": "array", "items": { "type": "number", "minimum": 0 } },
+          "remaining_seconds": { "type": "number", "minimum": 0 },
+          "progress": { "type": "number", "minimum": 0, "maximum": 1 },
+          "intermediate_rewards": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

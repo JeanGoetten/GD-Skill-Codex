@@ -1,0 +1,11 @@
+{
+  "id": "spatial-learning-h1-observation-01",
+  "hypothesis_id": "spatial-learning-h1",
+  "metric": "taxa de conclusão e erros por sala",
+  "value": 0.83,
+  "sample_size": 12,
+  "collected_at": "2026-09-14T19:30:00Z",
+  "status": "observed",
+  "limitations": ["A amostra foi coletada em um único protótipo."],
+  "source_uri": "local://playtest/spatial-learning-h1-observation-01"
+}

@@ -1,0 +1,25 @@
+{
+  "claim": "O estado final é alcançável sob as regras declaradas.",
+  "status": "derived",
+  "model": "discrete-state-transition-system",
+  "source": "discrete-state-machine-verification",
+  "calculation": "breadth-first search from q0 over declared transitions",
+  "assumptions": [
+    "Todas as transições fornecidas representam regras executáveis.",
+    "O world model não muda durante a análise."
+  ],
+  "evidence": [
+    { "type": "calculation", "id": "reachability-run-001" }
+  ],
+  "confidence": "medium",
+  "validation": ["architecture/validate_all.ps1"],
+  "limitations": [
+    "Não demonstra justiça, diversão ou comportamento de jogadores.",
+    "A confiança depende da completude das transições de entrada."
+  ],
+  "input_hash": "example-input-hash",
+  "world_model_version": "0.1.0",
+  "skill_version": "0.1.0",
+  "seed": 42,
+  "created_at": "2026-09-14T16:00:00Z"
+}

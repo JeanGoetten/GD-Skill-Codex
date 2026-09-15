@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "nested_gameplay_loop_architecture": {
+      "version": "1.0.0",
+      "time_unit": "seconds",
+      "minimum_completion_offset_seconds": 30,
+      "retention_pressure_target": 0.4,
+      "loops": [
+        {
+          "id": "micro-combat",
+          "level": "micro",
+          "duration_seconds": 30,
+          "action": "resolve encounter",
+          "objective": "win the immediate exchange",
+          "generated_input": "progress_points",
+          "destination_loop": "meso-upgrade",
+          "contributes_to": ["meso-upgrade"],
+          "completion_times_seconds": [30, 60, 90],
+          "progress": 0.75,
+          "weight": 0.5
+        },
+        {
+          "id": "meso-upgrade",
+          "level": "meso",
+          "duration_seconds": 600,
+          "action": "upgrade settlement",
+          "objective": "complete the current build",
+          "generated_input": "capacity",
+          "destination_loop": "macro-era",
+          "receives_from": ["micro-combat"],
+          "completion_times_seconds": [420],
+          "progress": 0.55,
+          "intermediate_rewards": ["new unit slot"],
+          "weight": 1
+        },
+        {
+          "id": "macro-era",
+          "level": "macro",
+          "duration_seconds": 7200,
+          "action": "advance era",
+          "objective": "reach the next era",
+          "receives_from": ["meso-upgrade"],
+          "completion_times_seconds": [3600],
+          "progress": 0.3,
+          "weight": 1.5
+        }
+      ]
+    }
+  }
+}

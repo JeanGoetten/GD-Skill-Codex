@@ -1,0 +1,32 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+    "title":  "GD Skill Codex SkillInput",
+    "type":  "object",
+    "required":  [
+                     "skill_id",
+                     "world_model"
+                 ],
+    "properties":  {
+                       "schema_version":  {
+                                              "type":  "string",
+                                              "pattern":  "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+                                          },
+                       "skill_id":  {
+                                        "$ref":  "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId"
+                                    },
+                       "request":  {
+                                       "type":  "string"
+                                   },
+                       "world_model":  {
+                                           "type":  "object"
+                                       },
+                       "parameters":  {
+                                          "type":  "object"
+                                      },
+                       "context":  {
+                                       "type":  "object"
+                                   }
+                   },
+    "additionalProperties":  true
+}

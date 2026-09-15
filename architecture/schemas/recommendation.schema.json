@@ -1,0 +1,35 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/recommendation.schema.json",
+    "title":  "GD Skill Codex Recommendation",
+    "type":  "object",
+    "required":  ["recommendation", "priority", "confidence", "claim_id", "evidence"],
+    "properties":  {
+                       "recommendation":  {
+                                              "minLength":  1,
+                                              "type":  "string"
+                                          },
+                       "rationale":  {
+                                         "type":  "string"
+                                     },
+                       "priority":  {
+                                        "type":  "string"
+                                    },
+                       "confidence":  {
+                                          "enum":  [
+                                                       "low",
+                                                       "medium",
+                                                       "high"
+                                                   ]
+                                      },
+                       "evidence":  {
+                                         "type":  "array",
+                                         "items": { "type": "string" }
+                                     },
+                       "claim_id": {
+                                         "type": "string",
+                                         "minLength": 1
+                                    }
+                   },
+    "additionalProperties":  true
+}

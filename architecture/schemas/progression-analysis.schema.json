@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/progression-analysis.schema.json",
+  "title": "GD Skill Codex exponential progression analysis",
+  "type": "object",
+  "required": ["initial_value", "base_rate", "feedback_exponent", "periods"],
+  "properties": {
+    "time_basis": { "type": "string" },
+    "initial_value": { "type": "number", "exclusiveMinimum": 0 },
+    "base_rate": { "type": "number", "exclusiveMinimum": 0 },
+    "feedback_exponent": { "type": "number", "minimum": 0 },
+    "periods": { "type": "integer", "minimum": 1, "maximum": 100000 },
+    "time_step": { "type": "number", "exclusiveMinimum": 0 },
+    "max_value": { "type": "number", "exclusiveMinimum": 0 },
+    "prestige": {
+      "type": "object",
+      "required": ["threshold", "exponent", "multiplier_per_prestige"],
+      "properties": {
+        "threshold": { "type": "number", "exclusiveMinimum": 0 },
+        "exponent": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "multiplier_per_prestige": { "type": "number", "exclusiveMinimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

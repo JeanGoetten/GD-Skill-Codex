@@ -1,0 +1,60 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/economy.schema.json",
+    "title":  "GD Skill Codex economy model",
+    "type":  "object",
+    "properties":  {
+                       "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" },
+                       "world_model_version": { "type": "string", "minLength": 1 },
+                       "analysis_version": { "type": "string", "minLength": 1 },
+                       "skill_version": { "type": "string", "minLength": 1 },
+                       "resources":  {
+                                          "items":  {
+                                                        "type": "object",
+                                                        "required": ["id", "unit", "stock", "capacity"],
+                                                        "properties": {
+                                                            "id": { "type": "string", "minLength": 1 },
+                                                            "unit": { "type": "string", "minLength": 1 },
+                                                            "stock": { "type": "number" },
+                                                            "capacity": { "type": "number", "minimum": 0 }
+                                                        }
+                                                    },
+                                          "type":  "array"
+                                      },
+                       "flows":  {
+                                      "items":  {
+                                                    "type": "object",
+                                                    "required": ["id", "from", "to", "rate", "unit"],
+                                                    "properties": {
+                                                        "id": { "type": "string", "minLength": 1 },
+                                                        "from": { "type": "string", "minLength": 1 },
+                                                        "to": { "type": "string", "minLength": 1 },
+                                                        "rate": { "type": "number" },
+                                                        "unit": { "type": "string", "minLength": 1 }
+                                                    }
+                                                },
+                                      "type":  "array"
+                                  },
+                       "balances":  {
+                                         "type": "object",
+                                         "properties": {
+                                             "stable": { "type": "boolean" },
+                                             "inflationary": { "type": "boolean" },
+                                             "deficit": { "type": "boolean" }
+                                         }
+                                     },
+                       "constraints":  {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "required": ["id", "description"],
+                                                "properties": {
+                                                    "id": { "type": "string", "minLength": 1 },
+                                                    "description": { "type": "string", "minLength": 1 },
+                                                    "epistemological_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                                }
+                                            }
+                                       }
+                   },
+    "additionalProperties":  false
+}

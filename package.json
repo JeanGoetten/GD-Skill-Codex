@@ -1,0 +1,21 @@
+{
+  "name": "gd-skill-codex",
+  "version": "1.0.0",
+  "description": "Catálogo de skills conceituais para análise e design de sistemas de jogos.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node architecture/validate_json_schema.js",
+    "validate:schema": "node architecture/validate_json_schema.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
+  }
+}

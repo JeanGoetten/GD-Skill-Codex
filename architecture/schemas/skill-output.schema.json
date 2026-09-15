@@ -1,0 +1,49 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/skill-output.schema.json",
+    "title":  "GD Skill Codex SkillOutput",
+    "type":  "object",
+    "required":  [
+                     "skill_id",
+                     "status"
+                 ],
+    "properties":  {
+                       "schema_version":  {
+                                              "type":  "string",
+                                              "pattern":  "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+                                          },
+                       "skill_id":  {
+                                        "$ref":  "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId"
+                                    },
+                       "status":  {
+                                      "enum":  [
+                                                   "success",
+                                                   "partial",
+                                                   "blocked",
+                                                   "failed"
+                                               ]
+                                  },
+                       "world_model":  {
+                                           "type":  "object"
+                                       },
+                       "results":  {
+                                       "type":  "object"
+                                   },
+                       "metrics":  {
+                                       "type":  "array"
+                                   },
+                       "evidence":  {
+                                        "type":  "array"
+                                    },
+                       "handoffs":  {
+                                        "type":  "array"
+                                    },
+                       "errors":  {
+                                      "items":  {
+                                                    "type":  "string"
+                                                },
+                                      "type":  "array"
+                                  }
+                   },
+    "additionalProperties":  true
+}

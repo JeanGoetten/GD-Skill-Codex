@@ -1,0 +1,191 @@
+﻿{
+    "version":  "1.0.0",
+    "description":  "Contratos tipados para composiÃ§Ã£o das skills do GD Skill Codex.",
+    "handoffs":  [
+                     {
+                         "source":  "discrete-state-machine-verification",
+                         "target":  "concurrent-gameplay-processes",
+                         "relation":  "complementary",
+                         "when":  [
+                                      "hÃ¡ simultaneidade ou sincronizaÃ§Ã£o de aÃ§Ãµes"
+                                  ],
+                         "input":  [
+                                       "world_state.rules",
+                                       "world_state.actions",
+                                       "state_variables"
+                                   ],
+                         "expected_output":  [
+                                                 "places",
+                                                 "transitions",
+                                                 "deadlock_candidates"
+                                             ],
+                         "return_to":  "discrete-state-machine-verification",
+                         "iteration":  {
+                                           "max_cycles":  2,
+                                           "convergence_metric":  "no_new_reachable_conflicts"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     },
+                     {
+                         "source":  "concurrent-gameplay-processes",
+                         "target":  "resource-flow-economy",
+                         "relation":  "downstream",
+                         "when":  [
+                                      "tokens representam estoques ou recursos compartilhados"
+                                  ],
+                         "input":  [
+                                       "places",
+                                       "transition_rates",
+                                       "resource_list"
+                                   ],
+                         "expected_output":  [
+                                                 "balance_equation",
+                                                 "bottlenecks",
+                                                 "stability_status"
+                                             ],
+                         "return_to":  "concurrent-gameplay-processes",
+                         "iteration":  {
+                                           "max_cycles":  3,
+                                           "convergence_metric":  "stable_stock_flow_balance"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     },
+                     {
+                         "source":  "procedural-level-constraint-solving",
+                         "target":  "procedural-expressive-range-analysis",
+                         "relation":  "iterative",
+                         "when":  [
+                                      "a geraÃ§Ã£o precisa ser medida e ajustada apÃ³s a solvabilidade"
+                                  ],
+                         "input":  [
+                                       "domains",
+                                       "constraints",
+                                       "generated_samples"
+                                   ],
+                         "expected_output":  [
+                                                 "solvability_status",
+                                                 "coverage_metrics",
+                                                 "generator_adjustments"
+                                             ],
+                         "return_to":  "procedural-level-constraint-solving",
+                         "iteration":  {
+                                           "max_cycles":  3,
+                                           "convergence_metric":  "solvability_and_coverage_delta_below_tolerance"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     },
+                     {
+                         "source":  "resource-flow-economy",
+                         "target":  "macroeconomic-resource-conversion",
+                         "relation":  "downstream",
+                         "when":  [
+                                      "hÃ¡ conversÃ£o em mÃºltiplos estÃ¡gios ou matriz input-output"
+                                  ],
+                         "input":  [
+                                       "stocks",
+                                       "source_rates",
+                                       "sink_rates",
+                                       "conversion_rates"
+                                   ],
+                         "expected_output":  [
+                                                 "input_output_matrix",
+                                                 "production_chain",
+                                                 "sustainability_status"
+                                             ],
+                         "return_to":  "resource-flow-economy",
+                         "iteration":  {
+                                           "max_cycles":  2,
+                                           "convergence_metric":  "stable_conversion_balance"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     },
+                     {
+                         "source":  "spatial-topology-and-learning-pacing",
+                         "target":  "epistemic-holarchic-progression",
+                         "relation":  "complementary",
+                         "when":  [
+                                      "a topologia espacial controla descoberta ou gating de conhecimento"
+                                  ],
+                         "input":  [
+                                       "spatial_graph",
+                                       "gates",
+                                       "learning_beats"
+                                   ],
+                         "expected_output":  [
+                                                 "knowledge_graph",
+                                                 "clue_dependencies",
+                                                 "evidence_gaps"
+                                             ],
+                         "return_to":  "spatial-topology-and-learning-pacing",
+                         "iteration":  {
+                                           "max_cycles":  3,
+                                           "convergence_metric":  "no_new_evidence_gaps"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     },
+                     {
+                         "source":  "epistemic-holarchic-progression",
+                         "target":  "cognitive-schema-disruption",
+                         "relation":  "complementary",
+                         "when":  [
+                                      "a progressÃ£o depende de revisar expectativas do jogador"
+                                  ],
+                         "input":  [
+                                       "knowledge_graph",
+                                       "clue_dependencies",
+                                       "expected_schema"
+                                   ],
+                         "expected_output":  [
+                                                 "disruption_points",
+                                                 "hidden_coherence",
+                                                 "calibration_hypotheses"
+                                             ],
+                         "return_to":  "spatial-topology-and-learning-pacing",
+                         "iteration":  {
+                                           "max_cycles":  3,
+                                           "convergence_metric":  "stable_disruption_coherence"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     },
+                     {
+                         "source":  "frame-based-combat-timing",
+                         "target":  "committed-risk-reward-actions",
+                         "relation":  "downstream",
+                         "when":  [
+                                      "janelas de execuÃ§Ã£o alteram exposiÃ§Ã£o ou compromisso"
+                                  ],
+                         "input":  [
+                                       "frame_timeline",
+                                       "input_windows",
+                                       "cancel_rules"
+                                   ],
+                         "expected_output":  [
+                                                 "action_contracts",
+                                                 "escape_windows",
+                                                 "risk_matrix"
+                                             ],
+                         "return_to":  "frame-based-combat-timing",
+                         "iteration":  {
+                                           "max_cycles":  2,
+                                           "convergence_metric":  "stable_risk_window_contract"
+                                       },
+                         "schema_version":  "1.0.0",
+                         "input_schema":  "https://gd-skill-codex.local/schemas/skill-input.schema.json",
+                         "output_schema":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                     }
+                 ],
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "contract_schema":  "https://gd-skill-codex.local/schemas/handoff-contract.schema.json"
+}

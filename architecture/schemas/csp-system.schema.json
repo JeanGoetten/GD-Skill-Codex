@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/csp-system.schema.json",
+  "title": "GD Skill Codex constraint satisfaction system",
+  "type": "object",
+  "required": ["variables", "constraints"],
+  "properties": {
+    "variables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "domain"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "domain": { "type": "array", "minItems": 1 },
+          "hard": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["left", "right", "relation"],
+        "properties": {
+          "left": { "type": "string", "minLength": 1 },
+          "right": { "type": "string", "minLength": 1 },
+          "relation": { "enum": ["different", "equal", "adjacent"] },
+          "hard": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

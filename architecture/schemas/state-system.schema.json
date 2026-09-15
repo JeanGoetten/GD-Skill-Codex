@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/state-system.schema.json",
+  "title": "GD Skill Codex discrete state transition system",
+  "type": "object",
+  "required": ["initial_state", "states", "transitions"],
+  "properties": {
+    "initial_state": { "type": "string", "minLength": 1 },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "terminal": { "type": "boolean" },
+          "outcome": { "enum": ["victory", "defeat", "draw", "none"] }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "event", "to"],
+        "properties": {
+          "from": { "type": "string", "minLength": 1 },
+          "event": { "type": "string", "minLength": 1 },
+          "to": { "type": "string", "minLength": 1 },
+          "probability": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+        },
+        "additionalProperties": true
+      }
+    },
+    "invariants": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

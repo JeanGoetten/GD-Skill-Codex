@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [
+    { "id": "gold", "name": "Gold", "unit": "per turn" },
+    { "id": "ore", "name": "Ore", "unit": "per turn" },
+    { "id": "soldier", "name": "Soldier", "unit": "unit" }
+  ],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "resource_flow": {
+      "version": "1.0.0",
+      "time_basis": "turn",
+      "resources": [
+        { "id": "gold", "initial_quantity": 100, "capacity": null },
+        { "id": "ore", "initial_quantity": 20, "capacity": 100 },
+        { "id": "soldier", "initial_quantity": 2, "capacity": null }
+      ],
+      "flows": [
+        { "id": "mine-gold", "resource_id": "gold", "direction": "source", "quantity": 10, "node": "mine" },
+        { "id": "living-cost", "resource_id": "gold", "direction": "sink", "quantity": 2, "node": "city" },
+        { "id": "ore-mine", "resource_id": "ore", "direction": "source", "quantity": 4, "node": "mine" },
+        { "id": "smelting", "resource_id": "ore", "direction": "sink", "quantity": 6, "node": "forge" },
+        { "id": "recruitment", "resource_id": "gold", "direction": "sink", "quantity": 5, "node": "barracks" },
+        { "id": "soldier-upkeep", "resource_id": "gold", "direction": "sink", "quantity": 0, "node": "army" }
+      ]
+    }
+  }
+}

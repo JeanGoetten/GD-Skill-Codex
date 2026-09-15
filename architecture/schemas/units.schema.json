@@ -1,0 +1,20 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/units.schema.json",
+    "title":  "GD Skill Codex units and quantities",
+    "type":  "object",
+    "properties":  {
+                       "value":  {
+                                     "type":  "number"
+                                 },
+                       "unit":  {
+                                    "minLength":  1,
+                                    "type":  "string"
+                                }
+                   },
+    "required":  [
+                     "value",
+                     "unit"
+                 ],
+    "additionalProperties":  false
+}

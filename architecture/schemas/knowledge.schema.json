@@ -1,0 +1,43 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/knowledge.schema.json",
+    "title":  "GD Skill Codex knowledge model",
+    "type":  "object",
+    "properties":  {
+                       "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" },
+                       "world_model_version": { "type": "string", "minLength": 1 },
+                       "analysis_version": { "type": "string", "minLength": 1 },
+                       "skill_version": { "type": "string", "minLength": 1 },
+                       "facts":  {
+                                     "type":  "array",
+                                     "items": {
+                                         "type": "object",
+                                         "required": ["id", "content", "epistemic_status"],
+                                         "properties": {
+                                             "id": { "type": "string", "minLength": 1 },
+                                             "content": { "type": "string", "minLength": 1 },
+                                             "source": { "type": "string" },
+                                             "epistemic_status": { "enum": ["unknown", "assumed", "observed", "derived", "validated"] }
+                                         },
+                                         "additionalProperties": true
+                                     }
+                                 },
+                       "dependencies":  {
+                                            "type":  "array",
+                                            "items": {
+                                                "type": "object",
+                                                "required": ["from", "to"],
+                                                "properties": {
+                                                    "from": { "type": "string", "minLength": 1 },
+                                                    "to": { "type": "string", "minLength": 1 },
+                                                    "relation": { "type": "string", "minLength": 1 }
+                                                },
+                                                "additionalProperties": true
+                                            }
+                                        },
+                       "confidence":  {
+                                          "type":  "string"
+                                      }
+                   },
+    "additionalProperties":  true
+}

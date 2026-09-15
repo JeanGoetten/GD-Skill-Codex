@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "cognitive_schema_disruption": {
+      "default_repetitions": 3,
+      "conventions": [
+        { "id": "door_rule", "repetitions": 4, "salience": 0.9, "consistent_feedback": true }
+      ],
+      "disruptions": [
+        {
+          "id": "hidden_switch",
+          "convention_id": "door_rule",
+          "magnitude": 0.4,
+          "threshold": 0.7,
+          "hidden_coherence": true,
+          "agency_preserved": true,
+          "strategic_variable_changed": true
+        }
+      ]
+    }
+  }
+}

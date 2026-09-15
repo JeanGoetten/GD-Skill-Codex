@@ -1,0 +1,45 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/resources.schema.json",
+    "title":  "GD Skill Codex resources",
+    "type":  "array",
+    "items":  {
+                  "type":  "object",
+                  "required":  [
+                                   "id"
+                               ],
+                  "properties":  {
+                                     "id":  {
+                                                "type":  "string",
+                                                "pattern":  "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                                            },
+                                     "name":  {
+                                                  "minLength":  1,
+                                                  "type":  "string"
+                                              },
+                                     "tags":  {
+                                                  "items":  {
+                                                                "type":  "string"
+                                                            },
+                                                  "type":  "array"
+                                              },
+                                     "metadata":  {
+                                                      "type":  "object"
+                                                  },
+                                     "unit":  {
+                                                  "type":  "string"
+                                              },
+                                     "quantity":  {
+                                                      "type":  "number"
+                                                  },
+                                     "capacity":  {
+                                                      "type":  "number"
+                                                  },
+                                     "owner_id":  {
+                                                      "type":  "string",
+                                                      "pattern":  "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                                                  }
+                                 },
+                  "additionalProperties":  true
+              }
+}

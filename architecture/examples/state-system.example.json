@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "state_system": {
+      "initial_state": "start",
+      "states": [
+        { "id": "start" },
+        { "id": "victory", "terminal": true, "outcome": "victory" },
+        { "id": "orphan" }
+      ],
+      "transitions": [
+        { "from": "start", "event": "complete_goal", "to": "victory" }
+      ],
+      "invariants": ["health >= 0"]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "era": {
+      "version": "1.0.0",
+      "solvability_status": "locally_consistent",
+      "bc_dimensions": [
+        {
+          "id": "linearity",
+          "name": "Path linearity",
+          "bins": [
+            { "id": "low", "min": 0.0, "max": 0.34 },
+            { "id": "medium", "min": 0.34, "max": 0.67 },
+            { "id": "high", "min": 0.67, "max": 1.01 }
+          ]
+        },
+        {
+          "id": "challenge_density",
+          "name": "Challenge density",
+          "bins": [
+            { "id": "low", "min": 0.0, "max": 0.34 },
+            { "id": "medium", "min": 0.34, "max": 0.67 },
+            { "id": "high", "min": 0.67, "max": 1.01 }
+          ]
+        }
+      ],
+      "generated_samples": [
+        { "id": "sample-001", "values": { "linearity": 0.20, "challenge_density": 0.18 } },
+        { "id": "sample-002", "values": { "linearity": 0.25, "challenge_density": 0.21 } },
+        { "id": "sample-003", "values": { "linearity": 0.72, "challenge_density": 0.81 } },
+        { "id": "sample-004", "values": { "linearity": 0.46, "challenge_density": 0.52 } }
+      ]
+    }
+  }
+}

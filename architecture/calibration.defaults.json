@@ -1,0 +1,26 @@
+[
+  {
+    "parameter": "schema_consolidation_repetitions",
+    "value": 3,
+    "status": "heuristic",
+    "confidence": "low",
+    "sample_size": 0,
+    "evidence": ["initial operational prior from cognitive-schema-disruption"],
+    "requires_validation": true,
+    "context": "Default inicial; ajustar por salience, consistência, feedback e conhecimento prévio."
+  },
+  {
+    "parameter": "nested_loop_duration",
+    "value": {
+      "micro": "1s-30s",
+      "meso": "3min-10min",
+      "macro": "2h-10h"
+    },
+    "status": "heuristic",
+    "confidence": "low",
+    "sample_size": 0,
+    "evidence": ["taxonomia operacional da skill de loops aninhados"],
+    "requires_validation": true,
+    "context": "Faixas context-dependent; não são propriedades universais de loops."
+  }
+]

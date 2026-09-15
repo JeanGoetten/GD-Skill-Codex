@@ -1,0 +1,36 @@
+﻿{
+    "$schema":  "https://json-schema.org/draft/2020-12/schema",
+    "$id":  "https://gd-skill-codex.local/schemas/evidence.schema.json",
+    "title":  "GD Skill Codex Evidence interface",
+    "type":  "object",
+    "required":  [
+                     "claim",
+                     "status"
+                 ],
+    "properties":  {
+                       "claim":  {
+                                     "minLength":  1,
+                                     "type":  "string"
+                                 },
+                       "status":  {
+                                      "type":  "string"
+                                  },
+                       "source":  {
+                                      "type":  "string"
+                                  },
+                       "confidence":  {
+                                          "enum":  [
+                                                       "low",
+                                                       "medium",
+                                                       "high"
+                                                   ]
+                                      },
+                       "assumptions":  {
+                                           "type":  "array"
+                                       },
+                       "limitations":  {
+                                           "type":  "array"
+                                       }
+                   },
+    "additionalProperties":  true
+}

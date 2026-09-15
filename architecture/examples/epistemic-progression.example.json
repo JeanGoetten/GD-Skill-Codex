@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "entities": [],
+  "resources": [],
+  "spatial": {},
+  "temporal": {},
+  "rules": [],
+  "knowledge": {},
+  "progression": {},
+  "economy": {},
+  "actors": [],
+  "actions": [],
+  "goals": [],
+  "hidden_state": {
+    "epistemic_progression": {
+      "holons": [
+        { "id": "root", "root": true, "physically_accessible_at_start": true },
+        { "id": "clue_a", "physically_accessible_at_start": true },
+        { "id": "clue_b", "physically_accessible_at_start": true },
+        { "id": "terminal", "terminal": true, "physically_accessible_at_start": true }
+      ],
+      "clues": [
+        { "from": "root", "to": "clue_a", "required_for_terminal": true },
+        { "from": "root", "to": "clue_b", "required_for_terminal": true },
+        { "from": "clue_a", "to": "terminal", "required_for_terminal": true },
+        { "from": "clue_b", "to": "terminal", "required_for_terminal": true }
+      ],
+      "known_holons": ["root", "clue_a"]
+    }
+  }
+}
