@@ -1,7 +1,7 @@
-param([Parameter(Mandatory = $true)][string]$ReportPath)
+﻿param([Parameter(Mandatory = $true)][string]$ReportPath)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$report = Get-Content -LiteralPath $ReportPath -Raw | ConvertFrom-Json
+$report = Get-Content -Encoding UTF8 -LiteralPath $ReportPath -Raw | ConvertFrom-Json
 $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($claim in @($report.claims)) {
     foreach ($field in @('claim_id','skill_id','status','confidence','provenance')) {

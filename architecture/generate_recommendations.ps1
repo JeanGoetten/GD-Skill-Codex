@@ -1,6 +1,6 @@
-param([Parameter(Mandatory = $true)][string]$ReportPath, [string]$OutputPath)
+﻿param([Parameter(Mandatory = $true)][string]$ReportPath, [string]$OutputPath)
 $ErrorActionPreference = 'Stop'
-$report = Get-Content -LiteralPath $ReportPath -Raw | ConvertFrom-Json
+$report = Get-Content -Encoding UTF8 -LiteralPath $ReportPath -Raw | ConvertFrom-Json
 $recommendations = @()
 foreach ($claim in @($report.claims)) {
     $blocked = $claim.status -eq 'INSUFFICIENT_EVIDENCE' -or $claim.confidence -eq 'low'

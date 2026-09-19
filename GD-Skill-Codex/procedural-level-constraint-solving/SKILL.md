@@ -11,7 +11,9 @@ activation_signals:
     - AC-3
     - backtracking
   recognition_references:
-    - procedural-level-constraint-solving
+    - "Spelunky"
+    - "The Binding of Isaac"
+    - "Baba Is You"
 outputs:
   - constraint model
   - solvability evidence
@@ -50,14 +52,13 @@ This skill does not resolve expressive diversity and combat feel.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: spatial-topology-and-learning-pacing; procedural-expressive-range-analysis; discrete-state-machine-verification.
+When the problem crosses its boundary, hand off to: discrete-state-machine-verification; procedural-expressive-range-analysis; spatial-topology-and-learning-pacing.
 
 ## Handoff Candidates
 
-- **discrete-state-machine-verification** — encaminhar quando o problema exigir sua interface específica.
-- **procedural-expressive-range-analysis** — encaminhar quando o problema exigir sua interface específica.
-- **spatial-topology-and-learning-pacing** — encaminhar quando o problema exigir sua interface específica.
-
+- **discrete-state-machine-verification** — when the generated level gameplay reduces to discrete states and transitions, hand off the state model for reachability verification.
+- **procedural-expressive-range-analysis** — when many generated instances must be characterized for diversity and bias, hand off the generator for expressive-range analysis.
+- **spatial-topology-and-learning-pacing** — when solvability must be evaluated as traversable space and teaching rhythm, hand off the level graph for topology analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Spelunky; The Binding of Isaac; Baba Is You.

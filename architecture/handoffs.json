@@ -1,13 +1,13 @@
-﻿{
+{
     "version":  "1.0.0",
-    "description":  "Contratos tipados para composiÃ§Ã£o das skills do GD Skill Codex.",
+    "description":  "Contratos tipados para composição das skills do GD Skill Codex.",
     "handoffs":  [
                      {
                          "source":  "discrete-state-machine-verification",
                          "target":  "concurrent-gameplay-processes",
                          "relation":  "complementary",
                          "when":  [
-                                      "hÃ¡ simultaneidade ou sincronizaÃ§Ã£o de aÃ§Ãµes"
+                                      "há simultaneidade ou sincronização de ações"
                                   ],
                          "input":  [
                                        "world_state.rules",
@@ -59,7 +59,7 @@
                          "target":  "procedural-expressive-range-analysis",
                          "relation":  "iterative",
                          "when":  [
-                                      "a geraÃ§Ã£o precisa ser medida e ajustada apÃ³s a solvabilidade"
+                                      "a geração precisa ser medida e ajustada após a solvabilidade"
                                   ],
                          "input":  [
                                        "domains",
@@ -85,7 +85,7 @@
                          "target":  "macroeconomic-resource-conversion",
                          "relation":  "downstream",
                          "when":  [
-                                      "hÃ¡ conversÃ£o em mÃºltiplos estÃ¡gios ou matriz input-output"
+                                      "há conversão em múltiplos estágios ou matriz input-output"
                                   ],
                          "input":  [
                                        "stocks",
@@ -138,7 +138,7 @@
                          "target":  "cognitive-schema-disruption",
                          "relation":  "complementary",
                          "when":  [
-                                      "a progressÃ£o depende de revisar expectativas do jogador"
+                                      "a progressão depende de revisar expectativas do jogador"
                                   ],
                          "input":  [
                                        "knowledge_graph",
@@ -164,7 +164,7 @@
                          "target":  "committed-risk-reward-actions",
                          "relation":  "downstream",
                          "when":  [
-                                      "janelas de execuÃ§Ã£o alteram exposiÃ§Ã£o ou compromisso"
+                                      "janelas de execução alteram exposição ou compromisso"
                                   ],
                          "input":  [
                                        "frame_timeline",

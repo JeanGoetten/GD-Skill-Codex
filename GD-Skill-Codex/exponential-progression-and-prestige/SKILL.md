@@ -11,7 +11,9 @@ activation_signals:
     - reset
     - upgrade time
   recognition_references:
-    - exponential-progression-and-prestige
+    - "Cookie Clicker"
+    - "Diablo"
+    - "incremental ascension systems"
 outputs:
   - curve comparison
   - income-cost forecast
@@ -50,14 +52,13 @@ This skill does not resolve all resource balance and combat timing.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: resource-flow-economy; macroeconomic-resource-conversion; nested-gameplay-loop-architecture.
+When the problem crosses its boundary, hand off to: resource-flow-economy; macroeconomic-resource-conversion; competitive-negative-feedback.
 
 ## Handoff Candidates
 
-- **resource-flow-economy** — encaminhar quando o problema exigir sua interface específica.
-- **macroeconomic-resource-conversion** — encaminhar quando o problema exigir sua interface específica.
-- **competitive-negative-feedback** — encaminhar quando o problema exigir sua interface específica.
-
+- **resource-flow-economy** — when growth rates depend on accumulable resource stocks and flows, hand off the economy model for flow-balance analysis.
+- **macroeconomic-resource-conversion** — when multi-tier production chains feed the progression curves, hand off the conversion matrix for input-output analysis.
+- **competitive-negative-feedback** — when catch-up mechanisms must dampen progression gaps between players, hand off the gap dynamics for feedback analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Cookie Clicker; Diablo; incremental ascension systems.

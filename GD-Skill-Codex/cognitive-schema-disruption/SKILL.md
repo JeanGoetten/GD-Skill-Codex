@@ -11,7 +11,9 @@ activation_signals:
     - Bayesian update
     - KL divergence
   recognition_references:
-    - cognitive-schema-disruption
+    - "The Witness"
+    - "Portal"
+    - "Outer Wilds"
 outputs:
   - schema model
   - surprise analysis
@@ -50,14 +52,13 @@ This skill does not resolve plot authorship and accessibility testing.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: epistemic-holarchic-progression; spatial-topology-and-learning-pacing; discrete-state-machine-verification.
+When the problem crosses its boundary, hand off to: epistemic-holarchic-progression; frame-based-combat-timing; procedural-expressive-range-analysis.
 
 ## Handoff Candidates
 
-- **epistemic-holarchic-progression** — encaminhar quando o problema exigir sua interface específica.
-- **frame-based-combat-timing** — encaminhar quando o problema exigir sua interface específica.
-- **procedural-expressive-range-analysis** — encaminhar quando o problema exigir sua interface específica.
-
+- **epistemic-holarchic-progression** — when the disruption depends on which clues the player has actually integrated rather than which rules changed, hand off the knowledge state (holons, clues, known/unknown) for graph-level epistemic analysis.
+- **frame-based-combat-timing** — when the expectation rupture targets input timing, cancel windows or frame legality rather than rules themselves, hand off the move data for frame-window analysis.
+- **procedural-expressive-range-analysis** — when disrupted conventions must stay consistent across many generated variants, hand off the generator for expressive-range measurement of rupture density and bias.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: The Witness; Portal; Outer Wilds.

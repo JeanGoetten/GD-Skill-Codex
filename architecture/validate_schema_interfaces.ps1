@@ -15,19 +15,19 @@ $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($file in $expected) {
   $path = Join-Path $schemaRoot $file
   if (-not (Test-Path $path)) { $errors.Add("schema ausente: $file"); continue }
-  try { $schema = Get-Content $path -Raw | ConvertFrom-Json } catch { $errors.Add("JSON inválido: $file"); continue }
+  try { $schema = Get-Content -Encoding UTF8 $path -Raw | ConvertFrom-Json } catch { $errors.Add("JSON inválido: $file"); continue }
   foreach ($field in @('$schema','$id','title','type')) {
     if (-not $schema.PSObject.Properties.Name.Contains($field)) { $errors.Add("$file sem $field") }
   }
 }
-try { $world = Get-Content (Join-Path $root 'world-model.schema.json') -Raw | ConvertFrom-Json } catch { $errors.Add('world-model.schema.json inválido') }
-try { $handoffs = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json } catch { $errors.Add('handoffs.json inválido') }
+try { $world = Get-Content -Encoding UTF8 (Join-Path $root 'world-model.schema.json') -Raw | ConvertFrom-Json } catch { $errors.Add('world-model.schema.json inválido') }
+try { $handoffs = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json } catch { $errors.Add('handoffs.json inválido') }
 if ($world) {
   foreach ($field in @('entities','resources','actors','actions','rules','goals','spatial','temporal','knowledge','hidden_state')) {
     $value = $world.properties.$field.'$ref'
     if (-not $value) { $errors.Add("world model sem referência composável: $field") }
   }
-  $hiddenStateSchema = Get-Content (Join-Path $schemaRoot 'hidden-state.schema.json') -Raw | ConvertFrom-Json
+  $hiddenStateSchema = Get-Content -Encoding UTF8 (Join-Path $schemaRoot 'hidden-state.schema.json') -Raw | ConvertFrom-Json
   if ($hiddenStateSchema) {
     $emergentRef = $hiddenStateSchema.properties.emergent_agency_composition.'$ref'
     if ($emergentRef -ne 'https://gd-skill-codex.local/schemas/emergent-agency-composition.schema.json') { $errors.Add('hidden-state sem referência emergent-agency-composition compatível') }

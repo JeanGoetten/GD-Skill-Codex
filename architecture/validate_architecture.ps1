@@ -1,10 +1,10 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$worldModel = Get-Content (Join-Path $root 'world-model.schema.json') -Raw | ConvertFrom-Json
-$registry = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
-$skillRegistry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
-$calibrationDefaults = Get-Content (Join-Path $root 'calibration.defaults.json') -Raw | ConvertFrom-Json
-$evidenceSchema = Get-Content (Join-Path $root 'evidence.schema.json') -Raw | ConvertFrom-Json
+$worldModel = Get-Content -Encoding UTF8 (Join-Path $root 'world-model.schema.json') -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
+$skillRegistry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$calibrationDefaults = Get-Content -Encoding UTF8 (Join-Path $root 'calibration.defaults.json') -Raw | ConvertFrom-Json
+$evidenceSchema = Get-Content -Encoding UTF8 (Join-Path $root 'evidence.schema.json') -Raw | ConvertFrom-Json
 $skillsRoot = Join-Path (Split-Path $root -Parent) 'GD-Skill-Codex'
 $skillNames = @(Get-ChildItem -LiteralPath $skillsRoot -Directory | Select-Object -ExpandProperty Name)
 $errors = [System.Collections.Generic.List[string]]::new()

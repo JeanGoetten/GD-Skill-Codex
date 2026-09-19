@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $path = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'skill-registry.json'
-$registry = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 -LiteralPath $path -Raw | ConvertFrom-Json
 foreach ($skill in $registry.skills) {
     if (-not $skill.PSObject.Properties.Name.Contains('domain_role')) {
         $skill | Add-Member -NotePropertyName domain_role -NotePropertyValue ([string]$skill.role)

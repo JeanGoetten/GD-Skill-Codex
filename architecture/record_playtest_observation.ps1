@@ -1,11 +1,11 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)][string]$HypothesisPath,
     [Parameter(Mandatory = $true)][string]$ObservationPath,
     [Parameter(Mandatory = $true)][string]$EvidenceStorePath
 )
 $ErrorActionPreference = 'Stop'
-$hypothesis = Get-Content -LiteralPath $HypothesisPath -Raw | ConvertFrom-Json
-$observation = Get-Content -LiteralPath $ObservationPath -Raw | ConvertFrom-Json
+$hypothesis = Get-Content -Encoding UTF8 -LiteralPath $HypothesisPath -Raw | ConvertFrom-Json
+$observation = Get-Content -Encoding UTF8 -LiteralPath $ObservationPath -Raw | ConvertFrom-Json
 if ($observation.hypothesis_id -ne $hypothesis.id) { throw 'Observação não referencia a hipótese fornecida.' }
 if ($observation.metric -ne $hypothesis.metric) { throw 'Métrica da observação diverge da hipótese.' }
 if ([int]$observation.sample_size -gt [int]$hypothesis.sample_size) { throw 'Observação excede o tamanho de amostra planejado.' }

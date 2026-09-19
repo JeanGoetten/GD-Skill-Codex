@@ -1,7 +1,7 @@
-param([Parameter(Mandatory = $true)][string]$EvidenceStorePath)
+﻿param([Parameter(Mandatory = $true)][string]$EvidenceStorePath)
 $ErrorActionPreference = 'Stop'
 if (-not (Test-Path -LiteralPath $EvidenceStorePath)) { throw "Evidence store não encontrado: $EvidenceStorePath" }
-$records = @(Get-Content -LiteralPath $EvidenceStorePath | Where-Object { $_.Trim() } | ForEach-Object { $_ | ConvertFrom-Json })
+$records = @(Get-Content -Encoding UTF8 -LiteralPath $EvidenceStorePath | Where-Object { $_.Trim() } | ForEach-Object { $_ | ConvertFrom-Json })
 $index = [ordered]@{
     schema_version = '1.0.0'
     updated_at = (Get-Date).ToUniversalTime().ToString('o')

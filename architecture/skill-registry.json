@@ -1,10 +1,10 @@
-﻿{
+{
     "version":  "1.0.0",
     "activation_schema":  {
-                              "explicit":  "termos do formalismo ou domÃ­nio nomeados pelo usuÃ¡rio",
-                              "semantic":  "descriÃ§Ãµes do problema que nÃ£o dependem de jargÃ£o",
-                              "structural":  "propriedades observÃ¡veis do sistema",
-                              "anti_signals":  "evidÃªncias que reduzem ou bloqueiam a ativaÃ§Ã£o"
+                              "explicit":  "termos do formalismo ou domínio nomeados pelo usuário",
+                              "semantic":  "descrições do problema que não dependem de jargão",
+                              "structural":  "propriedades observáveis do sistema",
+                              "anti_signals":  "evidências que reduzem ou bloqueiam a ativação"
                           },
     "skills":  [
                    {
@@ -19,16 +19,16 @@
                                                            "reachability"
                                                        ],
                                           "semantic":  [
-                                                           "estado impossÃ­vel",
-                                                           "transiÃ§Ã£o invÃ¡lida",
-                                                           "caminho inalcanÃ§Ã¡vel"
+                                                           "estado impossível",
+                                                           "transição inválida",
+                                                           "caminho inalcançável"
                                                        ],
                                           "structural":  [
                                                              "controle sequencial",
                                                              "estado inicial e final"
                                                          ],
                                           "anti_signals":  [
-                                                               "processos simultÃ¢neos como restriÃ§Ã£o principal"
+                                                               "processos simultâneos como restrição principal"
                                                            ]
                                       },
                        "inputs":  [
@@ -63,14 +63,14 @@
                                                            "liveness"
                                                        ],
                                           "semantic":  [
-                                                           "mÃ¡quinas operam simultaneamente",
-                                                           "mÃ¡quinas operem simultaneamente",
+                                                           "máquinas operam simultaneamente",
+                                                           "máquinas operem simultaneamente",
                                                            "recursos ficam presos",
                                                            "recursos presos",
-                                                           "sincronizaÃ§Ã£o"
+                                                           "sincronização"
                                                        ],
                                           "structural":  [
-                                                             "aÃ§Ãµes paralelas",
+                                                             "ações paralelas",
                                                              "recurso compartilhado"
                                                          ],
                                           "anti_signals":  [
@@ -109,17 +109,17 @@
                                                            "constraint"
                                                        ],
                                           "semantic":  [
-                                                           "fase gerada impossÃ­vel",
-                                                           "mapa sem soluÃ§Ã£o",
-                                                           "caminho crÃ­tico bloqueado"
+                                                           "fase gerada impossível",
+                                                           "mapa sem solução",
+                                                           "caminho crítico bloqueado"
                                                        ],
                                           "structural":  [
-                                                             "geraÃ§Ã£o procedural",
-                                                             "restriÃ§Ãµes duras",
+                                                             "geração procedural",
+                                                             "restrições duras",
                                                              "requisito de solvabilidade"
                                                          ],
                                           "anti_signals":  [
-                                                               "conteÃºdo inteiramente autoral e fixo"
+                                                               "conteúdo inteiramente autoral e fixo"
                                                            ]
                                       },
                        "inputs":  [
@@ -153,16 +153,16 @@
                                                            "KL divergence"
                                                        ],
                                           "semantic":  [
-                                                           "conteÃºdo procedural repetitivo",
+                                                           "conteúdo procedural repetitivo",
                                                            "gerador enviesado",
                                                            "baixa variedade"
                                                        ],
                                           "structural":  [
                                                              "amostras geradas",
-                                                             "distribuiÃ§Ã£o de variantes"
+                                                             "distribuição de variantes"
                                                          ],
                                           "anti_signals":  [
-                                                               "solvabilidade ainda nÃ£o verificada"
+                                                               "solvabilidade ainda não verificada"
                                                            ]
                                       },
                        "inputs":  [
@@ -197,7 +197,7 @@
                                                        ],
                                           "semantic":  [
                                                            "recurso acumula ou esgota",
-                                                           "produÃ§Ã£o nÃ£o acompanha consumo",
+                                                           "produção não acompanha consumo",
                                                            "gargalo"
                                                        ],
                                           "structural":  [
@@ -206,7 +206,7 @@
                                                              "fontes e sinks"
                                                          ],
                                           "anti_signals":  [
-                                                               "sem mudanÃ§a quantitativa de recursos"
+                                                               "sem mudança quantitativa de recursos"
                                                            ]
                                       },
                        "inputs":  [
@@ -240,13 +240,13 @@
                                                            "multiplier"
                                                        ],
                                           "semantic":  [
-                                                           "recursos convertidos em mÃºltiplos estÃ¡gios",
+                                                           "recursos convertidos em múltiplos estágios",
                                                            "cadeia produtiva",
                                                            "choque de oferta"
                                                        ],
                                           "structural":  [
-                                                             "bens intermediÃ¡rios",
-                                                             "mais de uma conversÃ£o"
+                                                             "bens intermediários",
+                                                             "mais de uma conversão"
                                                          ],
                                           "anti_signals":  [
                                                                "apenas um estoque com fonte e sink simples"
@@ -286,7 +286,7 @@
                                                        ],
                                           "semantic":  [
                                                            "janela de parry",
-                                                           "ataque tem recuperaÃ§Ã£o",
+                                                           "ataque tem recuperação",
                                                            "timing preciso"
                                                        ],
                                           "structural":  [
@@ -294,7 +294,7 @@
                                                              "janelas temporais discretas"
                                                          ],
                                           "anti_signals":  [
-                                                               "aÃ§Ã£o sem timing ou execuÃ§Ã£o temporal relevante"
+                                                               "ação sem timing ou execução temporal relevante"
                                                            ]
                                       },
                        "inputs":  [
@@ -328,17 +328,17 @@
                                                            "exposure"
                                                        ],
                                           "semantic":  [
-                                                           "aÃ§Ã£o pesada pune erro",
-                                                           "escolha irreversÃ­vel",
+                                                           "ação pesada pune erro",
+                                                           "escolha irreversível",
                                                            "janela de escape"
                                                        ],
                                           "structural":  [
-                                                             "precondiÃ§Ãµes",
+                                                             "precondições",
                                                              "custo",
-                                                             "consequÃªncia"
+                                                             "consequência"
                                                          ],
                                           "anti_signals":  [
-                                                               "aÃ§Ã£o sem custo ou compromisso"
+                                                               "ação sem custo ou compromisso"
                                                            ]
                                       },
                        "inputs":  [
@@ -373,15 +373,15 @@
                                                        ],
                                           "semantic":  [
                                                            "combinar habilidades",
-                                                           "mÃºltiplas soluÃ§Ãµes",
-                                                           "aÃ§Ã£o emergente"
+                                                           "múltiplas soluções",
+                                                           "ação emergente"
                                                        ],
                                           "structural":  [
-                                                             "aÃ§Ãµes composÃ¡veis",
-                                                             "efeitos combinatÃ³rios"
+                                                             "ações composáveis",
+                                                             "efeitos combinatórios"
                                                          ],
                                           "anti_signals":  [
-                                                               "sequÃªncia Ãºnica obrigatÃ³ria"
+                                                               "sequência única obrigatória"
                                                            ]
                                       },
                        "inputs":  [
@@ -416,9 +416,9 @@
                                                            "affordance"
                                                        ],
                                           "semantic":  [
-                                                           "jogador aprende pelo espaÃ§o",
+                                                           "jogador aprende pelo espaço",
                                                            "ritmo de salas",
-                                                           "Ã¡rea acessÃ­vel"
+                                                           "área acessível"
                                                        ],
                                           "structural":  [
                                                              "grafo de salas",
@@ -426,7 +426,7 @@
                                                              "learning beats"
                                                          ],
                                           "anti_signals":  [
-                                                               "problema exclusivamente econÃ´mico"
+                                                               "problema exclusivamente econômico"
                                                            ]
                                       },
                        "inputs":  [
@@ -461,14 +461,14 @@
                                                        ],
                                           "semantic":  [
                                                            "jogador precisa descobrir",
-                                                           "pistas desbloqueiam interpretaÃ§Ã£o",
+                                                           "pistas desbloqueiam interpretação",
                                                            "conhecimento opcional"
                                                        ],
                                           "structural":  [
-                                                             "grafo fÃ­sico e grafo de conhecimento"
+                                                             "grafo físico e grafo de conhecimento"
                                                          ],
                                           "anti_signals":  [
-                                                               "progressÃ£o somente numÃ©rica"
+                                                               "progressão somente numérica"
                                                            ]
                                       },
                        "inputs":  [
@@ -507,11 +507,11 @@
                                                            "regra parece bug"
                                                        ],
                                           "structural":  [
-                                                             "convenÃ§Ã£o repetida",
+                                                             "convenção repetida",
                                                              "pistas retrospectivas"
                                                          ],
                                           "anti_signals":  [
-                                                               "aleatoriedade sem coerÃªncia oculta"
+                                                               "aleatoriedade sem coerência oculta"
                                                            ]
                                       },
                        "inputs":  [
@@ -545,16 +545,16 @@
                                                            "negative feedback"
                                                        ],
                                           "semantic":  [
-                                                           "lÃ­der deve ser contido",
-                                                           "competiÃ§Ã£o snowball",
-                                                           "compensaÃ§Ã£o"
+                                                           "líder deve ser contido",
+                                                           "competição snowball",
+                                                           "compensação"
                                                        ],
                                           "structural":  [
-                                                             "posiÃ§Ã£o relativa",
-                                                             "taxa de recuperaÃ§Ã£o"
+                                                             "posição relativa",
+                                                             "taxa de recuperação"
                                                          ],
                                           "anti_signals":  [
-                                                               "sistema single-player sem comparaÃ§Ã£o"
+                                                               "sistema single-player sem comparação"
                                                            ]
                                       },
                        "inputs":  [
@@ -587,17 +587,17 @@
                                                            "marginal cost"
                                                        ],
                                           "semantic":  [
-                                                           "custo cresce por nÃ­vel",
-                                                           "reset com bÃ´nus",
-                                                           "progressÃ£o desacelera"
+                                                           "custo cresce por nível",
+                                                           "reset com bônus",
+                                                           "progressão desacelera"
                                                        ],
                                           "structural":  [
-                                                             "nÃ­veis",
+                                                             "níveis",
                                                              "custos",
                                                              "resets"
                                                          ],
                                           "anti_signals":  [
-                                                               "sem progressÃ£o ou mudanÃ§a de escala"
+                                                               "sem progressão ou mudança de escala"
                                                            ]
                                       },
                        "inputs":  [
@@ -631,7 +631,7 @@
                                                            "macro loop"
                                                        ],
                                           "semantic":  [
-                                                           "atividades em vÃ¡rias escalas",
+                                                           "atividades em várias escalas",
                                                            "retorno entre ciclos",
                                                            "ritmo temporal"
                                                        ],
@@ -640,7 +640,7 @@
                                                              "exit points"
                                                          ],
                                           "anti_signals":  [
-                                                               "evento isolado sem repetiÃ§Ã£o"
+                                                               "evento isolado sem repetição"
                                                            ]
                                       },
                        "inputs":  [

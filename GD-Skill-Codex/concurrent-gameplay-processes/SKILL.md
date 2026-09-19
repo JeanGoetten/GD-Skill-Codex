@@ -11,7 +11,9 @@ activation_signals:
     - deadlock
     - parallel actions
   recognition_references:
-    - concurrent-gameplay-processes
+    - "Factorio"
+    - "Oxygen Not Included"
+    - "RTS production"
 outputs:
   - process model
   - invariant report
@@ -50,14 +52,13 @@ This skill does not resolve narrative order and economic pricing.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: discrete-state-machine-verification; frame-based-combat-timing; resource-flow-economy.
+When the problem crosses its boundary, hand off to: discrete-state-machine-verification; resource-flow-economy; frame-based-combat-timing.
 
 ## Handoff Candidates
 
-- **discrete-state-machine-verification** — encaminhar quando o problema exigir sua interface específica.
-- **resource-flow-economy** — encaminhar quando o problema exigir sua interface específica.
-- **frame-based-combat-timing** — encaminhar quando o problema exigir sua interface específica.
-
+- **discrete-state-machine-verification** — when the interleaving can be reduced to sequential legal states and invariants, hand off the transition model for reachability analysis.
+- **resource-flow-economy** — when tokens behave as accumulable resources rather than process permissions, hand off the stock-flow model for balance analysis.
+- **frame-based-combat-timing** — when correctness depends on exact tick or frame windows instead of causal order, hand off the timing spec for frame-window analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Factorio; Oxygen Not Included; RTS production.

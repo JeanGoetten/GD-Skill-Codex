@@ -11,7 +11,9 @@ activation_signals:
     - composition
     - agency space
   recognition_references:
-    - emergent-agency-composition
+    - "The Legend of Zelda: Breath of the Wild"
+    - "Magicka"
+    - "immersive sims"
 outputs:
   - verb taxonomy
   - composition graph
@@ -50,14 +52,13 @@ This skill does not resolve individual move-set authoring and spatial pacing.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: frame-based-combat-timing; committed-risk-reward-actions; concurrent-gameplay-processes.
+When the problem crosses its boundary, hand off to: committed-risk-reward-actions; concurrent-gameplay-processes; cognitive-schema-disruption.
 
 ## Handoff Candidates
 
-- **committed-risk-reward-actions** — encaminhar quando o problema exigir sua interface específica.
-- **concurrent-gameplay-processes** — encaminhar quando o problema exigir sua interface específica.
-- **cognitive-schema-disruption** — encaminhar quando o problema exigir sua interface específica.
-
+- **committed-risk-reward-actions** — when a composed tactic needs explicit cost, exposure and recovery to be viable, hand off the tactic as an action contract for risk analysis.
+- **concurrent-gameplay-processes** — when composed verbs run concurrently and share resources, hand off the interaction model for Petri-net analysis.
+- **cognitive-schema-disruption** — when the design intends novel combinations to subvert learned conventions, hand off the expectation model for schema-disruption analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: The Legend of Zelda: Breath of the Wild; Magicka; immersive sims.

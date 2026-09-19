@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$Request,
     [Parameter(Mandatory = $true)]
@@ -10,17 +10,17 @@ param(
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not (Test-Path -LiteralPath $WorldModelPath)) { throw "World model não encontrado: $WorldModelPath" }
-$worldModel = Get-Content -LiteralPath $WorldModelPath -Raw | ConvertFrom-Json
+$worldModel = Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw | ConvertFrom-Json
 foreach ($field in @('entities','resources','spatial','temporal','rules','knowledge','progression','economy','actors','actions','goals','hidden_state')) {
     if (-not $worldModel.PSObject.Properties.Name.Contains($field)) { throw "World model sem campo obrigatório: $field" }
 }
 
 $routing = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'route_request.ps1') -Request $Request) | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0) { throw 'Roteamento falhou.' }
-$registry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
 $registryIds = @($registry.skills | ForEach-Object { $_.id })
 $timestamp = (Get-Date).ToUniversalTime().ToString('o')
-$worldJson = Get-Content -LiteralPath $WorldModelPath -Raw
+$worldJson = Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw
 $hashBytes = [Text.Encoding]::UTF8.GetBytes($Request + '|' + $worldJson)
 $inputHash = ([Security.Cryptography.SHA256]::Create().ComputeHash($hashBytes) | ForEach-Object { $_.ToString('x2') }) -join ''
 
@@ -56,7 +56,7 @@ $outputs = foreach ($skillId in @($routing.execution_order)) {
 }
 
 $adapterReports = @()
-$adapterContracts = Get-Content (Join-Path $root 'handoff-adapters.json') -Raw | ConvertFrom-Json
+$adapterContracts = Get-Content -Encoding UTF8 (Join-Path $root 'handoff-adapters.json') -Raw | ConvertFrom-Json
 for ($index = 0; $index -lt (@($routing.execution_order).Count - 1); $index++) {
     $sourceSkill = [string]$routing.execution_order[$index]
     $targetSkill = [string]$routing.execution_order[$index + 1]
@@ -70,7 +70,7 @@ for ($index = 0; $index -lt (@($routing.execution_order).Count - 1); $index++) {
         ($sourceOutput | ConvertTo-Json -Depth 20) | Set-Content -LiteralPath $sourcePath -Encoding utf8
         & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'execute_handoff_adapter.ps1') -SourceSkill $sourceSkill -TargetSkill $targetSkill -SourceOutputPath $sourcePath -OutputPath $adaptedPath
         if ($LASTEXITCODE -ne 0) { throw "Adapter falhou: $sourceSkill -> $targetSkill" }
-        $adapterReports += Get-Content -LiteralPath $adaptedPath -Raw | ConvertFrom-Json
+        $adapterReports += Get-Content -Encoding UTF8 -LiteralPath $adaptedPath -Raw | ConvertFrom-Json
     } finally {
         Remove-Item -LiteralPath $sourcePath,$adaptedPath -Force -ErrorAction SilentlyContinue
     }

@@ -1,6 +1,6 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$contracts = Get-Content (Join-Path $root 'handoff-adapters.json') -Raw | ConvertFrom-Json
+$contracts = Get-Content -Encoding UTF8 (Join-Path $root 'handoff-adapters.json') -Raw | ConvertFrom-Json
 $errors = [System.Collections.Generic.List[string]]::new()
 $knownUnits = @('resource', 'resource/second', 'dimensionless', 'frames')
 foreach ($adapter in $contracts.adapters) {

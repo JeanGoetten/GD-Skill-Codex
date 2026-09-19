@@ -11,7 +11,9 @@ activation_signals:
     - Leontief
     - conversion bottleneck
   recognition_references:
-    - macroeconomic-resource-conversion
+    - "Civilization"
+    - "EVE Online"
+    - "Anno"
 outputs:
   - production matrix
   - dependency analysis
@@ -50,14 +52,13 @@ This skill does not resolve moment-to-moment pacing and narrative resource meani
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: resource-flow-economy; competitive-negative-feedback; exponential-progression-and-prestige.
+When the problem crosses its boundary, hand off to: resource-flow-economy; exponential-progression-and-prestige; competitive-negative-feedback.
 
 ## Handoff Candidates
 
-- **resource-flow-economy** — encaminhar quando o problema exigir sua interface específica.
-- **exponential-progression-and-prestige** — encaminhar quando o problema exigir sua interface específica.
-- **competitive-negative-feedback** — encaminhar quando o problema exigir sua interface específica.
-
+- **resource-flow-economy** — when the question reduces to single-tier stock and flow balance without intermediate goods, hand off the simplified model for flow analysis.
+- **exponential-progression-and-prestige** — when conversion efficiency feeds long-run player growth curves, hand off the growth model for trajectory analysis.
+- **competitive-negative-feedback** — when wealth gaps between players are the concern rather than absolute prices, hand off the relative positions for feedback analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Civilization; EVE Online; Anno.
@@ -89,16 +90,22 @@ $$\mathbf{x}\ \ge\ K\mathbf{y}, \qquad K=\begin{bmatrix} k_{1,1} & \cdots & k_{1
 
 $$\mathbf{y}_{\text{effective}} = \eta \odot \mathbf{y}, \qquad \mathbf{x}_{\text{required}} = K\mathbf{y}$$
 
+4. For multi-tier goods whose outputs are also inputs, formalize the square Leontief intermediate-use form over the $n$ produced goods:
+
+$$\mathbf{x} = A\mathbf{x} + \mathbf{d}$$
+
+where $A \in \mathbb{R}^{n\times n}$ holds per-unit intermediate consumption, $\mathbf{x}$ is gross output and $\mathbf{d}$ is final demand. The total-requirements matrix $(I - A)^{-1}$ gives the gross output needed per unit of final demand (the Leontief multipliers used for ripple-effect analysis), and the economy is structurally productive if and only if the Hawkins–Simon condition holds: every leading principal minor of $(I - A)$ is positive. A violated Hawkins–Simon condition is a hard infeasibility certificate for the production graph — some demand vector cannot be met at any scale.
+
 ### Stage 2: Transaction Mechanisms and Dynamic Pricing
 
 1. Model price formation of a good $j$ in an exchange market based on the relation between supply ($S_j$) and demand ($D_j$):
 
-$$P_j(t+1) = P_j(t) \cdot \left(1 + \gamma \cdot \frac{D_j(t) - S_j(t)}{S_j(t)}\right)$$
+$$P_j(t+1) = \mathrm{clamp}\left(P_j(t) \cdot \left(1 + \gamma \cdot \frac{D_j(t) - S_j(t)}{S_j(t)}\right),\ P_{\min},\ P_{\max}\right)$$
 
-where $\gamma > 0$ is the market sensitivity to inventory imbalance.
+where $\gamma > 0$ is the market sensitivity to inventory imbalance. Without the clamp, the multiplicative update admits negative prices whenever net surplus exceeds $1/\gamma$; declare $P_{\min} > 0$ and $P_{\max}$ per market.
 2. Define transaction fees and market taxes ($T_{\text{market}}$) acting as currency drains on every completed trade.
 
-### Stage 3: Quantitative Theory of Money and Circulation Velocity
+### Stage 3: Quantity Theory of Money and Circulation Velocity
 
 1. Evaluate the monetary exchange equation in the game universe:
 
@@ -113,11 +120,11 @@ where $M$ is the total money supply in circulation, $V$ is the velocity of money
 
 The agent must analyze the economic matrix and flag the following systemic risks:
 
-### A. Monetary Hyperinflation from Source Imbalance
+### A. Monetary Expansion from Source Imbalance
 
-$$\Delta M_{\text{source}} \gg \Delta M_{\text{drain}} \implies \frac{d M}{dt} > 0 \implies P \to \infty$$
+$$\Delta M_{\text{source}} \gg \Delta M_{\text{drain}} \implies \frac{d M}{dt} > 0 \quad (\text{precondition for price growth})$$
 
-Action: Identify uncontrolled liquidity accumulation. Design automatic and proportional drains to agent wealth (e.g., asset maintenance fees, progressive manufacturing costs).
+Action: Identify uncontrolled liquidity accumulation. By $M V = P Y$, sustained monetary growth raises the price level only while $V$ and $Y$ remain fixed; both are behavioral, so treat $dM/dt > 0$ as a risk signal, not a price proof (reserve "hyperinflation" for observed price series, in the technical sense of Cagan). Design automatic and proportional drains to agent wealth (e.g., asset maintenance fees, progressive manufacturing costs).
 
 ### B. Chain Disruption by Bottleneck Input (*Bottleneck Resource*)
 
@@ -149,7 +156,7 @@ When responding to the user, the agent must present data in the following struct
 * **Total Money Supply ($M$):** [Volume of currency in circulation]
 * **Gross Injection ($\Delta M_{\text{source}}$):** [Rate of money creation per period]
 * **Total Drains ($\Delta M_{\text{drain}}$):** [Rate of money destruction by taxes/fees]
-* **Net Monetary Flow ($\frac{dM}{dt}$):** [Price trend: INFLATIONARY / DEFLATIONARY / BALANCED]
+* **Net Monetary Flow ($\frac{dM}{dt}$):** [Net emission: EXPANSIONARY / CONTRACTIONARY / BALANCED — price trend conclusions additionally require observed $V$ and $Y$]
 
 ### 3. Tax Matrix and Recommended Adjustment Drains
 
@@ -176,6 +183,7 @@ Required simulation or playtesting: demand shocks, substitution scenarios and ec
 ## Hypotheses and Limitations
 
 - Assumes input rows and product columns remain fixed, units are compatible, and yields/losses are measured per production batch.
+- The intermediate-use form, multipliers and the Hawkins–Simon condition follow Leontief (1941/1966); see Miller & Blair, *Input-Output Analysis*, for the full treatment.
 - Price and inflation risks are conditional on modeled supply, demand, velocity, and player behavior; validate with time-series data.
 
 ## 4. Procedure Execution Example
@@ -192,9 +200,9 @@ $$K = \begin{bmatrix} 100 & (\text{Metal}) \\ 20 & (\text{Crystal}) \end{bmatrix
 
 $$\Delta M_{\text{source}} = +1,000,000/\text{day}, \quad \Delta M_{\text{drain}} = -200,000/\text{day}$$
 
-$$\frac{dM}{dt} = +800,000\text{ coins/day} \quad (\text{Accelerating hyperinflation})$$
+$$\frac{dM}{dt} = +800,000\text{ coins/day} \quad (\text{sustained net emission; price-level risk})$$
 
 - **Proposed Systemic Adjustment:**
   1. Add production registration tax per factory: $T_{\text{fab}} = 500,000\text{ coins/day}$.
   2. Implement 10% market sales tax on Metal and Crystal transactions ($T_{\text{market}} \approx 300,000\text{ coins/day}$).
-  3. Post-adjustment result: $\frac{dM}{dt} = 1,000,000 - (200,000 + 500,000 + 300,000) = 0$ (Monetary stability achieved).
+  3. Post-adjustment result: $\frac{dM}{dt} = 1,000,000 - (200,000 + 500,000 + 300,000) = 0$ (zero net emission achieved; a price-trend conclusion still requires observed $V$ and $Y$).

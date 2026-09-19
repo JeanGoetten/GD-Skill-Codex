@@ -8,10 +8,13 @@ domain:
 activation_signals:
   concepts:
     - rubber banding
-    - lambda stability
+    - catch-up mechanics
     - sandbagging
+    - dynamic handicap
   recognition_references:
-    - competitive-negative-feedback
+    - "Mario Kart"
+    - "League of Legends"
+    - "Rocket League"
 outputs:
   - feedback model
   - stability analysis
@@ -50,14 +53,13 @@ This skill does not resolve matchmaking policy and solo economy.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: resource-flow-economy; exponential-progression-and-prestige; committed-risk-reward-actions.
+When the problem crosses its boundary, hand off to: resource-flow-economy; exponential-progression-and-prestige; concurrent-gameplay-processes.
 
 ## Handoff Candidates
 
-- **resource-flow-economy** — encaminhar quando o problema exigir sua interface específica.
-- **exponential-progression-and-prestige** — encaminhar quando o problema exigir sua interface específica.
-- **concurrent-gameplay-processes** — encaminhar quando o problema exigir sua interface específica.
-
+- **resource-flow-economy** — when the catch-up mechanism works by granting or draining transferable resources, hand off the stock-flow model for balance analysis.
+- **exponential-progression-and-prestige** — when damping acts on progression rates or level gaps rather than in-match performance, hand off the curve family for trajectory analysis.
+- **concurrent-gameplay-processes** — when several compensating processes run in parallel and may interleave or deadlock, hand off the process interaction for Petri-net analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Mario Kart; League of Legends; Rocket League.
@@ -66,11 +68,11 @@ These are semantic anchors only, not content to reproduce: Mario Kart; League of
 
 This skill formalizes equalization and stabilization dynamics of competitive ludic systems through negative feedback loops. While positive feedback accelerates divergence between agents, negative feedback imposes opposing forces proportional to the deviation from the desired equilibrium state.
 
-The rate of change of an agent's advantage relative to the group is described by the damping differential equation:
+The rate of change of an agent's performance gap relative to the group is described by the damping differential equation over the continuous gap $g_i$ (distance, time or score difference to the reference agent, typically the pack median):
 
-$$\frac{d Q}{dt} = -k \cdot (P_{\text{position}} - P_{\text{target}})$$
+$$\frac{d g_i}{dt} = u_{\text{base},i} - k \cdot g_i$$
 
-where $P_{\text{position}}$ is the agent's ordinal ranking (1st to last place), $P_{\text{target}}$ is the equilibrium position desired by the system (typically the median of the ranking), and $k > 0$ is the damping sensitivity coefficient.
+where $g_i$ is the continuous performance gap of agent $i$, $u_{\text{base},i}$ is the agent's uncompensated performance rate, and $k > 0$ is the damping sensitivity coefficient. Damping must act on the metric gap, never on the ordinal ranking: $P_{\text{position}} \in \{1, \dots, N\}$ is a discrete, non-metric label (the gap between 1st and 2nd can be 0.1 s or 30 s), so it cannot be differentiated or scaled by a gain. The ranking is only an observable used to *select* the intensity class of the intervention (Stage 2); the control signal itself must be the continuous gap.
 
 The objective of the agent is to design self-regulating mechanisms that reduce performance disparity without nullifying the merit of the dominant agent's strategic decision-making.
 
@@ -86,7 +88,7 @@ When activating this skill, the agent must sequentially execute the following an
 
 $$\mathbf{P} = [P_1, P_2, \dots, P_N]^T \quad \text{where } P_1 = \text{Absolute Leader and } P_N = \text{Last Place}$$
 
-2. Calculate relative deviation $\Delta P_i = P_i - P_{\text{median}}$.
+2. Measure the continuous performance gap $g_i$ of each agent (distance, time or score to the reference) and use the ordinal deviation $\Delta P_i = P_i - P_{\text{median}}$ only to select intervention classes; the damping magnitude uses $g_i$, never the ordinal label.
 
 ### Stage 2: Conditional Resource Probability Matrix ($M_{\text{prob}}$)
 
@@ -170,25 +172,26 @@ When responding to the user, the agent must structure the analysis in the follow
 ## Mathematical Status
 
 ### Formal Guarantees
-For x_(t+1)=lambda*x_t+b, |1-lambda|<1 is only a mathematical stability property under fixed assumptions; stable feedback does not imply fairness.
+For the discrete damping step $x_{t+1} = x_t - hkx_t + b = (1 - hk)x_t + b$ (tick $h$), the closed-loop pole is $(1 - hk)$: the loop is stable if and only if $0 < hk < 2$, and it overshoots/oscillates whenever $hk > 1$ — the regime that produces the Destructive Elastic Oscillation flagged below. These are properties of the linearized model under fixed assumptions; stable feedback does not imply fairness.
 
 ### Derived Metrics
-Sandbagging requires strategic simulation.
+Derived metrics include comeback probability, variance and intervention cost, computable from the declared model inputs.
 
 ### Heuristics and Design Judgments
-Derived metrics include comeback probability, variance and intervention cost.
+The damping gain $k$, the friction factor $\gamma$ and the $M_{\text{prob}}$ rows are calibrated defaults; choosing them is a design judgment, not a derived quantity.
 
 ### Required Simulation or Playtesting
-Heuristics tune incentives. Required simulation or playtesting: strategic agents, sandbagging probes and live telemetry.
+Sandbagging incentives require strategic simulation. Required simulation or playtesting: strategic agents, sandbagging probes and live telemetry.
 
 ## Hypotheses and Limitations
 
 - Assumes rank, gap, and resource utility are observable at the cadence used by the controller.
+- The gap-based damping formulation follows dynamic difficulty adjustment practice (Hunicke & Chapman, AIIDE 2005); the control-theoretic stability reading applies to the linearized, constant-gain model only.
 - Compensation effects and fairness conclusions are conditional on skill distribution, latency, and player adaptation; validate with simulations and playtests.
 
 ## 4. Procedure Execution Example
 
-If the user requests: *"Create a ketchup/equalization system for a racing game where last place gets a global turbo, but without making the race unfair for those who trained."*
+If the user requests: *"Create a catch-up/equalization system for a racing game where last place gets a global turbo, but without making the race unfair for those who trained."*
 
 The agent applying this skill formalizes:
 

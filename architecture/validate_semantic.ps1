@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$WorldModelPath,
     [string]$HandoffsPath,
     [string]$AdapterPath
@@ -9,7 +9,7 @@ $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $errors = [System.Collections.Generic.List[string]]::new()
 
 function Read-Json([string]$path) {
-    try { return Get-Content -LiteralPath $path -Raw | ConvertFrom-Json }
+    try { return Get-Content -Encoding UTF8 -LiteralPath $path -Raw | ConvertFrom-Json }
     catch { $errors.Add("JSON inválido ou ausente: $path ($($_.Exception.Message))"); return $null }
 }
 $skillRegistry = Read-Json (Join-Path $root 'skill-registry.json')

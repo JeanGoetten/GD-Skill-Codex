@@ -11,7 +11,9 @@ activation_signals:
     - invariant
     - reachability
   recognition_references:
-    - discrete-state-machine-verification
+    - "Super Mario Bros"
+    - "The Legend of Zelda"
+    - "XCOM"
 outputs:
   - state model
   - invariant checks
@@ -50,14 +52,13 @@ This skill does not resolve runtime implementation and player-experience proof.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: frame-based-combat-timing; concurrent-gameplay-processes; resource-flow-economy.
+When the problem crosses its boundary, hand off to: concurrent-gameplay-processes; procedural-level-constraint-solving; frame-based-combat-timing.
 
 ## Handoff Candidates
 
-- **concurrent-gameplay-processes** — encaminhar quando o problema exigir sua interface específica.
-- **procedural-level-constraint-solving** — encaminhar quando o problema exigir sua interface específica.
-- **frame-based-combat-timing** — encaminhar quando o problema exigir sua interface específica.
-
+- **concurrent-gameplay-processes** — when several state machines advance in parallel and share resources, hand off the process interaction for Petri-net analysis.
+- **procedural-level-constraint-solving** — when states describe generation constraints of levels rather than runtime transitions, hand off the constraint set for CSP analysis.
+- **frame-based-combat-timing** — when legality is decided by frame windows (startup/active/recovery) instead of discrete events, hand off the action timing for frame analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Super Mario Bros.; The Legend of Zelda; XCOM.

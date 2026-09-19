@@ -11,7 +11,9 @@ activation_signals:
     - knowledge state
     - revelation pacing
   recognition_references:
-    - epistemic-holarchic-progression
+    - "Outer Wilds"
+    - "Return of the Obra Dinn"
+    - "Disco Elysium"
 outputs:
   - knowledge graph
   - progression map
@@ -50,14 +52,13 @@ This skill does not resolve prose authoring and physical route validation.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: discrete-state-machine-verification; cognitive-schema-disruption; nested-gameplay-loop-architecture.
+When the problem crosses its boundary, hand off to: cognitive-schema-disruption; spatial-topology-and-learning-pacing; discrete-state-machine-verification.
 
 ## Handoff Candidates
 
-- **cognitive-schema-disruption** — encaminhar quando o problema exigir sua interface específica.
-- **spatial-topology-and-learning-pacing** — encaminhar quando o problema exigir sua interface específica.
-- **discrete-state-machine-verification** — encaminhar quando o problema exigir sua interface específica.
-
+- **cognitive-schema-disruption** — when discovered knowledge should reframe prior expectations rather than only unlock content, hand off the schema model for disruption analysis.
+- **spatial-topology-and-learning-pacing** — when clue discovery is gated by spatial topology and room sequence, hand off the level graph for topology and pacing analysis.
+- **discrete-state-machine-verification** — when knowledge gates become explicit states with transitions, hand off the gated model for reachability analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Outer Wilds; Return of the Obra Dinn; Disco Elysium.

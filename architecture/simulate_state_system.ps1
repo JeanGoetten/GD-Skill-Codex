@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$WorldModelPath,
     [int]$Steps = 100,
@@ -7,7 +7,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 if ($Steps -lt 1) { throw 'Steps deve ser positivo.' }
-$world = Get-Content -LiteralPath $WorldModelPath -Raw | ConvertFrom-Json
+$world = Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw | ConvertFrom-Json
 $system = $world.hidden_state.state_system
 if ($null -eq $system) { throw 'hidden_state.state_system ausente.' }
 $states = @($system.states | ForEach-Object { [string]$_.id })

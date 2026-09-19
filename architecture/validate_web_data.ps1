@@ -1,9 +1,9 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = Split-Path $root -Parent
-$registry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
-$handoffs = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
-$data = Get-Content (Join-Path $projectRoot 'web\data.js') -Raw
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$handoffs = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
+$data = Get-Content -Encoding UTF8 (Join-Path $projectRoot 'web\data.js') -Raw
 $errors = [System.Collections.Generic.List[string]]::new()
 
 foreach ($skill in $registry.skills) {

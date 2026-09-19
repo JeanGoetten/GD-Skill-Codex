@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 if ($MaxCycles -lt 1) { throw 'MaxCycles deve ser >= 1.' }
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$handoffs = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
+$handoffs = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
 $report = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'execute_skills.ps1') -Request $Request -WorldModelPath $WorldModelPath -Seed $Seed) | ConvertFrom-Json
 $history = @([ordered]@{ cycle = 1; status = $report.execution_status; output_hash = $report.input_hash; return_to = @($handoffs.handoffs | Where-Object { $_.source -eq $report.routing.primary } | ForEach-Object { $_.return_to }) })
 $converged = $false

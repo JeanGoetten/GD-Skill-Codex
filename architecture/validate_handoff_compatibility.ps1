@@ -1,8 +1,8 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$registry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
-$handoffs = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
-$adapterContracts = Get-Content (Join-Path $root 'handoff-adapters.json') -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$handoffs = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
+$adapterContracts = Get-Content -Encoding UTF8 (Join-Path $root 'handoff-adapters.json') -Raw | ConvertFrom-Json
 $ids = @($registry.skills | ForEach-Object { [string]$_.id })
 $errors = [System.Collections.Generic.List[string]]::new()
 $warnings = [System.Collections.Generic.List[string]]::new()

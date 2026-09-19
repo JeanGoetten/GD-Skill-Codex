@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)][string]$WorldModelPath,
     [Parameter(Mandatory = $true)][string]$ExecutorId,
     [string]$OutputPath,
@@ -11,7 +11,7 @@ if ($Repeats -lt 1) { throw 'Repeats deve ser >= 1.' }
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $executor = Join-Path (Join-Path $root 'executors') ($ExecutorId + '.ps1')
 if (-not (Test-Path -LiteralPath $executor)) { throw "Executor não encontrado: $ExecutorId" }
-$worldJson = Get-Content -LiteralPath $WorldModelPath -Raw
+$worldJson = Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw
 $world = $worldJson | ConvertFrom-Json
 $hash = ([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes($worldJson)) | ForEach-Object { $_.ToString('x2') }) -join ''
 $runs = @()

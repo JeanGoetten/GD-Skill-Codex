@@ -1,6 +1,6 @@
-param([Parameter(Mandatory = $true)][string]$ReportPath)
+﻿param([Parameter(Mandatory = $true)][string]$ReportPath)
 $ErrorActionPreference = 'Stop'
-$report = Get-Content -LiteralPath $ReportPath -Raw | ConvertFrom-Json
+$report = Get-Content -Encoding UTF8 -LiteralPath $ReportPath -Raw | ConvertFrom-Json
 $errors = [System.Collections.Generic.List[string]]::new()
 $claims = @($report.claims)
 foreach ($recommendation in @($report.recommendations)) {

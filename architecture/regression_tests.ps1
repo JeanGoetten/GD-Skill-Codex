@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $examples = Get-ChildItem -LiteralPath (Join-Path $root 'examples') -Filter '*.example.json'
 $failures = [System.Collections.Generic.List[string]]::new()
@@ -20,7 +20,7 @@ $executorAliases = @{
     'nested-gameplay-loop-architecture' = 'nested_gameplay_loop_architecture'
 }
 foreach ($example in $examples) {
-    $world = Get-Content $example.FullName -Raw | ConvertFrom-Json
+    $world = Get-Content -Encoding UTF8 $example.FullName -Raw | ConvertFrom-Json
     if ($null -eq $world.hidden_state) { continue }
     $candidates = Get-ChildItem -LiteralPath (Join-Path $root 'executors') -Filter '*.ps1'
     $matched = $false

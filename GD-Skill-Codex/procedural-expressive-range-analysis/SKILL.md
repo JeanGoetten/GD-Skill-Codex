@@ -11,7 +11,9 @@ activation_signals:
     - entropy
     - generator bias
   recognition_references:
-    - procedural-expressive-range-analysis
+    - "No Man's Sky"
+    - "Spelunky"
+    - "Minecraft"
 outputs:
   - diversity report
   - validity-filtered coverage
@@ -38,7 +40,7 @@ measure intentional content diversity without confusing noise for expression.
 
 ## Activation Signals
 
-expressive range; coverage; novelty; entropy; mode collapse; bias; recognition anchors: No Man?s Sky; Spelunky; Minecraft.
+expressive range; coverage; novelty; entropy; mode collapse; bias; recognition anchors: No Man's Sky; Spelunky; Minecraft.
 
 ## Scope
 
@@ -50,17 +52,16 @@ This skill does not resolve individual solvability and aesthetic authorship.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: procedural-level-constraint-solving; spatial-topology-and-learning-pacing; resource-flow-economy.
+When the problem crosses its boundary, hand off to: procedural-level-constraint-solving; spatial-topology-and-learning-pacing; cognitive-schema-disruption.
 
 ## Handoff Candidates
 
-- **procedural-level-constraint-solving** — encaminhar quando o problema exigir sua interface específica.
-- **spatial-topology-and-learning-pacing** — encaminhar quando o problema exigir sua interface específica.
-- **cognitive-schema-disruption** — encaminhar quando o problema exigir sua interface específica.
-
+- **procedural-level-constraint-solving** — when low-occupancy or collapsed regions need a generative fix through constraints, hand off the affected regions for CSP analysis.
+- **spatial-topology-and-learning-pacing** — when generated content must exhibit learnable spatial structure, hand off samples as level graphs for topology analysis.
+- **cognitive-schema-disruption** — when expressive variation is meant to subvert player expectations deliberately, hand off the variant set for schema-disruption analysis.
 ## Recognition References
 
-These are semantic anchors only, not content to reproduce: No Man?s Sky; Spelunky; Minecraft.
+These are semantic anchors only, not content to reproduce: No Man's Sky; Spelunky; Minecraft.
 
 ## Theoretical Context and System Function
 

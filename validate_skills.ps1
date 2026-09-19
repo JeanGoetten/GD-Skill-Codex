@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $skillsRoot = Join-Path $root 'GD-Skill-Codex'
 $requiredHeadings = @(
@@ -39,7 +39,7 @@ Get-ChildItem -LiteralPath $skillsRoot -Directory | ForEach-Object {
         $errors.Add("$($dir.Name): SKILL.md ausente")
         return
     }
-    $lines = Get-Content -LiteralPath $file
+    $lines = Get-Content -Encoding UTF8 -LiteralPath $file
     if ($lines.Count -lt 4 -or $lines[0] -ne '---') {
         $errors.Add("$($dir.Name): front matter não inicia na primeira linha")
         return

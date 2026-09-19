@@ -11,7 +11,9 @@ activation_signals:
     - expected value
     - spatial risk
   recognition_references:
-    - committed-risk-reward-actions
+    - "Dark Souls"
+    - "Monster Hunter"
+    - "Street Fighter"
 outputs:
   - action contract
   - risk ledger
@@ -50,14 +52,13 @@ This skill does not resolve frame tree definition and procedural solvability.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: frame-based-combat-timing; spatial-topology-and-learning-pacing; competitive-negative-feedback.
+When the problem crosses its boundary, hand off to: frame-based-combat-timing; emergent-agency-composition; competitive-negative-feedback.
 
 ## Handoff Candidates
 
-- **frame-based-combat-timing** — encaminhar quando o problema exigir sua interface específica.
-- **emergent-agency-composition** — encaminhar quando o problema exigir sua interface específica.
-- **competitive-negative-feedback** — encaminhar quando o problema exigir sua interface específica.
-
+- **frame-based-combat-timing** — when commitment risk must be priced in exact startup/active/recovery frames instead of declared windows, hand off the action signatures for frame-advantage analysis.
+- **emergent-agency-composition** — when several committed actions should combine into player-invented tactics, hand off the verb set for compositional agency analysis.
+- **competitive-negative-feedback** — when committed actions must not become dominant or useless under catch-up or handicap pressure, hand off the payoff table for feedback-stability analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Dark Souls; Monster Hunter; Street Fighter.

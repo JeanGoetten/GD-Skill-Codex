@@ -11,7 +11,9 @@ activation_signals:
     - cancel windows
     - input latency
   recognition_references:
-    - frame-based-combat-timing
+    - "Street Fighter"
+    - "Devil May Cry"
+    - "Super Smash Bros."
 outputs:
   - frame timeline
   - effective-window table
@@ -38,7 +40,7 @@ validate combat timing trees, interrupts, links and terminal recovery.
 
 ## Activation Signals
 
-startup; active; recovery; hitstop; cancel; link; invulnerability; recognition anchors: Street Fighter; Devil May Cry; Super Smash Bros..
+startup; active; recovery; hitstop; cancel; link; invulnerability; recognition anchors: Street Fighter; Devil May Cry; Super Smash Bros.
 
 ## Scope
 
@@ -50,17 +52,16 @@ This skill does not resolve macro progression and spatial layout.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: committed-risk-reward-actions; concurrent-gameplay-processes; exponential-progression-and-prestige.
+When the problem crosses its boundary, hand off to: discrete-state-machine-verification; committed-risk-reward-actions; concurrent-gameplay-processes.
 
 ## Handoff Candidates
 
-- **discrete-state-machine-verification** — encaminhar quando o problema exigir sua interface específica.
-- **committed-risk-reward-actions** — encaminhar quando o problema exigir sua interface específica.
-- **concurrent-gameplay-processes** — encaminhar quando o problema exigir sua interface específica.
-
+- **discrete-state-machine-verification** — when the frame system abstracts into discrete states and legality transitions, hand off the state model for reachability and invariant analysis.
+- **committed-risk-reward-actions** — when the relevant question is cost, exposure and reversibility of an action rather than frame legality, hand off the contract for risk-reward analysis.
+- **concurrent-gameplay-processes** — when multiple timed processes (projectiles, buffs, recovery) interact causally, hand off the interaction graph for Petri-net analysis.
 ## Recognition References
 
-These are semantic anchors only, not content to reproduce: Street Fighter; Devil May Cry; Super Smash Bros..
+These are semantic anchors only, not content to reproduce: Street Fighter; Devil May Cry; Super Smash Bros.
 
 ## Theoretical Context and System Function
 

@@ -1,9 +1,9 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$registry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
 $missingRoleFields = @($registry.skills | Where-Object { -not $_.domain_role -or -not $_.routing_role })
 if ($missingRoleFields.Count -gt 0) { throw "Skills sem domain_role/routing_role: $($missingRoleFields.id -join ', ')" }
-$handoffs = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
+$handoffs = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
 $skillsRoot = Join-Path (Split-Path $root -Parent) 'GD-Skill-Codex'
 $ids = @($registry.skills | ForEach-Object { $_.id })
 $errors = [System.Collections.Generic.List[string]]::new()

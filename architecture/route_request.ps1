@@ -1,10 +1,10 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$Request
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$registry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
 $normalize = {
     param([string]$Value)
     $normalized = $Value.ToLowerInvariant().Normalize([Text.NormalizationForm]::FormD)

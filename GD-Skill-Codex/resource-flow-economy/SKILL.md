@@ -11,7 +11,9 @@ activation_signals:
     - production rate
     - bottleneck
   recognition_references:
-    - resource-flow-economy
+    - "SimCity"
+    - "Stardew Valley"
+    - "Factorio"
 outputs:
   - flow model
   - balance metrics
@@ -50,14 +52,13 @@ This skill does not resolve full production matrices and competitive catch-up.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: macroeconomic-resource-conversion; competitive-negative-feedback; exponential-progression-and-prestige.
+When the problem crosses its boundary, hand off to: macroeconomic-resource-conversion; exponential-progression-and-prestige; committed-risk-reward-actions.
 
 ## Handoff Candidates
 
-- **macroeconomic-resource-conversion** — encaminhar quando o problema exigir sua interface específica.
-- **exponential-progression-and-prestige** — encaminhar quando o problema exigir sua interface específica.
-- **committed-risk-reward-actions** — encaminhar quando o problema exigir sua interface específica.
-
+- **macroeconomic-resource-conversion** — when resources convert through multi-tier production chains with intermediate goods, hand off the conversion matrix for input-output analysis.
+- **exponential-progression-and-prestige** — when accumulation rates drive player growth curves, hand off the rates as growth models for trajectory analysis.
+- **committed-risk-reward-actions** — when spending or investing resources is an irreversible commitment under uncertainty, hand off the decisions as action contracts for risk analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: SimCity; Stardew Valley; Factorio.

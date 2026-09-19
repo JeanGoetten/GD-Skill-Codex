@@ -11,7 +11,9 @@ activation_signals:
     - branching
     - implicit teaching
   recognition_references:
-    - spatial-topology-and-learning-pacing
+    - "Metroid"
+    - "Portal"
+    - "Dark Souls"
 outputs:
   - topology graph
   - pacing metrics
@@ -50,14 +52,13 @@ This skill does not resolve CSP solving, combat timing and economy tuning.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: procedural-level-constraint-solving; procedural-expressive-range-analysis; committed-risk-reward-actions.
+When the problem crosses its boundary, hand off to: procedural-level-constraint-solving; epistemic-holarchic-progression; nested-gameplay-loop-architecture.
 
 ## Handoff Candidates
 
-- **procedural-level-constraint-solving** — encaminhar quando o problema exigir sua interface específica.
-- **epistemic-holarchic-progression** — encaminhar quando o problema exigir sua interface específica.
-- **nested-gameplay-loop-architecture** — encaminhar quando o problema exigir sua interface específica.
-
+- **procedural-level-constraint-solving** — when the topology must be produced or repaired by generation, hand off the spatial constraints for CSP analysis.
+- **epistemic-holarchic-progression** — when the space mainly gates knowledge discovery rather than traversal skill, hand off the knowledge layer for epistemic analysis.
+- **nested-gameplay-loop-architecture** — when room sequences repeat as temporal loops across sessions, hand off the loop structure for temporal analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Metroid; Portal; Dark Souls.

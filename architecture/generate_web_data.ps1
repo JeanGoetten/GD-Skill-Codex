@@ -1,8 +1,8 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = Split-Path $root -Parent
-$registry = Get-Content (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
-$handoffs = Get-Content (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
+$registry = Get-Content -Encoding UTF8 (Join-Path $root 'skill-registry.json') -Raw | ConvertFrom-Json
+$handoffs = Get-Content -Encoding UTF8 (Join-Path $root 'handoffs.json') -Raw | ConvertFrom-Json
 $skillsRoot = Join-Path $projectRoot 'GD-Skill-Codex'
 $skillById = @{}
 foreach ($skill in $registry.skills) { $skillById[$skill.id] = $skill }
@@ -11,7 +11,7 @@ function Convert-ToJsString([object]$Value) {
     return ($Value | ConvertTo-Json -Compress -Depth 10)
 }
 function Get-FrontMatter([string]$Path) {
-    $content = Get-Content -LiteralPath $Path -Raw
+    $content = Get-Content -Encoding UTF8 -LiteralPath $Path -Raw
     $match = [regex]::Match($content, '(?s)^---\s*(.*?)\s*---')
     if (-not $match.Success) { throw "Front matter ausente: $Path" }
     return $match.Groups[1].Value
@@ -22,7 +22,7 @@ function Get-FrontMatterList([string]$FrontMatter, [string]$Field) {
     return @([regex]::Matches($match.Groups[1].Value, '(?m)^\s+-\s+(.+?)\s*$') | ForEach-Object { $_.Groups[1].Value.Trim() })
 }
 function Get-FirstHeading([string]$Path, [string]$Fallback) {
-    $match = [regex]::Match((Get-Content -LiteralPath $Path -Raw), '(?m)^#\s+(.+?)\s*$')
+    $match = [regex]::Match((Get-Content -Encoding UTF8 -LiteralPath $Path -Raw), '(?m)^#\s+(.+?)\s*$')
     if ($match.Success) { return ($match.Groups[1].Value -replace ':\s*.*$', '').Trim() }
     return $Fallback
 }

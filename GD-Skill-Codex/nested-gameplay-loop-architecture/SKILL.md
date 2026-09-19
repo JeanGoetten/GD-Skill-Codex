@@ -1,6 +1,6 @@
 ---
 name: nested-gameplay-loop-architecture
-description: Formalizes and designs nested gameplay loop architecture across multiple temporal scales (short, medium, and long term). Use this skill when the user requests: (1) design of continuous engagement and retention structures, (2) staggered alignment of temporal horizons (micro, meso, and macro loops), (3) elimination of cognitive exit points, or (4) balancing of overlapping objective completions.
+description: Formalizes and designs nested gameplay loop architecture across multiple temporal scales (short, medium, and long term). Use this skill when the user requests: (1) design of continuous engagement and retention structures, (2) staggered alignment of temporal horizons (micro, meso, and macro loops), (3) observation and design of cognitive exit points, or (4) balancing of overlapping objective completions.
 domain:
   primary:
     - nested gameplay loops
@@ -8,10 +8,12 @@ domain:
 activation_signals:
   concepts:
     - short/mid/long loop
-    - continuity
-    - exit point
+    - session structure
+    - cognitive exit point
   recognition_references:
-    - nested-gameplay-loop-architecture
+    - "Civilization"
+    - "Animal Crossing"
+    - "Hades"
 outputs:
   - loop map
   - continuity metrics
@@ -50,14 +52,13 @@ This skill does not resolve monetization and narrative knowledge graphs.
 
 ## Handoff Conditions
 
-When the problem crosses its boundary, hand off to: frame-based-combat-timing; exponential-progression-and-prestige; spatial-topology-and-learning-pacing.
+When the problem crosses its boundary, hand off to: frame-based-combat-timing; resource-flow-economy; epistemic-holarchic-progression.
 
 ## Handoff Candidates
 
-- **frame-based-combat-timing** — encaminhar quando o problema exigir sua interface específica.
-- **resource-flow-economy** — encaminhar quando o problema exigir sua interface específica.
-- **epistemic-holarchic-progression** — encaminhar quando o problema exigir sua interface específica.
-
+- **frame-based-combat-timing** — when the micro loop decomposes into frame-level action windows, hand off the core action for frame analysis.
+- **resource-flow-economy** — when loop rewards are measured in accumulable resources, hand off the reward flows for stock-flow analysis.
+- **epistemic-holarchic-progression** — when macro loops deliver information and understanding rather than numeric growth, hand off the knowledge structure for epistemic analysis.
 ## Recognition References
 
 These are semantic anchors only, not content to reproduce: Civilization; Animal Crossing; Hades.
@@ -107,12 +108,12 @@ $$\forall (i, j), \quad \vert{} t_{\text{completion, meso, i}} - t_{\text{comple
 
 ### Stage 3: Cognitive Retention Pressure Calculation ($\Pi_{\text{retention}}$)
 
-1. Define Cognitive Retention Pressure $\Pi(t)$ at instant $t$ as the sum of initiated but uncompleted tasks weighted by proximity to completion:
+1. Define Cognitive Retention Pressure $\Pi(t)$ at instant $t$ over a declared measurement window as the sum of initiated but uncompleted tasks weighted by proximity to completion:
 
-$$\Pi(t) = \sum_{k \in \text{Loops}} w_k \cdot \left( 1 - \frac{t_{\text{remaining}, k}}{T_k} \right)$$
+$$\Pi(t) = \sum_{k \in \text{Loops}} w_k \cdot \left( 1 - \frac{t_{\text{remaining}, k}}{T_k} \right) \quad \text{with } \textstyle\sum_k w_k = 1$$
 
-where $w_k$ is the strategic relevance of loop $k$.
-2. Maintain $\Pi(t) > 0.40$ throughout the session to avoid cognitive exit points.
+where $w_k$ is the strategic relevance of loop $k$; weights are normalized so that $\Pi \in [0, 1]$ and is comparable across projects.
+2. $\Pi(t)$ is a descriptive calibration heuristic, not a target: a floor such as $\Pi(t) > 0.40$ only makes sense per project, calibrated against observed session traces. The concept draws on the open-task/Zeigarnik literature (Zeigarnik, 1927), but the threshold itself has no validated empirical grounding and must never be used to manufacture engagement against voluntary stopping.
 
 ### Stage 4: Cross-Loop Feedback (Top-Down and Bottom-Up)
 
@@ -139,9 +140,9 @@ Action: Identify when short-term actions do not contribute to advancement of med
 
 ### C. Macro Barrier Without Granular Progress (*Feedback Drought*)
 
-$$T_{\text{meso}} \gg 30\text{ min} \quad \text{without intermediate rewards in Micro-Loop}$$
+$$T_{\text{meso}} \text{ reaching } 15\text{ min or beyond} \quad \text{without intermediate rewards in Micro-Loop}$$
 
-Action: Alert about strategic objectives requiring long periods of passive waiting without granting intermediate advancement milestones.
+Action: Alert about strategic objectives that exceed the meso band (drifting toward macro scale) while requiring long passive waits without granting intermediate advancement milestones.
 
 ---
 
@@ -153,9 +154,9 @@ When responding to the user, the agent must structure the specification in the f
 
 | Loop Level | Temporal Scale ($T$) | Core Action / Mechanic | Generated Input | Destination Loop for Input |
 | --- | --- | --- | --- | --- |
-| **Micro-Loop** | $[1\text{s} - 30\text{s}]$ (heuristic range) | [Move unit / Collect node] | Production Points ($\Delta P$) | Meso-Loop (Construction) |
-| **Meso-Loop** | $[3\text{min} - 10\text{min}]$ (heuristic range) | [Build Building / Research] | Capacity / Global Bonus | Macro-Loop (Victory Condition) |
-| **Macro-Loop** | $[2\text{h} - 10\text{h}]$ (heuristic range) | [Conquer Region / Era] | Tech Unlock | Micro-Loop (New Actions) |
+| **Micro-Loop** | $[1\text{s} - 60\text{s}]$ (heuristic range) | [Move unit / Collect node] | Production Points ($\Delta P$) | Meso-Loop (Construction) |
+| **Meso-Loop** | $[2\text{min} - 15\text{min}]$ (heuristic range) | [Build Building / Research] | Capacity / Global Bonus | Macro-Loop (Victory Condition) |
+| **Macro-Loop** | $[1\text{h} - 20\text{h}+]$ (heuristic range) | [Conquer Region / Era] | Tech Unlock | Micro-Loop (New Actions) |
 
 ### 2. Temporal Interleaving Analysis and Retention Curve
 
@@ -177,10 +178,10 @@ When responding to the user, the agent must structure the specification in the f
 Loop nesting can guarantee schedule relationships in the model, not engagement.
 
 ### Derived Metrics
-Continuity and exit metrics are descriptive and calibratable, not universal targets.
+Derived metrics include completion, re-entry, abandonment and transition latency, computable from session traces.
 
 ### Heuristics and Design Judgments
-Derived metrics include completion, re-entry, abandonment and transition latency.
+Continuity and exit metrics are descriptive and calibratable, not universal targets.
 
 ### Required Simulation or Playtesting
 Heuristics tune cadence. Required simulation or playtesting: session traces, interruption tests and calibrated telemetry.
@@ -188,6 +189,7 @@ Heuristics tune cadence. Required simulation or playtesting: session traces, int
 ## Hypotheses and Limitations
 
 - Assumes loop durations and completion events are measurable and that overlapping objectives are meaningful to the player.
+- The Zeigarnik effect (1927) motivates open-task tension, but retention pressure as constructed here is a design metric, not a validated psychological quantity; compulsion-oriented uses of loop nesting are documented as dark patterns (Zagal, Björk & Lewis, 2013).
 - Retention-pressure thresholds are conditional design hypotheses; protect voluntary stopping and validate through ethical playtesting.
 
 ## 4. Procedure Execution Example
@@ -205,4 +207,4 @@ The agent applying this skill formalizes:
   - This resource allows starting a new Meso-Loop $B$ (Colony Ship) on same Turn 5, taking 8 turns to complete (Turn 13).
   - Simultaneously, Macro-Loop (Star System) will be at 30% completion on Turn 5 and 80% on Turn 13.
 
-- **Result:** On Turn 5 (completion of $A$), player is hooked by immediate opportunity to start $B$, which will carry them to Turn 13, when Macro-Loop will be nearly ready (Turn 15). The cognitive exit point is systematically pushed into the future.
+- **Result:** On Turn 5 (completion of $A$), player is hooked by immediate opportunity to start $B$, which will carry them to Turn 13, when Macro-Loop will be nearly ready (Turn 15). The cognitive exit point is shifted into the future; whether that is desirable depends on design intent and must respect voluntary stopping — observe actual exit behavior in playtests instead of treating delayed exit as a success metric.

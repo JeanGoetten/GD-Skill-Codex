@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$Request,
     [string]$WorldModelPath,
@@ -13,7 +13,7 @@ if ([string]::IsNullOrWhiteSpace($Request)) { throw 'Request não pode ser vazio
 $worldModel = $null
 if ($WorldModelPath) {
     if (-not (Test-Path -LiteralPath $WorldModelPath)) { throw "World model não encontrado: $WorldModelPath" }
-    $worldModel = Get-Content -LiteralPath $WorldModelPath -Raw | ConvertFrom-Json
+    $worldModel = Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw | ConvertFrom-Json
 }
 
 $routingJson = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'route_request.ps1') -Request $Request
@@ -22,7 +22,7 @@ $routing = $routingJson | ConvertFrom-Json
 $timestamp = (Get-Date).ToUniversalTime().ToString('o')
 $worldVersion = if ($worldModel -and $worldModel.version) { $worldModel.version } else { 'unknown' }
 $hashInput = $Request
-if ($WorldModelPath) { $hashInput += '|' + (Get-Content -LiteralPath $WorldModelPath -Raw) }
+if ($WorldModelPath) { $hashInput += '|' + (Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw) }
 $hashBytes = [Text.Encoding]::UTF8.GetBytes($hashInput)
 $inputHash = ([Security.Cryptography.SHA256]::Create().ComputeHash($hashBytes) | ForEach-Object { $_.ToString('x2') }) -join ''
 $confidence = if (-not $WorldModelPath) {
