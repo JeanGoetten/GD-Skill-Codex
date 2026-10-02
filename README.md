@@ -217,45 +217,21 @@ O arquivo [`web/data.js`](web/data.js) é gerado por
 partir do registry, dos handoffs e dos `SKILL.md`; não deve ser editado como
 fonte primária.
 
-## Página pública
+## Interface de visualização
 
-O repositório inclui uma apresentação pública em GitHub Pages, com design light e foco em leitura rápida da arquitetura, tecnologias, finalidade, catálogo, handoffs, exemplos e tutorial para iniciantes.
+Interface de apresentação e exploração visual do projeto:
 
-O deploy é automático pelo workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml): cada push em `master` publica o conteúdo de [`web/`](web/) como site estático.
+**https://jeangoetten.github.io/GD-Skill-Codex/**
 
-A página está organizada em:
-- **Projeto:** síntese do problema que o Codex resolve e dos seus princípios;
-- **Arquitetura:** World Model, typed handoffs, executors, JSON Schema, evidence store e simulation;
-- **Explorer:** catálogo das 15 skills e mapa de relações downstream;
-- **Exemplos:** links diretos para fixtures JSON em `architecture/examples/`;
-- **Tutorial:** introdução visual em três passos para usuários sem conhecimento técnico.
+### Como usar
 
-A execução de PowerShell permanece separada da página pública: GitHub Pages fornece a documentação e exploração estática; a execução local continua disponível no ambiente do repositório.
+1. **Explorer:** use a busca e os filtros para localizar uma skill por nome, tipo ou evidência.
+2. **Detalhes:** selecione uma skill para consultar sua lente, saídas e handoffs downstream.
+3. **Mapa de handoffs:** clique nos nós para acompanhar as relações entre skills.
+4. **Exemplos:** abra os fixtures JSON para ver modelos de entrada utilizados pelo sistema.
+5. **Tutorial:** siga os três passos ilustrados para entender o fluxo de problema → World Model → skill → resultado.
 
-## Visualização web
-
-O painel está em [`web/`](web/) e funciona como uma página estática, sem dependências ou build:
-
-1. Abra [`web/index.html`](web/index.html) no navegador; ou
-2. sirva a raiz do repositório com qualquer servidor HTTP estático.
-
-Ele apresenta o `world_state` compartilhado, filtros por tipo e status epistemológico, fichas de cada skill e um mapa navegável dos handoffs downstream. Os dados de apresentação ficam em [`web/data.js`](web/data.js), mantendo o catálogo utilizável offline.
-
-### Planejamento e mockup
-
-O mockup visual preservado do worktree auxiliar está em
-[`docs/web-dashboard-mockup.svg`](docs/web-dashboard-mockup.svg). A
-implementação atual prioriza o catálogo de skills, o world model, os handoffs e
-o roteamento; extensões futuras podem adicionar entrada estruturada do usuário,
-nome provisório determinístico, séries temporais, Sankey, radar e tabelas
-acessíveis equivalentes aos gráficos. Dados ausentes devem permanecer explícitos
-e nunca ser inventados.
-
-O plano de evolução da arquitetura está em
-[`docs/action-plan.md`](docs/action-plan.md). Ele organiza as correções da
-auditoria em fases, backlog, critérios de aceite e um primeiro vertical slice,
-priorizando world model, contratos tipados, orchestrator, evidência,
-reprodutibilidade e validação antes de novas skills.
+Para uma visão rápida, comece pelo Explorer. Para estudar uma análise concreta, abra primeiro um dos exemplos e depois a skill correspondente no Explorer.
 
 ## Arquivo consolidado do projeto
 
