@@ -79,13 +79,21 @@
 </section>
 
 <section class="section tutorial" id="tutorial">
-  <div class="section-head"><div><p class="kicker">TUTORIAL</p><h2>How the agent uses the skills</h2></div><p>The tutorial shows the basic data flow. In practice, an AI agent creates or receives a World Model, selects skills, and combines their results.</p></div>
-  <div class="steps">
-    <article class="step"><div class="step-number">01</div><img src="tutorial/step-01.svg" alt="Diagram showing a design problem being transformed into a world model"><h3>Describe the problem</h3><p>Describe what happens in the game: who acts, which resources exist, which rules constrain actions, and what behavior you want to investigate.</p></article>
-    <article class="step"><div class="step-number">02</div><img src="tutorial/step-02.svg" alt="Diagram showing a skill selected from the type of problem"><h3>Choose the lens</h3><p>The Codex routes the problem to a specialized skill, such as states, concurrency, economy, progression, or space.</p></article>
-    <article class="step"><div class="step-number">03</div><img src="tutorial/step-03.svg" alt="Diagram showing a result, adapter, and next skill"><h3>Read the result</h3><p>Claims and metrics show what was derived. Limitations show what still requires data, simulation, or player testing.</p></article>
+  <div class="section-head"><div><p class="kicker">TUTORIAL</p><h2>Using GD Skill Codex with an AI coding agent</h2></div><p>If you already use Codex, Claude Code, or a similar coding agent, you can start from your game project. You do not need to learn the skills first.</p></div>
+  <div class="tutorial-intro"><strong>The basic relationship</strong><span>Your AI agent works on the game project. GD Skill Codex gives that agent structured game-design analysis capabilities.</span></div>
+  <div class="steps steps-five">
+    <article class="step"><div class="step-number">01</div><img src="tutorial/step-01.svg" alt="Diagram showing a game project connected to an AI coding agent and GD Skill Codex"><h3>Give the agent access to the Codex</h3><p>Make the GD Skill Codex repository available in your Codex or Claude Code session alongside your game project. The agent can inspect the catalog and determine which skills are relevant.</p></article>
+    <article class="step"><div class="step-number">02</div><img src="tutorial/step-02.svg" alt="Diagram showing a natural-language game-design problem sent to the agent"><h3>Describe a problem from your game</h3><p>Ask the agent about a concrete design question in normal language. Include the relevant mechanics, rules, values, files, or design goals when available.</p><pre><code>Analyze my progression system using GD Skill Codex.
+The player earns coins and spends them on upgrades.
+Each upgrade increases production by 25%.
+I want to know whether progression becomes too slow
+in the mid game. Do not change my code.</code></pre></article>
+    <article class="step"><div class="step-number">03</div><img src="tutorial/step-03.svg" alt="Diagram showing the agent turning project information into a structured World Model"><h3>Let the agent prepare the analysis context</h3><p>The agent identifies the entities, relationships, rules, states, goals, and values needed for the analysis. This structured representation is the World Model used by the skills.</p></article>
+    <article class="step"><div class="step-number">04</div><img src="tutorial/step-04.svg" alt="Diagram showing the agent selecting and running specialized Codex skills"><h3>Let the agent run the relevant skills</h3><p>The agent selects the appropriate skill or sequence of skills and provides their required inputs. When analyses can be connected, typed handoffs and adapters pass structured results between them.</p></article>
+    <article class="step"><div class="step-number">05</div><img src="tutorial/step-05.svg" alt="Diagram showing structured analysis results returning to the AI agent and game project"><h3>Use the findings in your project</h3><p>The Codex returns structured analysis, claims, metrics, assumptions, and limitations. The agent can explain the findings and help you decide what to test or change; it does not replace design judgment, simulation, or playtesting.</p></article>
   </div>
-  <div class="tutorial-more"><b>Run locally</b> Clone the repository, install dependencies with <code>npm install</code>, and run <code>npm test</code>. For the complete workflow, use the scripts in <code>architecture/</code>.</div>
+  <div class="tutorial-guide"><h3>You do not need to know the skills beforehand</h3><p>Start with the game problem. The intended workflow is:</p><div class="mini-flow"><span>Game project</span><b>→</b><span>AI agent</span><b>→</b><span>GD Skill Codex</span><b>→</b><span>Analysis</span><b>→</b><span>Design decision / test</span></div></div>
+  <div class="tutorial-more"><b>What the Codex is</b> A collection of structured game-design analysis skills, contracts, validators, and typed connections that an AI agent can use to decompose complex questions. <b>What it is not</b> A replacement for Codex or Claude Code, a requirement to manually select every skill, or a guarantee that an analytical result is a valid design decision.</div>
 </section>
 
 <section class="section final-cta">
