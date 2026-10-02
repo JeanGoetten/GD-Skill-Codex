@@ -217,6 +217,21 @@ O arquivo [`web/data.js`](web/data.js) é gerado por
 partir do registry, dos handoffs e dos `SKILL.md`; não deve ser editado como
 fonte primária.
 
+## Página pública
+
+O repositório inclui uma apresentação pública em GitHub Pages, com design light e foco em leitura rápida da arquitetura, tecnologias, finalidade, catálogo, handoffs, exemplos e tutorial para iniciantes.
+
+O deploy é automático pelo workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml): cada push em `master` publica o conteúdo de [`web/`](web/) como site estático.
+
+A página está organizada em:
+- **Projeto:** síntese do problema que o Codex resolve e dos seus princípios;
+- **Arquitetura:** World Model, typed handoffs, executors, JSON Schema, evidence store e simulation;
+- **Explorer:** catálogo das 15 skills e mapa de relações downstream;
+- **Exemplos:** links diretos para fixtures JSON em `architecture/examples/`;
+- **Tutorial:** introdução visual em três passos para usuários sem conhecimento técnico.
+
+A execução de PowerShell permanece separada da página pública: GitHub Pages fornece a documentação e exploração estática; a execução local continua disponível no ambiente do repositório.
+
 ## Visualização web
 
 O painel está em [`web/`](web/) e funciona como uma página estática, sem dependências ou build:
