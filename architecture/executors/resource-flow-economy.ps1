@@ -63,13 +63,13 @@ if ($errors.Count -gt 0) {
 }
 
 $resourceResults = [ordered]@{}
-$inflationary = [System.Collections.Generic.List[string]]::new()
+$surplus = [System.Collections.Generic.List[string]]::new()
 $deficit = [System.Collections.Generic.List[string]]::new()
 $balanced = [System.Collections.Generic.List[string]]::new()
 foreach ($resourceId in @($balances.Keys | Sort-Object)) {
     $balance = [double]$balances[$resourceId]
-    $state = if ($balance -gt 0) { 'inflationary' } elseif ($balance -lt 0) { 'deficit' } else { 'balanced' }
-    if ($state -eq 'inflationary') { $inflationary.Add($resourceId) }
+    $state = if ($balance -gt 0) { 'surplus' } elseif ($balance -lt 0) { 'deficit' } else { 'balanced' }
+    if ($state -eq 'surplus') { $surplus.Add($resourceId) }
     elseif ($state -eq 'deficit') { $deficit.Add($resourceId) } else { $balanced.Add($resourceId) }
     $resourceResults[$resourceId] = [ordered]@{
         source_total = $sourceTotals[$resourceId]
@@ -79,7 +79,7 @@ foreach ($resourceId in @($balances.Keys | Sort-Object)) {
         equation = "$($sourceTotals[$resourceId]) - $($sinkTotals[$resourceId]) = $balance"
     }
 }
-$overall = if ($deficit.Count -gt 0 -and $inflationary.Count -gt 0) { 'mixed' } elseif ($deficit.Count -gt 0) { 'deficit' } elseif ($inflationary.Count -gt 0) { 'inflationary' } else { 'balanced' }
+$overall = if ($deficit.Count -gt 0 -and $surplus.Count -gt 0) { 'mixed' } elseif ($deficit.Count -gt 0) { 'deficit' } elseif ($surplus.Count -gt 0) { 'surplus' } else { 'balanced' }
 [ordered]@{
     schema_version = '1.0.0'
     skill_id = 'resource-flow-economy'
@@ -90,7 +90,7 @@ $overall = if ($deficit.Count -gt 0 -and $inflationary.Count -gt 0) { 'mixed' } 
         balance_equation = 'Q_R(t+1) = Q_R(t) + sources_R - sinks_R'
         stability_status = $overall
         resources = $resourceResults
-        inflationary_resources = @($inflationary)
+        surplus_resources = @($surplus)
         deficit_resources = @($deficit)
         balanced_resources = @($balanced)
         bottlenecks = @($deficit)
@@ -98,7 +98,7 @@ $overall = if ($deficit.Count -gt 0 -and $inflationary.Count -gt 0) { 'mixed' } 
     metrics = @(
         [ordered]@{ name = 'resource_count'; value = $balances.Count; status = 'derived' }
         [ordered]@{ name = 'flow_count'; value = @($flowModel.flows).Count; status = 'derived' }
-        [ordered]@{ name = 'inflationary_resource_count'; value = $inflationary.Count; status = 'derived' }
+        [ordered]@{ name = 'surplus_resource_count'; value = $surplus.Count; status = 'derived' }
         [ordered]@{ name = 'deficit_resource_count'; value = $deficit.Count; status = 'derived' }
     )
     evidence = @(
