@@ -10,8 +10,7 @@
   const list = document.getElementById('skill-list');
   const detail = document.getElementById('detail-panel');
   const search = document.getElementById('search');
-  const typeFilter = document.getElementById('type-filter');
-  const evidenceFilter = document.getElementById('evidence-filter');
+  const roleFilter = document.getElementById('role-filter');
   const resultCount = document.getElementById('result-count');
 
   function renderDetail(skill) {
@@ -19,8 +18,10 @@
       detail.innerHTML = '<p class="muted">No skills match the current filters.</p>';
       return;
     }
-    const label = skill.type === 'formal' ? 'FORMAL MODEL'
-      : skill.type === 'design' ? 'DIAGNÓSTICO DE DESIGN' : 'MODEL + DESIGN';
+    const label = skill.role === 'formal' ? 'FORMAL MODEL'
+      : skill.role === 'design' ? 'DESIGN ANALYSIS'
+      : skill.role === 'validator' ? 'VALIDATOR'
+      : skill.role === 'primary' ? 'PRIMARY ANALYSIS' : 'ANALYSIS';
     detail.innerHTML =
       '<p class="kicker">' + label + '</p>' +
       '<h3>' + escapeHTML(skill.title) + '</h3>' +
@@ -32,8 +33,8 @@
       '<h4>Downstream handoffs</h4><ul>' + (skill.downstream || []).map((id) =>
         '<li><a href="#explorer" data-open="' + escapeHTML(id) + '">' +
         escapeHTML((byId.get(id) || {}).title || id) + '</a></li>').join('') + '</ul>' +
-      '<h4>Epistemic status</h4><p class="muted">' +
-      (skill.evidence || []).map(escapeHTML).join(' · ') + '</p>';
+      '<h4>Routing role</h4><p class="muted">' +
+      escapeHTML(skill.routingRole || 'not specified') + '</p>';
 
     detail.querySelectorAll('[data-open]').forEach((link) => {
       link.addEventListener('click', () => {
@@ -46,19 +47,17 @@
   function renderList(selectedId) {
     const q = (search.value || '').trim().toLowerCase();
     const skills = data.skills.filter((skill) => {
-      const typeOK = typeFilter.value === 'all' || skill.type === typeFilter.value;
-      const evidenceOK = evidenceFilter.value === 'all' ||
-        (skill.evidence || []).includes(evidenceFilter.value);
+      const roleOK = roleFilter.value === 'all' || skill.role === roleFilter.value;
       const text = [skill.id, skill.title, skill.lens, ...(skill.concepts || []),
         ...(skill.outputs || [])].join(' ').toLowerCase();
-      return typeOK && evidenceOK && (!q || text.includes(q));
+      return roleOK && (!q || text.includes(q));
     });
 
     resultCount.textContent = skills.length + ' of ' + data.skills.length + ' skills';
     list.innerHTML = skills.length ? skills.map((skill) =>
       '<article class="skill-card" data-id="' + escapeHTML(skill.id) + '" tabindex="0">' +
-      '<div class="card-top"><span class="type-dot ' + escapeHTML(skill.type) +
-      '"></span><span class="muted">' + escapeHTML((skill.evidence || [])[0] || '') +
+      '<div class="card-top"><span class="type-dot ' + escapeHTML(skill.role) +
+      '"></span><span class="muted">' + escapeHTML(skill.role || '') +
       '</span></div><h3>' + escapeHTML(skill.title) + '</h3><p>' +
       escapeHTML(skill.lens) + '</p></article>').join('') :
       '<p class="muted">No skills match the current filters.</p>';
@@ -112,8 +111,7 @@
   }
 
   search.addEventListener('input', () => renderList());
-  typeFilter.addEventListener('change', () => renderList());
-  evidenceFilter.addEventListener('change', () => renderList());
+  roleFilter.addEventListener('change', () => renderList());
 
   renderList();
   renderGraph();

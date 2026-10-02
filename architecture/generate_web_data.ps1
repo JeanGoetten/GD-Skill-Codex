@@ -46,21 +46,25 @@ $records = foreach ($skill in $registry.skills) {
     $concepts = Get-FrontMatterList $frontMatter 'domain.primary'
     if ($concepts.Count -eq 0) { $concepts = Get-FrontMatterList $frontMatter 'activation_signals.concepts' }
     $outputs = @($skill.outputs)
-    $type = switch ($skill.role) {
+    $role = switch ($skill.domain_role) {
         'formal' { 'formal' }
         'design' { 'design' }
-        default { 'hybrid' }
+        'validator' { 'validator' }
+        'primary' { 'primary' }
+        default { 'other' }
     }
-    $color = switch ($type) {
+    $color = switch ($role) {
         'formal' { 'cyan' }
         'design' { 'rose' }
-        default { 'amber' }
+        'validator' { 'violet' }
+        'primary' { 'amber' }
+        default { 'gray' }
     }
     [ordered]@{
         id = $skill.id
         title = Get-FirstHeading $skillPath $skill.id
-        type = $type
-        evidence = if ($type -eq 'formal') { @('formal', 'derived') } elseif ($type -eq 'design') { @('derived', 'heuristic', 'empirical') } else { @('derived', 'heuristic', 'empirical') }
+        role = $role
+        routingRole = [string]$skill.routing_role
         color = $color
         lens = "$($skill.formalism) · $($outputs -join ' · ')"
         concepts = @($concepts)
