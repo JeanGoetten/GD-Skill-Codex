@@ -18,11 +18,13 @@ foreach ($handoff in $handoffs.handoffs) {
             $adapter = $adapterContracts.adapters | Where-Object { $_.source -eq $handoff.source -and $_.target -eq $handoff.target } | Select-Object -First 1
             if ($null -eq $adapter) { $errors.Add("adapter ausente para input ${field}: $($handoff.source) -> $($handoff.target)") }
             elseif ($null -eq $adapter.maps.PSObject.Properties[$field] -and $null -eq $adapter.derived.PSObject.Properties[$field] -and @($adapter.external_required) -notcontains $field) { $errors.Add("adapter sem mapeamento para input ${field}: $($handoff.source) -> $($handoff.target)") }
-            else { $warnings.Add("adapter declarado para input ${field}: $($handoff.source) -> $($handoff.target)") }
+            else { Write-Output "OK: adapter cobre input ${field}: $($handoff.source) -> $($handoff.target)" }
         }
     }
     foreach ($field in @($handoff.expected_output)) {
-        if ($targetFields -notcontains [string]$field) { $warnings.Add("output ${field} é contrato do destino e não é produzido pela origem: $($handoff.source) -> $($handoff.target)") }
+        if ($targetFields -notcontains [string]$field) {
+            $errors.Add("expected_output inválido para o contrato de destino ${field}: $($handoff.source) -> $($handoff.target)")
+        }
     }
     if ([string]$handoff.schema_version -ne '1.0.0') { $errors.Add("schema_version incompatível no handoff $($handoff.source) -> $($handoff.target)") }
 }
