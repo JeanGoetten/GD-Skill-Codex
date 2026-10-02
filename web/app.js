@@ -16,23 +16,23 @@
 
   function renderDetail(skill) {
     if (!skill) {
-      detail.innerHTML = '<p class="muted">Nenhuma skill corresponde aos filtros.</p>';
+      detail.innerHTML = '<p class="muted">No skills match the current filters.</p>';
       return;
     }
-    const label = skill.type === 'formal' ? 'MODELO FORMAL'
-      : skill.type === 'design' ? 'DIAGNÓSTICO DE DESIGN' : 'MODELO + DESIGN';
+    const label = skill.type === 'formal' ? 'FORMAL MODEL'
+      : skill.type === 'design' ? 'DIAGNÓSTICO DE DESIGN' : 'MODEL + DESIGN';
     detail.innerHTML =
       '<p class="kicker">' + label + '</p>' +
       '<h3>' + escapeHTML(skill.title) + '</h3>' +
       '<p class="lens">' + escapeHTML(skill.lens) + '</p>' +
       '<div class="tag-list">' + (skill.concepts || []).map((c) =>
         '<span class="tag">' + escapeHTML(c) + '</span>').join('') + '</div>' +
-      '<h4>Saídas</h4><ul>' + (skill.outputs || []).map((o) =>
+      '<h4>Outputs</h4><ul>' + (skill.outputs || []).map((o) =>
         '<li>' + escapeHTML(o) + '</li>').join('') + '</ul>' +
-      '<h4>Handoffs downstream</h4><ul>' + (skill.downstream || []).map((id) =>
+      '<h4>Downstream handoffs</h4><ul>' + (skill.downstream || []).map((id) =>
         '<li><a href="#explorer" data-open="' + escapeHTML(id) + '">' +
         escapeHTML((byId.get(id) || {}).title || id) + '</a></li>').join('') + '</ul>' +
-      '<h4>Estatuto epistemológico</h4><p class="muted">' +
+      '<h4>Epistemic status</h4><p class="muted">' +
       (skill.evidence || []).map(escapeHTML).join(' · ') + '</p>';
 
     detail.querySelectorAll('[data-open]').forEach((link) => {
@@ -54,14 +54,14 @@
       return typeOK && evidenceOK && (!q || text.includes(q));
     });
 
-    resultCount.textContent = skills.length + ' de ' + data.skills.length + ' skills';
+    resultCount.textContent = skills.length + ' of ' + data.skills.length + ' skills';
     list.innerHTML = skills.length ? skills.map((skill) =>
       '<article class="skill-card" data-id="' + escapeHTML(skill.id) + '" tabindex="0">' +
       '<div class="card-top"><span class="type-dot ' + escapeHTML(skill.type) +
       '"></span><span class="muted">' + escapeHTML((skill.evidence || [])[0] || '') +
       '</span></div><h3>' + escapeHTML(skill.title) + '</h3><p>' +
       escapeHTML(skill.lens) + '</p></article>').join('') :
-      '<p class="muted">Nenhuma skill corresponde aos filtros.</p>';
+      '<p class="muted">No skills match the current filters.</p>';
 
     list.querySelectorAll('[data-id]').forEach((card) => {
       card.addEventListener('click', () => renderList(card.dataset.id));

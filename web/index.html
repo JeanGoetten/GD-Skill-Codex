@@ -20,8 +20,8 @@
 <section class="hero" id="overview">
   <div class="hero-copy">
     <p class="kicker">FRAMEWORK · GAME DESIGN · SYSTEMS THINKING</p>
-    <h1>A skill system for <em>thinking about games as systems.</em></h1>
-    <p class="lead">GD Skill Codex organizes formal models, design heuristics, simulation, and evidence into a modular architecture for analyzing complex gameplay problems.</p>
+    <h1>A technical skill framework for game-design analysis.</h1>
+    <p class="lead">GD Skill Codex provides structured skills that an AI agent can use to analyze game systems. Each skill receives structured data, performs a specific analysis, and returns typed results for other skills or for the designer.</p>
     <div class="hero-actions"><a class="button primary" href="#explorer">Explore the Codex</a><a class="button secondary" href="#tutorial">Start with the tutorial</a></div>
     <div class="hero-meta"><span>15 skills</span><span>7 typed handoffs</span><span>Shared World Model</span><span>AJV 8</span></div>
   </div>
@@ -35,12 +35,12 @@
 </section>
 
 <section class="section intro-grid">
-  <div><p class="kicker">PURPOSE</p><h2>From an idea catalog to analysis infrastructure.</h2></div>
-  <div><p>The project does not attempt to replace the designer. It creates clear contracts for decomposing problems, passing results between analyses, separating calculations from hypotheses, and recording what still requires simulation or playtesting.</p><p class="muted">The central principle is epistemic: a derived metric does not automatically become a conclusion about the player experience.</p></div>
+  <div><p class="kicker">PURPOSE</p><h2>A practical framework for AI-assisted game analysis.</h2></div>
+  <div><p>The project is intended to be used by AI agents as a structured set of game-design analysis skills. It defines inputs, outputs, validation rules, and connections between skills so an agent can break a problem into smaller analyses.</p><p class="muted">The system separates calculated results from assumptions and evidence. Results that require simulation or playtesting are marked accordingly.</p></div>
 </section>
 
 <section class="section" id="architecture">
-  <div class="section-head"><div><p class="kicker">ARCHITECTURE</p><h2>A composable analysis pipeline</h2></div><p>The technologies serve traceability, validation, and composition — not complexity for its own sake.</p></div>
+  <div class="section-head"><div><p class="kicker">ARCHITECTURE</p><h2>A structured analysis pipeline</h2></div><p>The technical layer keeps data, validation, execution, and skill handoffs explicit.</p></div>
   <div class="tech-grid">
     <article><span class="icon">Σ</span><h3>World Model</h3><p>Shared ontology for entities, actions, states, rules, goals, knowledge, and hidden state.</p></article>
     <article><span class="icon">→</span><h3>Typed Handoffs</h3><p>Adapters transform one skill’s outputs into explicit inputs for the next.</p></article>
@@ -80,21 +80,21 @@
 </section>
 
 <section class="section tutorial" id="tutorial">
-  <div class="section-head"><div><p class="kicker">TUTORIAL</p><h2>Getting started without technical knowledge</h2></div><p>You do not need programming knowledge to understand the flow. The starting point is to describe the game system using observable objects.</p></div>
+  <div class="section-head"><div><p class="kicker">TUTORIAL</p><h2>How the agent uses the skills</h2></div><p>The tutorial shows the basic data flow. In practice, an AI agent creates or receives a World Model, selects skills, and combines their results.</p></div>
   <div class="steps">
     <article class="step"><div class="step-number">01</div><img src="tutorial/step-01.svg" alt="Diagram showing a design problem being transformed into a world model"><h3>Describe the problem</h3><p>Describe what happens in the game: who acts, which resources exist, which rules constrain actions, and what behavior you want to investigate.</p></article>
     <article class="step"><div class="step-number">02</div><img src="tutorial/step-02.svg" alt="Diagram showing a skill selected from the type of problem"><h3>Choose the lens</h3><p>The Codex routes the problem to a specialized skill, such as states, concurrency, economy, progression, or space.</p></article>
     <article class="step"><div class="step-number">03</div><img src="tutorial/step-03.svg" alt="Diagram showing a result, adapter, and next skill"><h3>Read the result</h3><p>Claims and metrics show what was derived. Limitations show what still requires data, simulation, or player testing.</p></article>
   </div>
-  <div class="tutorial-more"><b>Want to run it?</b> Clone the repository, install dependencies with <code>npm install</code>, and run <code>npm test</code>. For the complete workflow, use the scripts in <code>architecture/</code>.</div>
+  <div class="tutorial-more"><b>Run locally</b> Clone the repository, install dependencies with <code>npm install</code>, and run <code>npm test</code>. For the complete workflow, use the scripts in <code>architecture/</code>.</div>
 </section>
 
 <section class="section final-cta">
-  <p class="kicker">OPEN SOURCE</p><h2>Explore the architecture, adapt the skills, and follow its evolution.</h2>
+  <p class="kicker">OPEN SOURCE</p><h2>Use the repository as a base for building or connecting an AI agent for game-design analysis.</h2>
   <div class="hero-actions"><a class="button primary" href="https://github.com/JeanGoetten/GD-Skill-Codex">Open on GitHub ↗</a><a class="button secondary" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/README.md">Read README ↗</a></div>
 </section>
 </main>
-<footer><span>GD Skill Codex</span><span>Game Design · Systems · Evidence</span></footer>
+<footer><span>GD Skill Codex</span><span>AI Agents · Game Design · Systems</span></footer>
 
 <script src="data.js"></script>
 <script src="simulation-data.js"></script>
