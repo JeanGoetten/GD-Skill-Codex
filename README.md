@@ -96,9 +96,7 @@ O runner de referência
 [`architecture/run_analysis.ps1`](architecture/run_analysis.ps1) gera um plano
 de análise reproduzível e marca explicitamente a insuficiência de evidência
 enquanto a execução das skills ainda não estiver implementada.
-[`architecture/execute_skills.ps1`](architecture/execute_skills.ps1) é a ponte
-de execução atual: valida o world model e registra outputs bloqueados até que
-executors versionados sejam adicionados, sem inventar diagnósticos.
+[`architecture/execute_skills.ps1`](architecture/execute_skills.ps1) é o dispatcher operacional: valida o world model, executa as skills na ordem de roteamento e, quando existe um adapter compatível, executa o adapter **antes** da skill seguinte. O resultado do adapter é injetado no world model temporário da skill seguinte em `hidden_state.handoff_context` e preservado também como `input_context` no `SkillOutput`. Assim, handoffs são entradas efetivas da execução, e não apenas relatórios produzidos depois dela.
 O primeiro executor versionado analisa sistemas de estados em
 [`architecture/executors/discrete-state-machine-verification.ps1`](architecture/executors/discrete-state-machine-verification.ps1);
 o formato mínimo está exemplificado em
@@ -166,17 +164,20 @@ permite carregar um relatório JSON local e exibe status, seed, hash, claims,
 confiança, proveniência e adapters; sem relatório, o estado permanece
 `not executed`.
 O registry agora separa `domain_role` de `routing_role` sem manter o campo legado
-`role`, e
-[`iterate_handoffs.ps1`](architecture/iterate_handoffs.ps1) executa ciclos
-limitados com critério de convergência. Schemas de conhecimento, progressão,
+`role`. [`iterate_handoffs.ps1`](architecture/iterate_handoffs.ps1) executa ciclos
+limitados com critério de convergência, reutilizando o contexto retornado pela
+cadeia em vez de simplesmente repetir a mesma análise sem entrada intermediária. Schemas de conhecimento, progressão,
 economia e espaço exigem IDs, relações, unidades ou status epistemológicos
 quando esses objetos são fornecidos.
 Os adapters declarativos em [`handoff-adapters.json`](architecture/handoff-adapters.json)
 podem ser executados por [`execute_handoff_adapter.ps1`](architecture/execute_handoff_adapter.ps1).
 Campos não deriváveis permanecem em `external_required` e não são fabricados.
 Quando duas skills compatíveis aparecem na ordem de execução, o dispatcher
-executa automaticamente o adapter e inclui `handoff_adapters` no relatório;
-warnings de campos externos continuam visíveis.
+executa o adapter entre as duas execuções. O adapter pode produzir `ready`,
+`partial` ou `requires_external_evidence`; campos não deriváveis permanecem
+explícitos em `external_required` e `warnings`. O contexto recebido pela skill
+destino é registrado em `input_context` e em `hidden_state.handoff_context`,
+enquanto `handoff_adapters` preserva a proveniência da transformação.
 A validação JSON Schema agora usa AJV 8 e `ajv-formats`, executada por
 [`validate_json_schema.js`](architecture/validate_json_schema.js) ou
 `npm run validate:schema`.

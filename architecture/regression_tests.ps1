@@ -152,5 +152,28 @@ try {
 }
 finally { Remove-Item -LiteralPath $fixtureRoot -Recurse -Force -ErrorAction SilentlyContinue }
 
+# Handoff regression: adapters must be injected into the next skill's execution context.
+$handoffReport = Join-Path $env:TEMP ("gd-codex-handoff-" + [guid]::NewGuid().ToString() + ".json")
+try {
+    $executeSkills = Join-Path $root 'execute_skills.ps1'
+    $petriExample = Join-Path $root 'examples\petri-net.example.json'
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $executeSkills -Request 'analisar concorrência e fluxo de recursos' -WorldModelPath $petriExample -OutputPath $handoffReport *> $null
+    $handoffExit = $LASTEXITCODE
+    $ErrorActionPreference = $previousPreference
+    if ($handoffExit -ne 0) {
+        $failures.Add('handoff/execution: dispatcher deveria concluir sem erro')
+    } else {
+        $handoffResult = Get-Content -Encoding UTF8 -LiteralPath $handoffReport -Raw | ConvertFrom-Json
+        $targetOutput = @($handoffResult.outputs | Where-Object { $_.skill_id -eq 'resource-flow-economy' }) | Select-Object -First 1
+        if ($null -eq $targetOutput -or $null -eq $targetOutput.input_context -or $targetOutput.input_context.adapter_id -ne 'concurrent-gameplay-processes->resource-flow-economy') {
+            $failures.Add('handoff/execution-context: target skill não recebeu o adapter no input_context')
+        }
+    }
+} finally {
+    Remove-Item -LiteralPath $handoffReport -Force -ErrorAction SilentlyContinue
+}
+
 if ($failures.Count -gt 0) { $failures | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output "OK: $($examples.Count) fixtures executadas sem status inválido."
