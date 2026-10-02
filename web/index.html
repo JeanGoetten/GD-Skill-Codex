@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GD Skill Codex — framework modular para análise e design de sistemas de jogos.">
+<meta name="description" content="GD Skill Codex — modular framework for game-system analysis and design.">
 <title>GD Skill Codex — Game Design Systems</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="site-header">
   <a class="brand" href="#top"><span class="brand-mark">GD</span><span><b>Skill Codex</b><small>game design systems</small></span></a>
-  <nav aria-label="Navegação principal">
-    <a href="#overview">Projeto</a><a href="#architecture">Arquitetura</a><a href="#explorer">Explorer</a><a href="#examples">Exemplos</a><a href="#tutorial">Tutorial</a>
+  <nav aria-label="Main navigation">
+    <a href="#overview">Project</a><a href="#architecture">Architecture</a><a href="#explorer">Explorer</a><a href="#examples">Examples</a><a href="#tutorial">Tutorial</a>
   </nav>
   <a class="github-link" href="https://github.com/JeanGoetten/GD-Skill-Codex">GitHub ↗</a>
 </header>
@@ -20,78 +20,78 @@
 <section class="hero" id="overview">
   <div class="hero-copy">
     <p class="kicker">FRAMEWORK · GAME DESIGN · SYSTEMS THINKING</p>
-    <h1>Um sistema de skills para <em>pensar jogos como sistemas.</em></h1>
-    <p class="lead">O GD Skill Codex organiza modelos formais, heurísticas de design, simulação e evidência em uma arquitetura modular para analisar problemas complexos de gameplay.</p>
-    <div class="hero-actions"><a class="button primary" href="#explorer">Explorar o Codex</a><a class="button secondary" href="#tutorial">Começar pelo tutorial</a></div>
-    <div class="hero-meta"><span>15 skills</span><span>7 handoffs tipados</span><span>World Model compartilhado</span><span>AJV 8</span></div>
+    <h1>A skill system for <em>thinking about games as systems.</em></h1>
+    <p class="lead">GD Skill Codex organizes formal models, design heuristics, simulation, and evidence into a modular architecture for analyzing complex gameplay problems.</p>
+    <div class="hero-actions"><a class="button primary" href="#explorer">Explore the Codex</a><a class="button secondary" href="#tutorial">Start with the tutorial</a></div>
+    <div class="hero-meta"><span>15 skills</span><span>7 typed handoffs</span><span>Shared World Model</span><span>AJV 8</span></div>
   </div>
-  <div class="hero-diagram" aria-label="Fluxo simplificado do Codex">
-    <div class="diagram-card"><span>01</span><b>Problema</b><small>modelo do sistema</small></div>
+  <div class="hero-diagram" aria-label="Simplified Codex flow">
+    <div class="diagram-card"><span>01</span><b>Problem</b><small>system model</small></div>
     <i>↓</i>
-    <div class="diagram-card active"><span>02</span><b>Skills</b><small>análise especializada</small></div>
+    <div class="diagram-card active"><span>02</span><b>Skills</b><small>specialized analysis</small></div>
     <i>↓</i>
-    <div class="diagram-card"><span>03</span><b>Evidência</b><small>claims + limitações</small></div>
+    <div class="diagram-card"><span>03</span><b>Evidence</b><small>claims + limitations</small></div>
   </div>
 </section>
 
 <section class="section intro-grid">
-  <div><p class="kicker">FINALIDADE</p><h2>De catálogo de ideias a infraestrutura de análise.</h2></div>
-  <div><p>O projeto não tenta substituir o designer. Ele cria contratos claros para decompor problemas, encaminhar resultados entre análises, separar cálculo de hipótese e registrar o que ainda exige simulação ou playtest.</p><p class="muted">O princípio central é epistemológico: uma métrica derivada não vira automaticamente uma conclusão sobre a experiência do jogador.</p></div>
+  <div><p class="kicker">PURPOSE</p><h2>From an idea catalog to analysis infrastructure.</h2></div>
+  <div><p>The project does not attempt to replace the designer. It creates clear contracts for decomposing problems, passing results between analyses, separating calculations from hypotheses, and recording what still requires simulation or playtesting.</p><p class="muted">The central principle is epistemic: a derived metric does not automatically become a conclusion about the player experience.</p></div>
 </section>
 
 <section class="section" id="architecture">
-  <div class="section-head"><div><p class="kicker">ARQUITETURA</p><h2>Uma cadeia de análise composável</h2></div><p>As tecnologias servem à rastreabilidade, validação e composição — não ao acúmulo de complexidade.</p></div>
+  <div class="section-head"><div><p class="kicker">ARCHITECTURE</p><h2>A composable analysis pipeline</h2></div><p>The technologies serve traceability, validation, and composition — not complexity for its own sake.</p></div>
   <div class="tech-grid">
-    <article><span class="icon">Σ</span><h3>World Model</h3><p>Ontologia compartilhada para entidades, ações, estados, regras, objetivos, conhecimento e estado oculto.</p></article>
-    <article><span class="icon">→</span><h3>Typed Handoffs</h3><p>Adapters transformam saídas de uma skill em entradas explícitas da próxima.</p></article>
-    <article><span class="icon">ƒ</span><h3>Executors</h3><p>PowerShell executa análises determinísticas e produz claims, métricas, anomalias e limitações.</p></article>
-    <article><span class="icon">{ }</span><h3>JSON Schema</h3><p>AJV 8 valida world models, contratos, evidências, hipóteses e relatórios.</p></article>
-    <article><span class="icon">◎</span><h3>Evidence Store</h3><p>Proveniência, confiança e status epistemológico permanecem ligados aos resultados.</p></article>
-    <article><span class="icon">◇</span><h3>Simulation</h3><p>Simulações são evidência derivada e permanecem separadas de telemetria e playtest.</p></article>
+    <article><span class="icon">Σ</span><h3>World Model</h3><p>Shared ontology for entities, actions, states, rules, goals, knowledge, and hidden state.</p></article>
+    <article><span class="icon">→</span><h3>Typed Handoffs</h3><p>Adapters transform one skill’s outputs into explicit inputs for the next.</p></article>
+    <article><span class="icon">ƒ</span><h3>Executors</h3><p>PowerShell runs deterministic analyses and produces claims, metrics, anomalies, and limitations.</p></article>
+    <article><span class="icon">{ }</span><h3>JSON Schema</h3><p>AJV 8 validates world models, contracts, evidence, hypotheses, and reports.</p></article>
+    <article><span class="icon">◎</span><h3>Evidence Store</h3><p>Provenance, confidence, and epistemic status remain linked to results.</p></article>
+    <article><span class="icon">◇</span><h3>Simulation</h3><p>Simulations are derived evidence and remain separate from telemetry and playtesting.</p></article>
   </div>
-  <div class="pipeline" aria-label="Pipeline do projeto">
+  <div class="pipeline" aria-label="Project pipeline">
     <span>REQUEST</span><b>→</b><span>WORLD MODEL</span><b>→</b><span>ROUTER</span><b>→</b><span>SKILLS</span><b>→</b><span>ADAPTER</span><b>→</b><span>EVIDENCE</span>
   </div>
 </section>
 
 <section class="section" id="explorer">
-  <div class="section-head"><div><p class="kicker">EXPLORER</p><h2>Catálogo e relações</h2></div><p>Use a visualização para percorrer as 15 lentes e seus handoffs. A execução local continua disponível quando o repositório é servido com <code>server.js</code>.</p></div>
+  <div class="section-head"><div><p class="kicker">EXPLORER</p><h2>Catalog and relationships</h2></div><p>Use the visualization to browse the 15 lenses and their handoffs. Local execution remains available when the repository is served with <code>server.js</code>.</p></div>
   <div class="panel console-panel">
     <div class="toolbar">
-      <label class="field">Buscar<input id="search" type="search" placeholder="skill, conceito..."></label>
-      <label class="field">Tipo<select id="type-filter"><option value="all">todos</option><option value="formal">formal</option><option value="design">design</option><option value="hybrid">híbrido</option></select></label>
-      <label class="field">Evidência<select id="evidence-filter"><option value="all">todas</option><option value="derived">derived</option><option value="heuristic">heuristic</option><option value="empirical">empirical</option></select></label>
+      <label class="field">Search<input id="search" type="search" placeholder="skill, concept..."></label>
+      <label class="field">Type<select id="type-filter"><option value="all">all</option><option value="formal">formal</option><option value="design">design</option><option value="hybrid">hybrid</option></select></label>
+      <label class="field">Evidence<select id="evidence-filter"><option value="all">all</option><option value="derived">derived</option><option value="heuristic">heuristic</option><option value="empirical">empirical</option></select></label>
       <span id="result-count" class="result-count"></span>
     </div>
     <div class="catalog-layout"><div id="skill-list" class="skill-list"></div><aside id="detail-panel" class="detail"></aside></div>
   </div>
-  <div class="graph-wrap"><div class="graph-title"><b>Mapa de handoffs</b><span>relações downstream declaradas</span></div><svg id="graph" viewBox="0 0 900 430" role="img" aria-label="Mapa de handoffs"></svg><div id="graph-text" class="sr-only"></div></div>
+  <div class="graph-wrap"><div class="graph-title"><b>Mapa de handoffs</b><span>declared downstream relationships</span></div><svg id="graph" viewBox="0 0 900 430" role="img" aria-label="Handoff map"></svg><div id="graph-text" class="sr-only"></div></div>
 </section>
 
 <section class="section" id="examples">
-  <div class="section-head"><div><p class="kicker">EXEMPLOS</p><h2>Dados de referência</h2></div><p>Os arquivos abaixo podem ser abertos, baixados ou usados como base para construir novos world models.</p></div>
+  <div class="section-head"><div><p class="kicker">EXAMPLES</p><h2>Reference data</h2></div><p>The files below can be opened, downloaded, or used as a basis for building new world models.</p></div>
   <div class="example-grid">
-    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/state-system.example.json"><span>01</span><h3>State System</h3><p>Exemplo mínimo de sistema de estados para verificação de transições e alcançabilidade.</p><b>JSON ↗</b></a>
-    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/petri-net.example.json"><span>02</span><h3>Petri Net</h3><p>Rede simples com matéria-prima, transição de craft e produto para análise de concorrência.</p><b>JSON ↗</b></a>
-    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/resource-flow-economy.example.json"><span>03</span><h3>Resource Flow</h3><p>Fixture para estoques, fluxos, taxas e equilíbrio de recursos.</p><b>JSON ↗</b></a>
-    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/progression-analysis.example.json"><span>04</span><h3>Progression</h3><p>Fixture de curva discreta, aquisição, crescimento e prestígio.</p><b>JSON ↗</b></a>
+    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/state-system.example.json"><span>01</span><h3>State System</h3><p>Minimal state-system example for transition and reachability verification.</p><b>JSON ↗</b></a>
+    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/petri-net.example.json"><span>02</span><h3>Petri Net</h3><p>Simple network with raw material, a crafting transition, and a product for concurrency analysis.</p><b>JSON ↗</b></a>
+    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/resource-flow-economy.example.json"><span>03</span><h3>Resource Flow</h3><p>Fixture for stocks, flows, rates, and resource balance.</p><b>JSON ↗</b></a>
+    <a class="example-card" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/architecture/examples/progression-analysis.example.json"><span>04</span><h3>Progression</h3><p>Fixture for a discrete curve, acquisition, growth, and prestige.</p><b>JSON ↗</b></a>
   </div>
-  <div class="note">Os links apontam para a cópia publicada pelo GitHub Pages. Para o catálogo completo, consulte <a href="https://github.com/JeanGoetten/GD-Skill-Codex/tree/master/architecture/examples">architecture/examples no GitHub ↗</a>.</div>
+  <div class="note">The links point to the copy published through GitHub Pages. For the complete catalog, see <a href="https://github.com/JeanGoetten/GD-Skill-Codex/tree/master/architecture/examples">architecture/examples on GitHub ↗</a>.</div>
 </section>
 
 <section class="section tutorial" id="tutorial">
-  <div class="section-head"><div><p class="kicker">TUTORIAL</p><h2>Começando sem conhecimento técnico</h2></div><p>Você não precisa saber programação para entender o fluxo. O ponto de partida é descrever o sistema do jogo com objetos observáveis.</p></div>
+  <div class="section-head"><div><p class="kicker">TUTORIAL</p><h2>Getting started without technical knowledge</h2></div><p>You do not need programming knowledge to understand the flow. The starting point is to describe the game system using observable objects.</p></div>
   <div class="steps">
-    <article class="step"><div class="step-number">01</div><img src="tutorial/step-01.svg" alt="Diagrama mostrando um problema de design sendo transformado em world model"><h3>Descreva o problema</h3><p>Escreva o que acontece no jogo: quem age, quais recursos existem, quais regras limitam as ações e qual comportamento deseja investigar.</p></article>
-    <article class="step"><div class="step-number">02</div><img src="tutorial/step-02.svg" alt="Diagrama mostrando uma skill escolhida a partir do tipo de problema"><h3>Escolha a lente</h3><p>O Codex encaminha o problema para uma skill especializada, como estados, concorrência, economia, progressão ou espaço.</p></article>
-    <article class="step"><div class="step-number">03</div><img src="tutorial/step-03.svg" alt="Diagrama mostrando resultado, adapter e próxima skill"><h3>Leia o resultado</h3><p>Claims e métricas mostram o que foi derivado. Limitações mostram o que ainda precisa de dados, simulação ou teste com jogadores.</p></article>
+    <article class="step"><div class="step-number">01</div><img src="tutorial/step-01.svg" alt="Diagram showing a design problem being transformed into a world model"><h3>Describe the problem</h3><p>Describe what happens in the game: who acts, which resources exist, which rules constrain actions, and what behavior you want to investigate.</p></article>
+    <article class="step"><div class="step-number">02</div><img src="tutorial/step-02.svg" alt="Diagram showing a skill selected from the type of problem"><h3>Choose the lens</h3><p>The Codex routes the problem to a specialized skill, such as states, concurrency, economy, progression, or space.</p></article>
+    <article class="step"><div class="step-number">03</div><img src="tutorial/step-03.svg" alt="Diagram showing a result, adapter, and next skill"><h3>Read the result</h3><p>Claims and metrics show what was derived. Limitations show what still requires data, simulation, or player testing.</p></article>
   </div>
-  <div class="tutorial-more"><b>Quer executar?</b> Clone o repositório, instale as dependências com <code>npm install</code> e rode <code>npm test</code>. Para o fluxo completo, use os scripts em <code>architecture/</code>.</div>
+  <div class="tutorial-more"><b>Want to run it?</b> Clone the repository, install dependencies with <code>npm install</code>, and run <code>npm test</code>. For the complete workflow, use the scripts in <code>architecture/</code>.</div>
 </section>
 
 <section class="section final-cta">
-  <p class="kicker">OPEN SOURCE</p><h2>Explore a arquitetura, adapte as skills e acompanhe a evolução.</h2>
-  <div class="hero-actions"><a class="button primary" href="https://github.com/JeanGoetten/GD-Skill-Codex">Abrir no GitHub ↗</a><a class="button secondary" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/README.md">Ler README ↗</a></div>
+  <p class="kicker">OPEN SOURCE</p><h2>Explore the architecture, adapt the skills, and follow its evolution.</h2>
+  <div class="hero-actions"><a class="button primary" href="https://github.com/JeanGoetten/GD-Skill-Codex">Open on GitHub ↗</a><a class="button secondary" href="https://github.com/JeanGoetten/GD-Skill-Codex/blob/master/README.md">Read README ↗</a></div>
 </section>
 </main>
 <footer><span>GD Skill Codex</span><span>Game Design · Systems · Evidence</span></footer>

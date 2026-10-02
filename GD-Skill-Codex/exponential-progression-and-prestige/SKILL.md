@@ -69,11 +69,11 @@ These are semantic anchors only, not content to reproduce: Cookie Clicker; Diabl
 
 ## Theoretical Context and System Function
 
-This skill formalizes ludic engagement systems based on positive feedback loops, where accumulation of a primary resource $Q$ directly increments the generation rate of that same resource. The fundamental accumulation dynamics over time are governed by the differential equation:
+This skill formalizes ludic engagement systems based on positive feedback loops, where accumulation of a primary resource $Q$ can increment the generation rate of that same resource. A continuous idealization of that feedback is the differential equation:
 
 $$\frac{d Q(t)}{dt} = f(Q) = k \cdot Q(t)^\alpha$$
 
-where $\alpha \ge 1$ is the acceleration coefficient and $k > 0$ is the base infrastructure efficiency.
+where $k > 0$ and $\alpha$ is the acceleration coefficient ($\alpha = 1$: constant relative growth rate — exponential, not accelerating in relative terms; $\alpha > 1$: super-exponential growth, which blows up to infinity in finite time $t^* = Q_0^{1-\alpha}/(k(\alpha-1))$ — relevant to the overflow check below). This ODE is a conceptual backdrop only: the operative model of this skill is the *discrete* purchase loop of Stages 1–2 (linear income in units owned, geometric cost), which does not satisfy the ODE. Do not substitute one for the other in calculations.
 
 The objective of the agent when executing this skill is to calculate the system's growth trajectory, prevent uncontrolled accumulation from reaching computational data type limits, and structure reset layers (*Prestige*) to convert accumulated quantity into permanent multipliers.
 
@@ -85,12 +85,12 @@ When activating this skill, the agent must sequentially execute the following an
 
 ### Stage 1: Cost Scaling Curve Definition
 
-1. Map the cost $C_n$ for acquiring the $n$-th unit of a resource-generating source:
+1. Map the cost $C_n$ for acquiring a unit of a resource-generating source. Convention: units are **0-indexed** — the first unit is $n = 0$ and costs $C_0$:
 
-$$C(n) = C_0 \cdot r^n$$
+$$C(n) = C_0 \cdot r^n, \qquad n = 0, 1, 2, \dots$$
 
-where $C_0$ is the base cost and $r > 1$ is the geometric scaling ratio (typically $r \in [1.07, 1.15]$).
-2. Calculate the cumulative cost $C_{\text{total}}$ to acquire $k$ units at once starting from current quantity $n$:
+where $C_0$ is the base cost (cost of the first unit) and $r > 1$ is the geometric scaling ratio (typically $r \in [1.07, 1.15]$). All derived quantities ($C_{\text{total}}$, $ROI$, tables) must use the same indexing convention; with this convention the first unit costs $C_0$, not $C_0 \cdot r$.
+2. Calculate the cumulative cost $C_{\text{total}}$ to acquire $k$ units at once starting from current quantity $n$ (0-indexed):
 
 $$C_{\text{total}}(n, k) = C_0 \cdot \frac{r^n \cdot (r^k - 1)}{r - 1}$$
 
@@ -101,11 +101,11 @@ $$C_{\text{total}}(n, k) = C_0 \cdot \frac{r^n \cdot (r^k - 1)}{r - 1}$$
 $$GPS(t) = \left( \sum_{i=1}^{m} u_i \cdot g_i \right) \cdot M_{\text{global}}$$
 
 where $u_i$ is the quantity of units of source $i$, $g_i$ is the individual base generation rate, and $M_{\text{global}}$ is the combined multiplier of all system upgrades.
-2. Formulate the **Return on Investment Time ($ROI$)** for purchasing the $n$-th unit of source $i$:
+2. Formulate the **Return on Investment Time ($ROI$)** for purchasing the next unit of source $i$ (payback of the *marginal* generation the purchase adds):
 
 $$ROI_i(n) = \frac{C_i(n)}{\Delta GPS_i} = \frac{C_{0,i} \cdot r_i^n}{g_i \cdot M_{\text{global}}}$$
 
-The agent uses $ROI$ to evaluate the optimal purchase decision from the player's perspective.
+The agent uses $ROI$ to evaluate the optimal purchase decision from the player's perspective. $ROI$ is a **payback time** and must not be conflated with the *time-to-afford* $t_{\text{wait}}(n) = C_i(n)/GPS(t)$ — the wall-time for the player to accumulate the cost from current income. They diverge precisely near a progression wall: $t_{\text{wait}}$ explodes while $GPS$ stagnates, whereas $ROI$ can even improve. Use $t_{\text{wait}}$ to diagnose walls and $ROI$ to rank purchases.
 
 ### Stage 3: Prestige / Reset Layer Formulation
 
@@ -114,7 +114,7 @@ The agent uses $ROI$ to evaluate the optimal purchase decision from the player's
 
 $$P(Q_{\text{total}}) = \left\lfloor a \cdot \left( \frac{Q_{\text{total}}}{10^b} \right)^\gamma \right\rfloor$$
 
-where $\gamma \in (0, 1)$ (frequently $\gamma = 0.5$ for square root), ensuring diminishing returns per reset.
+where $\gamma \in (0, 1)$, ensuring diminishing returns per reset. The exponent is a design parameter, not a constant of nature — published games vary ($\gamma = 1/2$ in several idle titles, $\gamma = 1/3$ in Cookie Clicker); declare the chosen value and calibrate it against playtest retention data instead of treating any single value as typical.
 3. Map the injection of prestige resource $P$ into the global multiplier:
 
 $$M_{\text{prestige}} = 1 + (P \cdot \beta)$$
@@ -127,23 +127,25 @@ where $\beta > 0$ is the percentage bonus per prestige unit.
 
 The agent must apply the following logical verifications on the exponential model:
 
-### A. Numeric Overflow Prevention
+### A. Numeric Overflow and Precision Loss Prevention
 
-$$Q(t) > \text{MaxValue}(\text{Float64}) \approx 1.79 \times 10^{308}$$
+$$Q(t) > 2^{53} \approx 9.007 \times 10^{15} \quad \text{(integer precision limit of IEEE-754 double)}$$
 
-Action: If the time to reach the numerical limit of the programming language's data type is $t < t_{\text{expected}}$, the agent must require implementation of custom scientific notation representation (*BigNumber*) or adjust the ratio $r$.
+Action: $2^{53}$ is the last integer exactly representable in a Float64; beyond it, additions and cost accumulations silently lose precision — counters, rankings and comparisons corrupt long before the representability ceiling of $\approx 1.79 \times 10^{308}$. If the time to cross $2^{53}$ is $t < t_{\text{expected}}$, require a BigNumber/custom scientific-notation representation (or adjust the ratio $r$); treat the $1.79 \times 10^{308}$ bound only as the hard overflow fallback.
 
 ### B. Insurmountable Progression Wall
 
-$$\exists n \quad \text{such that} \quad ROI(n) > t_{\text{session, max}}$$
+$$\exists n \quad \text{such that} \quad t_{\text{wait}}(n) = \frac{C(n)}{GPS(t)} > t_{\text{session, max}}$$
 
-Action: Flag if the wait time to acquire a single next upgrade exceeds the acceptable user retention window without a prestige option being available.
+Action: Flag if the *wait time to afford* the single next upgrade (cost divided by current income — not the marginal payback $ROI$) exceeds the acceptable user retention window without a prestige option being available. Report both $t_{\text{wait}}(n)$ and $ROI(n)$: a wall shows $t_{\text{wait}} \to \infty$ with stagnant $GPS$.
 
 ### C. Premature Prestige Devaluation
 
-$$P(Q_{\text{total, 2nd reset}}) \le P(Q_{\text{total, 1st reset}})$$
+With $Q_{\text{total}}$ defined as lifetime accumulation (Stage 3), $P(Q_{\text{total, 2nd}}) > P(Q_{\text{total, 1st}})$ holds by monotonicity — comparing absolute prestige totals is vacuous. The design question is whether the *marginal* gain per reset justifies the re-progression time:
 
-Action: Verify if the prestige curve offers a real incremental gain that reduces the time needed to redo the initial progression.
+$$\frac{P(Q_{\text{total, k+1}}) - P(Q_{\text{total, k}})}{t_{\text{reprogression, k}}} \to 0$$
+
+Action: Flag when the marginal prestige per unit of re-progression time collapses toward zero (the reset stops being worth performing) — verify by computing $\Delta P$ between consecutive resets against the measured time to redo the initial progression.
 
 ---
 
@@ -153,7 +155,7 @@ When responding to the user, the agent must structure the analysis in the follow
 
 ### 1. Generator Source Scaling Parameters
 
-| Generator / Source | Base Cost ($C_0$) | Ratio ($r$) | Base Generation ($g_i$) | Initial $ROI$ ($n=1$) |
+| Generator / Source | Base Cost ($C_0$) | Ratio ($r$) | Base Generation ($g_i$) | Initial $ROI$ ($n=0$) |
 | --- | --- | --- | --- | --- |
 | **[Source Level 1]** | $15$ | $1.15$ | $0.1$/s | $150$s |
 | **[Source Level 2]** | $100$ | $1.15$ | $1.0$/s | $100$s |

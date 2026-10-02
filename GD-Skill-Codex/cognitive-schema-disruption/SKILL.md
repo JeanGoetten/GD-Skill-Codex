@@ -69,7 +69,7 @@ Separate the observable responses: **surprise** is an immediate prediction error
 
 ## Theoretical Context and System Function
 
-This skill formalizes *Schematically Disruptive Design*, a cognitive-theoretical approach that deliberately manipulates the predictive mental schemas built by the agent during ludic interaction. As the agent interacts with the system, they internally develop a probabilistic state transition model $P_{\text{cognitive}}(S_{t+1} \mid S_t, a_t)$.
+This skill formalizes *Schematically Disruptive Design*, a cognitive-theoretical approach that deliberately manipulates the predictive mental schemas built by the agent during playful interaction. As the agent interacts with the system, they internally develop a probabilistic state transition model $P_{\text{cognitive}}(S_{t+1} \mid S_t, a_t)$.
 
 Schematic disruption occurs when the system intentionally replaces the expected transition function $\delta_{\text{expected}}$ with a disruptive function $\delta_{\text{real}}$, generating a non-zero Kullback-Leibler divergence ($D_{\text{KL}}$) between mental expectation and actual computed state:
 
@@ -77,7 +77,7 @@ $$D_{\text{KL}}(P_{\text{real}} \parallel P_{\text{cognitive}}) = \sum_{s} P_{\t
 
 For heterogeneous or mixed state spaces, define a common feature representation and metric first; use KL only for distributions over the same measurable outcomes. For continuous variables, use a density or an alternative divergence with matched units.
 
-The objective of the agent is to design systemically coherent a posteriori noises and expectation breaks, forcing the player to shift from the **assimilation** process (fitting new events into old rules) to the **cognitive accommodation** process (reorganizing their own mental model of how the game functions).
+The objective of the agent is to design systematically coherent a posteriori noises and expectation breaks, forcing the player to shift from the **assimilation** process (fitting new events into old rules) to the **cognitive accommodation** process (reorganizing their own mental model of how the game functions).
 
 ---
 
@@ -93,7 +93,7 @@ When activating this skill, the agent must sequentially execute the following co
 
 ### Stage 2: Disruption Point Injection ($\delta_{\text{disruptive}}$)
 
-1. Define the Disruption Trigger $T_{\text{disruption}}$ activated by a hidden conditional condition in state $S$.
+1. Defines the Disruption Trigger $T_{\text{disruption}}$ activated by a hidden conditional condition in state $S$.
 2. Formulate the disruptive real transition:
 
 $$\delta_{\text{real}}(S_t, a_t) = S_{\text{subverted}} \quad \text{where } S_{\text{subverted}} \neq \delta_{\text{expected}}(S_t, a_t)$$
@@ -106,7 +106,7 @@ $$\delta_{\text{real}}(S_t, a_t) = S_{\text{subverted}} \quad \text{where } S_{\
 
 $$\Delta_{\text{mag}} = \lVert \phi(S_{\text{real}}) - \phi(S_{\text{expected}}) \rVert_W$$
 
-Here $\phi$ maps heterogeneous state components into a common feature space and $\lVert\cdot\rVert_W$ is a declared, dimensionless weighted norm; do not subtract incomparable categorical, continuous, and narrative values directly.
+Here $\phi$ maps heterogeneous state components into a common feature space and $\lVert\cdot\rVert_W$ is a declared, dimensionless weighted norm; do not subtract incomparable categorical, continuous, and narrative values ​​directly.
 
 2. Evaluate post-disruption player behavior based on two theoretical limits:
    - **Accommodation Zone ($\Delta_{\text{mag}} \le \Delta_{\text{threshold}}$):** Prediction error provokes curiosity, strategic re-evaluation, and deep analytical engagement.
@@ -202,6 +202,6 @@ The agent applying this skill formalizes:
 - **Initial Schema ($S_{\text{cognitive}}$):** The *Logic* skill is modeled as a highly reliable advisor ($P_{\text{expected}}$ near 1.0); the disruption risk is that players may treat this as certainty.
 - **Consolidation Phase:** $N = 15$ successful checks where *Logic* provided correct clues.
 - **Disruption Point ($T_{\text{disruption}}$):** Final suspect interrogation. *Logic* states: "He's lying because his pulse accelerated."
-- **Disruptive Real Transition ($\delta_{\text{real}}$):** *Logic*'s statement is a rationalist delusion induced by the protagonist's own childhood trauma (hidden state variable $S_{\text{trauma}} = \text{True}$). Following *Logic*'s advice leads to a wrongful accusation.
+- **Disruptive Real Transition ($\delta_{\text{real}}$):** *Logic*'s statement is a rationalist delusion induced by the protagonist's own childhood trauma (hidden state variable $S_{\text{trauma}} = \text{True}$). *Logic*'s advice leads to a wrongful accusation.
 - **Retrospective Hidden Clues:** Previous item descriptions in inventory indicated *Logic* became overly aggressive when dealing with certain family themes.
 - **Analysis:** Disruption requires player to stop blindly trusting the game interface and start analyzing "Logic" as an imperfect character with their own agenda (Cognitive Accommodation).

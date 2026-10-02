@@ -86,23 +86,23 @@ When activating this skill, the agent must sequentially execute the following ma
 
 $$\mathbf{x}\ \ge\ K\mathbf{y}, \qquad K=\begin{bmatrix} k_{1,1} & \cdots & k_{1,n}\\ \vdots & \ddots & \vdots\\ k_{m,1} & \cdots & k_{m,n}\end{bmatrix},\quad \mathbf{x}\in\mathbb{R}^{m},\ \mathbf{y}\in\mathbb{R}^{n}$$
 
-3. Add the technological efficiency factor or process loss rate $\eta \in (0, 1]$:
+3. Add the technological efficiency factor or process loss rate $\boldsymbol{\eta} \in (0,1]^n$ (one entry per product; use a scalar $\eta$ only when all products share the same yield, in which case ordinary multiplication replaces the Hadamard product):
 
-$$\mathbf{y}_{\text{effective}} = \eta \odot \mathbf{y}, \qquad \mathbf{x}_{\text{required}} = K\mathbf{y}$$
+$$\mathbf{y}_{\text{effective}} = \boldsymbol{\eta} \odot \mathbf{y}, \qquad \mathbf{x}_{\text{required}} = K\mathbf{y}$$
 
 4. For multi-tier goods whose outputs are also inputs, formalize the square Leontief intermediate-use form over the $n$ produced goods:
 
-$$\mathbf{x} = A\mathbf{x} + \mathbf{d}$$
+$$\mathbf{z} = A\mathbf{z} + \mathbf{d}$$
 
-where $A \in \mathbb{R}^{n\times n}$ holds per-unit intermediate consumption, $\mathbf{x}$ is gross output and $\mathbf{d}$ is final demand. The total-requirements matrix $(I - A)^{-1}$ gives the gross output needed per unit of final demand (the Leontief multipliers used for ripple-effect analysis), and the economy is structurally productive if and only if the Hawkins–Simon condition holds: every leading principal minor of $(I - A)$ is positive. A violated Hawkins–Simon condition is a hard infeasibility certificate for the production graph — some demand vector cannot be met at any scale.
+where $A \in \mathbb{R}^{n\times n}$ holds per-unit intermediate consumption, $\mathbf{z} \in \mathbb{R}^n$ is gross output (a distinct vector from the input quantities $\mathbf{x} \in \mathbb{R}^m$ of step 2 — do not reuse the symbol), and $\mathbf{d}$ is final demand. The total-requirements matrix $(I - A)^{-1}$ gives the gross output needed per unit of final demand (the Leontief multipliers used for ripple-effect analysis), and the economy is structurally productive if and only if the Hawkins–Simon condition holds: every leading principal minor of $(I - A)$ is positive. A violated Hawkins–Simon condition is a hard infeasibility certificate for the production graph — some demand vector cannot be met at any scale.
 
 ### Stage 2: Transaction Mechanisms and Dynamic Pricing
 
-1. Model price formation of a good $j$ in an exchange market based on the relation between supply ($S_j$) and demand ($D_j$):
+1. Model price formation of a good $j$ in an exchange market based on the relation between supply ($S_j$) and demand ($D_j$). Use the *relative* excess demand normalized by total market activity, which stays defined when $S_j = 0$ and keeps the multiplicative factor positive for $\gamma \le 1$:
 
-$$P_j(t+1) = \mathrm{clamp}\left(P_j(t) \cdot \left(1 + \gamma \cdot \frac{D_j(t) - S_j(t)}{S_j(t)}\right),\ P_{\min},\ P_{\max}\right)$$
+$$P_j(t+1) = \mathrm{clamp}\left(P_j(t) \cdot \left(1 + \gamma \cdot \frac{D_j(t) - S_j(t)}{D_j(t) + S_j(t)}\right),\ P_{\min},\ P_{\max}\right)$$
 
-where $\gamma > 0$ is the market sensitivity to inventory imbalance. Without the clamp, the multiplicative update admits negative prices whenever net surplus exceeds $1/\gamma$; declare $P_{\min} > 0$ and $P_{\max}$ per market.
+where $0 < \gamma \le 1$ is the market sensitivity to inventory imbalance. If the absolute-excess form $(D_j - S_j)/S_j$ is retained instead, guard the division ($S_j = 0$ is exactly the interesting case: a new or collapsed market — treat it as maximal upward pressure), note that the factor turns negative only when surplus exceeds $S_j/\gamma$ (which additionally requires $\gamma > 1$, since $(D_j - S_j)/S_j > -1$ always), and still declare $P_{\min} > 0$ and $P_{\max}$ per market.
 2. Define transaction fees and market taxes ($T_{\text{market}}$) acting as currency drains on every completed trade.
 
 ### Stage 3: Quantity Theory of Money and Circulation Velocity
@@ -111,7 +111,7 @@ where $\gamma > 0$ is the market sensitivity to inventory imbalance. Without the
 
 $$M \cdot V = P \cdot Y$$
 
-where $M$ is the total money supply in circulation, $V$ is the velocity of money circulation, $P$ is the general price level, and $Y$ is the total volume of real transactions.
+where $M$ is the total money supply in circulation, $V$ is the velocity of money circulation, $P$ is the general price level, and $Y$ is the aggregate real output (income form of the equation; the transactional form $MV = PT$ uses the number of transactions $T$ instead — declare which form the analysis adopts).
 2. Monitor the net money emission rate from system Sources ($\Delta M_{\text{source}}$) compared to money destruction by code-imposed Drains ($\Delta M_{\text{drain}}$).
 
 ---
@@ -134,9 +134,9 @@ Action: Flag if absolute scarcity of a single secondary input halts production o
 
 ### C. Deflationary Spiral / Market Paralysis
 
-$$\Delta M_{\text{drain}} > \Delta M_{\text{source}} \implies \text{Liquidity Shortage} \implies V \to 0$$
+$$\Delta M_{\text{drain}} > \Delta M_{\text{source}} \implies \text{Liquidity Shortage}$$
 
-Action: Detect when tax costs and drains remove excess money from the system, preventing agents from trading due to lack of payment medium.
+Action: Detect when tax costs and drains remove excess money from the system, preventing agents from trading due to lack of payment medium. Under $MV = PY$ with sticky prices, monetary contraction predicts a fall in transacted volume $Y$ (or in $P$); $V$ is behavioral and is *not* implied — report $V \to 0$ only as an observed empirical trend, never as a formal consequence.
 
 ---
 

@@ -129,9 +129,11 @@ Action: Identify when costs and drains exceed the production capacity of Sources
 
 ### C. Conversion Bottleneck Blockage
 
-$$k \cdot R_A \to m \cdot R_B \quad \text{where } \text{Rate}(R_A) \ll k$$
+$$k \cdot R_A \to m \cdot R_B \quad \text{where } k \cdot f_{\text{conv}} \gg \text{Rate}_{\text{source, max}}(R_A)$$
 
-Action: Alert if a conversion rate requires more inputs than the maximum output rate of the source Source.
+where $k$ is the input coefficient per conversion operation (units of $R_A$ per operation), $f_{\text{conv}}$ is the conversion frequency (operations per unit time), and $\text{Rate}_{\text{source, max}}(R_A)$ is the maximum sustained output rate of the source (units of $R_A$ per unit time). All three quantities must be expressed per the same time basis before comparing.
+
+Action: Alert if the input rate demanded by the conversion ($k \cdot f_{\text{conv}}$, units/time) exceeds the maximum output rate of the source Source (units/time) — comparing rates with rates, never a rate against the stoichiometric coefficient $k$ alone.
 
 ---
 
@@ -156,7 +158,7 @@ When responding to the user, the agent must structure the analysis in the follow
 
 ### 3. Stability Diagnosis and Recommendations
 
-* **System Status:** [STABLE / INFLATIONARY / DEFICITARY]
+* **System Status:** [STABLE / STOCK SURPLUS / STOCK DEFICIT]
 * **Identified Bottlenecks:** [List of nodes blocking circulation]
 * **Recommended Parameter Adjustments:** [Suggested numerical changes to $\lambda$, $k$, $m$ or capacities]
 
@@ -168,7 +170,7 @@ When responding to the user, the agent must structure the analysis in the follow
 Balance equations guarantee only the declared steady state under fixed rates.
 
 ### Derived Metrics
-Derived metrics include stock half-life, throughput, scarcity and sink/source ratios.
+Derived metrics include stock half-life, throughput, scarcity and sink/source ratios. Half-life is well defined only for *proportional* decay ($dQ/dt = -\lambda Q$, half-life $= \ln 2/\lambda$); with a constant (linear) sink the stock reaches zero in finite time and no constant half-life exists — state the decay model before reporting the metric.
 
 ### Heuristics and Design Judgments
 Heuristics judge pacing and legibility.
@@ -196,5 +198,5 @@ The agent applying this skill formalizes:
 
 $$\frac{d Q_{\text{gold}}(t)}{dt} = +10 - 2 = +8/\text{s}$$
 
-- **Analysis:** The system is inflationary ($\frac{dQ}{dt} = +8/\text{s}$). Every 6.25 seconds ($50 / 8$), the player accumulates enough gold to produce 1 soldier. Without maintenance costs for generated soldiers, there will be infinite accumulation of military force.
+- **Analysis:** The stock is in surplus (a stock-flow result, not evidence of price inflation) ($\frac{dQ}{dt} = +8/\text{s}$). Every 6.25 seconds ($50 / 8$), the player accumulates enough gold to produce 1 soldier. Because the converter is *Interactive*, military force accumulates without bound **only under continuous player conversion**; the unbounded-growth claim is conditional on that behavior, not a property of the system alone.
 - **Recommendation:** Add a conditional Sink $\Delta R_{\text{gold}} = -0.5/\text{s}$ per active soldier.

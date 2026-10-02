@@ -48,7 +48,7 @@ knowledge dependencies and inference paths.
 
 ## Exclusions
 
-This skill does not resolve prose authoring and physical route validation.
+This skill does not resolve prose authoring. It validates physical routes only as *modeled trajectory requirements* on the graph (Stage 3): checking that every holon location is reachable under the movement rules the user declares. Full physical validation against a concrete movement system — collision, physics, timing, interaction implementations — is out of scope and is the domain of discrete-state-machine-verification (see Handoff Conditions).
 
 ## Handoff Conditions
 
@@ -114,9 +114,11 @@ $$\forall H_i \in V_{\text{holons}}, \quad \exists \text{ valid trajectory } \ta
 ### Stage 4: Resolution by Cognitive Reconstruction ($C_{\text{reconstruction}}$)
 
 1. The player agent accumulates a subset of known holons $K(t) \subseteq V_{\text{holons}}$ at time $t$.
-2. The probability of inferring the solution to trigger a terminal mechanism $H_{\text{terminal}}$ is calculated by the coverage density of its predecessor nodes $In(H_{\text{terminal}})$:
+2. Estimate the **coverage density** of the terminal mechanism's predecessor nodes $In(H_{\text{terminal}})$ by the player's known set:
 
-$$\text{InferenceCapacity}(H_{\text{terminal}}) = \frac{\vert{}K(t) \cap In(H_{\text{terminal}})\vert{}}{\vert{}In(H_{\text{terminal}})\vert{}}$$
+$$\text{CoverageDensity}(H_{\text{terminal}}) = \frac{\vert{}K(t) \cap In(H_{\text{terminal}})\vert{}}{\vert{}In(H_{\text{terminal}})\vert{}}, \qquad In(H_{\text{terminal}}) \neq \emptyset$$
+
+(when $In(H_{\text{terminal}}) = \emptyset$ the metric is undefined — report `UNDEFINED`, not 0 or 1). **Coverage density is not a probability of inference.** By this skill's own taxonomy, synthesis requires *combining non-equivalent clues*: knowing half of the required predecessors can carry probability ≈ 0 of inferring the solution, while a single sufficient holon can carry probability ≈ 1 at coverage $1/N$. A probabilistic claim requires a declared inference model (e.g., a conjunction of calibrated per-clue probabilities for synthesis nodes) validated by playtesting — see Mathematical Status. Report `CoverageDensity` as a structural readiness indicator and label any inference-probability statement `heuristic` or `empirical`.
 
 ---
 
@@ -134,7 +136,7 @@ Action: Identify and reject blockages requiring inventory items or stat counters
 
 $$\exists H_i \in V \setminus \{H_{\text{root}}\} \quad \text{such that} \quad \text{InDegree}(H_i) = 0$$
 
-Action: Flag secondary holons that have no incoming clues pointing to them in the graph, making their discovery dependent on random spatial scanning (*pixel hunting*).
+Action: Flag holons **classified as required** (Stage 2 taxonomy) that have no incoming clues pointing to them in the graph, making their discovery dependent on random spatial scanning (*pixel hunting*). Do not flag *optional* knowledge nodes: deliberate unclued discoveries reward exploration and are a canonical pattern of the genre (e.g., Outer Wilds). Report optional unclued holons separately, without the anomaly label.
 
 ### C. False Holarchy / Strictly Linear Graph
 
@@ -160,9 +162,9 @@ When responding to the user, the agent must present the specification in the fol
 ### 2. Epistemic Graph Metrics ($G$)
 
 * **Total Number of Holons ($\vert{}V\vert{}$):** [Quantity of knowledge nodes]
-* **Edge Density ($\vert{}E\vert{} / \vert{}V\vert{}$):** [Degree of clue interconnection]
-* **Graph Diameter (Max Critical Path):** [Minimum number of chained discoveries for final solution]
-* **Non-Linearity Degree:** [Percentage of nodes with $In(H_i) \ge 2$]
+* **Average Degree ($\vert{}E\vert{} / \vert{}V\vert{}$):** [Degree of clue interconnection; for cross-graph comparison use classic edge density $\vert{}E\vert{} / (\vert{}V\vert{}(\vert{}V\vert{}-1))$]
+* **Solution Path Length (root $\to$ $H_{\text{terminal}}$):** [Minimum number of chained discoveries for the final solution — the directed shortest-path distance from root to terminal, *not* the graph diameter, which is dominated by the longest lateral branch]
+* **Branching Degree:** [Percentage of nodes with $\vert{}Out(H_i)\vert{} \ge 2$ — branching is defined by outgoing routes; $\vert{}In(H_i)\vert{} \ge 2$ measures convergence, per the Stage 2 taxonomy]
 
 ### 3. Progression Diagnosis and Recommendations
 

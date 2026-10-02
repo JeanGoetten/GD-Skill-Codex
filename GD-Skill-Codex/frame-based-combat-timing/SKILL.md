@@ -113,7 +113,7 @@ $$\Delta_{\text{block}} = \text{Stun}_{\text{block}} - (T(a) - t_{\text{hit}})$$
 
 ### Stage 4: Algorithmic Resolution of Simultaneous Collision (*Trades*)
 
-If two *Hitboxes* from distinct agents collide on the same instantaneous frame $t$, apply the **Impact Priority Function ($P(a)$)**:
+If two *Hitboxes* from distinct agents collide on the same instantaneous frame $t$, apply the **Impact Priority Function ($P(a)$)** as a *working model* (strict ordinal order: Light/Medium/Heavy/Special/Invincible). Real engines vary: many force a mutual trade on any same-frame collision regardless of move, and effective priority can depend on hitbox depth ordering, armor and invulnerability windows rather than a single ordinal $P(a)$. Declare which convention the target engine uses before applying this rule:
 
 $$\text{Result} = \begin{cases} \text{Victory for } a_1, & \text{if } P(a_1) > P(a_2) \\ \text{Victory for } a_2, & \text{if } P(a_2) > P(a_1) \\ \text{Mutual Impact (Trade)}, & \text{if } P(a_1) = P(a_2) \end{cases}$$
 
@@ -127,17 +127,25 @@ The agent must analyze the action vector and flag the following design risks:
 
 $$\exists a_1, a_2 \in A \quad \text{such that} \quad \Delta_{\text{hit}}(a_1) \ge T_{\text{startup}}(a_2)$$
 
-Action: If hit advantage of $a_1$ is greater than or equal to startup of $a_2$ (and $a_1$ can be repeated infinitely), flag an unblockable infinite combo.
+Action: This condition certifies a single **link** ($a_1$ recovers before $a_2$ becomes active), not an infinite loop. To flag an infinite combo, the loop must close: require $\Delta_{\text{hit}}(a_1) \ge T_{\text{startup}}(a_2)$ **and** the cycle to return to $a_1$ (for an alternating pair: $\Delta_{\text{hit}}(a_2) \ge T_{\text{startup}}(a_1)$; for a self-loop: $\Delta_{\text{hit}}(a_1) \ge T_{\text{startup}}(a_1)$), **and** the engine to lack per-hit decay (hitstun scaling, pushback). Report the condition as a conditional risk, not a proof.
 
 ### B. Absolute Safe Block Traps (*Safe Jumps / True Blockstrings*)
 
-$$\Delta_{\text{block}}(a_1) + T_{\text{startup}}(a_2) \le 0 \quad \text{without interruption windows}$$
+After $a_1$ is blocked, the attacker is free at $t=0$ and the defender at $t=\Delta_{\text{block}}(a_1)$ (positive $\Delta_{\text{block}}$ = attacker recovers first). If $a_2$ starts immediately, its first active frame occurs at $t = T_{\text{startup}}(a_2)$, so the defender's interruption window is:
 
-Action: Verify if the action combination prevents any defensive decision-making by the target.
+$$\text{gap} = T_{\text{startup}}(a_2) - \Delta_{\text{block}}(a_1)$$
+
+A true blockstring (no defensive decision possible) requires the gap to be non-positive:
+
+$$\Delta_{\text{block}}(a_1) \ge T_{\text{startup}}(a_2)$$
+
+Action: Flag the combination only when this inequality holds (including cancellation windows that let $a_2$ begin before $a_1$'s recovery ends). When $\Delta_{\text{block}}(a_1) < 0$, the defender is the one with a free window — that is a punishable situation for the attacker, not a trap.
 
 ### C. Unpunishable High-Reward Moves
 
-$$\Delta_{\text{block}}(a) \ge -T_{\text{startup, min}}(A)$$
+Boundary convention: when $\Delta_{\text{block}}(a) = -T_{\text{startup, min}}(A)$ exactly, the punishment connects on its first active frame and the move is treated as **punishable** (inclusive threshold). A move is safe only if strictly greater:
+
+$$\Delta_{\text{block}}(a) > -T_{\text{startup, min}}(A)$$
 
 Action: Identify high-damage moves whose block disadvantages are smaller than the fastest response action in the system.
 
@@ -178,7 +186,7 @@ When responding to the user, the agent must present data in the following struct
 Frames are discrete indices.
 
 ### Derived Metrics
-The effective window is W_eff = W - (displacement + reaction + execution + latency), bounded below by zero.
+The effective window is W_eff = W - (displacement + reaction + execution + latency), bounded below by zero. All terms must be expressed in frames: reaction, execution and latency convert from seconds via $f_{\text{tick}}$; *displacement* is spatial and converts to frames only through the target's effective movement speed (frames = distance / speed per frame). State the speed assumption used; without it the sum is dimensionally undefined.
 
 ### Heuristics and Design Judgments
 Guarantees cover declared frame order and cancellation legality, not readability or fairness.

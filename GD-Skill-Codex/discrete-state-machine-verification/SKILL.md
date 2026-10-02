@@ -100,6 +100,12 @@ and the reachable set must satisfy:
 
 $$Reach(q_0) \subseteq Valid$$
 
+As stated this is nearly tautological (Reachable is defined over valid states), so the **non-trivial check it stands for is invariant preservation by $\delta$**: for every valid $q$ and every event $\sigma$ enabled at $q$ ($P_\sigma(q) = \text{True}$), the successor must also be valid:
+
+$$\Phi(q) \land P_\sigma(q) \implies \Phi(\delta(q, \sigma))$$
+
+Enumerating this check (or, equivalently, verifying that transitions never leave `Valid`) is what catches transitions from valid into invalid states — which the naive reachability set would silently exclude and thus mask. In a probabilistic automaton, require $\Phi(q')$ for every $q'$ in the support of $\delta(q, \sigma)$.
+
 ### Stage 2: Event Alphabet Specification ($\Sigma$)
 
 1. Catalog all inputs, agent actions, and environment events in $\Sigma$.
@@ -142,11 +148,15 @@ $$\text{Orphans} = \{q \in Q_{\text{valid}} \setminus \{q_0\} \mid \nexists \tex
 
 Here, **orphan** means only a valid state with no path from $q_0$; a merely possible state that violates $\Phi$ is invalid, not orphaned. A valid state with an incoming edge from another unreachable state is still orphaned because it has no path from $q_0$.
 
-### B. Undesired Blocking Detection (Non-Terminal Deadlocks)
+### B. Undesired Blocking Detection (Non-Terminal Deadlocks and Livelocks)
 
 $$\text{Deadlock} = \{q \in Q \setminus F \mid \forall \sigma \in \Sigma, \, P_\sigma(q) = \text{False}\}$$
 
 Action: Identify states where the game halts without having reached a terminal condition $F$.
+
+$$\text{Livelock} = \{q \in Q \setminus F \mid \text{every cycle reachable from } q \text{ never reaches } F\}$$
+
+Action: Also identify non-terminal states from which no terminal state is reachable — the game continues forever without resolution (e.g., infinite regeneration loops). Detect by computing, for each non-terminal state, whether $F$ is reachable via backward BFS from $F$; states outside the backward-reachable set are deadlock-or-livelock candidates. Under stochastic $\delta$ (Dist(Q)), reachability of $F$ is not *winnability*: a path existing does not mean the player can force it. Report probabilistic reachability (or explicitly scope the claim to "a path exists") instead of stating guaranteed victory.
 
 ### C. Improper Non-determinism
 

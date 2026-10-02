@@ -1,126 +1,125 @@
-# Plano de ação do GD Skill Codex
+# GD Skill Codex Action Plan
 
 ## Objetivo
 
-Transformar o GD Skill Codex de uma especificação arquitetural bem organizada
-em um framework operacional de análise de game design, sem ampliar o catálogo
-de 15 skills antes de consolidar:
+Transform the GD Skill Codex from a well-organized architectural specification
+in an operational game design analysis framework, without expanding the catalog
+15 skills before consolidating:
 
-1. um world model semântico e versionado;
-2. interfaces realmente tipadas entre skills;
-3. roteamento, execução e iteração separados;
-4. validação semântica e consistência entre fontes;
-5. evidência, incerteza e reprodutibilidade rastreáveis;
-6. uma ponte explícita entre análise, simulação e playtest.
+1. a semantic and versioned world model;
+2. truly typed interfaces between skills;
+3. separate routing, execution and iteration;
+4. semantic validation and consistency between sources;
+5. traceable evidence, uncertainty and reproducibility;
+6. an explicit bridge between analysis, simulation and playtest.
 
-Este documento é um roadmap de implementação. Ele não substitui
-[`architecture/orchestrator.md`](../architecture/orchestrator.md), que descreve
-o comportamento arquitetural atual.
+This document is an implementation roadmap. It does not replace
+[`architecture/orchestrator.md`](../architecture/orchestrator.md), which describes
+the current architectural behavior.
 
-## Diagnóstico de partida
+## Startup diagnostics
 
-### Já existe
+### Already exists
 
-- 15 skills com front matter e protocolos próprios;
-- registry, handoffs, calibração e validações estruturais;
-- um world model compartilhado, ainda superficial;
-- roteador heurístico determinístico;
-- dashboard web estático para catálogo e visualização;
-- distinção conceitual entre `formal`, `derived`, `heuristic` e `empirical`.
+- 15 skills with front matter and own protocols;
+- registration, handoffs, calibration and structural validations;
+- a shared world model, still superficial;
+- deterministic heuristic router;
+- static web dashboard for catalog and visualization;
+- conceptual distinction between `formal`, `derived`, `heuristic` and `empirical`.
 
-### Ainda não existe
+### Does not exist yet
 
-- uma ontologia verificável por entidade, relação, unidade e versão;
-- compatibilidade de schemas entre saída e entrada de handoffs;
-- um executor de skills e de ciclos de retorno;
-- um evidence store ou formato universal de claims;
-- validação de unidades, semântica e dependências;
-- execução reproduzível de simulações e geração procedural;
-- uma ligação entre orchestrator e dashboard;
-- uma fonte derivada única para registry, grafo e dados web.
+- an ontology verifiable by entity, relation, unit and version;
+- schema compatibility between output and input handoffs;
+- an executor of skills and feedback cycles;
+- an evidence store or universal claims format;
+- validation of units, semantics and dependencies;
+- reproducible execution of simulations and procedural generation;
+- a connection between orchestrator and dashboard;
+- a single derived source for registry, graph and web data.
 
-### Princípios de decisão
+### Decision principles
 
-1. **Evidência antes de recomendação:** ausência de dados pode produzir
-   `INSUFFICIENT_EVIDENCE`, não uma conclusão inventada.
-2. **Modelo antes de métrica:** toda métrica deve declarar domínio, unidade,
-   assumptions, método e limitações.
-3. **Projeções, não ontologia forçada:** uma entidade pode ser projetada como
-   ator, recurso, estado ou capacidade conforme a análise.
-4. **Hard constraint separado de preferência:** invariantes, restrições,
-   heurísticas e hipóteses empíricas não devem compartilhar o mesmo status.
-5. **Uma fonte de verdade:** artefatos derivados não devem ser editados
-   manualmente.
-6. **Aproximações declaradas:** modelos contínuos, probabilísticos ou físicos
-   simplificados precisam declarar quando são aproximações.
-7. **Sem pontuação global não definida:** o sistema deve preferir um vetor de
-   resultados e incertezas a uma nota única de “saúde”.
+1. **Evidence before recommendation:** lack of data can produce
+   `INSUFFICIENT_EVIDENCE`, not an invented conclusion.
+2. **Model before metric:** every metric must declare domain, unit,
+   assumptions, method and limitations.
+3. **Projections, not forced ontology:** an entity can be projected as
+   actor, resource, state or capacity according to the analysis.
+4. **Hard constraint separated from preference:** invariants, constraints,
+   Heuristics and empirical hypotheses should not share the same status.
+5. **One source of truth:** Derived artifacts should not be edited
+   manually.
+6. **Stated approximations:** continuous, probabilistic or physical models
+   simplified ones need to state when they are approximations.
+7. **No global score not defined:** the system should prefer a vector of
+   results and uncertainties to a single note of “health”.
 
-## Registro de execução
+## Execution log
 
-### 2026-09-14 — início da Fase 0
+### 2026-09-14 — start of Phase 0
 
-**Status:** em andamento, com baseline e decisões de governança registrados.
+**Status:** in progress, with baseline and governance decisions recorded.
 
-**Evidências verificadas**
+**Verified evidence**
 
-| Área | Estado observado | Fonte atual | Decisão de trabalho |
+| Area | Observed status | Current source | Job decision |
 | --- | --- | --- | --- |
-| Skills | 15 diretórios com `SKILL.md` | `GD-Skill-Codex/` | Não adicionar skills até concluir Fases 1–5 |
-| Registry | `role` mistura natureza e roteamento | `architecture/skill-registry.json` | Separar `domain_role` e `routing_role` na Fase 2 |
-| Handoffs | 7 contratos com nomes de campos, sem schemas | `architecture/handoffs.json` | Migrar para `input_schema`/`output_schema` na Fase 2 |
-| World model | Campos principais são arrays/objetos permissivos | `architecture/world-model.schema.json` | Decompor em sub-schemas na Fase 1 |
-| Routing | Ranking heurístico determinístico | `architecture/route_request.ps1` | Manter como fallback até a Fase 3 |
-| Validation | Predominantemente estrutural | `architecture/validate_*.ps1` | Criar validação semântica e entrypoint na Fase 4 |
-| Web | Catálogo estático baseado em `web/data.js` | `web/` | Não apresentar como engine; derivar dados na Fase 4 |
-| Evidência | Status existem, mas não há evidence store | `architecture/` e front matter | Criar modelo universal na Fase 5 |
+| Skills | 15 directories with `SKILL.md` | `GD-Skill-Codex/` | Do not add skills until completing Phases 1–5 |
+| Registry | `role` mixes nature and routing | `architecture/skill-registry.json` | Separate `domain_role` and `routing_role` in Phase 2 |
+| Handoffs | 7 contracts with field names, without schemas | `architecture/handoffs.json` | Migrate to `input_schema`/`output_schema` in Phase 2 |
+| World model | Main fields are permissive arrays/objects | `architecture/world-model.schema.json` | Decompose into sub-schemes in Phase 1 |
+| Routing | Deterministic heuristic ranking | `architecture/route_request.ps1` | Keep as fallback until Phase 3 |
+| Validation | Predominantly structural | `architecture/validate_*.ps1` | Create semantic validation and entrypoint in Phase 4 |
+| Web | Static catalog based on `web/data.js` | `web/` | Do not present as an engine; derive data in Phase 4 |
+| Evidence | Statuses exist, but there is no evidence store | `architecture/` and front matter | Create universal model in Phase 5 |
 
-**Decisões registradas**
+**Recorded decisions**
 
-- O estado atual será descrito como **especificação arquitetural +
-  implementação de referência**, não como engine operacional.
-- `web/data.js` é um artefato de apresentação e não uma fonte de verdade.
-- `INSUFFICIENT_EVIDENCE` será um resultado válido e explícito.
-- Não será criada uma pontuação global de saúde/confiança sem função,
-  dados e método definidos.
-- O primeiro vertical slice será
-  `world model -> sistema de estados -> handoff validado -> claim rastreável`.
+- The current state will be described as **architectural specification +
+  reference implementation**, not as an operational engine.
+- `web/data.js` is a presentation artifact and not a source of truth.
+- `INSUFFICIENT_EVIDENCE` will be a valid and explicit result.
+- An overall health/confidence score will not be created without function,
+  defined data and method.
+- The first vertical slice will be
+  `world model -> state system -> validated handoff -> traceable claim`.
 
-**Pendências da Fase 0**
+**Phase 0 pending issues**
 
-- completar a matriz de rastreabilidade entre claims públicos, status
-  epistemológico e evidências;
-- rotular números demonstrativos existentes na camada web;
-- registrar a política de versionamento em schemas executáveis;
-- converter este baseline em validações automáticas na Fase 4.
+- complete the traceability matrix between public claims, status
+  epistemological and evidence;
+- label demonstrative numbers existing in the web layer;
+- register the versioning policy in executable schemas;
+- convert this baseline into automatic validations in Phase 4.
 
-### 2026-09-14 — primeira fatia das Fases 1–5
+### 2026-09-14 — first slice of Phases 1–5
 
-**Status:** fundamentos implementados; integração operacional e calibração
-continuam em andamento.
+**Status:** fundamentals implemented; operational integration and calibration
+continue in progress.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `architecture/schemas/` com 22 schemas composáveis para world model,
-  interfaces, métricas, assumptions, evidências, recomendações e testes;
-- `world-model.schema.json` passou a referenciar entidades, atores, recursos,
-  ações, regras, objetivos, espaço, tempo, conhecimento, progressão e economia;
-- `handoffs.json` recebeu `schema_version`, `input_schema` e `output_schema`;
-- criado `validate_schema_interfaces.ps1` para verificar a presença e o
-  encadeamento dos contratos;
-- criado `evidence.schema.json` e `evidence.example.json`;
-- `validate_all.ps1` passou a executar arquitetura, cross-skill, web e
+- created `architecture/schemas/` with 22 composable schemas for world model,
+  interfaces, metrics, assumptions, evidence, recommendations and tests;
+- `world-model.schema.json` now references entities, actors, resources,
+  actions, rules, objectives, space, time, knowledge, progression and economy;
+- `handoffs.json` received `schema_version`, `input_schema` and `output_schema`;
+- created `validate_schema_interfaces.ps1` to check presence and
+  chaining of contracts;
+- created `evidence.schema.json` and `evidence.example.json`;
+- `validate_all.ps1` now runs architecture, cross-skill, web and
   interfaces;
-- `validate_web_data.ps1` detecta skills/downstreams ausentes na apresentação;
-- `route_request.ps1` agora diferencia pesos de sinais, aplica bloqueio por
-  anti-signal sem evidência positiva, escolhe secundárias por limiar relativo
-  e expõe a política de roteamento no resultado;
-- corrigidas formalizações de sistema de estados, aleatoriedade, invariantes,
-  vetor de risco-recompensa, alcance físico de CSP e equações discretas de
-  economia.
+- `validate_web_data.ps1` detects missing skills/downstreams in the presentation;
+- `route_request.ps1` now differentiates signal weights, applies blocking by
+  anti-signal without positive evidence, chooses secondaries by relative threshold
+  and exposes the routing policy in the result;
+- corrected state system formalizations, randomness, invariants,
+  risk-reward vector, physical range of CSP and discrete equations of
+  economy.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 OK: todas as skills passaram na validação
 OK: world model e handoffs passaram na validação
@@ -129,326 +128,326 @@ OK: web/data.js sincronizado com skills/downstreams
 OK: schemas composáveis/interfaces e contratos compatíveis
 ```
 
-**Pendências imediatas**
+**Immediate issues**
 
-- ligar `validate_all.ps1` aos critérios de aceite documentados;
-- substituir objetos permissivos restantes por propriedades semânticas
-  versionadas em progressão/economia;
-- completar geração automática de `web/data.js`;
-- implementar executor de skills, evidence store persistente e simulação;
-- continuar a correção matemática das skills restantes e adicionar casos-limite.
+- link `validate_all.ps1` to the documented acceptance criteria;
+- replace remaining permissive objects with semantic properties
+  versioned in progression/economy;
+- complete automatic generation of `web/data.js`;
+- implement skills executor, persistent evidence store and simulation;
+- continue the mathematical correction of the remaining skills and add limit cases.
 
-### 2026-09-14 — reference runner e estado atual
+### 2026-09-14 — reference runner and current status
 
-Foi criado [`architecture/run_analysis.ps1`](../architecture/run_analysis.ps1).
-Ele aceita um pedido, executa o roteamento ponderado, registra ordem de
-execução, seed, versão do world model e um claim derivado. Como ainda não há
-executor de skills nem simulation runner, o relatório retorna
-`INSUFFICIENT_EVIDENCE` explicitamente. Essa é a primeira execução reproduzível
-do pipeline sem transformar um plano em diagnóstico.
+[`architecture/run_analysis.ps1`](../architecture/run_analysis.ps1) was created.
+It accepts a request, performs weighted routing, records order of
+execution, seed, world model version and a derived claim. As there is not yet
+skill runner or simulation runner, the report returns
+`INSUFFICIENT_EVIDENCE` explicitly. This is the first reproducible run
+of the pipeline without transforming a plan into a diagnosis.
 
-**Estado das fases**
+**Phase status**
 
-| Fase | Estado | Evidência |
+| Phase | Status | Evidence |
 | --- | --- | --- |
-| 0 — baseline/governança | concluída com pendências de rotulagem | registro e decisões acima |
-| 1 — world model/unidades/versionamento | núcleo implementado; semântica de progressão/economia ainda parcial | `architecture/schemas/`, `world-model.schema.json` |
-| 2 — interfaces/handoffs | contratos e schemas implementados; compatibilidade específica por skill ainda pendente | `handoffs.json`, `validate_schema_interfaces.ps1` |
-| 3 — orchestrator | reference runner implementado; executor real ainda pendente | `run_analysis.ps1`, `route_request.ps1` |
-| 4 — validação/artefatos | validação agregada implementada; geração automática web ainda pendente | `validate_all.ps1`, `validate_web_data.ps1` |
-| 5 — evidência/reprodutibilidade | schema, exemplo e store JSONL append-only implementados; propagação de confiança pendente | `evidence.schema.json`, `evidence.example.json`, `run_analysis.ps1` |
-| 6 — modelos matemáticos | correções prioritárias parciais | skills de estado, risco, CSP e economia |
-| 7 — simulação/web operacional | acessibilidade textual e rótulo de catálogo adicionados; simulation bridge pendente | `web/index.html`, `web/app.js` |
+| 0 — baseline/governance | completed with labeling issues | registration and decisions above |
+| 1 — world model/units/versioning | core implemented; progression/economy semantics still partial | `architecture/schemas/`, `world-model.schema.json` |
+| 2 — interfaces/handoffs | contracts and schemes implemented; skill-specific compatibility still pending | `handoffs.json`, `validate_schema_interfaces.ps1` |
+| 3 — orchestrator | reference runner implemented; royal executor still pending | `run_analysis.ps1`, `route_request.ps1` |
+| 4 — validation/artifacts | implemented aggregate validation; automatic web generation still pending | `validate_all.ps1`, `validate_web_data.ps1` |
+| 5 — evidence/reproducibility | implemented schema, example and append-only JSONL store; pending trust propagation | `evidence.schema.json`, `evidence.example.json`, `run_analysis.ps1` |
+| 6 — mathematical models | partial priority fixes | state, risk, CSP and economics skills |
+| 7 — simulation/operational web | textual accessibility and catalog label added; simulation bridge pending | `web/index.html`, `web/app.js` |
 
-**Verificações finais desta execução**
+**Final checks of this run**
 
-- `architecture/validate_all.ps1`: passou;
-- `validate_skills.ps1`: passou;
-- `node --check web/app.js`: passou;
-- `run_analysis.ps1` com `-Seed 42`: produziu plano determinístico e
+- `architecture/validate_all.ps1`: passed;
+- `validate_skills.ps1`: passed;
+- `node --check web/app.js`: passed;
+- `run_analysis.ps1` with `-Seed 42`: produced deterministic plan and
   `INSUFFICIENT_EVIDENCE`;
-- persistência JSONL de claims: testada com hash, versão e seed;
-- nenhum executor de skill ou simulation runner foi fingido como concluído.
+- JSONL persistence of claims: tested with hash, version and seed;
+- no skill runner or simulation runner was pretended to be completed.
 
-### 2026-09-14 — geração derivada e confiança mínima
+### 2026-09-14 — derived generation and minimum trust
 
-**Entregas desta etapa**
+**Deliveries for this stage**
 
-- criado `architecture/generate_web_data.ps1`;
-- `web/data.js` agora é gerado a partir de `skill-registry.json`,
-  `handoffs.json` e `SKILL.md`, com downstreams derivados dos handoffs;
-- `validate_all.ps1` executa a geração antes das validações, reduzindo drift
-  entre arquitetura e dashboard;
-- o runner calcula e registra confiança mínima propagada:
-  `low` sem world model, `medium` com contexto parcial e `high` apenas com
-  múltiplas evidências e sinal forte;
-- README e orchestrator passaram a declarar o gerador e a natureza derivada
-  do artefato web.
+- created `architecture/generate_web_data.ps1`;
+- `web/data.js` is now generated from `skill-registry.json`,
+  `handoffs.json` and `SKILL.md`, with downstreams derived from the handoffs;
+- `validate_all.ps1` runs generation before validations, reducing drift
+  between architecture and dashboard;
+- the runner calculates and records minimum propagated confidence:
+  `low` without world model, `medium` with partial context and `high` only with
+  multiple evidence and strong signal;
+- README and orchestrator now declare the generator and derived nature
+  of the web artifact.
 
-**Verificação**
+**Verification**
 
-- geração concluída para 15 skills;
-- `node --check web/app.js` passou;
-- downstreams gerados passaram em `validate_web_data.ps1`;
-- a confiança do runner foi testada com e sem world model;
-- a limitação permanece explícita: confiança é uma política inicial, não
-  validação empírica.
-- após a primeira execução do gerador, o validador web foi ajustado para
-  aceitar a sintaxe JavaScript/JSON produzida; a regressão foi reproduzida e
-  corrigida antes da validação final.
+- generation completed for 15 skills;
+- `node --check web/app.js` passed;
+- generated downstreams passed `validate_web_data.ps1`;
+- the runner's confidence was tested with and without the world model;
+- the limitation remains explicit: trust is an initial policy, not
+  empirical validation.
+- after the first run of the generator, the web validator was adjusted to
+  accept the produced JavaScript/JSON syntax; the regression was reproduced and
+  corrected before final validation.
 
-### 2026-09-14 — ponte de execução de skills
+### 2026-09-14 — skill execution bridge
 
-Foi criado [`architecture/execute_skills.ps1`](../architecture/execute_skills.ps1).
-Esta primeira implementação:
+[`architecture/execute_skills.ps1`](../architecture/execute_skills.ps1) was created.
+This first implementation:
 
-- exige e valida os campos obrigatórios do world model;
-- executa o roteamento existente;
-- materializa uma saída por skill na ordem de execução;
-- registra `skill_id`, versão, hash de entrada, seed e versão do world model;
-- retorna `status: blocked` e `INSUFFICIENT_EVIDENCE` quando não existe
-  executor operacional para a skill;
-- pode persistir um claim por skill no evidence store JSONL.
+- requires and validates the mandatory fields of the world model;
+- executes existing routing;
+- materializes an output per skill in the execution order;
+- records `skill_id`, version, input hash, seed and version of the world model;
+- returns `status: blocked` and `INSUFFICIENT_EVIDENCE` when it does not exist
+  operational executor for the skill;
+- you can persist a claim per skill in the JSONL evidence store.
 
-Isso fecha a interface de execução sem mascarar a ausência de implementações
-das skills. A pendência foi reduzida de “não há ponte de execução” para
-“adicionar executors versionados para as skills e um simulation runner”.
+This closes the execution interface without masking the absence of implementations
+of skills. The backlog was reduced from “there is no execution bridge” to
+“add versioned executors for skills and a simulation runner”.
 
-### 2026-09-14 — primeiro executor e simulation runner
+### 2026-09-14 — first executor and simulation runner
 
-**Entregas**
+**Deliveries**
 
-- criado `architecture/schemas/state-system.schema.json`;
-- criado `architecture/executors/discrete-state-machine-verification.ps1`;
-- o executor aplica BFS no sistema declarado, reportando estados alcançáveis,
-  terminais alcançáveis, órfãos, deadlocks, não-determinismo e métricas
-  derivadas;
-- `execute_skills.ps1` passou a despachar para executors versionados quando
-  eles existem, mantendo `blocked` para skills sem implementação;
-- criado `architecture/simulate_state_system.ps1`, com seed, limite de passos,
-  seleção determinística/ponderada e trace reproduzível;
-- criado o exemplo
+- created `architecture/schemas/state-system.schema.json`;
+- created `architecture/executors/discrete-state-machine-verification.ps1`;
+- the executor applies BFS to the declared system, reporting achievable states,
+  reachable endpoints, orphans, deadlocks, non-determinism and metrics
+  derivatives;
+- `execute_skills.ps1` started dispatching to versioned executors when
+  they exist, keeping `blocked` for skills without implementation;
+- created `architecture/simulate_state_system.ps1`, with seed, step limit,
+  deterministic/weighted selection and reproducible trace;
+- created the example
   `architecture/examples/state-system.example.json`.
 
-**Verificação**
+**Verification**
 
-- sistema de exemplo produziu `partial`, alcançou `start, victory` e detectou
+- example system produced `partial`, reached `start, victory` and detected
   `orphan`;
-- simulation runner alcançou o terminal `victory` em trace limitado;
-- execução sem executor continua explicitamente bloqueada;
-- a limitação permanece: este executor prova propriedades do grafo declarado,
-  não a implementação runtime nem a experiência do jogador.
+- simulation runner reached the `victory` terminal in limited trace;
+- execution without an executor remains explicitly blocked;
+- the limitation remains: this executor proves properties of the declared graph,
+  not the runtime implementation nor the player experience.
 
 ### 2026-09-14 — cobertura formal ampliada
 
-**Entregas**
+**Deliveries**
 
-- criado `csp-system.schema.json` e integrado ao validador de interfaces;
-- criado `executors/procedural-level-constraint-solving.ps1`, com validação
-  de referências, propagação AC-3 e detecção de domínios vazios;
-- criado `examples/csp-system.example.json`;
-- criado `executors/resource-flow-economy.ps1` por executor especializado,
-  com schema e fixture próprios;
-- o executor de recursos calcula a equação discreta
-  `Q(t+1) = Q(t) + sources - sinks`, classifica recursos como
-  `inflationary`, `deficit` ou `balanced` e registra evidência derivada;
-- `execute_skills.ps1` agora pode despachar três skills formais:
-  estados, CSP e fluxo de recursos.
+- created `csp-system.schema.json` and integrated with the interface validator;
+- created `executors/procedural-level-constraint-solving.ps1`, with validation
+  of references, AC-3 propagation and empty domain detection;
+- created `examples/csp-system.example.json`;
+- created `executors/resource-flow-economy.ps1` by specialized executor,
+  with its own schema and fixture;
+- feature runner calculates discrete equation
+  `Q(t+1) = Q(t) + sources - sinks`, classifies resources as
+  `inflationary`, `deficit` or `balanced` and records derived evidence;
+- `execute_skills.ps1` can now dispatch three formal skills:
+  states, CSP and resource flow.
 
-**Verificação**
+**Verification**
 
-- fixture CSP: `success`, `locally_consistent`, sem domínios vazios;
-- fixture de recursos: `success`, estado `mixed`, com inflação e déficit
-  detectados separadamente;
-- ambos foram executados pelo pipeline, não apenas chamados diretamente;
-- AC-3 continua explicitamente limitado a consistência local;
-- o balanço econômico continua condicional ao modelo discreto fornecido.
+- CSP fixture: `success`, `locally_consistent`, no empty domains;
+- resource fixture: `success`, `mixed` state, with inflation and deficit
+  detected separately;
+- both were executed by the pipeline, not just called directly;
+- AC-3 continues to be explicitly limited to local consistency;
+- the economic balance remains conditional on the discrete model provided.
 
-### 2026-09-14 — executor de processos concorrentes
+### 2026-09-14 — executor of competing processes
 
-**Entregas**
+**Deliveries**
 
-- criado `petri-net.schema.json` e registrado no `hidden-state.schema.json`;
-- criado `executors/concurrent-gameplay-processes.ps1`;
-- criado `examples/petri-net.example.json`;
-- o executor valida places, tokens e arcos, executa uma trajetória limitada,
-  registra marcações, transições disparadas, progresso observado e deadlock;
-- `execute_skills.ps1` passou a despachar quatro executors formais:
-  estados, CSP, fluxo de recursos e processos concorrentes.
+- created `petri-net.schema.json` and registered in `hidden-state.schema.json`;
+- created `executors/concurrent-gameplay-processes.ps1`;
+- created `examples/petri-net.example.json`;
+- the executor validates places, tokens and arcs, executes a limited trajectory,
+  records markings, triggered transitions, observed progress and deadlock;
+- `execute_skills.ps1` now dispatches four formal executors:
+  states, CSP, resource flow and concurrent processes.
 
-**Verificação**
+**Verification**
 
-- fixture Petri Net disparou `craft` de forma determinística;
-- a marcação final foi `raw_material=0, product=1`;
-- o deadlock foi reportado explicitamente após o consumo do único token;
-- execução pelo pipeline roteou para `concurrent-gameplay-processes`;
-- a limitação está registrada: uma trajetória limitada não prova vivacidade
-  global nem ausência de deadlocks em todos os estados.
+- Petri Net fixture fired `craft` deterministically;
+- the final marking was `raw_material=0, product=1`;
+- the deadlock was explicitly reported after the single token was consumed;
+- execution through the pipeline routed to `concurrent-gameplay-processes`;
+- limitation is registered: a limited trajectory does not prove liveliness
+  global nor absence of deadlocks in all states.
 
-### 2026-09-14 — executor de timing baseado em frames
+### 2026-09-14 — frame-based timing executor
 
-**Entregas**
+**Deliveries**
 
-- criado `frame-timing.schema.json` e integrado ao `hidden-state` e à
-  validação de interfaces;
-- criado `executors/frame-based-combat-timing.ps1`;
-- criado `examples/frame-timing.example.json`;
-- o executor calcula duração total, segundos por tick, hit advantage e block
-  advantage para ações com startup/active/recovery declarados;
-- candidatos a loop exigem simultaneamente vantagem suficiente, repetibilidade,
-  contato, recurso e ausência declarada de escape;
-- limitações de geometria, spacing, input buffer e estados de escape são
-  incluídas no resultado, em vez de serem inferidas.
+- created `frame-timing.schema.json` and integrated with `hidden-state` and
+  interface validation;
+- created `executors/frame-based-combat-timing.ps1`;
+- created `examples/frame-timing.example.json`;
+- the executor calculates total duration, seconds per tick, hit advantage and block
+  advantage for actions with startup/active/recovery declared;
+- loop candidates simultaneously require sufficient advantage, repeatability,
+  contact, recourse and declared absence of escape;
+- limitations of geometry, spacing, input buffer and escape states are
+  included in the result, rather than being inferred.
 
-**Verificação**
+**Verification**
 
-- fixture produziu `success`, 33 frames totais, `+3` hit advantage e `-7`
+- fixture produced `success`, 33 total frames, `+3` hit advantage and `-7`
   block advantage;
-- nenhum loop foi classificado como garantido;
-- execução pelo pipeline roteou para `frame-based-combat-timing`;
-- validação permanece condicional aos parâmetros declarados.
+- no loops were classified as guaranteed;
+- execution through the pipeline routed to `frame-based-combat-timing`;
+- validation remains conditional on the declared parameters.
 
-### 2026-09-14 — executor ERA e cobertura de validator
+### 2026-09-14 — ERA executor and validator coverage
 
-**Entregas**
+**Deliveries**
 
-- criado `procedural-expressive-range-analysis.schema.json` e integrado ao
-  `hidden_state` e ao validador de interfaces;
-- criado `executors/procedural-expressive-range-analysis.ps1`;
-- criado `examples/procedural-expressive-range-analysis.example.json`;
-- o executor exige `solvability_status` e amostras não vazias;
-- calcula contagem de amostras, amostras classificadas, bins ocupados,
-  `bin_occupancy_coverage` e `distribution_bias`;
-- separa explicitamente ocupação de bins de cobertura geométrica/área;
-- `execute_skills.ps1` agora pode despachar o validator ERA quando roteado.
+- created `procedural-expressive-range-analysis.schema.json` and integrated into
+  `hidden_state` and the interface validator;
+- created `executors/procedural-expressive-range-analysis.ps1`;
+- created `examples/procedural-expressive-range-analysis.example.json`;
+- executor requires `solvability_status` and non-empty samples;
+- calculates sample count, classified samples, occupied bins,
+  `bin_occupancy_coverage` and `distribution_bias`;
+- explicitly separates occupation of bins from geometric coverage/area;
+- `execute_skills.ps1` can now dispatch the ERA validator when routed.
 
-**Verificação**
+**Verification**
 
-- fixture produziu `success` com 4 amostras;
-- 3 de 9 bins foram ocupados (`0.3333`);
-- o bin de maior concentração representou `0.5` das amostras classificadas;
-- execução pelo pipeline roteou para ERA;
-- não foi inferida qualidade, diversidade geométrica ou solvabilidade global.
+- fixture produced `success` with 4 samples;
+- 3 out of 9 bins were occupied (`0.3333`);
+- the bin with the highest concentration represented `0.5` of the classified samples;
+- execution through the pipeline routed to ERA;
+- no quality, geometric diversity or overall solvency was inferred.
 
-## Sequenciamento por fases
+## Phase sequencing
 
-As fases são ordenadas por dependência. Uma fase pode começar em paralelo
-quando seus pré-requisitos estiverem concluídos, mas não deve declarar
-estabilidade antes dos critérios de aceite da fase anterior.
+The phases are ordered by dependency. A phase can start in parallel
+when your prerequisites are complete, but you must not declare
+stability before the acceptance criteria of the previous phase.
 
-### Fase 0 — Baseline e governança
+### Phase 0 — Baseline and governance
 
-**Objetivo:** congelar o contrato de evolução e tornar o estado atual
-observável antes das mudanças.
+**Objective:** freeze the evolution contract and make the current state
+observable before the changes.
 
-**Entregas**
+**Deliveries**
 
-- inventário das fontes de verdade e dos campos duplicados;
-- matriz de rastreabilidade entre audit item, arquivo, decisão e teste;
-- política de versionamento para schemas, skills e análises;
-- definição dos status epistemológicos canônicos:
+- inventory of sources of truth and duplicate fields;
+- traceability matrix between audit item, file, decision and test;
+- versioning policy for schemas, skills and analyses;
+- definition of canonical epistemological statuses:
   `formal`, `derived`, `heuristic`, `empirical`, `observed`, `assumed`,
   `unknown`, `contradicted`, `validated`;
-- registro explícito de `INSUFFICIENT_EVIDENCE`;
-- decisão documentada de que o dashboard atual é catálogo estático.
+- explicit registration of `INSUFFICIENT_EVIDENCE`;
+- documented decision that the current dashboard is a static catalog.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- cada claim público relevante possui uma classificação epistemológica;
-- nenhum número demonstrativo do dashboard é apresentado como execução real;
-- o README descreve o projeto como especificação + implementação de referência.
+- each relevant public claim has an epistemological classification;
+- no demonstrative dashboard number is presented as actual execution;
+- the README describes the project as specification + reference implementation.
 
 **Prioridade:** P0.
 
-### Fase 1 — World model, unidades e versionamento
+### Phase 1 — World model, units and versioning
 
-**Objetivo:** substituir o schema permissivo por uma ontologia composta,
-sem impor uma única classificação para todas as entidades.
+**Objective:** replace the permissive schema with a composite ontology,
+without imposing a single classification for all entities.
 
-**Entregas**
+**Deliveries**
 
-- decomposição de `world-model.schema.json` em sub-schemas para entidades,
-  atores, recursos, ações, regras, objetivos, espaço, tempo, conhecimento e
-  estado oculto;
-- identificadores estáveis, `type`, `source`, `version`, `timestamp`,
-  ownership, relações e estado epistemológico;
-- vocabulário de unidades e conversões explícitas entre segundos, frames,
-  ticks, ciclos, distância, velocidade, dano e taxas;
-- separação entre entidade, recurso, variável de estado, moeda, capacidade,
-  conhecimento e população;
-- `world_model_version`, `analysis_version`, `skill_version` e `input_hash`;
-- validação de referências internas e relações entre objetos.
+- decomposition of `world-model.schema.json` into sub-schemas for entities,
+  actors, resources, actions, rules, objectives, space, time, knowledge and
+  hidden state;
+- stable identifiers, `type`, `source`, `version`, `timestamp`,
+  ownership, relationships and epistemological status;
+- unit vocabulary and explicit conversions between seconds, frames,
+  ticks, cycles, distance, speed, damage and rates;
+- separation between entity, resource, state variable, currency, capacity,
+  knowledge and population;
+- `world_model_version`, `analysis_version`, `skill_version` and `input_hash`;
+- validation of internal references and relationships between objects.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- exemplos válidos e inválidos cobrem cada sub-schema;
-- referências para entidades inexistentes falham;
-- unidades incompatíveis falham antes de qualquer cálculo;
-- duas projeções diferentes podem apontar para a mesma entidade sem duplicá-la.
+- valid and invalid examples cover each sub-schema;
+- references to non-existent entities fail;
+- incompatible units fail before any calculation;
+- two different projections can point to the same entity without duplicating it.
 
-**Prioridade:** P0. **Dependência:** Fase 0.
+**Priority:** P0. **Dependency:** Phase 0.
 
-### Fase 2 — Contratos de interface e handoffs
+### Phase 2 — Interface contracts and handoffs
 
-**Objetivo:** transformar nomes de campos em contratos verificáveis.
+**Objective:** transform field names into verifiable contracts.
 
-**Entregas**
+**Deliveries**
 
-- schemas para `SkillInput`, `SkillOutput`, `HandoffContract`, `Metric`,
-  `Assumption`, `Evidence`, `Recommendation` e `TestPlan`;
-- `input_schema`, `output_schema`, `version`, campos obrigatórios, unidades e
-  compatibilidade no `handoffs.json`;
-- distinção entre `model`, `assumptions`, `analysis`, `results`, `evidence`,
-  `uncertainty`, `recommendation` e `test`;
-- contrato de iteração com payload de retorno, merge strategy, estado
-  preservado, condição de parada e métrica computável;
-- taxonomia separada para `domain_role` (`formal`, `design`, `hybrid`) e
+- schemas for `SkillInput`, `SkillOutput`, `HandoffContract`, `Metric`,
+  `Assumption`, `Evidence`, `Recommendation` and `TestPlan`;
+- `input_schema`, `output_schema`, `version`, required fields, units and
+  compatibility in `handoffs.json`;
+- distinction between `model`, `assumptions`, `analysis`, `results`, `evidence`,
+  `uncertainty`, `recommendation` and `test`;
+- iteration contract with return payload, merge strategy, state
+  preserved,stop condition and computable metric;
+- separate taxonomy for `domain_role` (`formal`, `design`, `hybrid`) and
   `routing_role` (`primary_candidate`, `secondary`, `validator`);
-- validação de que cada input de destino existe no output compatível da origem.
+- validation that each target input exists in the source's compatible output.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- um handoff incompatível falha com erro localizado;
-- `return_to` só aceita skills e etapas existentes;
-- `max_cycles` é inteiro positivo;
-- toda `convergence_metric` possui definição, limiar e método de avaliação;
-- registry, handoffs e front matter podem ser comparados automaticamente.
+- an incompatible handoff fails with a localized error;
+- `return_to` only accepts existing skills and steps;
+- `max_cycles` is positive integer;
+- every `convergence_metric` has a definition, threshold and evaluation method;
+- registry, handoffs and front matter can be compared automatically.
 
-**Prioridade:** P0. **Dependência:** Fase 1.
+**Priority:** P0. **Dependency:** Phase 1.
 
-### Fase 3 — Orchestrator executável
+### Phase 3 — Executable Orchestrator
 
-**Objetivo:** separar roteamento, execução, validação e iteração.
+**Objective:** separate routing, execution, validation and iteration.
 
-**Entregas**
+**Deliveries**
 
-- pipeline: request, decomposição, extração do world model,
-  assumptions/unknowns, projeção ontológica, routing, seleção mínima,
-  execução, validação e relatório;
-- `route_request.ps1` explicitamente mantido como fallback heurístico;
-- pesos distintos para sinais explícitos, semânticos e estruturais;
-- bloqueios reais para anti-signals e conflitos;
-- seleção de secondary skills baseada em dependências, não em `First 3`;
-- seleção de validators pelo contrato e pelo tipo de risco;
-- grafo de dependências e ordem de execução;
-- `evidence sufficiency` antes de qualquer recomendação;
-- logs de execução, falhas explícitas e resultados parciais identificados.
+- pipeline: request, decomposition, world model extraction,
+  assumptions/unknowns, ontological projection, routing, minimum selection,
+  execution, validation and reporting;
+- `route_request.ps1` explicitly kept as heuristic fallback;
+- different weights for explicit, semantic and structural signals;
+- real blocks for anti-signals and conflicts;
+- selection of secondary skills based on dependencies, not on `First 3`;
+- selection of validators by contract and type of risk;
+- dependency graph and execution order;
+- `evidence sufficiency` before any recommendation;
+- execution logs, explicit failures and partial results identified.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- a mesma entrada produz o mesmo plano de execução quando a seed é fixa;
-- um anti-signal bloqueia ou exige revisão conforme a política declarada;
-- nenhuma skill é executada sem inputs compatíveis;
-- ciclos encerram por convergência, limite ou erro reportado;
-- `UNKNOWN` e `INSUFFICIENT_EVIDENCE` são resultados válidos.
+- the same input produces the same execution plan when the seed is fixed;
+- an anti-signal blocks or requires review according to the declared policy;
+- no skill is executed without compatible inputs;
+- cycles close due to convergence, limit or reported error;
+- `UNKNOWN` and `INSUFFICIENT_EVIDENCE` are valid results.
 
-**Prioridade:** P0. **Dependência:** Fases 1 e 2.
+**Priority:** P0. **Dependency:** Phases 1 and 2.
 
-### Fase 4 — Validação semântica e geração de artefatos
+### Phase 4 — Semantic validation and artifact generation
 
-**Objetivo:** substituir validações de presença por validações de coerência.
+**Objective:** replace presence validations with coherence validations.
 
-**Entregas**
+**Deliveries**
 
 - `validate_schema.ps1`;
 - `validate_registry.ps1`;
@@ -458,78 +457,77 @@ sem impor uma única classificação para todas as entidades.
 - `validate_routing.ps1`;
 - `validate_examples.ps1`;
 - `validate_web_data.ps1`;
-- `validate_all.ps1` como entrypoint;
-- gerador de `web/data.js`, tabelas documentais e grafo a partir do registry e
-  dos handoffs;
-- checagem de cobertura do grafo, ciclos legítimos, referências e drift.
+- `validate_all.ps1` as entrypoint;
+- generator of `web/data.js`, document tables and graph from the registry and
+  of handoffs;
+- checking graph coverage, legitimate cycles, references and drift.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- `validate_all.ps1` cobre todos os validadores e retorna erros acionáveis;
-- o grafo web é derivado de `handoffs.json`;
-- alterações no registry são detectadas nos artefatos gerados;
-- nenhum dado demonstrativo contém timestamp ou confiança que pareça execução
-  real sem o rótulo `DEMO`, `EXAMPLE` ou `SIMULATED`.
+- `validate_all.ps1` covers all validators and returns actionable errors;
+- the web graph is derived from `handoffs.json`;
+- changes to the registry are detected in the generated artifacts;
+- no demonstrative data contains timestamp or confidence that appears to be execution
+  real without the label `DEMO`, `EXAMPLE` or `SIMULATED`.
 
-**Prioridade:** P1. **Dependência:** Fases 1–3.
+**Priority:** P1. **Dependency:** Phases 1–3.
 
-### Fase 5 — Evidence engine e reprodutibilidade
+### Phase 5 — Evidence engine and reproducibility
 
-**Objetivo:** fazer a camada epistemológica ser imposta pela arquitetura.
+**Objective:** to make the epistemological layer imposed by architecture.
 
-**Entregas**
+**Deliveries**
 
-- evidence store com `claim`, `status`, `source`, `calculation`,
-  `assumptions`, `confidence`, `validation` e limitações;
-- vínculo entre claim, input hash, versão do world model, skill e execução;
-- registro de seed, parâmetros, amostra, timestamp e ambiente;
-- propagação de confiança e orçamento de incerteza;
-- distinção entre modelo, dado observado, resultado derivado e recomendação;
-- relatório de conflitos e dependência de hipóteses;
-- vetor de estado do sistema no lugar de `health score` não definido.
+- evidence store with `claim`, `status`, `source`, `calculation`,
+  `assumptions`, `confidence`, `validation` and limitations;
+- link between claim, input hash, world model version, skill and execution;
+- registration of seed, parameters, sample, timestamp and environment;
+- confidence propagation and uncertainty budget;
+- distinction between model, observed data, derived result and recommendation;
+- report of conflicts and dependence on hypotheses;
+- system state vector in place of undefined `health score`.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- toda recomendação aponta para pelo menos um claim;
-- todo claim derivado aponta para dados e cálculo reproduzíveis;
-- resultados sem evidência suficiente são marcados sem fallback silencioso;
-- uma execução PCG/simulação pode ser repetida com a mesma seed e parâmetros.
+- every recommendation points to at least one claim;
+- every derived claim points to reproducible data and calculation;
+- results without sufficient evidence are marked without silent fallback;
+- a PCG/simulation run can be repeated with the same seed and parameters.
 
-**Prioridade:** P0. **Dependência:** Fases 1–3.
+**Priority:** P0. **Dependency:** Phases 1–3.
 
-### 2026-09-14 — executors de progressão e macroeconomia
+### 2026-09-14 — progression executors and macroeconomics
 
-**Status:** cobertura formal ampliada; os dois modelos executáveis foram
-integrados ao `hidden_state` e ao pipeline de execução.
+**Status:** expanded formal coverage; the two executable models were
+integrated into `hidden_state` and the execution pipeline.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `progression-analysis.schema.json` com parâmetros versionados para
-  crescimento discreto, classificação de regime, prestígio e limites de
+- created `progression-analysis.schema.json` with versioned parameters for
+  discrete growth, regime classification, prestige and limits of
   overflow;
-- criado o executor `exponential-progression-and-prestige.ps1`, que valida
-  parâmetros, calcula crescimento finito e pontos/multiplicadores de prestígio
-  e bloqueia entradas ausentes ou blow-up não representável;
-- criado `macroeconomic-conversion.schema.json` para recursos, produtos,
-  conversões, eficiência e fluxo monetário;
-- criado o executor `macroeconomic-resource-conversion.ps1`, com matriz
-  input-output discreta, consumo ajustado por eficiência, balanço de fontes e
-  sinks monetários e projeção de preço explicitamente aproximada;
-- adicionadas fixtures reproduzíveis em `architecture/examples/`;
-- ambos os schemas foram registrados em `hidden-state.schema.json` e em
+- created the exponential-progression-and-prestige.ps1` executor, which validates
+  parameters, calculates finite growth and prestige points/multipliers
+  and blocks missing inputs or unrepresentable blow-up;
+- created `macroeconomic-conversion.schema.json` for resources, products,
+  conversions, efficiency and monetary flow;
+- created the executor `macroeconomic-resource-conversion.ps1`, with matrix
+  discrete input-output, consumption adjusted by efficiency, balance of sources and
+  monetary sinks and explicitly approximate price projection;
+- added reproducible fixtures in `architecture/examples/`;
+- both schemas were registered in `hidden-state.schema.json` and in
   `validate_schema_interfaces.ps1`.
 
 **Limites preservados**
 
-- crescimento calculado não é previsão de retenção ou de comportamento;
-- balanço monetário não prova inflação/deflação sem séries temporais, demanda,
-  velocidade e observação;
-- a projeção de preço é uma aproximação bounded, não uma previsão de mercado;
-- resultados continuam condicionais aos coeficientes, eficiência e hipóteses
-  declarados no world model.
+- calculated growth is not a prediction of retention or behavior;
+- monetary balance does not prove inflation/deflation without time series, demand,
+  speed and observation;
+- the price projection is a bounded approximation, not a market forecast;
+- results remain conditional on coefficients, efficiency and hypotheses
+  declared in the world model.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 progression-analysis.example.json: executor concluído
 macroeconomic-conversion.example.json: executor concluído
@@ -537,34 +535,33 @@ macro pelo execute_skills.ps1: primary roteada e executor despachado
 casos ausentes/blow-up de progressão: bloqueio/guard validados pelo executor
 ```
 
-### 2026-09-14 — executor seletivo de risco-recompensa
+### 2026-09-14 — selective risk-reward performer
 
-**Status:** uma lente de design com entradas observáveis foi integrada ao
-pipeline, sem promover heurísticas estruturais a evidência de playtest.
+**Status:** a design lens with observable inputs has been integrated into
+pipeline, without promoting structural heuristics to playtest evidence.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `risk-reward-action.schema.json` para contratos de ação, custo de
-  stamina, recuperação, dano, reação, áreas hitbox/hurtbox e custo de evasão;
-- criado `committed-risk-reward-actions.ps1`, com verificações de:
-  `RISKLESS_DOMINANCE`, `STAMINA_LOCK_TRAP` e
+- created `risk-reward-action.schema.json` for action contracts, cost of
+  stamina, recovery, damage, reaction, hitbox/hurtbox areas and evasion cost;
+- created `committed-risk-reward-actions.ps1`, with checks for:
+  `RISKLESS_DOMINANCE`, `STAMINA_LOCK_TRAP` and
   `REACH_EXPOSURE_INCOHERENCE`;
-- adicionada fixture reproduzível em
+- added playable fixture in
   `architecture/examples/risk-reward-actions.example.json`;
-- integrado `hidden_state.risk_reward_actions` ao schema compartilhado;
-- registrado o novo schema na validação de interfaces;
-- incluídos handoffs explícitos para timing e composição de ações.
+- integrated `hidden_state.risk_reward_actions` into the shared schema;
+- registered the new schema in interface validation;
+- included explicit handoffs for timing and composition of actions.
 
 **Limites preservados**
 
-- os alertas são derivados de parâmetros declarados, não observações de
-  jogadores;
-- áreas geométricas são proxies e não substituem hitboxes, espaçamento ou
-  simulação de escapes;
-- nenhum flag afirma sozinho dominância, injustiça ou frustração.
+- alerts are derived from declared parameters, not observations of
+  players;
+- geometric areas are proxies and do not replace hitboxes, spacing or
+  exhaust simulation;
+- no flag alone asserts dominance, injustice or frustration.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 risk-reward-actions.example.json: executor success, 2 flags estruturais
 execute_skills.ps1: roteamento para committed-risk-reward-actions e dispatch concluídos
@@ -572,35 +569,34 @@ validate_schema_interfaces.ps1: 31 schemas compatíveis
 validate_all.ps1: validação agregada concluída
 ```
 
-### 2026-09-14 — executor seletivo de progressão epistêmica
+### 2026-09-14 — selective epistemic progression executor
 
-**Status:** segunda lente de design com dados observáveis integrada ao
-pipeline, mantendo a distinção entre topologia de conhecimento e evidência
-empírica de compreensão.
+**Status:** second design lens with observable data integrated into the
+pipeline, maintaining the distinction between knowledge topology and evidence
+empirical understanding.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `epistemic-progression.schema.json` para holons, pistas, terminais,
-  acessibilidade física declarada e conjunto de conhecimento conhecido;
-- criado `epistemic-holarchic-progression.ps1`, com verificações de:
-  `INFORMATIONAL_ISLAND`, `PSEUDO_HOLON` e `FALSE_HOLARCHY`;
-- calculada a cobertura de predecessores obrigatórios de cada holon terminal;
-- adicionada fixture reproduzível em
+- created `epistemic-progression.schema.json` for holons, clues, terminals,
+  declared physical accessibility and known body of knowledge;
+- created `epistemic-holarchic-progression.ps1`, with checks for:
+  `INFORMATIONAL_ISLAND`, `PSEUDO_HOLON` and `FALSE_HOLARCHY`;
+- calculated the coverage of mandatory predecessors of each terminal holon;
+- added playable fixture in
   `architecture/examples/epistemic-progression.example.json`;
-- integrado `hidden_state.epistemic_progression` ao schema compartilhado e à
-  validação de interfaces;
-- incluídos handoffs explícitos para cognição e pacing espacial.
+- integrated `hidden_state.epistemic_progression` into the shared schema and
+  interface validation;
+- included explicit handoffs for cognition and spatial pacing.
 
 **Limites preservados**
 
-- cobertura do grafo não é probabilidade de inferência ou acessibilidade
-  cognitiva;
-- acessibilidade física declarada ainda exige validação de trajetória,
-  hazards e regras de interação;
-- o executor não infere diversão, clareza ou frustração.
+- graph coverage is not inference probability or reachability
+  cognitive;
+- declared physical accessibility still requires trajectory validation,
+  hazards and interaction rules;
+- the performer does not infer fun, clarity or frustration.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 epistemic-progression.example.json: executor success, capacidade terminal 0,5
 execute_skills.ps1: roteamento para epistemic-holarchic-progression e dispatch concluídos
@@ -608,32 +604,31 @@ validate_schema_interfaces.ps1: 32 schemas compatíveis
 validate_all.ps1: validação agregada concluída
 ```
 
-### 2026-09-14 — executor seletivo de disrupção de schema cognitivo
+### 2026-09-14 — selective cognitive schema disruption executor
 
-**Status:** terceira lente de design observável integrada, com hipóteses
-estruturais separadas de efeitos cognitivos que exigem playtest.
+**Status:** Integrated third observable design lens, with hypotheses
+structural effects separated from cognitive effects that require playtesting.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `cognitive-schema-disruption.schema.json` para convenções,
-  repetições, saliência, rupturas, limiares e coerência oculta;
-- criado `cognitive-schema-disruption.ps1`, com verificações de:
+- created `cognitive-schema-disruption.schema.json` for conventions,
+  repetitions, salience, ruptures, thresholds and hidden coherence;
+- created `cognitive-schema-disruption.ps1`, with checks for:
   `PREMATURE_DISRUPTION`, `ARBITRARY_DISSONANCE`,
-  `PUNITIVE_DISRUPTION` e `NON_STRATEGIC_BREAK`;
-- adicionada fixture reproduzível em
+  `PUNITIVE_DISRUPTION` and `NON_STRATEGIC_BREAK`;
+- added playable fixture in
   `architecture/examples/cognitive-schema-disruption.example.json`;
-- integrado `hidden_state.cognitive_schema_disruption` ao schema compartilhado
-  e à validação de interfaces;
-- incluídos handoffs explícitos para progressão epistêmica e análise de range.
+- integrated `hidden_state.cognitive_schema_disruption` into shared schema
+  and interface validation;
+- included explicit handoffs for epistemic progression and range analysis.
 
 **Limites preservados**
 
-- magnitude e limiar são proxies declarados em espaço de features;
-- coerência oculta não prova descoberta ou aceitação pelo jogador;
-- surpresa, confusão e acomodação exigem observação ou playtest.
+- magnitude and threshold are proxies declared in feature space;
+- hidden coherence does not prove discovery or acceptance by the player;
+- surprise, confusion and accommodation require observation or playtest.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 cognitive-schema-disruption.example.json: executor success, 0 flags
 execute_skills.ps1: roteamento e dispatch concluídos
@@ -641,32 +636,31 @@ validate_schema_interfaces.ps1: 33 schemas compatíveis
 validate_all.ps1: validação agregada concluída
 ```
 
-### 2026-09-14 — executor seletivo de feedback competitivo
+### 2026-09-14 — selective competitive feedback performer
 
-**Status:** quarta lente de design observável integrada, com separação entre
-propriedades matemáticas do feedback e hipóteses de justiça/comportamento.
+**Status:** integrated fourth observable design lens, with separation between
+mathematical properties of feedback and fairness/behavior hypotheses.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `competitive-feedback.schema.json` para posições, scores, arrasto do
-  líder, efeito de compensação, histórico e valor esperado por ranking;
-- criado `competitive-negative-feedback.ps1`, com verificações de:
-  `EXTREME_RUBBER_BANDING`, `DESTRUCTIVE_ELASTIC_OSCILLATION` e
+- created `competitive-feedback.schema.json` for positions, scores, drag
+  leader, compensation effect, history and expected value per ranking;
+- created `competitive-negative-feedback.ps1`, with checks for:
+  `EXTREME_RUBBER_BANDING`, `DESTRUCTIVE_ELASTIC_OSCILLATION` and
   `SANDBAGGING_INCENTIVE`;
-- adicionada fixture reproduzível em
+- added playable fixture in
   `architecture/examples/competitive-feedback.example.json`;
-- integrado `hidden_state.competitive_feedback` ao schema compartilhado e à
-  validação de interfaces;
-- incluídos handoffs explícitos para economia de recursos e progressão.
+- integrated `hidden_state.competitive_feedback` into shared schema and
+  interface validation;
+- included explicit handoffs to save resources and progression.
 
 **Limites preservados**
 
-- estabilidade matemática não prova justiça percebida ou diversão;
-- sandbagging requer agentes estratégicos, simulação ou telemetria;
-- uma amostra pontual de posições não demonstra dinâmica temporal.
+- mathematical stability does not prove perceived fairness or fun;
+- sandbagging requires strategic agents, simulation or telemetry;
+- a specific sample of positions does not demonstrate temporal dynamics.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 competitive-feedback.example.json: executor success, 2 hipóteses estruturais
 execute_skills.ps1: roteamento e dispatch concluídos
@@ -674,33 +668,32 @@ validate_schema_interfaces.ps1: 34 schemas compatíveis
 validate_all.ps1: validação agregada concluída
 ```
 
-### 2026-09-14 — executor seletivo de topologia espacial e pacing
+### 2026-09-14 — selective executor of spatial topology and pacing
 
-**Status:** quinta lente de design observável integrada ao pipeline.
+**Status:** Fifth observable design lens integrated into the pipeline.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `spatial-pacing.schema.json` para nós, arestas, mecânicas, fases,
-  tensão, risco de morte e salas de descompressão;
-- criado `spatial-topology-and-learning-pacing.ps1`, com verificações de:
+- created `spatial-pacing.schema.json` for nodes, edges, mechanics, phases,
+  tension, risk of death and decompression rooms;
+- created `spatial-topology-and-learning-pacing.ps1`, with checks for:
   `COGNITIVE_LOAD_SPIKE`, `TENSION_PLATEAU`,
-  `TOPOLOGICAL_PREREQUISITE_BREAK` e `UNREACHABLE_SPACE`;
-- adicionada fixture reproduzível em
+  `TOPOLOGICAL_PREREQUISITE_BREAK` and `UNREACHABLE_SPACE`;
+- added playable fixture in
   `architecture/examples/spatial-pacing.example.json`;
-- integrado `hidden_state.spatial_pacing` ao schema compartilhado e à
-  validação de interfaces;
-- incluídos handoffs explícitos para solvabilidade procedural e progressão
-  epistêmica.
+- integrated `hidden_state.spatial_pacing` into shared schema and
+  interface validation;
+- included explicit handoffs for procedural solvency and progression
+  epistemic.
 
 **Limites preservados**
 
-- alcançabilidade do grafo não prova solvabilidade física ou acessibilidade;
-- tensão e fases são proxies declarados;
-- qualidade pedagógica exige traces de rota, teste com novatos e revisão de
-  acessibilidade.
+- reachability of the graph does not prove physical solvability or accessibility;
+- voltage and phases are declared proxies;
+- pedagogical quality requires route tracing, testing with novices and review of
+  accessibility.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 spatial-pacing.example.json: executor success, reachable ratio 1
 execute_skills.ps1: roteamento e dispatch concluídos
@@ -708,45 +701,44 @@ validate_schema_interfaces.ps1: 35 schemas compatíveis
 validate_all.ps1: validação agregada concluída
 ```
 
-### 2026-09-14 — execução do bloco de pendências 1–7
+### 2026-09-14 — execution of to-do block 1–7
 
-**Status:** cobertura de executors e infraestrutura transversal ampliadas;
-contratos e resultados continuam distinguindo cálculo derivado de evidência
-empírica.
+**Status:** Expanded coverage of executors and transversal infrastructure;
+contracts and results continue to distinguish calculation derived from evidence
+empirical.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- implementados executors de `emergent-agency-composition` e
-  `nested-gameplay-loop-architecture`, com schemas, fixtures, métricas,
-  diagnósticos e handoffs;
-- criada `validate_handoff_compatibility.ps1`, verificando origem, destino,
-  campos declarados, versão e adapters necessários;
-- criado `regression_tests.ps1`, que executa as fixtures de todos os
-  executors e rejeita status inválidos;
-- criado `simulation_runner.ps1`, com repetição, seed, hash do world model,
-  status por execução e classificação `derived_from_simulation` ou
+- implemented `emergent-agency-composition` executors and
+  `nested-gameplay-loop-architecture`, with schemas, fixtures, metrics,
+  diagnostics and handoffs;
+- created `validate_handoff_compatibility.ps1`, checking origin, destination,
+  declared fields, version and adapters required;
+- created `regression_tests.ps1`, which runs the fixtures of all
+  executors and rejects invalid statuses;
+- created `simulation_runner.ps1`, with repetition, seed, world model hash,
+  status by run and classification `derived_from_simulation` or
   `INSUFFICIENT_EVIDENCE`;
-- criado `playtest-hypothesis.schema.json` e fixture para separar hipótese,
-  população, métrica, protocolo, amostra e critério de sucesso;
-- corrigido `execute_skills.ps1` para registrar claims derivados quando há
-  output real, manter confiança baixa/média e usar `partial` corretamente;
-- dashboard passou a aceitar relatório JSON local e exibir status, skills,
-  seed e hash, mantendo `not executed` por padrão;
-- `validate_all.ps1` passou a incluir compatibilidade de handoffs.
+- created `playtest-hypothesis.schema.json` and fixture to separate hypothesis,
+  population, metrics, protocol, sample and success criteria;
+- fixed `execute_skills.ps1` to register derived claims when there is
+  real output, maintain low/medium confidence and use `partial` correctly;
+- dashboard now accepts local JSON reports and displays status, skills,
+  seed and hash, keeping `not executed` by default;
+- `validate_all.ps1` now includes handoff compatibility.
 
-**Pendências ainda abertas**
+**Pending issues still open**
 
-- validação JSON Schema com engine completa;
-- propagação de confiança por dependências e conflitos em múltiplos claims;
-- adapters executáveis entre handoffs, além da detecção de necessidade;
-- simulation runner com agentes estratégicos e séries temporais específicas;
-- integração automática do evidence store e carregamento de execuções pelo
+- JSON Schema validation with complete engine;
+- propagation of trust through dependencies and conflicts in multiple claims;
+- executable adapters between handoffs, in addition to need detection;
+- simulation runner with strategic agents and specific time series;
+- automatic integration of the evidence store and loading of executions via
   dashboard;
-- separação definitiva entre `domain_role` e `routing_role`;
-- ontologia completa do world model e calibragem empírica.
+- definitive separation between `domain_role` and `routing_role`;
+- complete ontology of the world model and empirical calibration.
 
-**Validação executada**
-
+**Validation performed**
 ```text
 2 novos executors: fixtures e dispatch validados
 16 fixtures executadas sem status inválido
@@ -755,28 +747,27 @@ validate_all.ps1: validação agregada concluída
 node --check web/app.js: concluído
 ```
 
-### 2026-09-14 — fechamento explícito das pendências 1–7
+### 2026-09-14 — explicit closure of issues 1–7
 
-**Status:** os sete primeiros itens do backlog foram executados em sua forma
-de referência; adapters e calibração empírica continuam como limitações
-declaradas.
+**Status:** the first seven backlog items have been executed in their form
+reference; adapters and empirical calibration remain limitations
+declared.
 
-**Entregas adicionais**
+**Additional deliveries**
 
-- criada a migração persistente de `skill-registry.json` para
-  `domain_role`/`routing_role`, com roteador e validação atualizados;
-- criados `iterate_handoffs.ps1` e critérios de convergência/limite de ciclos;
-- criado `provenance.schema.json` com source kind, dependências, conflitos,
-  hashes e versões;
-- fortalecidos schemas de `knowledge`, `progression`, `economy` e `spatial`
-  com IDs, relações, unidades, estoque, gates e status epistemológico;
-- evidence store do dispatcher passou a registrar claims derivados quando há
-  output real, mantendo `INSUFFICIENT_EVIDENCE` apenas para bloqueios;
-- compatibilidade de handoffs agora diferencia contratos válidos de campos que
-  ainda exigem adapters explícitos.
+- created persistent migration from `skill-registry.json` to
+  `domain_role`/`routing_role`, with updated router and validation;
+- created `iterate_handoffs.ps1` and convergence/cycle limit criteria;
+- created `provenance.schema.json` with source type, dependencies, conflicts,
+  hashes and versions;
+- strengthened `knowledge`, `progression`, `economy` and `spatial` schemas
+  with IDs, relations, units, stock, gates and epistemological status;
+- dispatcher's evidence store started recording derived claims when there are
+  real output, keeping `INSUFFICIENT_EVIDENCE` for locks only;
+- handoff compatibility now differentiates valid contracts from fields that
+  still require explicit adapters.
 
-**Validação final do bloco**
-
+**Final block validation**
 ```text
 39 schemas composáveis/interfaces compatíveis
 7 handoffs verificados; 5 adapters explicitamente advertidos
@@ -786,49 +777,47 @@ registry: 15 skills com domain_role/routing_role
 validate_all.ps1: concluído
 ```
 
-### 2026-09-14 — adapters executáveis de handoff
+### 2026-09-14 — handoff executable adapters
 
-**Status:** os cinco avisos de compatibilidade de campos foram convertidos em
-contratos declarativos e um executor de adapter, preservando dados externos
-como requisito explícito.
+**Status:** the five field compatibility warnings have been converted to
+declarative contracts and an adapter executor, preserving external data
+as an explicit requirement.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- criado `handoff-adapters.json` com mapeamentos, campos derivados e
+- created `handoff-adapters.json` with mappings, derived fields and
   `external_required`;
-- criado `execute_handoff_adapter.ps1`, que materializa campos mapeados,
-  registra expressões derivadas pendentes e não fabrica dados ausentes;
-- `validate_handoff_compatibility.ps1` agora exige adapter para campos não
-  compatíveis e valida que cada campo possui mapeamento, derivação ou requisito
-  externo;
-- fixture Petri Net foi adaptada para fluxo de recursos e produziu campos
-  `places` e `transition_rates`, com warning explícito para `resource_list`
-  ausente na saída.
+- created `execute_handoff_adapter.ps1`, which materializes mapped fields,
+  records outstanding derived expressions and does not fabricate missing data;
+- `validate_handoff_compatibility.ps1` now requires adapter for fields not
+  compatible and validates that each field has mapping, derivation or requirement
+  external;
+- Petri Net fixture was adapted for resource flow and produced fields
+  `places` and `transition_rates`, with explicit warning for `resource_list`
+  missing in the output.
 
-**Validação**
-
+**Validation**
 ```text
 7 handoffs verificados com adapters declarados
 adapter concurrent-gameplay-processes -> resource-flow-economy executado
 Node disponível; a engine AJV foi instalada e integrada à validação agregada
 ```
 
-### 2026-09-14 — instalação e integração do AJV
+### 2026-09-14 — AJV installation and integration
 
-**Status:** validação JSON Schema completa integrada à validação agregada.
+**Status:** Full JSON Schema validation integrated with aggregate validation.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- instalado `ajv` 8.20.0 e `ajv-formats` 3.0.1 como dependências de
-  desenvolvimento;
-- criado `architecture/validate_json_schema.js`, com carregamento dos schemas
-  composáveis, resolução de `$ref`, suporte a formatos e tolerância a BOM;
-- `validate_all.ps1` passou a executar a validação AJV;
-- `package.json` recebeu `test` e `validate:schema`;
-- 15 world models e 16 fixtures foram validados pelo AJV.
+- installed `ajv` 8.20.0 and `ajv-formats` 3.0.1 as dependencies
+  development;
+- created `architecture/validate_json_schema.js`, with schema loading
+  composable, `$ref` resolution, format support and BOM tolerance;
+- `validate_all.ps1` started to perform AJV validation;
+- `package.json` received `test` and `validate:schema`;
+- 15 world models and 16 fixtures were validated by AJV.
 
-**Validação**
-
+**Validation**
 ```text
 npm run validate:schema: passou
 validate_all.ps1: passou
@@ -837,21 +826,20 @@ AJV: 15 world models válidos; 16 fixtures inspecionadas
 
 ### 2026-09-14 — adapters integrados ao dispatcher
 
-**Status:** o fluxo de execução agora materializa automaticamente adapters
-declarados entre skills consecutivas.
+**Status:** the execution flow now automatically materializes adapters
+declared between consecutive skills.
 
-**Entregas concluídas**
+**Deliveries completed**
 
-- `execute_skills.ps1` passou a identificar pares consecutivos com contrato em
+- `execute_skills.ps1` now identifies consecutive pairs with contracts in
   `handoff-adapters.json`;
-- cada adapter é executado via `execute_handoff_adapter.ps1` e seu resultado
-  é incluído no campo `handoff_adapters` do relatório;
-- campos derivados, warnings e requisitos externos permanecem rastreáveis;
-- falhas de adapter interrompem a execução explicitamente, sem fallback
-  silencioso.
+- each adapter is executed via `execute_handoff_adapter.ps1` and its result
+  is included in the `handoff_adapters` field of the report;
+- derived fields, warnings and external requirements remain traceable;
+- adapter failures stop execution explicitly, without fallback
+  silent.
 
-**Validação**
-
+**Validation**
 ```text
 request Petri Net + resource flow: 1 adapter automático executado
 execution_status: blocked por skill downstream sem executor, não por adapter
@@ -859,241 +847,240 @@ adapter warnings: 1 campo externo ausente, preservado explicitamente
 validate_all.ps1: passou
 ```
 
-### Fase 6 — Correção dos modelos e calibração
+### Phase 6 — Model correction and calibration
 
-**Objetivo:** corrigir formalizações que podem contaminar diagnósticos.
+**Objective:** correct formalizations that could contaminate diagnoses.
 
 **Ordem recomendada**
 
-1. sistema de transição discreto, distinguindo conjunto finito, sistema
-   discreto, não-determinismo e distribuição probabilística;
-2. invariantes como `Valid = {q | Phi(q)}` e alcançabilidade como subconjunto;
-3. timing com condições de contato, repetição, recursos, escape e geometria;
-4. ações risco-recompensa com estado, dano, posição e velocidade separados;
-5. feedback competitivo em diferença de performance, não apenas ranking;
-6. economia com equações discretas quando o sistema for event-driven,
-   preços bounded e hipóteses explícitas para fontes, sinks e demanda;
-7. progressão como positive-feedback growth, incluindo casos exponencial,
-   sublinear e blow-up;
-8. bandas temporais canônicas configuráveis para loops;
-9. progressão epistêmica com modos `pure_epistemic`, `hybrid` e `physical`;
-10. divergência cognitiva como `design-space divergence` até existir
-    observação empírica;
-11. ERA com tamanho de amostra adaptativo e métricas distintas de occupancy,
-    density e valid-space coverage;
-12. CSP com `Reachability(agent_model)` e separação entre generator,
-    verifier e quality evaluator.
+1. discrete transition system, distinguishing finite set, system
+   discrete, non-determinism and probabilistic distribution;
+2. invariants like `Valid = {q | Phi(q)}` and reachability as a subset;
+3. timing with contact conditions, repetition, resources, escape and geometry;
+4. risk-reward actions with separate state, damage, position and speed;
+5. competitive feedback on performance differences, not just ranking;
+6. savings with discrete equations when the system is event-driven,
+   bounded prices and explicit assumptions for sources, sinks and demand;
+7. progression as positive-feedback growth, including exponential cases,
+   sublinear and blow-up;
+8. Configurable canonical temporal bands for loops;
+9. epistemic progression with `pure_epistemic`, `hybrid` and `physical` modes;
+10. cognitive divergence as `design-space divergence` until it exists
+    empirical observation;
+11. ERA with adaptive sample size and distinct occupancy metrics,
+    density and valid-space coverage;
+12. CSP with `Reachability(agent_model)` and separation between generator,
+    verifier and quality evaluator.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- cada fórmula declara domínio, unidade, hipótese e status epistemológico;
-- exemplos não concluem mais do que os dados permitem;
-- defaults arbitrários são marcados como heurísticos calibráveis;
-- testes de regressão cobrem casos-limite: zero, negativo, infinito,
-  domínio vazio, ciclos e dados insuficientes.
+- each formula declares domain, unity, hypothesis and epistemological status;
+- examples do not conclude more than the data allow;
+- arbitrary defaults are marked as calibratable heuristics;
+- regression tests cover limit cases: zero, negative, infinity,
+  empty domain, insufficient cycles and data.
 
-**Prioridade:** P1. **Dependência:** Fases 1, 2 e 5.
+**Priority:** P1. **Dependency:** Phases 1, 2 and 5.
 
-### Fase 7 — Ponte de simulação, playtest e web
+### Phase 7 — Simulation, playtest and web bridge
 
-**Objetivo:** conectar análise executável, evidência e apresentação.
+**Objective:** connect executable analysis, evidence and presentation.
 
-**Entregas**
+**Deliveries**
 
-- interface de simulation runner;
-- interface de playtest hypothesis e coleta de observações;
-- armazenamento de execuções e séries temporais;
-- dashboard alimentado por resultados reais quando disponíveis;
-- estado “not executed” explícito;
-- representação textual acessível para o grafo;
-- visualização de claims, evidências, incertezas e conflitos;
-- fluxo futuro `request -> router -> execution -> result -> dashboard`.
+- simulation runner interface;
+- hypothesis playtest interface and observation collection;
+- storage of runs and time series;
+- dashboard powered by real results when available;
+- explicit “not executed” state;
+- accessible textual representation for the graph;
+- visualization of claims, evidence, uncertainties and conflicts;
+- future flow `request -> router -> execution -> result -> dashboard`.
 
-**Critérios de aceite**
+**Acceptance criteria**
 
-- a UI diferencia catálogo, análise executada e demonstração;
-- o grafo e os números exibidos derivam de artefatos versionados;
-- usuários de tecnologias assistivas conseguem consultar as relações sem
-  depender apenas do SVG;
-- uma execução pode ser aberta a partir do dashboard com sua proveniência.
+- the UI differentiates catalog, performed analysis and demonstration;
+- the graph and displayed numbers derive from versioned artifacts;
+- users of assistive technologies can consult relationships without
+  depend only on SVG;
+- an execution can be opened from the dashboard with its provenance.
 
-**Prioridade:** P2. **Dependência:** Fases 4 e 5.
+**Priority:** P2. **Dependency:** Phases 4 and 5.
 
-### 2026-09-14 — fechamento operacional do bloco 1–7
+### 2026-09-14 — operational closure of block 1–7
 
-**Status:** concluído e validado.
+**Status:** completed and validated.
 
-- a ontologia recebeu validação semântica cross-skill para IDs, referências,
-  unidades, dependências, ciclos e deadlocks;
-- `role` foi removido do registry; `domain_role` e `routing_role` são as
-  dimensões oficiais;
-- adapters passaram a declarar versão, schemas de origem/destino e unidades;
-- `iterate_handoffs.ps1` registra `return_to`, conflitos e convergência;
-- claims e evidence records agora carregam `skill_id`, confiança propagada,
-  proveniência, dependências e conflitos;
-- o evidence store JSONL gera um índice consultável `.index.json`;
-- o simulation runner registra snapshots, eventos, séries temporais e agentes
-  declarados, sem transformar repetição de executor em evidência empírica;
-- regressões cobrem ausência, IDs duplicados, referências inválidas, zero,
-  negativos, overflow, ciclos, deadlocks, partial e adapters incompletos;
-- o dashboard exibe claims, confiança, estatuto epistemológico e adapters ao
-  carregar um relatório.
+- the ontology received cross-skill semantic validation for IDs, references,
+  units, dependencies, cycles and deadlocks;
+- `role` was removed from the registry; `domain_role` and `routing_role` are the
+  official dimensions;
+- adapters now declare version, source/destination schemas and units;
+- `iterate_handoffs.ps1` records `return_to`, conflicts and convergence;
+- claims and evidence records now carry `skill_id`, propagated trust,
+  provenance, dependencies and conflicts;
+- the JSONL evidence store generates a queryable index `.index.json`;
+- simulation runner records snapshots, events, time series and agents
+  declared, without transforming the executor's repetition into empirical evidence;
+- regressions cover missing, duplicate IDs, invalid references, zero,
+  negatives, overflow, cycles, deadlocks, partial and incomplete adapters;
+- the dashboard displays claims, trust, epistemological status and adapters alongside
+  upload a report.
 
-**Validação executada:** `npm test`, `npm run validate:schema`,
-`architecture/regression_tests.ps1` e `architecture/validate_all.ps1`.
+**Validation run:** `npm test`, `npm run validate:schema`,
+`architecture/regression_tests.ps1` and `architecture/validate_all.ps1`.
 
-**Limitações preservadas:** séries temporais ainda são snapshots de executor,
-agentes usam apenas estratégias declaradas no world model e a confiança não é
-calibrada empiricamente. Nenhuma recomendação é liberada quando o claim está
-em `INSUFFICIENT_EVIDENCE`.
+**Limitations preserved:** time series are still executor snapshots,
+agents only use strategies declared in the world model and trust is not
+empirically calibrated. No recommendations are released when the claim is
+in `INSUFFICIENT_EVIDENCE`.
 
 ### 2026-09-14 — quatro tarefas operacionais selecionadas
 
-Foram executadas quatro tarefas do backlog:
+Four backlog tasks were performed:
 
-1. **Compatibilidade dimensional de adapters:** criado
-   `validate_adapter_dimensions.ps1`, com verificação de versão, schemas,
-   unidades e campos dimensionais.
-2. **Evidence store consultável:** criado `query_evidence_store.ps1`, com
-   filtros por `skill_id`, `status` e `confidence`.
-3. **Recomendações rastreáveis:** criado `generate_recommendations.ps1` e
-   integrado o campo `recommendations` ao relatório; claims insuficientes ou
-   de baixa confiança produzem recomendações `blocked`.
-4. **Simulação agregada:** `simulation_runner.ps1` passou a registrar contagem
-   de sucessos/parciais/falhas e nomes de métricas, mantendo snapshots,
-   eventos, seeds e a distinção entre derivação e evidência empírica.
+1. **Dimensional compatibility of adapters:** created
+   `validate_adapter_dimensions.ps1`, with version check, schemas,
+   dimensional units and fields.
+2. **Queryable evidence store:** created `query_evidence_store.ps1`, with
+   filters by `skill_id`, `status` and `confidence`.
+3. **Traceable Recommendations:** created `generate_recommendations.ps1` and
+   integrated the `recommendations` field into the report; insufficient claims or
+   Low-confidence results in `blocked` recommendations.
+4. **Aggregated simulation:** `simulation_runner.ps1` started recording count
+   of successes/partials/failures and metric names, maintaining snapshots,
+   events, seeds and the distinction between derivation and empirical evidence.
 
-Validação adicional: quatro adapters dimensionais válidos, evidence query
-retornando registros filtrados, recomendação bloqueada para claim insuficiente,
-AJV, regressões e `validate_all.ps1` aprovados.
+Additional validation: four valid dimensional adapters, evidence query
+returning filtered records, recommendation blocked for insufficient claim,
+AJV, regressions and `validate_all.ps1` approved.
 
-### 2026-09-14 — integração de evidência de simulação e dashboard
+### 2026-09-14 — integration of simulation evidence and dashboard
 
-- `simulation_runner.ps1` aceita `EvidenceStorePath` e persiste um claim de
-  simulação com seed, hash, status epistemológico, limitações e proveniência;
-- `validate_recommendations.ps1` verifica que cada recomendação aponta para um
-  claim existente, possui evidência e permanece bloqueada quando necessário;
-- o dashboard permite filtrar claims carregados por bloqueio, baixa confiança
-  ou estado condicional;
-- o fluxo continua distinguindo `derived_from_simulation` de evidência
-  observacional e não promove runs parciais a conclusões.
+- `simulation_runner.ps1` accepts `EvidenceStorePath` and persists a claim
+  simulation with seed, hash, epistemological status, limitations and provenance;
+- `validate_recommendations.ps1` checks that each recommendation points to a
+  existing claim, has evidence and remains blocked when necessary;
+- the dashboard allows you to filter claims loaded by blocking, low trust
+  or conditional state;
+- flow continues to distinguish `derived_from_simulation` from evidence
+  observational and does not promote partial conclusions.
 
-### 2026-09-14 — validação de relatório e índice incremental
+### 2026-09-14 — report validation and incremental index
 
-- criado `validate_report.ps1`, que verifica claims, hashes de proveniência e
-  recomendações rastreáveis em um relatório completo;
-- criado `refresh_evidence_index.ps1`; o índice agora é regenerado após cada
-  execução do dispatcher ou persistência de simulação;
-- a suíte de regressão ganhou casos de relatório válido e inválido, incluindo
-  recomendação órfã, recomendação não bloqueada e hash divergente;
-- validações finais: AJV, `validate_all.ps1`, `regression_tests.ps1` e fluxo
-  ponta a ponta com dois registros no evidence store.
+- created `validate_report.ps1`, which checks claims, provenance hashes and
+  recommendations trackable in a comprehensive report;
+- created `refresh_evidence_index.ps1`; the index is now regenerated after each
+  dispatcher execution or simulation persistence;
+- regression suite gained valid and invalid reporting cases including
+  orphan recommendation, unblocked recommendation and divergent hash;
+- final validations: AJV, `validate_all.ps1`, `regression_tests.ps1` and flow
+  end to end with two records in the evidence store.
 
-### 2026-09-14 — contrato de simulação e apresentação operacional
+### 2026-09-14 — simulation and operational presentation contract
 
-- criado `simulation-report.schema.json`, cobrindo runs, snapshots, eventos,
-  agentes, estado epistemológico e agregados;
-- criado `validate_simulation_report.js` e integrado o schema à inspeção AJV;
-- o dashboard agora identifica relatórios de simulação e exibe runs,
-  sucessos, parciais e falhas, mantendo explícito que simulação derivada não
-  equivale a telemetria ou playtest;
-- um relatório gerado com duas execuções foi validado pelo contrato dedicado,
-  além de `npm test`, `validate_all.ps1` e `regression_tests.ps1`.
+- created `simulation-report.schema.json`, covering runs, snapshots, events,
+  agents, epistemological state and aggregates;
+- created `validate_simulation_report.js` and integrated the schema with AJV inspection;
+- the dashboard now identifies simulation reports and displays runs,
+  successes, partials and failures, keeping explicit that derived simulation does not
+  equivalent to telemetry or playtest;
+- a report generated with two runs was validated by the dedicated contract,
+  in addition to `npm test`, `validate_all.ps1` and `regression_tests.ps1`.
 
-### 2026-09-14 — validação automática de simulação e playtest
+### 2026-09-14 — automatic validation of simulation and playtest
 
-- `validate_all.ps1` passou a gerar uma execução de referência e validar seu
-  relatório com `validate_simulation_report.js`;
-- criado `validate_playtest_hypothesis.js`/`.ps1`, que valida a fixture de
-  hipótese, exige amostra/protocolo/critério e rejeita observações declaradas
-  como se fossem hipótese;
-- `regression_tests.ps1` recebeu caso inválido de playtest;
-- validações executadas com sucesso: AJV, `validate_all.ps1`,
-  `regression_tests.ps1` e a fixture oficial de playtest.
+- `validate_all.ps1` now generates a reference run and validates its
+  report with `validate_simulation_report.js`;
+- created `validate_playtest_hypothesis.js`/`.ps1`, which validates the fixture
+  hypothesis, requires sample/protocol/criterion and rejects stated observations
+  as if they were hypotheses;
+- `regression_tests.ps1` received invalid playtest case;
+- validations executed successfully: AJV, `validate_all.ps1`,
+  `regression_tests.ps1` is the official playtest fixture.
 
-### 2026-09-14 — registro de observações de playtest
+### 2026-09-14 — record of playtest observations
 
-- criado `playtest-observation.schema.json` com contrato para métrica, amostra,
-  timestamp, status e limitações;
-- criado `validate_playtest_observation.js` e
-  `record_playtest_observation.ps1`, que vinculam a observação à hipótese,
-  conferem métrica/amostra e persistem um claim empírico no evidence store;
-- `validate_all.ps1` executa a fixture de observação e verifica a atualização
-  do índice; regressões cobrem observação estrutural inválida.
+- created `playtest-observation.schema.json` with contract for metric, sample,
+  timestamp, status and limitations;
+- created `validate_playtest_observation.js` and
+  `record_playtest_observation.ps1`, which link the observation to the hypothesis,
+  check metrics/sample and persist an empirical claim in the evidence store;
+- `validate_all.ps1` runs the observation fixture and checks for update
+  of the index; regressions cover invalid structural observation.
 
-### 2026-09-14 — validação AJV do evidence store
+### 2026-09-14 — evidence store AJV validation
 
-- criado `validate_evidence_store.js`, que valida cada registro JSONL contra
-  `evidence.schema.json` e identifica JSON inválido, status ou confiança fora
-  do contrato e proveniência incompleta;
-- `validate_all.ps1` valida stores gerados por playtest e simulação antes de
-  removê-los como artefatos temporários;
-- regressões cobrem um registro de evidência inválido.
+- created `validate_evidence_store.js`, which validates each JSONL record against
+  `evidence.schema.json` and identifies invalid JSON, status or trust out
+  of the contract and incomplete provenance;
+- `validate_all.ps1` validates stores generated by playtest and simulation before
+  remove them as temporary artifacts;
+- regressions cover an invalid evidence record.
 
-## Backlog rastreável
+## Trackable backlog
 
-| ID | Tema | Fase | Prioridade | Resultado esperado |
+| ID | Theme | Phase | Priority | Expected result |
 | --- | --- | --- | --- | --- |
-| B-01 | Ontologia e sub-schemas | 1 | P0 | World model semântico e validável |
-| B-02 | Unidades e domínios | 1 | P0 | Compatibilidade dimensional verificável |
-| B-03 | Versionamento e hashes | 1 | P0 | Análises antigas reproduzíveis |
-| B-04 | Contratos de input/output | 2 | P0 | Handoffs tipados por schema |
-| B-05 | Taxonomia de papéis | 2 | P0 | Natureza e papel de roteamento separados |
-| B-06 | Iteration contract | 2 | P0 | Retornos e convergência computáveis |
-| B-07 | Pipeline do orchestrator | 3 | P0 | Routing, execução e validação separados |
-| B-08 | Evidence sufficiency | 3/5 | P0 | Recomendações bloqueadas sem evidência |
-| B-09 | Validadores semânticos | 4 | P1 | Coerência entre interfaces e fontes |
-| B-10 | Fonte única e geração web | 4 | P1 | Eliminação de drift |
-| B-11 | Evidence store | 5 | P0 | Claims rastreáveis |
-| B-12 | Incerteza e confiança | 5 | P0 | Incerteza propagada e explícita |
-| B-13 | Reprodutibilidade | 5 | P0 | Seed, parâmetros e hashes registrados |
-| B-14 | Correção FSM/timing/economia | 6 | P1 | Formalizações dimensionalmente coerentes |
-| B-15 | Correção ERA/CSP/cognição | 6 | P1 | Métricas e alcance corretamente limitados |
-| B-16 | Simulation/playtest bridge | 7 | P2 | Evidência executável |
-| B-17 | Dashboard operacional | 7 | P2 | UI conectada a execuções |
+| B-01 | Ontology and sub-schemes | 1 | P0 | Semantic and validable world model |
+| B-02 | Units and domains | 1 | P0 | Verifiable dimensional compatibility |
+| B-03 | Versioning and hashes | 1 | P0 | Old analyzes reproducible |
+| B-04 | Input/output contracts | 2 | P0 | Schema-typed handoffs |
+| B-05 | Role taxonomy | 2 | P0 | Separate nature and role of routing |
+| B-06 | Iteration contract | 2 | P0 | Computable returns and convergence |
+| B-07 | Orchestrator pipeline | 3 | P0 | Separate routing, execution and validation |
+| B-08 | Evidence sufficiency | 3/5 | P0 | Recommendations blocked without evidence |
+| B-09 | Semantic validators | 4 | P1 | Coherence between interfaces and sources |
+| B-10 | Single source and web generation | 4 | P1 | Drift elimination |
+| B-11 | Evidence store | 5 | P0 | Traceable claims |
+| B-12 | Uncertainty and confidence | 5 | P0 | Propagated and explicit uncertainty |
+| B-13 | Reproducibility | 5 | P0 | Registered seed, parameters and hashes |
+| B-14 | FSM/timing/economy correction | 6 | P1 | Dimensionally coherent formalizations |
+| B-15 | ERA/CSP/cognition correction | 6 | P1 | Correctly limited metrics and reach |
+| B-16 | Simulation/playtest bridge | 7 | P2 | Executable evidence |
+| B-17 | Operational dashboard | 7 | P2 | Execution-connected UI |
 
-## Critérios de pronto do framework
+## Framework ready criteria
 
-O Codex só deve ser descrito como framework operacional quando todos os itens
-abaixo forem verdadeiros:
+The Codex should only be described as an operational framework when all items
+below are true:
 
-- [ ] schemas do world model e das interfaces possuem validação executável;
-- [ ] handoffs têm compatibilidade verificável de entrada, saída e unidade;
-- [ ] routing, execução, iteração e validação são componentes distintos;
-- [ ] existe um resultado válido para evidência insuficiente;
-- [ ] claims têm proveniência, assumptions e status epistemológico;
-- [ ] execuções são reproduzíveis por versão, hash, seed e parâmetros;
-- [ ] validação semântica e validação estrutural são separadas;
-- [ ] registry, handoffs, README e web são sincronizados por geração;
-- [ ] modelos matemáticos corrigidos têm casos-limite cobertos;
-- [ ] dashboard não apresenta dados simulados como fatos;
-- [ ] pelo menos uma skill formal, uma de design e uma validator percorrem
-  o pipeline completo;
-- [ ] existe uma simulação ou experimento de referência com resultado
-  rastreável até a recomendação.
+- [ ] world model and interface schemas have executable validation;
+- [ ] handoffs have verifiable input, output and unit compatibility;
+- [ ] routing, execution, iteration and validation are distinct components;
+- [ ] there is a valid result for insufficient evidence;
+- [ ] claims have provenance, assumptions and epistemological status;
+- [ ] executions are reproducible by version, hash, seed and parameters;
+- [ ] semantic validation and structural validation are separate;
+- [ ] registry, handoffs, README and web are synchronized by generation;
+- [ ] corrected mathematical models have limit cases covered;
+- [ ] dashboard does not present simulated data as facts;
+- [ ] at least one formal skill, one design skill and one validator skill go through
+  the complete pipeline;
+- [ ] there is a simulation or reference experiment with results
+  traceable to recommendation.
 
-## Fora de escopo imediato
+## Out of immediate scope
 
-- adicionar novas skills;
-- criar uma pontuação global de “qualidade” ou “saúde”;
-- substituir todos os modelos por simulações físicas completas;
-- tratar heurísticas de retenção como objetivo universal;
-- inferir impacto cognitivo, diversão ou justiça sem dados observacionais;
-- transformar o dashboard em produto de produção antes da camada de evidência.
+- add new skills;
+- create a global “quality” or “health” score;
+- replace all models with complete physical simulations;
+- treat retention heuristics as a universal objective;
+- infer cognitive impact, fun or fairness without observational data;
+- transform the dashboard into a production product before the evidence layer.
 
-## Sequência de execução recomendada
+## Recommended execution sequence
 
-1. Fase 0 e inventário de drift.
-2. Fase 1, começando por IDs, unidades e versões.
-3. Fase 2 e migração de um handoff-piloto.
-4. Fase 3 com uma execução ponta a ponta de referência.
-5. Fase 4 para impedir regressões e gerar artefatos.
-6. Fase 5 para tornar claims e evidências persistentes.
-7. Fase 6, priorizando modelos que já participam do handoff-piloto.
-8. Fase 7 somente após dados reais poderem alimentar a apresentação.
+1. Phase 0 and drift inventory.
+2. Phase 1, starting with IDs, units and versions.
+3. Phase 2 and migration of a pilot handoff.
+4. Phase 3 with a reference end-to-end execution.
+5. Phase 4 to prevent regressions and generate artifacts.
+6. Phase 5 to make claims and evidence persistent.
+7. Phase 6, prioritizing models that already participate in the pilot handoff.
+8. Phase 7 only after real data can feed the presentation.
 
-O primeiro vertical slice recomendado é:
-
+The first recommended vertical slice is:
 ```text
 world model versionado
   -> discrete state system
@@ -1103,5 +1090,5 @@ world model versionado
   -> relatório reproduzível
 ```
 
-Esse slice testa o fundamento do framework sem exigir a implementação
-simultânea das 15 skills.
+This slice tests the foundation of the framework without requiring implementation
+simultaneous use of the 15 skills.

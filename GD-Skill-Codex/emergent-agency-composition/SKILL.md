@@ -81,7 +81,7 @@ Given two atomic mechanics $f_1$ and $f_2$, the temporal or spatial composition 
 
 $$S_{\text{result}} = f_2(f_1(S_{\text{initial}}), P_2)$$
 
-The execution of composition $f_2(f_1(S))$ is logically valid if and only if the state vector alteration $\Delta S_1 = f_1(S_{\text{initial}}) - S_{\text{initial}}$ satisfies the invocation preconditions of method $f_2$.
+The execution of composition $f_2(f_1(S))$ is logically valid if and only if the **post-state** $S' = f_1(S_{\text{initial}})$ (together with the acting agent's state $A$) satisfies the invocation preconditions of method $f_2$. Preconditions are predicates over the resulting state of the target entity and the agent — not over the *alteration* $\Delta S_1 = S' - S_{\text{initial}}$: an alteration is a difference, not a state, and heterogeneous game states (categorical flags, continuous values, narrative facts) have no canonical subtraction. Check $\text{Pre}(f_2, S', A)$ directly; report the validity claim as conditional on the declared precondition predicates.
 
 The objective of the agent is to design orthogonal mechanics systems capable of interacting through a common set of world attributes, amplifying player resolution freedom without compromising rule stability.
 
@@ -111,17 +111,21 @@ $$f_i: (S, A, P_i) \longrightarrow S'$$
 ### Stage 3: Functional Composition Resolution $f_2(f_1(S))$
 
 1. Evaluate invocation sequence of two or more methods at time $t_1$ and $t_2$:
-   - If $f_1$ alters spatial position or state of an entity $E$ generating $S'$, and $S'$ activates $f_2$'s precondition, calculate the composed function $f_{1,2}(S) = (f_2 \circ f_1)(S)$.
+   - If $f_1$ alters spatial position or state of an entity $E$ generating $S'$, and $S'$ activates $f_2$'s precondition (checked per the composition rule above), calculate the composed function $f_{1,2}(S) = (f_2 \circ f_1)(S)$.
 
-2. Calculate synergy factor $K_{\text{synergy}}$ in output variable alteration:
+2. Estimate the synergy factor $K_{\text{synergy}}$ for the output variable alteration:
 
 $$\text{CombinedEffect} = (\text{Effect}(f_1) + \text{Effect}(f_2)) \cdot K_{\text{synergy}}$$
+
+This sum is only defined when $\text{Effect}(f_i)$ are expressed in the **same commensurable unit** (e.g., the same resource, or a declared utility scale); do not add heterogeneous effects. $K_{\text{synergy}}$ has no closed-form definition: estimate it as the ratio $\text{CombinedEffect}_{\text{measured}} / (\text{Effect}(f_1) + \text{Effect}(f_2))$ from simulation or playtest telemetry, and label the value `empirical` with its measurement context. Absent data, report $K_{\text{synergy}}$ as an unvalidated hypothesis, not a number.
 
 ### Stage 4: Spatial Propagation and Effect Radius ($\vec{r}_{\text{effect}}$)
 
 1. When a composition generates an alteration at a node in matrix $M_{\text{prop}}$, extend effect to bordering entities contained in the spatial region defined by the effect radius:
 
-$$\text{Distance}(E_{\text{source}}, E_{\text{target}}) \le \vec{r}_{\text{effect}} \implies M_{\text{prop}}(E_{\text{target}}) = \text{Updated}$$
+$$\lVert E_{\text{source}} - E_{\text{target}} \rVert \le \lVert \vec{r}_{\text{effect}} \rVert \implies M_{\text{prop}}(E_{\text{target}}) = \text{Updated}$$
+
+where the comparison is between the distance norm and the radius norm (declare the metric — Euclidean, Manhattan, or grid — before applying).
 
 ---
 
@@ -168,7 +172,7 @@ When responding to the user, the agent must structure the analysis in the follow
 
 ### 3. Emergent Agency Diagnosis and Recommendations
 
-* **Systemic Emergence Degree:** [LOW / MEDIUM / HIGH]
+* **Systemic Emergence Degree:** [LOW / MEDIUM / HIGH — justify with the declared operational criteria: count of distinct valid compositions found, share of compositions enabled by shared-property affordances (vs. scripted pairs), and reachable-verb growth per added verb. LOW: compositions rare and mostly scripted; MEDIUM: several emergent compositions through shared properties; HIGH: compositions compose further (chains of depth ≥ 3) without dominant trivializers]
 * **Detected Execution Anomalies:** [Identification of infinite loops or trivializing combos]
 * **Recommended Integrity Adjustments:** [Inclusion of propagation limits or energy drains]
 

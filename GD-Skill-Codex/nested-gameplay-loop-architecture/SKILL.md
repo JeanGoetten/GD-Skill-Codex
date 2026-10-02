@@ -84,33 +84,37 @@ When activating this skill, the agent must sequentially execute the following an
 1. Categorize game actions into three well-defined temporal scales:
    - **Micro-Loop (Short Term / Tactical):**
 
-$$\text{Duration: } T_{\text{micro}} \in [1\text{s}, 60\text{s}]$$
+$$\text{Duration: } T_{\text{micro}} \in [1\text{s}, 60\text{s}] \quad \text{(heuristic reference band)}$$
 
 Focus: Immediate mechanical resolution, unit allocation, instant tactile feedback.
    - **Meso-Loop (Medium Term / Strategic):**
 
-$$\text{Duration: } T_{\text{meso}} \in [2\text{min}, 15\text{min}]$$
+$$\text{Duration: } T_{\text{meso}} \in [2\text{min}, 15\text{min}] \quad \text{(heuristic reference band)}$$
 
 Focus: Building completion, mid-tier technology research, resource production cycles.
    - **Macro-Loop (Long Term / Systemic):**
 
-$$\text{Duration: } T_{\text{macro}} \in [1\text{h}, 20\text{h}+]$$
+$$\text{Duration: } T_{\text{macro}} \in [1\text{h}, 20\text{h}+] \quad \text{(heuristic reference band)}$$
 
 Focus: Global victory conditions, cultural/military hegemony, historical era evolution.
 
+These bands are heuristic anchors for session-scale strategy games, not definitions. A project may declare its own scale map (e.g., a roguelike run of 30–60 min acts as a meso-loop; a session-scale builder may run macro-loops inside 10 min) — the requirement is to *declare* the mapping and keep loop ordering strict ($T_{\text{micro}} < T_{\text{meso}} < T_{\text{macro}}$), not to force the default bands.
+
 ### Stage 2: Temporal Interleaving Matrix Mapping ($\Delta t_{\text{offset}}$)
 
-1. Ensure task completion times do not coincide on the same temporal frame $t$:
+1. Distinguish **intentional** from **unintentional** completion coincidence. For every completion boundary, declare whether simultaneous endings are designed (a session hook, a chapter finale) or accidental. Flag as a risk only *unintentional* coincidences — completions landing within an unplanned window:
 
-$$\forall (i, j), \quad \vert{} t_{\text{completion, meso, i}} - t_{\text{completion, micro, j}} \vert{} \ge \tau_{\text{minimum}}$$
+$$\forall (i, j) \text{ unplanned}, \quad \vert{} t_{\text{completion, meso, i}} - t_{\text{completion, micro, j}} \vert{} \ge \tau_{\text{minimum}}$$
+
+$\tau_{\text{minimum}}$ is a calibrated heuristic with no universal value: default to one micro-loop period and recalibrate per project from observed session traces.
 
 2. Structure progression so that reward received upon completing a Micro-Loop injects resources that directly accelerate progress of a pending Meso-Loop.
 
 ### Stage 3: Cognitive Retention Pressure Calculation ($\Pi_{\text{retention}}$)
 
-1. Define Cognitive Retention Pressure $\Pi(t)$ at instant $t$ over a declared measurement window as the sum of initiated but uncompleted tasks weighted by proximity to completion:
+1. Define Cognitive Retention Pressure $\Pi(t)$ at instant $t$ over a declared measurement window as the sum over **open** loops (initiated and not yet completed; completed loops contribute 0 and exit the sum) weighted by proximity to completion:
 
-$$\Pi(t) = \sum_{k \in \text{Loops}} w_k \cdot \left( 1 - \frac{t_{\text{remaining}, k}}{T_k} \right) \quad \text{with } \textstyle\sum_k w_k = 1$$
+$$\Pi(t) = \sum_{k \in \text{OpenLoops}(t)} w_k \cdot \left( 1 - \frac{t_{\text{remaining}, k}}{T_k} \right) \quad \text{with } \textstyle\sum_{k \in \text{OpenLoops}(t)} w_k = 1$$
 
 where $w_k$ is the strategic relevance of loop $k$; weights are normalized so that $\Pi \in [0, 1]$ and is comparable across projects.
 2. $\Pi(t)$ is a descriptive calibration heuristic, not a target: a floor such as $\Pi(t) > 0.40$ only makes sense per project, calibrated against observed session traces. The concept draws on the open-task/Zeigarnik literature (Zeigarnik, 1927), but the threshold itself has no validated empirical grounding and must never be used to manufacture engagement against voluntary stopping.
@@ -126,11 +130,11 @@ where $w_k$ is the strategic relevance of loop $k$; weights are normalized so th
 
 The agent must analyze the loop plan and flag the following structural failures:
 
-### A. Destructive Synchronization of Exit Points (*Aligned Exit Points*)
+### A. Unintentional Synchronization of Exit Points (*Aligned Exit Points*)
 
 $$\exists t_{\text{static}} \quad \text{such that} \quad t_{\text{end, micro}} = t_{\text{end, meso}} = t_{\text{end, macro}}$$
 
-Action: Flag when multiple goal cycles end simultaneously at the same instant. This creates a goal vacuum signaling the ideal moment for the player to end the session.
+Action: Flag when multiple goal cycles end simultaneously *without declared design intent* (per Stage 2). An accidental all-levels coincidence creates a goal vacuum that invites the player to end the session. Deliberate alignment — a chapter finale, a session-shaped cadence — is a legitimate design tool and must be reported as "intentional synchronization", not flagged as failure.
 
 ### B. Sterile Micro-Loop Without Systemic Impact
 
@@ -198,9 +202,8 @@ If the user requests: *"Design the loop nesting for a turn-based space managemen
 
 The agent applying this skill formalizes:
 
-- **Micro-Loop ($T_{\text{micro}} = 1\text{ turn / 10s}$):** Move fleet, order planet exploration, allocate worker.
-- **Meso-Loop ($T_{\text{meso}} = 5\text{ turns / 50s}$):** Completion of space module or planetary mine.
-- **Macro-Loop ($T_{\text{macro}} = 40\text{ turns / 6.6min}$):** Complete colonization of a star system.
+- **Declared scale map (project remapping of the heuristic bands):** this is a session-scale builder, so the project remaps the bands: **Micro-Loop ($T_{\text{micro}} = 1\text{ turn / 10s}$):** move fleet, order planet exploration, allocate worker. **Meso-Loop ($T_{\text{meso}} = 5\text{ turns / 50s}$):** completion of space module or planetary mine. **Macro-Loop ($T_{\text{macro}} = 40\text{ turns / 6.6min}$):** complete colonization of a star system. The strict ordering $T_{\text{micro}} < T_{\text{meso}} < T_{\text{macro}}$ holds; the absolute durations deviate from the default bands by declared design intent.
+- **Completion boundary intents:** the coincidence of the Meso-Loop $A$ completion with the micro completion cadence on Turn 5 is **intentional** (a declared hook), so the $\tau_{\text{minimum}}$ unplanned-coincidence check does not apply to it.
 - **Temporal Misalignment Calculation ($\Delta t_{\text{offset}}$):**
   - On Turn 5, player completes Meso-Loop $A$ (Planetary Mine).
   - Newly completed Mine grants +50 metal alloy immediately.

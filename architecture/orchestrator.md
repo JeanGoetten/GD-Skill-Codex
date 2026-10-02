@@ -1,7 +1,7 @@
 # Problem Orchestrator
 
-Camada de controle do GD Skill Codex. Ela compõe as skills existentes; não substitui
-nenhuma delas.
+GD Skill Codex control layer. It builds on existing skills; does not replace
+none of them.
 
 ## Pipeline obrigatório
 
@@ -24,116 +24,116 @@ user request
 
 ### 1. Decomposição
 
-Extrair entidades, atores, ações, recursos, objetivos, restrições, escalas
-temporais, relações espaciais e evidências disponíveis. Registrar premissas
-ausentes como perguntas ou hipóteses; não inventar valores.
+Extract entities, actors, actions, resources, objectives, constraints, scales
+temporal, spatial relationships and available evidence. Record assumptions
+absent as questions or hypotheses; do not invent values.
 
 ### 2. Classificação ontológica
 
-Escolher uma ou mais projeções sobre `architecture/world-model.schema.json`:
+Choose one or more projections on `architecture/world-model.schema.json`:
 
-| Sinal dominante | Modelo primário |
+| Dominant signal | Primary model |
 | --- | --- |
-| estados sequenciais, invariantes, alcançabilidade | `discrete-state-machine-verification` |
-| processos paralelos, sincronização, recurso compartilhado | `concurrent-gameplay-processes` |
-| domínios, restrições e geração | `procedural-level-constraint-solving` |
+| sequential states, invariants, reachability | `discrete-state-machine-verification` |
+| parallel processes, synchronization, shared resource | `concurrent-gameplay-processes` |
+| domains, restrictions and generation | `procedural-level-constraint-solving` |
 | timeline, startup/active/recovery, frames | `frame-based-combat-timing` |
-| estoques, fontes, sinks e taxas | `resource-flow-economy` |
-| conversão em múltiplos estágios | `macroeconomic-resource-conversion` |
+| stocks, sources, sinks and rates | `resource-flow-economy` |
+| multi-stage conversion | `macroeconomic-resource-conversion` |
 
-Regra: concorrência com controle sequencial usa um modelo híbrido FSM + Petri
-Net; não ampliar uma FSM para representar simultaneidade complexa.
+Rule: Concurrency with sequential control uses a hybrid FSM + Petri model
+Net; do not extend an FSM to represent complex concurrency.
 
-### 3. Seleção e composição
+### 3. Selection and composition
 
-O registry central em `architecture/skill-registry.json` está em migração para
-separar duas dimensões:
+The central registry at `architecture/skill-registry.json` is migrating to
+separate two dimensions:
 
-- **domain role**: natureza da skill (`formal`, `design`, `hybrid`);
-- **routing role**: função contextual (`primary_candidate`, `secondary`,
+- **domain role**: nature of the skill (`formal`, `design`, `hybrid`);
+- **routing role**: contextual role (`primary_candidate`, `secondary`,
   `validator`).
 
-A migração de `role` foi concluída. `domain_role` e `routing_role` são as únicas dimensões válidas para novos contratos; qualquer ocorrência de `role` no registry é erro de arquitetura.
-O roteador usa perfis de problema antes dos sinais genéricos. A pontuação combina
-perfis semânticos, sinais `explicit`, `semantic` e `structural`, com penalização
-por `anti_signals`. Candidatos próximos são preservados como secundários em vez
-de serem descartados por uma escolha arbitrária. O registry não possui mais
-`role` legado; somente `domain_role` e `routing_role` são válidos.
-Use `architecture/route_request.ps1` como implementação de referência.
+Role migration is complete. `domain_role` and `routing_role` are the only valid dimensions for new contracts; any occurrence of `role` in the registry is an architectural error.
+The router uses problem profiles before generic signals. The score matches
+semantic profiles, `explicit`, `semantic` and `structural` signals, with penalty
+by `anti_signals`. Nearby candidates are preserved as secondary instead
+of being discarded by an arbitrary choice. The registry no longer has
+`role` legacy; only `domain_role` and `routing_role` are valid.
+Use `architecture/route_request.ps1` as a reference implementation.
 
-Skills complementares trabalham em paralelo ou em ciclos; `downstream` indica
-dependência de dados, não apenas uma sugestão de leitura. O runner materializa
-contexto de entrada, adapters tipados e pacotes de retorno. Cada ciclo tem
-`return_to`, `max_cycles` e uma impressão digital de claims/adapters para
-detectar estabilidade; igualdade de status ou de rota isoladamente não é mais
-considerada convergência.
+Complementary skills work in parallel or in cycles; `downstream` indicates
+data dependency, not just a reading suggestion. The runner materializes
+input context, typed adapters and return packets. Each cycle has
+`return_to`, `max_cycles` and a claims/adapters fingerprint for
+detect stability; equality of status or route alone is no longer
+considered convergence.
 
 ### 4. Estatuto epistemológico
 
-Toda conclusão deve ser classificada:
+Every conclusion must be classified:
 
-- **formal**: garantia condicional ao modelo e às premissas;
-- **derived**: métrica calculada a partir dos dados;
-- **heuristic**: parâmetro ou julgamento de design calibrável;
-- **empirical**: afirmação que exige simulação, playtest ou observação.
+- **formal**: guarantee conditional on the model and assumptions;
+- **derived**: metric calculated from the data;
+- **heuristic**: calibrable design parameter or judgment;
+- **empirical**: statement that requires simulation, playtest or observation.
 
-Constantes do sistema, parâmetros de design, métricas derivadas e hipóteses
-empíricas não podem ser apresentados como a mesma coisa. Referências de obras
-são apenas âncoras semânticas: não autorizam imitação de estilo nem inferência
-de cânone.
+System constants, design parameters, derived metrics, and hypotheses
+empirical data cannot be presented as the same thing. Work references
+they are just semantic anchors: they do not authorize imitation of style or inference
+of canon.
 
-### 5. Validação cruzada
+### 5. Cross validation
 
-Antes da recomendação final, verificar:
+Before making the final recommendation, check:
 
-1. **ontologia**: entidades, recursos e estados significam a mesma coisa;
-2. **tempo**: segundos, frames e ciclos têm conversão explícita;
-3. **causalidade**: dependências não formam contradições;
-4. **economia**: fontes, sinks e conversões preservam unidades;
-5. **agência**: uma projeção não remove uma escolha criada por outra;
-6. **solvabilidade**: cobertura, estabilidade ou entropia não são confundidas
-   com qualidade ou diversão.
-7. **evidência**: toda recomendação aponta para claims, assumptions e
-   limitações; sem dados suficientes, retornar `INSUFFICIENT_EVIDENCE`.
+1. **ontology**: entities, resources and states mean the same thing;
+2. **time**: seconds, frames and cycles have explicit conversion;
+3. **causality**: dependencies do not form contradictions;
+4. **economy**: sources, sinks and conversions preserve units;
+5. **agency**: a projection does not remove a choice created by another;
+6. **solvency**: coverage, stability or entropy are not to be confused
+   with quality or fun.
+7. **evidence**: every recommendation points to claims, assumptions and
+   limitations; without sufficient data, return `INSUFFICIENT_EVIDENCE`.
 
-Conflitos devem ser reportados como bloqueios ou hipóteses pendentes, nunca
-silenciosamente resolvidos.
+Conflicts must be reported as blocks or pending hypotheses, never
+silently resolved.
 
 ## Calibração empírica
 
-`architecture/calibration.schema.json` registra a diferença entre constante do
-sistema, parâmetro de design, métrica derivada, heurística, observação e valor
-validado. Defaults como `N_repetitions = 3` devem ser registrados como
-`heuristic`, com confiança e necessidade de validação, nunca como garantia
+`architecture/calibration.schema.json` records the difference between the
+system, design parameter, derived metric, heuristic, observation and value
+validated. Defaults like `N_repetitions = 3` must be registered as
+`heuristic`, with confidence and need for validation, never as a guarantee
 universal.
 
-## Validação e proveniência
+## Validation and provenance
 
-`architecture/validate_all.ps1` executa as validações estruturais,
-cross-skill e de sincronização da camada web. O schema
-`architecture/evidence.schema.json` define a unidade mínima de proveniência
-para claims, incluindo status epistemológico, evidências, assumptions,
-limitações, versões, hash de entrada e seed quando aplicável.
+`architecture/validate_all.ps1` runs the structural validations,
+cross-skill and web layer synchronization. The schema
+`architecture/evidence.schema.json` sets the minimum provenance unit
+for claims, including epistemological status, evidence, assumptions,
+limitations, versions, input hash and seed when applicable.
 
-`architecture/run_analysis.ps1` é o reference runner atual: ele executa o
-roteamento e produz um plano versionado com proveniência, mas declara
-`INSUFFICIENT_EVIDENCE` até existir executor de skills ou simulação. Isso evita
-apresentar um plano de execução como se fosse um diagnóstico concluído.
-Quando recebe `-EvidenceStorePath`, também persiste os claims como JSONL
-append-only, preservando hash de entrada, versões, seed e timestamp.
+`architecture/run_analysis.ps1` is the current reference runner: it runs the
+routing and produces a versioned plan with provenance, but declares
+`INSUFFICIENT_EVIDENCE` until there is a skill executor or simulation. This avoids
+present an execution plan as if it were a completed diagnosis.
+When it receives `-EvidenceStorePath`, it also persists the claims as JSONL
+append-only, preserving input hash, versions, seed and timestamp.
 
-`architecture/execute_skills.ps1` implementa a ponte inicial de execução:
-valida o world model, materializa um `SkillInput` por skill roteada e gera um
-`SkillOutput` `blocked` quando não existe executor operacional. Bloquear é
-intencional; o script não interpreta Markdown como código nem fabrica
-resultados.
+`architecture/execute_skills.ps1` implements the initial execution bridge:
+validates the world model, materializes a `SkillInput` per routed skill and generates a
+`SkillOutput` `blocked` when there is no operational executor. Blocking is
+intentional; the script does not interpret Markdown as code nor does it manufacture
+results.
 
-O primeiro executor concreto é
-`architecture/executors/discrete-state-machine-verification.ps1`. Ele aplica
-BFS ao `hidden_state.state_system` e reporta estados alcançáveis, órfãos,
-deadlocks e não-determinismo. A simulação limitada correspondente está em
-`architecture/simulate_state_system.ps1`; ela exige seed e limite de passos.
+The first concrete executor is
+`architecture/executors/discrete-state-machine-verification.ps1`. He applies
+BFS to `hidden_state.state_system` and reports reachable, orphaned,
+deadlocks and non-determinism. The corresponding limited simulation is in
+`architecture/simulate_state_system.ps1`; it requires seed and step limit.
 
-`architecture/generate_web_data.ps1` gera o artefato da visualização a partir
-do registry, dos handoffs e do front matter/conteúdo das skills. A camada web
-é uma projeção do sistema, não uma fonte independente de relações.
+`architecture/generate_web_data.ps1` generates the visualization artifact from
+registry, handoffs and front matter/skills content. The web layer
+it is a projection of the system, not an independent source of relations.

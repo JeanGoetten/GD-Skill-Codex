@@ -93,9 +93,9 @@ $$D(V_{x,y}) = \{d_1, d_2, \dots, d_k\} \quad (\text{e.g., Open Room, Platform, 
 
 $$\exists \text{Path } P = (V_{\text{entry}}, \dots, V_{\text{exit}}) \quad \text{such that } \forall (V_a, V_b) \in P, \text{Transition}(V_a, V_b) = \text{Valid}$$
 
-   - **Boundary Guarantee:** Boundary variables of the grid $V_{1,y}, V_{X,y}, V_{x,1}, V_{x,Y}$ must have forced assignments of indestructible boundaries.
+   - **Boundary Guarantee:** Boundary variables of the grid — $\forall y:\ V_{1,y}, V_{X,y}$ and $\forall x:\ V_{x,1}, V_{x,Y}$ — must have forced assignments of indestructible boundaries.
 
-2. **Soft Constraints ($C_{\text{soft}}$):** Cost or preference functions used to rank valid solutions without discarding the instance:
+2. **Soft Constraints ($C_{\text{soft}}$):** Cost or preference functions used to rank valid solutions without discarding the instance. Declare the value range of every $C_{\text{soft}, i}$ (e.g., normalized to $[0,1]$) and the scale of the weights $w_i$; summing terms with heterogeneous scales makes the weights incomparable:
 
 $$\text{Attractiveness}(N) = \sum_{i} w_i \cdot C_{\text{soft}, i}(N)$$
 
@@ -110,10 +110,12 @@ $$\text{Attractiveness}(N) = \sum_{i} w_i \cdot C_{\text{soft}, i}(N)$$
 
 $$\vec{K}_{\text{agent}} = (\Delta x_{\text{jump, max}}, \Delta y_{\text{jump, max}}, \text{MaxSafeFall})$$
 
+where $\Delta y_{\text{jump, max}}$ is the maximum *ascent* the agent can reach (positive upward offset) and MaxSafeFall is the maximum descent that does not damage or kill the agent. Descents are gated by MaxSafeFall, not by the jump reach: a surface below the agent within falling distance needs no jump, so an absolute-value check on DistanceY would wrongly reject reachable drops.
+
 2. As a coarse pre-filter, validate whether distance between two traversable
 surfaces $V_a$ and $V_b$ satisfies:
 
-$$\text{DistanceX}(V_a, V_b) \le \Delta x_{\text{jump, max}} \quad \land \quad \text{DistanceY}(V_a, V_b) \le \Delta y_{\text{jump, max}}$$
+$$\text{DistanceX}(V_a, V_b) \le \Delta x_{\text{jump, max}} \quad \land \quad \left( 0 \le \text{Rise}(V_a, V_b) \le \Delta y_{\text{jump, max}} \;\lor\; \text{Drop}(V_a, V_b) \le \text{MaxSafeFall} \right)$$
 
 This is not a proof of physical reachability. The final check must use
 `Reachability(V_a, V_b, agent_model)` and account for trajectory, gravity,
@@ -133,9 +135,11 @@ Action: Identify when the set of hard constraints is so rigid that no combinatio
 
 ### B. Combinatorial Explosion from Open Domain (*Under-constrained System*)
 
-$$\vert{}D(V_{x,y})\vert{} \approx k \quad \forall V_{x,y} \implies \text{Search Time} \to \infty$$
+Signal under-constraint by the *effective branching factor after propagation*: if the ratio of the mean post-AC-3 domain size $\bar{d}$ to the initial domain size $k$ stays close to 1 (propagation prunes almost nothing), backtracking search explores $\mathcal{O}(k^{|V|})$ assignments in the worst case — for enumeration or ranking tasks this is combinatorial in the number of variables $|V|$:
 
-Action: Flag lack of local adjacency constraints, causing backtracking search to exceed acceptable load time.
+$$\frac{\bar{d}}{k} \approx 1 \quad \implies \quad \text{worst-case search cost} = \mathcal{O}(k^{|V|})$$
+
+Action: Flag lack of local adjacency constraints when propagation barely reduces domains *and* the generator enumerates or ranks solutions (rejection sampling and "find one solution" tasks often get *easier* with many solutions — do not flag those). State whether the cost driver is search, enumeration, or filtering.
 
 ### C. Implicit Path Break by Unidirectional Opening
 

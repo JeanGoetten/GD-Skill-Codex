@@ -102,6 +102,8 @@ $$\forall p \in \bullet t_j, \quad M_k(p) \ge W(p, t_j)$$
 
 $$M_{k+1}(p) = M_k(p) - W(p, t_j) + W(t_j, p) \quad \forall p \in P$$
 
+with the convention $W \equiv 0$ for non-adjacent (place, transition) pairs — $W$ is only defined on arcs $F$ and the sum runs over all places using that extension.
+
 ### Stage 4: Incidence Matrix ($C$) and State Equation
 
 1. Build the Incidence Matrix $C$ of dimension $\vert{}P\vert{} \times \vert{}T\vert{}$, where:
@@ -112,7 +114,7 @@ $$C(p, t) = W(t, p) - W(p, t)$$
 
 $$M_k = M_0 + C \cdot S_k$$
 
-where $S_k$ is the accumulated firing vector indicating how many times each transition has fired up to step $k$.
+where $S_k$ is the accumulated firing vector indicating how many times each transition has fired up to step $k$. **This equation is a necessary, not sufficient, condition of reachability:** there exist vectors $S$ satisfying it that correspond to no legal firing sequence (spurious markings). Use it to rule reachability *out* and to derive invariants; to rule it *in*, exhibit a firing sequence or run a reachability analysis.
 
 ---
 
@@ -171,7 +173,7 @@ When responding to the user, the agent must structure results as follows:
 ## Mathematical Status
 
 ### Formal Guarantees
-A marked Petri net can guarantee conservation invariants and identify enabled transitions, but not comprehension or liveness under every policy.
+A marked Petri net supports verification of decidable properties of the modeled system — conservation invariants, boundedness, enabledness, and liveness of the *formalized* net — but it guarantees nothing about what the net does not model: player comprehension, policy effects outside the net, and gameplay quality.
 
 ### Derived Metrics
 Derived metrics include utilization, wait time, contention and deadlock incidence.
@@ -200,4 +202,4 @@ The agent applying this skill formalizes:
 - $W(t_{\text{start}}, p_{\text{in\_production}}) = 1$
 - $W(p_{\text{in\_production}}, t_{\text{finish}}) = 1$
 - $W(t_{\text{finish}}, p_{\text{free\_slot}}) = 1$, $W(t_{\text{finish}}, p_{\text{unit\_ready}}) = 1$
-- Incidence matrix $C$ and verification of liveness $L4$ for $t_{\text{start\_production}}$ if mineral replenishment exists.
+- Incidence matrix $C$. Liveness classification *within the formalized net*: with $M_0(p_{\text{mineral}}) = 100$ and no replenishment transition, $t_{\text{start\_production}}$ can fire at most twice and the net dies afterwards — the honest in-model classification is $L1$, not $L4$. $L4$ (live) holds only for an extended model variant that adds a mineral replenishment transition; if that variant is analyzed, add the transition to $T$ and redo the classification.
