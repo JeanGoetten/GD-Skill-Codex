@@ -5,6 +5,7 @@
     [string]$WorldModelPath,
     [string]$OutputPath,
     [string]$EvidenceStorePath,
+    [string]$HandoffInputPath,
     [int]$Seed = 0
 )
 $ErrorActionPreference = 'Stop'
@@ -23,6 +24,13 @@ $timestamp = (Get-Date).ToUniversalTime().ToString('o')
 $worldJson = Get-Content -Encoding UTF8 -LiteralPath $WorldModelPath -Raw
 $hashBytes = [Text.Encoding]::UTF8.GetBytes($Request + '|' + $worldJson)
 $inputHash = ([Security.Cryptography.SHA256]::Create().ComputeHash($hashBytes) | ForEach-Object { $_.ToString('x2') }) -join ''
+$skillAssumptions = @('O world model fornecido representa o estado relevante do sistema.')
+$skillUnknowns = @('Valores não presentes no world model permanecem desconhecidos; não são inferidos.')
+$handoffInput = $null
+if ($HandoffInputPath) {
+    if (-not (Test-Path -LiteralPath $HandoffInputPath)) { throw "Handoff input não encontrado: $HandoffInputPath" }
+    $handoffInput = Get-Content -Encoding UTF8 -LiteralPath $HandoffInputPath -Raw | ConvertFrom-Json
+}
 
 $outputs = foreach ($skillId in @($routing.execution_order)) {
     if ($registryIds -notcontains $skillId) { throw "Skill roteada não está no registry: $skillId" }
@@ -30,7 +38,16 @@ $outputs = foreach ($skillId in @($routing.execution_order)) {
     if (Test-Path -LiteralPath $executorPath) {
         $executorJson = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $executorPath -WorldModelPath $WorldModelPath
         if ($LASTEXITCODE -ne 0) { throw "Executor falhou: $skillId" }
-        $executorJson | ConvertFrom-Json
+        $normalizedOutput = $executorJson | ConvertFrom-Json
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'claims')) { $normalizedOutput | Add-Member -NotePropertyName claims -NotePropertyValue @() }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'anomalies')) { $normalizedOutput | Add-Member -NotePropertyName anomalies -NotePropertyValue @() }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'assumptions')) { $normalizedOutput | Add-Member -NotePropertyName assumptions -NotePropertyValue $skillAssumptions }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'limitations')) { $normalizedOutput | Add-Member -NotePropertyName limitations -NotePropertyValue @('Resultado formal/derivado não substitui validação empírica.') }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'handoffs')) { $normalizedOutput | Add-Member -NotePropertyName handoffs -NotePropertyValue @() }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'metrics')) { $normalizedOutput | Add-Member -NotePropertyName metrics -NotePropertyValue @() }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'evidence')) { $normalizedOutput | Add-Member -NotePropertyName evidence -NotePropertyValue @() }
+        if (-not ($normalizedOutput.PSObject.Properties.Name -contains 'input_context')) { $normalizedOutput | Add-Member -NotePropertyName input_context -NotePropertyValue $handoffInput }
+        $normalizedOutput
     } else {
         [ordered]@{
         schema_version = '1.0.0'
@@ -50,6 +67,11 @@ $outputs = foreach ($skillId in @($routing.execution_order)) {
             }
         )
         handoffs = @()
+        claims = @()
+        anomalies = @()
+        assumptions = $skillAssumptions
+        limitations = @('Skill declarativa sem executor operacional; nenhum resultado analítico foi produzido.')
+        input_context = $handoffInput
         errors = @('INSUFFICIENT_EVIDENCE: execução sem implementação da skill ou simulação.')
         }
     }

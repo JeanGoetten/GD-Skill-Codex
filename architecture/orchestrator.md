@@ -53,16 +53,20 @@ separar duas dimensões:
 - **routing role**: função contextual (`primary_candidate`, `secondary`,
   `validator`).
 
-Enquanto a migração não for concluída, `role` legado permanece compatível.
-Ativação usa pesos distintos para sinais `explicit`, `semantic` e `structural`;
-`anti_signals` podem bloquear uma ativação sem evidência positiva suficiente.
-Use
-`architecture/route_request.ps1` como implementação de referência.
+A migração de `role` foi concluída. `domain_role` e `routing_role` são as únicas dimensões válidas para novos contratos; qualquer ocorrência de `role` no registry é erro de arquitetura.
+O roteador usa perfis de problema antes dos sinais genéricos. A pontuação combina
+perfis semânticos, sinais `explicit`, `semantic` e `structural`, com penalização
+por `anti_signals`. Candidatos próximos são preservados como secundários em vez
+de serem descartados por uma escolha arbitrária. O registry não possui mais
+`role` legado; somente `domain_role` e `routing_role` são válidos.
+Use `architecture/route_request.ps1` como implementação de referência.
 
 Skills complementares trabalham em paralelo ou em ciclos; `downstream` indica
-dependência de dados, não apenas uma sugestão de leitura. Cada ciclo tem
-`return_to`, `max_cycles` e `convergence_metric` em
-`architecture/handoffs.json`, evitando iteração infinita.
+dependência de dados, não apenas uma sugestão de leitura. O runner materializa
+contexto de entrada, adapters tipados e pacotes de retorno. Cada ciclo tem
+`return_to`, `max_cycles` e uma impressão digital de claims/adapters para
+detectar estabilidade; igualdade de status ou de rota isoladamente não é mais
+considerada convergência.
 
 ### 4. Estatuto epistemológico
 

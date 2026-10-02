@@ -36,7 +36,23 @@
     "actors": { "$ref": "https://gd-skill-codex.local/schemas/actors.schema.json" },
     "actions": { "$ref": "https://gd-skill-codex.local/schemas/actions.schema.json" },
     "goals": { "$ref": "https://gd-skill-codex.local/schemas/goals.schema.json" },
-    "hidden_state": { "$ref": "https://gd-skill-codex.local/schemas/hidden-state.schema.json" }
+    "hidden_state": { "$ref": "https://gd-skill-codex.local/schemas/hidden-state.schema.json" },
+    "ontology": {
+      "type": "object",
+      "description": "Núcleo ontológico comum; projections especializadas podem reutilizar os mesmos identificadores.",
+      "properties": {
+        "entities": { "type": "array" },
+        "properties": { "type": "array" },
+        "relations": { "type": "array" },
+        "actions": { "type": "array" },
+        "events": { "type": "array" },
+        "states": { "type": "array" },
+        "rules": { "type": "array" },
+        "goals": { "type": "array" },
+        "observations": { "type": "array" }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": false
 }

@@ -8,8 +8,8 @@
       "input_schema": "https://gd-skill-codex.local/schemas/petri-net.schema.json",
       "output_schema": "https://gd-skill-codex.local/schemas/resource-flow-economy.schema.json",
       "units": { "transition_rates": "resource/second", "resource_list": "resource" },
-      "maps": { "places": "places", "resource_list": "resource_list" },
-      "derived": { "transition_rates": "transitions[].rate" },
+      "maps": { "places": "results.places[]", "resource_list": "results.resource_list[]" },
+      "derived": { "transition_rates": "results.transitions[].rate" },
       "external_required": []
     },
     {
@@ -19,7 +19,7 @@
       "input_schema": "https://gd-skill-codex.local/schemas/csp-system.schema.json",
       "output_schema": "https://gd-skill-codex.local/schemas/procedural-expressive-range-analysis.schema.json",
       "units": {},
-      "maps": { "domains": "domains", "constraints": "constraints" },
+      "maps": { "domains": "results.domains", "constraints": "results.constraints" },
       "derived": {},
       "external_required": ["generated_samples"]
     },
@@ -30,7 +30,7 @@
       "input_schema": "https://gd-skill-codex.local/schemas/resource-flow-economy.schema.json",
       "output_schema": "https://gd-skill-codex.local/schemas/macroeconomic-conversion.schema.json",
       "units": { "stocks": "resource", "source_rates": "resource/second", "sink_rates": "resource/second" },
-      "maps": { "stocks": "resources", "source_rates": "sources", "sink_rates": "sinks", "conversion_rates": "conversions" },
+      "maps": { "stocks": "results.resources", "source_rates": "results.sources", "sink_rates": "results.sinks", "conversion_rates": "results.conversions" },
       "derived": {},
       "external_required": []
     },
@@ -41,7 +41,7 @@
       "input_schema": "https://gd-skill-codex.local/schemas/epistemic-progression.schema.json",
       "output_schema": "https://gd-skill-codex.local/schemas/cognitive-schema-disruption.schema.json",
       "units": {},
-      "maps": { "expected_schema": "knowledge_graph" },
+      "maps": { "expected_schema": "results.knowledge_graph" },
       "derived": {},
       "external_required": ["hidden_coherence"]
     },
@@ -52,8 +52,11 @@
       "input_schema": "https://gd-skill-codex.local/schemas/spatial-pacing.schema.json",
       "output_schema": "https://gd-skill-codex.local/schemas/epistemic-progression.schema.json",
       "units": {},
-      "maps": { "spatial_graph": "knowledge_graph", "nodes": "holons", "edges": "clues" },
-      "derived": {},
+      "maps": { "spatial_graph": "results.spatial_graph[]", "gates": "results.gates[]", "learning_beats": "results.learning_beats[]" },
+      "derived": {
+        "candidate_epistemic_gates": "results.gates",
+        "candidate_clue_locations": "results.spatial_graph"
+      },
       "external_required": ["clue_dependencies"]
     },
     {
@@ -63,7 +66,7 @@
       "input_schema": "https://gd-skill-codex.local/schemas/frame-timing.schema.json",
       "output_schema": "https://gd-skill-codex.local/schemas/risk-reward-action.schema.json",
       "units": { "frame_timeline": "frames", "input_windows": "frames" },
-      "maps": { "frame_timeline": "frame_timeline", "input_windows": "input_windows", "execution_contracts": "action_contracts" },
+      "maps": { "frame_timeline": "results.frame_timeline", "input_windows": "results.input_windows", "execution_contracts": "results.action_contracts" },
       "derived": {},
       "external_required": ["preconditions"]
     }

@@ -4,8 +4,12 @@
     "title":  "GD Skill Codex SkillInput",
     "type":  "object",
     "required":  [
+                     "schema_version",
                      "skill_id",
-                     "world_model"
+                     "request",
+                     "world_model",
+                     "assumptions",
+                     "unknowns"
                  ],
     "properties":  {
                        "schema_version":  {
@@ -26,7 +30,15 @@
                                       },
                        "context":  {
                                        "type":  "object"
-                                   }
+                                   },
+                       "assumptions": {
+                           "type": "array",
+                           "items": { "type": "string" }
+                       },
+                       "unknowns": {
+                           "type": "array",
+                           "items": { "type": "string" }
+                       }
                    },
-    "additionalProperties":  true
+    "additionalProperties": false
 }

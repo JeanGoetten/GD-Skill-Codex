@@ -4,8 +4,16 @@
     "title":  "GD Skill Codex SkillOutput",
     "type":  "object",
     "required":  [
+                     "schema_version",
                      "skill_id",
-                     "status"
+                     "status",
+                     "claims",
+                     "metrics",
+                     "anomalies",
+                     "assumptions",
+                     "evidence",
+                     "limitations",
+                     "handoffs"
                  ],
     "properties":  {
                        "schema_version":  {
@@ -39,11 +47,15 @@
                                         "type":  "array"
                                     },
                        "errors":  {
-                                      "items":  {
-                                                    "type":  "string"
-                                                },
+                                      "items":  { "type": "string" },
                                       "type":  "array"
-                                  }
+                                  },
+                       "claims": { "type": "array" },
+                       "anomalies": { "type": "array" },
+                       "assumptions": { "type": "array" },
+                       "limitations": { "type": "array" },
+                       "conflicts": { "type": "array" },
+                       "input_context": { "type": ["object", "null"] }
                    },
-    "additionalProperties":  true
+    "additionalProperties": false
 }
