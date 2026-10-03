@@ -29,8 +29,11 @@ foreach ($example in $examples) {
         $property = if ($executorAliases.ContainsKey($id)) { $executorAliases[$id] } else { ($id -replace '-', '_') }
         if ($world.hidden_state.PSObject.Properties.Name -contains $property) {
             $matched = $true
-            $result = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $executor.FullName -WorldModelPath $example.FullName) | ConvertFrom-Json
+            $result = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'invoke_skill_executor.ps1') -ExecutorPath $executor.FullName -WorldModelPath $example.FullName) | ConvertFrom-Json
             if ($result.status -notin @('success','partial','blocked')) { $failures.Add("$($example.Name): status inválido $($result.status)") }
+            foreach ($requiredField in @('schema_version','skill_id','status','claims','metrics','anomalies','assumptions','evidence','limitations','handoffs')) {
+                if (-not ($result.PSObject.Properties.Name -contains $requiredField)) { $failures.Add("$($example.Name): SkillOutput sem $requiredField") }
+            }
         }
     }
     if (-not $matched) { $failures.Add("$($example.Name): nenhum executor correspondente") }
@@ -149,6 +152,30 @@ try {
     $invalidEvidenceExit = $LASTEXITCODE
     $ErrorActionPreference = $previousPreference
     if ($invalidEvidenceExit -eq 0) { $failures.Add('evidence/invalid: deveria falhar') }
+
+    # FSM-specific cases: livelock, invariant violation and invalid probability mass.
+    $fsmCase = [ordered]@{} + $base
+    $fsmCase.hidden_state = @{ state_system = @{
+        initial_state = 'start'
+        states = @(
+            @{ id = 'start'; health = 1 },
+            @{ id = 'loop'; health = -1 },
+            @{ id = 'win'; terminal = $true; outcome = 'victory'; health = 1 }
+        )
+        transitions = @(
+            @{ from = 'start'; event = 'choose'; to = 'loop'; probability = 0.8 },
+            @{ from = 'start'; event = 'choose'; to = 'win'; probability = 0.8 },
+            @{ from = 'loop'; event = 'repeat'; to = 'loop' }
+        )
+        invariants = @('health >= 0')
+    } }
+    $fsmPath = Join-Path $fixtureRoot 'fsm-anomalies.json'
+    $fsmCase | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fsmPath -Encoding UTF8
+    $fsmExecutor = Join-Path $root 'executors\discrete-state-machine-verification.ps1'
+    $fsmResult = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'invoke_skill_executor.ps1') -ExecutorPath $fsmExecutor -WorldModelPath $fsmPath) | ConvertFrom-Json
+    if (@($fsmResult.results.livelock_candidates) -notcontains 'loop') { $failures.Add('fsm/livelock: loop deveria ser detectado') }
+    if (@($fsmResult.results.invalid_states) -notcontains 'loop') { $failures.Add('fsm/invariant: estado inválido deveria ser detectado') }
+    if (@($fsmResult.results.probability_issues).Count -eq 0) { $failures.Add('fsm/probability: massa inválida deveria ser detectada') }
 }
 finally { Remove-Item -LiteralPath $fixtureRoot -Recurse -Force -ErrorAction SilentlyContinue }
 

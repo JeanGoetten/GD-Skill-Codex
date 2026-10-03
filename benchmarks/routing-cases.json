@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "cases": [
+    { "id": "fsm-01", "request": "verify state reachability, invariants, orphan states and deadlocks", "expected_primary": "discrete-state-machine-verification" },
+    { "id": "petri-01", "request": "analyze concurrent processes, synchronization, tokens and Petri net deadlocks", "expected_primary": "concurrent-gameplay-processes" },
+    { "id": "csp-01", "request": "solve procedural level variables, domains and hard constraints with CSP", "expected_primary": "procedural-level-constraint-solving" },
+    { "id": "era-01", "request": "measure procedural generator expressive range, diversity, bins and distribution bias", "expected_primary": "procedural-expressive-range-analysis" },
+    { "id": "flow-01", "request": "balance resource stocks, sources, sinks and flow rates", "expected_primary": "resource-flow-economy" },
+    { "id": "macro-01", "request": "analyze multi-tier production conversion matrix and virtual market prices", "expected_primary": "macroeconomic-resource-conversion" },
+    { "id": "frames-01", "request": "analyze startup active recovery frames, cancels and frame advantage", "expected_primary": "frame-based-combat-timing" },
+    { "id": "risk-01", "request": "evaluate committed actions, irreversibility, exposure and spatial risk reward", "expected_primary": "committed-risk-reward-actions" },
+    { "id": "agency-01", "request": "analyze atomic verb composition, affordances and emergent agency", "expected_primary": "emergent-agency-composition" },
+    { "id": "space-01", "request": "analyze spatial topology, critical path, teaching beats and learning pacing", "expected_primary": "spatial-topology-and-learning-pacing" },
+    { "id": "epistemic-01", "request": "model knowledge holons, clues, inference paths and epistemic progression", "expected_primary": "epistemic-holarchic-progression" },
+    { "id": "cognitive-01", "request": "analyze prediction error, expectation rupture and cognitive schema disruption", "expected_primary": "cognitive-schema-disruption" },
+    { "id": "feedback-01", "request": "analyze rubber banding, comeback aid, damping and negative competitive feedback", "expected_primary": "competitive-negative-feedback" },
+    { "id": "progression-01", "request": "analyze exponential cost curves, marginal gain, prestige and reset", "expected_primary": "exponential-progression-and-prestige" },
+    { "id": "loops-01", "request": "map nested micro meso macro gameplay loops and cadence", "expected_primary": "nested-gameplay-loop-architecture" }
+  ]
+}

@@ -17,9 +17,10 @@ function Get-FrontMatter([string]$Path) {
     return $match.Groups[1].Value
 }
 function Get-FrontMatterList([string]$FrontMatter, [string]$Field) {
-    $match = [regex]::Match($FrontMatter, "(?ms)^${Field}:\s*\r?\n((?:\s+-\s+.*\r?\n?)+)")
+    $leaf = ($Field -split '\.')[-1]
+    $match = [regex]::Match($FrontMatter, "(?m)^[ \t]*${leaf}:[ \t]*\r?\n((?:[ \t]+-[ \t]+.*\r?\n?)+)")
     if (-not $match.Success) { return @() }
-    return @([regex]::Matches($match.Groups[1].Value, '(?m)^\s+-\s+(.+?)\s*$') | ForEach-Object { $_.Groups[1].Value.Trim() })
+    return @([regex]::Matches($match.Groups[1].Value, '(?m)^[ \t]+-[ \t]+(.+?)[ \t]*$') | ForEach-Object { $_.Groups[1].Value.Trim().Trim('"') })
 }
 function Get-FirstHeading([string]$Path, [string]$Fallback) {
     $match = [regex]::Match((Get-Content -Encoding UTF8 -LiteralPath $Path -Raw), '(?m)^#\s+(.+?)\s*$')
@@ -28,10 +29,12 @@ function Get-FirstHeading([string]$Path, [string]$Fallback) {
 }
 
 $worldFields = @(
-    @('entities', 'entidades'), @('resources', 'recursos'), @('spatial', 'espacial'),
-    @('temporal', 'temporal'), @('rules', 'regras'), @('knowledge', 'conhecimento'),
-    @('progression', 'progressão'), @('economy', 'economia'), @('actors', 'atores'),
-    @('actions', 'ações'), @('goals', 'objetivos'), @('hidden_state', 'estado oculto')
+    [ordered]@{ id = 'entities'; label = 'entities' }, [ordered]@{ id = 'resources'; label = 'resources' },
+    [ordered]@{ id = 'spatial'; label = 'spatial' }, [ordered]@{ id = 'temporal'; label = 'temporal' },
+    [ordered]@{ id = 'rules'; label = 'rules' }, [ordered]@{ id = 'knowledge'; label = 'knowledge' },
+    [ordered]@{ id = 'progression'; label = 'progression' }, [ordered]@{ id = 'economy'; label = 'economy' },
+    [ordered]@{ id = 'actors'; label = 'actors' }, [ordered]@{ id = 'actions'; label = 'actions' },
+    [ordered]@{ id = 'goals'; label = 'goals' }, [ordered]@{ id = 'hidden_state'; label = 'hidden state' }
 )
 $downstream = @{}
 foreach ($skill in $registry.skills) { $downstream[$skill.id] = [System.Collections.Generic.List[string]]::new() }

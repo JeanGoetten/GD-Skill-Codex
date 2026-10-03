@@ -7,7 +7,7 @@
     [int]$Repeats = 1
 )
 $ErrorActionPreference = 'Stop'
-if ($Repeats -lt 1) { throw 'Repeats deve ser >= 1.' }
+if ($Repeats -lt 1 -or $Repeats -gt 1000) { throw 'Repeats deve estar entre 1 e 1000.' }
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $executor = Join-Path (Join-Path $root 'executors') ($ExecutorId + '.ps1')
 if (-not (Test-Path -LiteralPath $executor)) { throw "Executor não encontrado: $ExecutorId" }
@@ -19,7 +19,7 @@ $snapshots = @()
 $events = @()
 for ($i = 0; $i -lt $Repeats; $i++) {
     $runSeed = $Seed + $i
-    $output = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $executor -WorldModelPath $WorldModelPath) | ConvertFrom-Json
+    $output = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'invoke_skill_executor.ps1') -ExecutorPath $executor -WorldModelPath $WorldModelPath) | ConvertFrom-Json
     $runs += [ordered]@{ run_id = "$ExecutorId-$runSeed"; seed = $runSeed; status = $output.status; output = $output }
     $snapshots += [ordered]@{
         tick = $i
@@ -38,6 +38,7 @@ for ($i = 0; $i -lt $Repeats; $i++) {
 $report = [ordered]@{
     schema_version = '1.0.0'
     runner = 'architecture/simulation_runner.ps1'
+    execution_mode = 'repeated_static_analysis'
     executor_id = $ExecutorId
     world_model_hash = $hash
     seed = $Seed
@@ -53,7 +54,12 @@ $report = [ordered]@{
             source = 'world_model'
         }
     })
-    evidence_status = if (@($runs | Where-Object { $_.status -eq 'success' }).Count -gt 0) { 'derived_from_simulation' } else { 'INSUFFICIENT_EVIDENCE' }
+    evidence_status = if (@($runs | Where-Object { $_.status -eq 'success' }).Count -gt 0) { 'derived_from_repeated_analysis' } else { 'INSUFFICIENT_EVIDENCE' }
+    limitations = @(
+        'The generic runner repeats a deterministic executor; it does not model strategic agent decisions.',
+        'Seed is provenance metadata unless the selected executor explicitly consumes stochastic input.',
+        'Time-series ticks are run snapshots, not elapsed gameplay time.'
+    )
     aggregate = [ordered]@{
         successful_runs = @($runs | Where-Object { $_.status -eq 'success' }).Count
         partial_runs = @($runs | Where-Object { $_.status -eq 'partial' }).Count
@@ -69,12 +75,12 @@ if ($EvidenceStorePath) {
     $record = [ordered]@{
         claim = "A simulação $ExecutorId produziu $Repeats execução(ões) reproduzível(is)."
         skill_id = $ExecutorId
-        status = if ($report.evidence_status -eq 'derived_from_simulation') { 'derived' } else { 'INSUFFICIENT_EVIDENCE' }
+        status = if ($report.evidence_status -eq 'derived_from_repeated_analysis') { 'derived' } else { 'INSUFFICIENT_EVIDENCE' }
         source = 'architecture/simulation_runner.ps1'
         evidence = @([ordered]@{ type = 'simulation'; id = "$ExecutorId-$hash" })
         assumptions = @('O world model e o executor representam adequadamente o sistema analisado.')
-        confidence = if ($report.evidence_status -eq 'derived_from_simulation') { 'medium' } else { 'low' }
-        limitations = @('Repetição de executor não substitui telemetria ou playtest.')
+        confidence = if ($report.evidence_status -eq 'derived_from_repeated_analysis') { 'medium' } else { 'low' }
+        limitations = @($report.limitations)
         input_hash = $hash
         world_model_version = if ($world.version) { $world.version } else { 'unknown' }
         skill_version = '1.0.0'

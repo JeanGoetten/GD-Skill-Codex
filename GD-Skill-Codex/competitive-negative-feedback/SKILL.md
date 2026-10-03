@@ -1,32 +1,33 @@
 ---
 name: competitive-negative-feedback
-description: Formulates negative feedback loop mechanisms for damping and competition self-regulation in interactive games. Use this skill when the user requests: (1) design of performance equalization dynamics between agents, (2) creation of conditional probability tables for resources based on position/ranking, (3) damping of absolute leads via systemic drag or dynamic handicaps, or (4) prevention of early elimination of disadvantaged players while maintaining ludic balance.
-domain:
-  primary:
-    - competitive balancing
-    - negative feedback
-activation_signals:
-  concepts:
-    - rubber banding
-    - catch-up mechanics
-    - sandbagging
-    - dynamic handicap
-  recognition_references:
-    - "Mario Kart"
-    - "League of Legends"
-    - "Rocket League"
-outputs:
-  - feedback model
-  - stability analysis
-  - anti-exploit recommendations
-handoffs:
-  downstream:
-    - resource-flow-economy
-    - exponential-progression-and-prestige
-    - concurrent-gameplay-processes
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Formulates negative feedback loop mechanisms for damping and competition self-regulation in interactive games. Use this skill when the user requests: (1) design of performance equalization dynamics between agents, (2) creation of conditional probability tables for resources based on position/ranking, (3) damping of absolute leads via systemic drag or dynamic handicaps, or (4) prevention of early elimination of disadvantaged players while maintaining ludic balance."
+metadata:
+  domain:
+    primary:
+      - competitive balancing
+      - negative feedback
+  activation_signals:
+    concepts:
+      - rubber banding
+      - catch-up mechanics
+      - sandbagging
+      - dynamic handicap
+    recognition_references:
+      - "Mario Kart"
+      - "League of Legends"
+      - "Rocket League"
+  outputs:
+    - feedback model
+    - stability analysis
+    - anti-exploit recommendations
+  handoffs:
+    downstream:
+      - resource-flow-economy
+      - exponential-progression-and-prestige
+      - concurrent-gameplay-processes
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Competitive Negative Feedback: Catch-Up and Damping

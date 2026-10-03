@@ -1,17 +1,20 @@
 {
   "name": "gd-skill-codex",
   "version": "1.0.0",
-  "description": "Catálogo de skills conceituais para análise e design de sistemas de jogos.",
-  "main": "index.js",
+  "description": "Typed, evidence-aware framework of game-system analysis skills for AI agents and designers.",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "test": "node architecture/validate_json_schema.js",
-    "validate:schema": "node architecture/validate_json_schema.js"
+    "test:all": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./architecture/validate_all.ps1",
+    "test:regression": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./architecture/regression_tests.ps1",
+    "validate:skills": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./validate_skills.ps1",
+    "validate:schema": "node architecture/validate_json_schema.js",
+    "serve": "node web/server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["game-design", "systems-design", "ai-agents", "formal-methods", "simulation"],
+  "author": "Jean Goetten",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {

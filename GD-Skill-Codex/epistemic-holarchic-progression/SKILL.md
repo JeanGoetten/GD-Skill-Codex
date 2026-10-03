@@ -1,31 +1,32 @@
 ---
 name: epistemic-holarchic-progression
-description: Models non-linear narrative structures and purely knowledge-driven progression (ludic epistemology) organized as graphs of informational holons. Use this skill when the user requests: (1) design of non-linear holarchic narrative structures, (2) modeling of information and mystery graphs without physical key locks, (3) definition of autonomous and relational informational holons, or (4) validation of universal accessibility based on player's cognitive discoveries.
-domain:
-  primary:
-    - epistemic progression
-    - holarchic knowledge
-activation_signals:
-  concepts:
-    - clue graph
-    - knowledge state
-    - revelation pacing
-  recognition_references:
-    - "Outer Wilds"
-    - "Return of the Obra Dinn"
-    - "Disco Elysium"
-outputs:
-  - knowledge graph
-  - progression map
-  - uncertainty analysis
-handoffs:
-  downstream:
-    - cognitive-schema-disruption
-    - spatial-topology-and-learning-pacing
-    - discrete-state-machine-verification
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models non-linear narrative structures and purely knowledge-driven progression (ludic epistemology) organized as graphs of informational holons. Use this skill when the user requests: (1) design of non-linear holarchic narrative structures, (2) modeling of information and mystery graphs without physical key locks, (3) definition of autonomous and relational informational holons, or (4) validation of universal accessibility based on player's cognitive discoveries."
+metadata:
+  domain:
+    primary:
+      - epistemic progression
+      - holarchic knowledge
+  activation_signals:
+    concepts:
+      - clue graph
+      - knowledge state
+      - revelation pacing
+    recognition_references:
+      - "Outer Wilds"
+      - "Return of the Obra Dinn"
+      - "Disco Elysium"
+  outputs:
+    - knowledge graph
+    - progression map
+    - uncertainty analysis
+  handoffs:
+    downstream:
+      - cognitive-schema-disruption
+      - spatial-topology-and-learning-pacing
+      - discrete-state-machine-verification
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Epistemic Holarchic Progression: Layered Knowledge Graphs

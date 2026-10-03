@@ -1,31 +1,32 @@
 ---
 name: macroeconomic-resource-conversion
-description: Maps and balances complex resource conversion matrices, internal exchange markets, and hyperinflation containment systems. Use this skill when the user requests: (1) design of multi-input composite production chains, (2) modeling of resource Input-Output matrices, (3) dynamic pricing by supply and demand in virtual markets, or (4) dampening of macroeconomic shocks and combating ludic hyperinflation.
-domain:
-  primary:
-    - macroeconomics
-    - resource conversion
-activation_signals:
-  concepts:
-    - input-output matrix
-    - Leontief
-    - conversion bottleneck
-  recognition_references:
-    - "Civilization"
-    - "EVE Online"
-    - "Anno"
-outputs:
-  - production matrix
-  - dependency analysis
-  - scenario recommendations
-handoffs:
-  downstream:
-    - resource-flow-economy
-    - exponential-progression-and-prestige
-    - competitive-negative-feedback
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Maps and balances complex resource conversion matrices, internal exchange markets, and hyperinflation containment systems. Use this skill when the user requests: (1) design of multi-input composite production chains, (2) modeling of resource Input-Output matrices, (3) dynamic pricing by supply and demand in virtual markets, or (4) dampening of macroeconomic shocks and combating ludic hyperinflation."
+metadata:
+  domain:
+    primary:
+      - macroeconomics
+      - resource conversion
+  activation_signals:
+    concepts:
+      - input-output matrix
+      - Leontief
+      - conversion bottleneck
+    recognition_references:
+      - "Civilization"
+      - "EVE Online"
+      - "Anno"
+  outputs:
+    - production matrix
+    - dependency analysis
+    - scenario recommendations
+  handoffs:
+    downstream:
+      - resource-flow-economy
+      - exponential-progression-and-prestige
+      - competitive-negative-feedback
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Macroeconomic Resource Conversion: Production Matrices

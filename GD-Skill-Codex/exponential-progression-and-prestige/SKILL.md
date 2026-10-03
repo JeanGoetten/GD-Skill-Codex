@@ -1,31 +1,32 @@
 ---
 name: exponential-progression-and-prestige
-description: Formulates and balances positive feedback loops, exponential growth curves, and prestige mechanics. Use this skill when the user requests: (1) design of exponential or incremental progression curves (idle/incremental games), (2) calculation of scaled acquisition costs and resource generation, (3) prevention of numeric overflow, or (4) formulation of prestige and reset systems to convert stalled progress.
-domain:
-  primary:
-    - progression curves
-    - prestige systems
-activation_signals:
-  concepts:
-    - exponential curve
-    - reset
-    - upgrade time
-  recognition_references:
-    - "Cookie Clicker"
-    - "Diablo"
-    - "incremental ascension systems"
-outputs:
-  - curve comparison
-  - income-cost forecast
-  - prestige tuning report
-handoffs:
-  downstream:
-    - resource-flow-economy
-    - macroeconomic-resource-conversion
-    - competitive-negative-feedback
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Formulates and balances positive feedback loops, exponential growth curves, and prestige mechanics. Use this skill when the user requests: (1) design of exponential or incremental progression curves (idle/incremental games), (2) calculation of scaled acquisition costs and resource generation, (3) prevention of numeric overflow, or (4) formulation of prestige and reset systems to convert stalled progress."
+metadata:
+  domain:
+    primary:
+      - progression curves
+      - prestige systems
+  activation_signals:
+    concepts:
+      - exponential curve
+      - reset
+      - upgrade time
+    recognition_references:
+      - "Cookie Clicker"
+      - "Diablo"
+      - "incremental ascension systems"
+  outputs:
+    - curve comparison
+    - income-cost forecast
+    - prestige tuning report
+  handoffs:
+    downstream:
+      - resource-flow-economy
+      - macroeconomic-resource-conversion
+      - competitive-negative-feedback
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Exponential Progression and Prestige: Curve Families

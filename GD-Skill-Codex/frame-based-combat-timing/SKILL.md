@@ -1,31 +1,32 @@
 ---
 name: frame-based-combat-timing
-description: Models deterministic high-frame-rate decision trees, cancel windows, and command priorities in combat systems. Use this skill when the user requests: (1) design or balancing of frame data tables, (2) formalization of action temporal phases (Startup, Active, Recovery), (3) calculation of frame advantages on hit or block (hit advantage / block advantage), or (4) algorithmic resolution of cancel windows and collision priorities (hit priority/trades).
-domain:
-  primary:
-    - combat timing
-    - discrete frames
-activation_signals:
-  concepts:
-    - startup, active, recovery
-    - cancel windows
-    - input latency
-  recognition_references:
-    - "Street Fighter"
-    - "Devil May Cry"
-    - "Super Smash Bros."
-outputs:
-  - frame timeline
-  - effective-window table
-  - timing recommendations
-handoffs:
-  downstream:
-    - discrete-state-machine-verification
-    - committed-risk-reward-actions
-    - concurrent-gameplay-processes
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models deterministic high-frame-rate decision trees, cancel windows, and command priorities in combat systems. Use this skill when the user requests: (1) design or balancing of frame data tables, (2) formalization of action temporal phases (Startup, Active, Recovery), (3) calculation of frame advantages on hit or block (hit advantage / block advantage), or (4) algorithmic resolution of cancel windows and collision priorities (hit priority/trades)."
+metadata:
+  domain:
+    primary:
+      - combat timing
+      - discrete frames
+  activation_signals:
+    concepts:
+      - startup, active, recovery
+      - cancel windows
+      - input latency
+    recognition_references:
+      - "Street Fighter"
+      - "Devil May Cry"
+      - "Super Smash Bros."
+  outputs:
+    - frame timeline
+    - effective-window table
+    - timing recommendations
+  handoffs:
+    downstream:
+      - discrete-state-machine-verification
+      - committed-risk-reward-actions
+      - concurrent-gameplay-processes
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Frame-Based Combat Timing: Discrete Timing Trees

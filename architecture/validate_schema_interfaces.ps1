@@ -6,7 +6,7 @@ $expected = @(
   'actions.schema.json','rules.schema.json','goals.schema.json','spatial.schema.json','temporal.schema.json',
   'knowledge.schema.json','hidden-state.schema.json','progression.schema.json','economy.schema.json',
   'skill-input.schema.json','skill-output.schema.json',
-  'handoff-contract.schema.json','metric.schema.json','assumption.schema.json','evidence.schema.json','state-system.schema.json','csp-system.schema.json','petri-net.schema.json','frame-timing.schema.json',
+  'handoff-contract.schema.json','handoffs.schema.json','handoff-adapters.schema.json','skill-registry.schema.json','metric.schema.json','assumption.schema.json','evidence.schema.json','state-system.schema.json','csp-system.schema.json','petri-net.schema.json','frame-timing.schema.json',
   'recommendation.schema.json','test-plan.schema.json','resource-flow-economy.schema.json',
   'playtest-observation.schema.json',
   'procedural-expressive-range-analysis.schema.json','macroeconomic-conversion.schema.json','risk-reward-action.schema.json','epistemic-progression.schema.json','cognitive-schema-disruption.schema.json','competitive-feedback.schema.json','progression-analysis.schema.json','spatial-pacing.schema.json','playtest-hypothesis.schema.json','provenance.schema.json','emergent-agency-composition.schema.json','nested-gameplay-loop-architecture.schema.json'

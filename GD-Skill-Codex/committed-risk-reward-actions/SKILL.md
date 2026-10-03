@@ -1,31 +1,32 @@
 ---
 name: committed-risk-reward-actions
-description: Specifies agent methods (mechanics) with high state restriction, high risk/reward, and spatial penalties for invocation errors. Use this skill when the user requests: (1) formalization of agent methods (operational verbs) in object-oriented style f(S, A, P) -> S', (2) modeling of mechanics with high action commitment and static vulnerability windows, (3) balancing of real-time stamina/resource costs, or (4) calculation of spatial punishment for incorrect positioning.
-domain:
-  primary:
-    - risk-reward actions
-    - commitment contracts
-activation_signals:
-  concepts:
-    - irreversibility
-    - expected value
-    - spatial risk
-  recognition_references:
-    - "Dark Souls"
-    - "Monster Hunter"
-    - "Street Fighter"
-outputs:
-  - action contract
-  - risk ledger
-  - playtest hypotheses
-handoffs:
-  downstream:
-    - frame-based-combat-timing
-    - emergent-agency-composition
-    - competitive-negative-feedback
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Specifies agent methods (mechanics) with high state restriction, high risk/reward, and spatial penalties for invocation errors. Use this skill when the user requests: (1) formalization of agent methods (operational verbs) as state transition functions, (2) modeling of mechanics with high action commitment and static vulnerability windows, (3) balancing of real-time stamina/resource costs, or (4) calculation of spatial punishment for incorrect positioning."
+metadata:
+  domain:
+    primary:
+      - risk-reward actions
+      - commitment contracts
+  activation_signals:
+    concepts:
+      - irreversibility
+      - expected value
+      - spatial risk
+    recognition_references:
+      - "Dark Souls"
+      - "Monster Hunter"
+      - "Street Fighter"
+  outputs:
+    - action contract
+    - risk ledger
+    - playtest hypotheses
+  handoffs:
+    downstream:
+      - frame-based-combat-timing
+      - emergent-agency-composition
+      - competitive-negative-feedback
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Committed Risk-Reward Actions: Spatial Commitment Contracts

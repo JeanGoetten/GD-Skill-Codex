@@ -1,31 +1,32 @@
 ---
 name: discrete-state-machine-verification
-description: Formalizes and validates discrete rule systems and transition graphs in digital games. Use this skill when the user requests: (1) formal modeling of a game as a Discrete Finite Automaton, (2) logical consistency validation of rules, (3) reachability analysis of win/loss states, or (4) detection of ambiguous transitions and orphan states.
-domain:
-  primary:
-    - state machines
-    - formal verification
-activation_signals:
-  concepts:
-    - automaton
-    - invariant
-    - reachability
-  recognition_references:
-    - "Super Mario Bros"
-    - "The Legend of Zelda"
-    - "XCOM"
-outputs:
-  - state model
-  - invariant checks
-  - reachability evidence
-handoffs:
-  downstream:
-    - concurrent-gameplay-processes
-    - procedural-level-constraint-solving
-    - frame-based-combat-timing
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Formalizes and validates discrete rule systems and transition graphs in digital games. Use this skill when the user requests: (1) formal modeling of a game as a Discrete Finite Automaton, (2) logical consistency validation of rules, (3) reachability analysis of win/loss states, or (4) detection of ambiguous transitions and orphan states."
+metadata:
+  domain:
+    primary:
+      - state machines
+      - formal verification
+  activation_signals:
+    concepts:
+      - automaton
+      - invariant
+      - reachability
+    recognition_references:
+      - "Super Mario Bros"
+      - "The Legend of Zelda"
+      - "XCOM"
+  outputs:
+    - state model
+    - invariant checks
+    - reachability evidence
+  handoffs:
+    downstream:
+      - concurrent-gameplay-processes
+      - procedural-level-constraint-solving
+      - frame-based-combat-timing
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Discrete State Machine Verification: Formalization and Reachability

@@ -11,6 +11,9 @@ foreach ($skill in $registry.skills) {
         $errors.Add("web/data.js sem skill do registry: $($skill.id)")
     }
 }
+if ($data -match '"concepts"\s*:\s*\[\s*\]') {
+    $errors.Add('web/data.js contém skill sem conceitos; verifique o parser de front matter')
+}
 foreach ($handoff in $handoffs.handoffs) {
     $pattern = '"?id"?\s*:\s*"' + [regex]::Escape($handoff.source) + '".*?"?downstream"?\s*:\s*\[([^\]]*)\]'
     $match = [regex]::Match($data, $pattern, [Text.RegularExpressions.RegexOptions]::Singleline)

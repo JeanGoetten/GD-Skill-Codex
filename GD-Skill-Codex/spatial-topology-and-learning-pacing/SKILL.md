@@ -1,31 +1,32 @@
 ---
 name: spatial-topology-and-learning-pacing
-description: Models spatial topology of levels and learning pacing based on progressive introduction of atomic mechanics and concept isolation. Use this skill when the user requests: (1) structuring of learning curve and skill introduction without explicit tutorials, (2) design of rooms/encounters with isolation of ludic variables, (3) analysis of spatial pacing and tension in level architecture, or (4) topological chaining of combinatorial challenges.
-domain:
-  primary:
-    - spatial topology
-    - learning pacing
-activation_signals:
-  concepts:
-    - graph topology
-    - branching
-    - implicit teaching
-  recognition_references:
-    - "Metroid"
-    - "Portal"
-    - "Dark Souls"
-outputs:
-  - topology graph
-  - pacing metrics
-  - route recommendations
-handoffs:
-  downstream:
-    - procedural-level-constraint-solving
-    - epistemic-holarchic-progression
-    - nested-gameplay-loop-architecture
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models spatial topology of levels and learning pacing based on progressive introduction of atomic mechanics and concept isolation. Use this skill when the user requests: (1) structuring of learning curve and skill introduction without explicit tutorials, (2) design of rooms/encounters with isolation of ludic variables, (3) analysis of spatial pacing and tension in level architecture, or (4) topological chaining of combinatorial challenges."
+metadata:
+  domain:
+    primary:
+      - spatial topology
+      - learning pacing
+  activation_signals:
+    concepts:
+      - graph topology
+      - branching
+      - implicit teaching
+    recognition_references:
+      - "Metroid"
+      - "Portal"
+      - "Dark Souls"
+  outputs:
+    - topology graph
+    - pacing metrics
+    - route recommendations
+  handoffs:
+    downstream:
+      - procedural-level-constraint-solving
+      - epistemic-holarchic-progression
+      - nested-gameplay-loop-architecture
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Spatial Topology and Learning Pacing: Navigation as Implicit Teaching

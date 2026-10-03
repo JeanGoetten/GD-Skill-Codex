@@ -1,31 +1,32 @@
 ---
 name: emergent-agency-composition
-description: Models composition and emergent synergy between multiple simultaneous operational verbs and shared physical properties. Use this skill when the user requests: (1) design of combinatorial ability systems, (2) modeling of interactions based on generic physical/elemental properties, (3) resolution of functional compositions of methods f_2(f_1(S)), or (4) creation of emergent agency through overlap of atomic mechanics.
-domain:
-  primary:
-    - emergent agency
-    - verb composition
-activation_signals:
-  concepts:
-    - action affordance
-    - composition
-    - agency space
-  recognition_references:
-    - "The Legend of Zelda: Breath of the Wild"
-    - "Magicka"
-    - "immersive sims"
-outputs:
-  - verb taxonomy
-  - composition graph
-  - agency diagnostics
-handoffs:
-  downstream:
-    - committed-risk-reward-actions
-    - concurrent-gameplay-processes
-    - cognitive-schema-disruption
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models composition and emergent synergy between multiple simultaneous operational verbs and shared physical properties. Use this skill when the user requests: (1) design of combinatorial ability systems, (2) modeling of interactions based on generic physical/elemental properties, (3) resolution of functional compositions of methods f_2(f_1(S)), or (4) creation of emergent agency through overlap of atomic mechanics."
+metadata:
+  domain:
+    primary:
+      - emergent agency
+      - verb composition
+  activation_signals:
+    concepts:
+      - action affordance
+      - composition
+      - agency space
+    recognition_references:
+      - "The Legend of Zelda: Breath of the Wild"
+      - "Magicka"
+      - "immersive sims"
+  outputs:
+    - verb taxonomy
+    - composition graph
+    - agency diagnostics
+  handoffs:
+    downstream:
+      - committed-risk-reward-actions
+      - concurrent-gameplay-processes
+      - cognitive-schema-disruption
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Emergent Agency Composition: Combinatorial Action Systems

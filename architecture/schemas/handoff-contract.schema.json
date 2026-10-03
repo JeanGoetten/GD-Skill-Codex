@@ -73,10 +73,12 @@
                                                       ]
                                      },
                        "input_schema":  {
-                                            "$ref":  "https://gd-skill-codex.local/schemas/skill-input.schema.json"
+                                            "type": "string",
+                                            "format": "uri"
                                         },
                        "output_schema":  {
-                                             "$ref":  "https://gd-skill-codex.local/schemas/skill-output.schema.json"
+                                             "type": "string",
+                                             "format": "uri"
                                          }
                    },
     "additionalProperties":  true

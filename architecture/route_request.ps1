@@ -20,8 +20,8 @@ $problemProfiles = @(
     [pscustomobject]@{ id='procedural-level-constraint-solving'; cues=@('geracao procedural','gerado','mapa sem solucao','solvabilidade','restricao','constraint','csp','backtracking'); weight=5 },
     [pscustomobject]@{ id='frame-based-combat-timing'; cues=@('startup','active','recovery','cancel','parry','frames','frame','janela de timing','tick'); weight=5 },
     [pscustomobject]@{ id='resource-flow-economy'; cues=@('estoque','fluxo','produz','consome','fonte','sink','gargalo','taxa','recurso acumula','recurso esgota'); weight=5 },
-    [pscustomobject]@{ id='macroeconomic-resource-conversion'; cues=@('cadeia produtiva','multiplos estagios','input-output','bens intermediarios','choque de oferta','multiplicador'); weight=5 },
-    [pscustomobject]@{ id='discrete-state-machine-verification'; cues=@('estado impossivel','alcancabilidade','transicao invalida','invariante','fsm','automato','deadlock sequencial'); weight=5 },
+    [pscustomobject]@{ id='macroeconomic-resource-conversion'; cues=@('cadeia produtiva','multiplos estagios','input-output','bens intermediarios','choque de oferta','multiplicador','multi-tier production','conversion matrix','production chain','virtual market'); weight=5 },
+    [pscustomobject]@{ id='discrete-state-machine-verification'; cues=@('estado impossivel','alcancabilidade','transicao invalida','invariante','fsm','automato','deadlock sequencial','state machine','state reachability','orphan state','invariant violation'); weight=5 },
     [pscustomobject]@{ id='committed-risk-reward-actions'; cues=@('risco-recompensa','risk reward','compromisso','exposicao','acao pesada','custo de errar','janela de escape'); weight=4 },
     [pscustomobject]@{ id='emergent-agency-composition'; cues=@('combinar habilidades','solucoes multiplas','acao emergente','composicao de acoes','affordance'); weight=4 },
     [pscustomobject]@{ id='spatial-topology-and-learning-pacing'; cues=@('topologia','ritmo de salas','gating espacial','aprende pelo espaco','grafo de salas','learning beat'); weight=4 },
@@ -29,7 +29,7 @@ $problemProfiles = @(
     [pscustomobject]@{ id='cognitive-schema-disruption'; cues=@('expectativa','surpresa','regra parece bug','regra reinterpreta','reinterpreta','reinterpretar','prediction error','schema','bayesian'); weight=4 },
     [pscustomobject]@{ id='competitive-negative-feedback'; cues=@('lider','catch-up','rubber band','competicao','snowball','posicao relativa'); weight=4 },
     [pscustomobject]@{ id='exponential-progression-and-prestige'; cues=@('custo cresce','exponencial','prestigio','reset com bonus','nivel','progressao desacelera'); weight=4 },
-    [pscustomobject]@{ id='nested-gameplay-loop-architecture'; cues=@('micro loop','macro loop','loop aninhado','varias escalas','ritmo temporal','exit point'); weight=4 },
+    [pscustomobject]@{ id='nested-gameplay-loop-architecture'; cues=@('micro loop','macro loop','loop aninhado','varias escalas','ritmo temporal','exit point','gameplay loop','nested gameplay','micro meso macro','loop cadence'); weight=4 },
     [pscustomobject]@{ id='procedural-expressive-range-analysis'; cues=@('repetitivo','variedade','expressive range','entropia','distribuicao de variantes','gerador enviesado'); weight=3 }
 )
 

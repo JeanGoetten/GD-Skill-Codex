@@ -1,4 +1,9 @@
-# GD Skill Codex Action Plan
+# GD Skill Codex Historical Action Plan
+
+> This document preserves the implementation record started on 2026-09-14.
+> It is not the current backlog. Use [`../ROADMAP.md`](../ROADMAP.md) for live
+> release gates and [`spec-implementation-matrix.md`](spec-implementation-matrix.md)
+> for current executable coverage.
 
 ## Objetivo
 
@@ -1040,10 +1045,10 @@ AJV, regressions and `validate_all.ps1` approved.
 | B-16 | Simulation/playtest bridge | 7 | P2 | Executable evidence |
 | B-17 | Operational dashboard | 7 | P2 | Execution-connected UI |
 
-## Framework ready criteria
+## Historical framework-ready criteria (snapshot from 2026-09-14)
 
-The Codex should only be described as an operational framework when all items
-below are true:
+This checklist is preserved as an audit snapshot; it is not automatically
+updated. Current status is maintained in `ROADMAP.md`.
 
 - [ ] world model and interface schemas have executable validation;
 - [ ] handoffs have verifiable input, output and unit compatibility;

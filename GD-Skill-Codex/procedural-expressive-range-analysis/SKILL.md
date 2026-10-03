@@ -1,31 +1,32 @@
 ---
 name: procedural-expressive-range-analysis
-description: Evaluates the quality, diversity, and variability of procedural content generation (PCG) algorithms using Expressive Range Analysis (ERA) methodology. Use this skill when the user requests: (1) evaluation of a procedural level or map generator quality, (2) calculation of Behavioral Characterizations (BC), (3) detection of algorithmic bias, structural repetition, or design gaps in PCG, or (4) mapping of probability distributions of expressive spaces.
-domain:
-  primary:
-    - procedural diversity
-    - expressive range
-activation_signals:
-  concepts:
-    - coverage
-    - entropy
-    - generator bias
-  recognition_references:
-    - "No Man's Sky"
-    - "Spelunky"
-    - "Minecraft"
-outputs:
-  - diversity report
-  - validity-filtered coverage
-  - sampling plan
-handoffs:
-  downstream:
-    - procedural-level-constraint-solving
-    - spatial-topology-and-learning-pacing
-    - cognitive-schema-disruption
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Evaluates the quality, diversity, and variability of procedural content generation (PCG) algorithms using Expressive Range Analysis (ERA) methodology. Use this skill when the user requests: (1) evaluation of a procedural level or map generator quality, (2) calculation of Behavioral Characterizations (BC), (3) detection of algorithmic bias, structural repetition, or design gaps in PCG, or (4) mapping of probability distributions of expressive spaces."
+metadata:
+  domain:
+    primary:
+      - procedural diversity
+      - expressive range
+  activation_signals:
+    concepts:
+      - coverage
+      - entropy
+      - generator bias
+    recognition_references:
+      - "No Man's Sky"
+      - "Spelunky"
+      - "Minecraft"
+  outputs:
+    - diversity report
+    - validity-filtered coverage
+    - sampling plan
+  handoffs:
+    downstream:
+      - procedural-level-constraint-solving
+      - spatial-topology-and-learning-pacing
+      - cognitive-schema-disruption
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Procedural Expressive Range Analysis: Content Diversity

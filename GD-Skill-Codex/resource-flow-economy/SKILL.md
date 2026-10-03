@@ -1,31 +1,32 @@
 ---
 name: resource-flow-economy
-description: Models and balances static and dynamic internal economy systems using the Machinations framework. Use this skill when the user requests: (1) design or balancing of resource flow equations (dQ/dt), (2) definition of primitive nodes (Sources, Sinks, Converters, Pools), (3) analysis of generation rates and sinks to prevent inflation or scarcity, or (4) stabilization of complex ludic economic systems.
-domain:
-  primary:
-    - resource flows
-    - economy balancing
-activation_signals:
-  concepts:
-    - stock and flow
-    - production rate
-    - bottleneck
-  recognition_references:
-    - "SimCity"
-    - "Stardew Valley"
-    - "Factorio"
-outputs:
-  - flow model
-  - balance metrics
-  - tuning recommendations
-handoffs:
-  downstream:
-    - macroeconomic-resource-conversion
-    - exponential-progression-and-prestige
-    - committed-risk-reward-actions
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models and balances static and dynamic internal economy systems using the Machinations framework. Use this skill when the user requests: (1) design or balancing of resource flow equations (dQ/dt), (2) definition of primitive nodes (Sources, Sinks, Converters, Pools), (3) analysis of generation rates and sinks to prevent inflation or scarcity, or (4) stabilization of complex ludic economic systems."
+metadata:
+  domain:
+    primary:
+      - resource flows
+      - economy balancing
+  activation_signals:
+    concepts:
+      - stock and flow
+      - production rate
+      - bottleneck
+    recognition_references:
+      - "SimCity"
+      - "Stardew Valley"
+      - "Factorio"
+  outputs:
+    - flow model
+    - balance metrics
+    - tuning recommendations
+  handoffs:
+    downstream:
+      - macroeconomic-resource-conversion
+      - exponential-progression-and-prestige
+      - committed-risk-reward-actions
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Resource Flow Economy: Stock-Flow Balance

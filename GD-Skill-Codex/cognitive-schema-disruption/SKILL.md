@@ -1,31 +1,32 @@
 ---
 name: cognitive-schema-disruption
-description: Models intentional cognitive schema disruption, rule expectation subversion, and cognitive accommodation induction in digital games. Use this skill when the user requests: (1) design of mechanical or narrative expectation-breaking moments, (2) modeling of transition functions with deliberate cognitive noise, (3) analysis of player's predictive mental models versus actual system response, or (4) balancing tension between engagement through dissonance and frustration from rejection.
-domain:
-  primary:
-    - cognitive schemas
-    - expectation disruption
-activation_signals:
-  concepts:
-    - prediction error
-    - Bayesian update
-    - KL divergence
-  recognition_references:
-    - "The Witness"
-    - "Portal"
-    - "Outer Wilds"
-outputs:
-  - schema model
-  - surprise analysis
-  - calibrated disruption plan
-handoffs:
-  downstream:
-    - epistemic-holarchic-progression
-    - frame-based-combat-timing
-    - procedural-expressive-range-analysis
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models intentional cognitive schema disruption, rule expectation subversion, and cognitive accommodation induction in digital games. Use this skill when the user requests: (1) design of mechanical or narrative expectation-breaking moments, (2) modeling of transition functions with deliberate cognitive noise, (3) analysis of player's predictive mental models versus actual system response, or (4) balancing tension between engagement through dissonance and frustration from rejection."
+metadata:
+  domain:
+    primary:
+      - cognitive schemas
+      - expectation disruption
+  activation_signals:
+    concepts:
+      - prediction error
+      - Bayesian update
+      - KL divergence
+    recognition_references:
+      - "The Witness"
+      - "Portal"
+      - "Outer Wilds"
+  outputs:
+    - schema model
+    - surprise analysis
+    - calibrated disruption plan
+  handoffs:
+    downstream:
+      - epistemic-holarchic-progression
+      - frame-based-combat-timing
+      - procedural-expressive-range-analysis
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Cognitive Schema Disruption: Reinterpretation and Learning

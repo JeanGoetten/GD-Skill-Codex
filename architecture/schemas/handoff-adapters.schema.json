@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/handoff-adapters.schema.json",
+  "title": "GD Skill Codex handoff adapters",
+  "type": "object",
+  "required": ["version", "adapters"],
+  "properties": {
+    "version": { "type": "string", "minLength": 1 },
+    "adapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "version", "input_schema", "output_schema", "units", "maps", "derived", "external_required"],
+        "properties": {
+          "source": { "$ref": "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId" },
+          "target": { "$ref": "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId" },
+          "version": { "type": "string", "minLength": 1 },
+          "input_schema": { "type": "string", "format": "uri" },
+          "output_schema": { "type": "string", "format": "uri" },
+          "units": { "type": "object", "additionalProperties": { "type": "string" } },
+          "maps": { "type": "object", "additionalProperties": { "type": "string" } },
+          "derived": { "type": "object", "additionalProperties": { "type": "string" } },
+          "external_required": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

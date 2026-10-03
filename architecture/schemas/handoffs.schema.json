@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/handoffs.schema.json",
+  "title": "GD Skill Codex handoff registry",
+  "type": "object",
+  "required": ["version", "contract_schema", "handoffs"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "contract_schema": { "type": "string", "format": "uri" },
+    "handoffs": {
+      "type": "array",
+      "items": { "$ref": "https://gd-skill-codex.local/schemas/handoff-contract.schema.json" }
+    }
+  },
+  "additionalProperties": false
+}

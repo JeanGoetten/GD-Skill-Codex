@@ -3,10 +3,11 @@
   "$id": "https://gd-skill-codex.local/schemas/simulation-report.schema.json",
   "title": "GD Skill Codex simulation report",
   "type": "object",
-  "required": ["schema_version", "runner", "executor_id", "world_model_hash", "seed", "repeats", "runs", "time_series", "events", "agents", "evidence_status", "aggregate"],
+  "required": ["schema_version", "runner", "execution_mode", "executor_id", "world_model_hash", "seed", "repeats", "runs", "time_series", "events", "agents", "evidence_status", "limitations", "aggregate"],
   "properties": {
     "schema_version": { "type": "string" },
     "runner": { "const": "architecture/simulation_runner.ps1" },
+    "execution_mode": { "const": "repeated_static_analysis" },
     "executor_id": { "type": "string", "minLength": 1 },
     "world_model_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "seed": { "type": "integer" },
@@ -38,7 +39,8 @@
     },
     "events": { "type": "array" },
     "agents": { "type": "array" },
-    "evidence_status": { "enum": ["derived_from_simulation", "INSUFFICIENT_EVIDENCE"] },
+    "evidence_status": { "enum": ["derived_from_repeated_analysis", "INSUFFICIENT_EVIDENCE"] },
+    "limitations": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
     "aggregate": {
       "type": "object",
       "required": ["successful_runs", "partial_runs", "failed_runs", "metric_names"],

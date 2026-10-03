@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/skill-registry.schema.json",
+  "title": "GD Skill Codex skill registry",
+  "type": "object",
+  "required": ["version", "activation_schema", "skills"],
+  "properties": {
+    "version": { "type": "string", "minLength": 1 },
+    "activation_schema": { "type": "object" },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "priority", "formalism", "activation", "inputs", "outputs", "complements", "conflicts", "domain_role", "routing_role"],
+        "properties": {
+          "id": { "$ref": "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId" },
+          "priority": { "type": "number" },
+          "formalism": { "type": "string", "minLength": 1 },
+          "activation": {
+            "type": "object",
+            "required": ["explicit", "semantic", "structural", "anti_signals"],
+            "properties": {
+              "explicit": { "type": "array", "items": { "type": "string" } },
+              "semantic": { "type": "array", "items": { "type": "string" } },
+              "structural": { "type": "array", "items": { "type": "string" } },
+              "anti_signals": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          },
+          "inputs": { "type": "array", "items": { "type": "string" } },
+          "outputs": { "type": "array", "items": { "type": "string" } },
+          "complements": { "type": "array", "items": { "type": "string" } },
+          "conflicts": { "type": "array", "items": { "type": "string" } },
+          "domain_role": { "enum": ["formal", "design", "validator", "primary"] },
+          "routing_role": { "enum": ["primary_candidate", "secondary_candidate", "validator_candidate"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

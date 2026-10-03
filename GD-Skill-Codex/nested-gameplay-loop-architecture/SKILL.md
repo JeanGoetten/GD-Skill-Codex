@@ -1,31 +1,32 @@
 ---
 name: nested-gameplay-loop-architecture
-description: Formalizes and designs nested gameplay loop architecture across multiple temporal scales (short, medium, and long term). Use this skill when the user requests: (1) design of continuous engagement and retention structures, (2) staggered alignment of temporal horizons (micro, meso, and macro loops), (3) observation and design of cognitive exit points, or (4) balancing of overlapping objective completions.
-domain:
-  primary:
-    - nested gameplay loops
-    - temporal architecture
-activation_signals:
-  concepts:
-    - short/mid/long loop
-    - session structure
-    - cognitive exit point
-  recognition_references:
-    - "Civilization"
-    - "Animal Crossing"
-    - "Hades"
-outputs:
-  - loop map
-  - continuity metrics
-  - calibration plan
-handoffs:
-  downstream:
-    - frame-based-combat-timing
-    - resource-flow-economy
-    - epistemic-holarchic-progression
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Formalizes and designs nested gameplay loop architecture across multiple temporal scales (short, medium, and long term). Use this skill when the user requests: (1) design of continuous engagement and retention structures, (2) staggered alignment of temporal horizons (micro, meso, and macro loops), (3) observation and design of cognitive exit points, or (4) balancing of overlapping objective completions."
+metadata:
+  domain:
+    primary:
+      - nested gameplay loops
+      - temporal architecture
+  activation_signals:
+    concepts:
+      - short/mid/long loop
+      - session structure
+      - cognitive exit point
+    recognition_references:
+      - "Civilization"
+      - "Animal Crossing"
+      - "Hades"
+  outputs:
+    - loop map
+    - continuity metrics
+    - calibration plan
+  handoffs:
+    downstream:
+      - frame-based-combat-timing
+      - resource-flow-economy
+      - epistemic-holarchic-progression
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Nested Gameplay Loop Architecture: Temporal Loop Alignment

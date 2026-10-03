@@ -23,6 +23,10 @@
                        "skill_id":  {
                                         "$ref":  "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId"
                                     },
+                       "executor_version": {
+                                               "type": "string",
+                                               "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+                                           },
                        "status":  {
                                       "enum":  [
                                                    "success",

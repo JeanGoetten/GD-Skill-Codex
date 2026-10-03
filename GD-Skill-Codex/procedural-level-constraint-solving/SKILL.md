@@ -1,31 +1,32 @@
 ---
 name: procedural-level-constraint-solving
-description: Analyzes playability and solvability risks in procedural levels using Constraint Satisfaction Programming (CSP). Use this skill when the user requests: (1) modeling of map generators with a verifiable critical path, (2) definition of Hard Constraints and Soft Constraints in generation algorithms, (3) constraint propagation and consistency verification via AC-3/Backtracking, or (4) detection of blocked or impossible scenarios in procedurally generated levels.
-domain:
-  primary:
-    - constraint solving
-    - procedural level generation
-activation_signals:
-  concepts:
-    - CSP
-    - AC-3
-    - backtracking
-  recognition_references:
-    - "Spelunky"
-    - "The Binding of Isaac"
-    - "Baba Is You"
-outputs:
-  - constraint model
-  - solvability evidence
-  - generator diagnostics
-handoffs:
-  downstream:
-    - discrete-state-machine-verification
-    - procedural-expressive-range-analysis
-    - spatial-topology-and-learning-pacing
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Analyzes playability and solvability risks in procedural levels using Constraint Satisfaction Programming (CSP). Use this skill when the user requests: (1) modeling of map generators with a verifiable critical path, (2) definition of Hard Constraints and Soft Constraints in generation algorithms, (3) constraint propagation and consistency verification via AC-3/Backtracking, or (4) detection of blocked or impossible scenarios in procedurally generated levels."
+metadata:
+  domain:
+    primary:
+      - constraint solving
+      - procedural level generation
+  activation_signals:
+    concepts:
+      - CSP
+      - AC-3
+      - backtracking
+    recognition_references:
+      - "Spelunky"
+      - "The Binding of Isaac"
+      - "Baba Is You"
+  outputs:
+    - constraint model
+    - solvability evidence
+    - generator diagnostics
+  handoffs:
+    downstream:
+      - discrete-state-machine-verification
+      - procedural-expressive-range-analysis
+      - spatial-topology-and-learning-pacing
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Procedural Level Constraint Solving: Solvable Generation

@@ -93,10 +93,11 @@ try {
         $executorPath = Join-Path (Join-Path $root 'executors') ($skillId + '.ps1')
 
         if (Test-Path -LiteralPath $executorPath) {
-            $executorJson = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $executorPath -WorldModelPath $executionWorldPath
+            $executorJson = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'invoke_skill_executor.ps1') -ExecutorPath $executorPath -WorldModelPath $executionWorldPath
             if ($LASTEXITCODE -ne 0) { throw "Executor falhou: $skillId" }
             $normalizedOutput = $executorJson | ConvertFrom-Json
             foreach ($pair in @(
+                @('schema_version', '1.0.0'),
                 @('claims', @()), @('anomalies', @()), @('assumptions', $skillAssumptions),
                 @('limitations', @('Resultado formal/derivado não substitui validação empírica.')),
                 @('handoffs', @()), @('metrics', @()), @('evidence', @())

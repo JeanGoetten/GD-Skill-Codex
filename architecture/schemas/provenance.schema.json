@@ -8,7 +8,7 @@
     "input_hash": { "type": "string", "minLength": 1 },
     "world_model_version": { "type": "string", "minLength": 1 },
     "skill_version": { "type": "string", "minLength": 1 },
-    "source_kind": { "enum": ["derived_from_declared_model", "derived_from_simulation", "empirical_observation", "INSUFFICIENT_EVIDENCE"] },
+    "source_kind": { "enum": ["derived_from_declared_model", "derived_from_repeated_analysis", "derived_from_simulation", "empirical_observation", "INSUFFICIENT_EVIDENCE"] },
     "dependencies": { "type": "array", "items": { "type": "string" } },
     "conflicts": { "type": "array", "items": { "type": "string" } }
   },

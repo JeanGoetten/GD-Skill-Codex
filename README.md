@@ -24,7 +24,7 @@ Catalog of conceptual skills for analysis and design of game systems.
 
 ## Conventions
 
-Each skill is in `DIRECTORY/SKILL.md`, starts with YAML front matter containing `name`, `description`, `domain.primary`, `activation_signals.concepts`, `activation_signals.recognition_references`, `outputs`, `handoffs.downstream` and `exclusions`. `name` uses exactly the name of the official directory. They all include `Domain`, `Purpose`, `Activation Signals`, `Scope`, `Exclusions`, `Handoff Conditions`, `Handoff Candidates` and `Recognition References`, in addition to the specific mathematical protocol.
+Each skill is in `DIRECTORY/SKILL.md` and starts with portable YAML front matter. The standard keys are `name`, `description` and `metadata`; project-specific fields live below `metadata` as `domain.primary`, `activation_signals.concepts`, `activation_signals.recognition_references`, `outputs`, `handoffs.downstream` and `exclusions`. `name` uses exactly the name of the official directory. They all include `Domain`, `Purpose`, `Activation Signals`, `Scope`, `Exclusions`, `Handoff Conditions`, `Handoff Candidates` and `Recognition References`, in addition to the specific mathematical protocol.
 
 ### Mathematical status and handoffs
 
@@ -54,6 +54,42 @@ In PowerShell, run:
 ```
 
 The script checks front matter, `name == directory` and required headings without installing dependencies.
+
+For the complete suite, install dependencies and run:
+
+```powershell
+npm ci
+npm run test:all
+```
+
+The live release gates are in [`ROADMAP.md`](ROADMAP.md). Historical implementation
+notes remain in [`docs/action-plan.md`](docs/action-plan.md), executable coverage
+is tracked in [`docs/spec-implementation-matrix.md`](docs/spec-implementation-matrix.md),
+and empirical-validity requirements are in
+[`docs/research-validity.md`](docs/research-validity.md).
+
+## End-to-end example
+
+Plan routing without executing a skill:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\architecture\run_analysis.ps1 `
+  -Request "verify state reachability and invariant violations" `
+  -WorldModelPath .\architecture\examples\state-system.example.json
+```
+
+Execute the routed skills and produce validated outputs, claims, provenance,
+confidence propagation, and conditional recommendations:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\architecture\execute_skills.ps1 `
+  -Request "verify state reachability and invariant violations" `
+  -WorldModelPath .\architecture\examples\state-system.example.json `
+  -OutputPath .\analysis-report.json
+```
+
+For the local catalog and bounded fixture runner, use `npm run serve`. The
+server binds to `127.0.0.1`; do not expose it to an untrusted network.
 
 ## Integrated feedback architecture
 
@@ -91,10 +127,10 @@ web data synchronization check. The minimum provenance contract
 it's in [`architecture/evidence.schema.json`](architecture/evidence.schema.json)
 and an example is in
 [`architecture/evidence.example.json`](architecture/evidence.example.json).
-The reference runner
+The planning-only reference runner
 [`architecture/run_analysis.ps1`](architecture/run_analysis.ps1) generates a plan
-of reproducible analysis and explicitly marks the insufficiency of evidence
-while the execution of the skills has not yet been implemented.
+of reproducible analysis and explicitly marks the insufficiency of evidence. Use
+it when only routing is desired; it intentionally does not execute skills.
 [`architecture/execute_skills.ps1`](architecture/execute_skills.ps1) is the operational dispatcher: it validates the world model, executes the skills in the routing order and, when there is a compatible adapter, executes the adapter **before** the next skill. The result of the adapter is injected into the temporary world model of the next skill in `hidden_state.handoff_context` and also preserved as `input_context` in `SkillOutput`. Thus, handoffs are effective inputs to the execution, and not just reports produced after it.
 The first versioned executor analyzes state systems in
 [`architecture/executors/discrete-state-machine-verification.ps1`](architecture/executors/discrete-state-machine-verification.ps1);

@@ -1,31 +1,32 @@
 ---
 name: concurrent-gameplay-processes
-description: Models synchronization of concurrent actions, parallel dependencies, and mutual blocking prevention (deadlocks) using Petri Nets. Use this skill when the user requests: (1) modeling of concurrent or simultaneous processes in games, (2) verification of real-time resource dependencies, (3) analysis of cooldowns, build queues, and parallel production, or (4) mathematical verification of liveness, boundedness, and deadlock freedom.
-domain:
-  primary:
-    - concurrency
-    - resource synchronization
-activation_signals:
-  concepts:
-    - Petri net
-    - deadlock
-    - parallel actions
-  recognition_references:
-    - "Factorio"
-    - "Oxygen Not Included"
-    - "RTS production"
-outputs:
-  - process model
-  - invariant report
-  - deadlock classification
-handoffs:
-  downstream:
-    - discrete-state-machine-verification
-    - resource-flow-economy
-    - frame-based-combat-timing
-exclusions:
-  - franchise-specific canon
-  - unvalidated claims
+description: "Models synchronization of concurrent actions, parallel dependencies, and mutual blocking prevention (deadlocks) using Petri Nets. Use this skill when the user requests: (1) modeling of concurrent or simultaneous processes in games, (2) verification of real-time resource dependencies, (3) analysis of cooldowns, build queues, and parallel production, or (4) mathematical verification of liveness, boundedness, and deadlock freedom."
+metadata:
+  domain:
+    primary:
+      - concurrency
+      - resource synchronization
+  activation_signals:
+    concepts:
+      - Petri net
+      - deadlock
+      - parallel actions
+    recognition_references:
+      - "Factorio"
+      - "Oxygen Not Included"
+      - "RTS production"
+  outputs:
+    - process model
+    - invariant report
+    - deadlock classification
+  handoffs:
+    downstream:
+      - discrete-state-machine-verification
+      - resource-flow-economy
+      - frame-based-combat-timing
+  exclusions:
+    - franchise-specific canon
+    - unvalidated claims
 ---
 
 # Concurrent Gameplay Processes: Petri-Net Concurrency

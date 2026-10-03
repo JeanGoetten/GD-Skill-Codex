@@ -49,6 +49,15 @@ Get-ChildItem -LiteralPath $skillsRoot -Directory | ForEach-Object {
         $errors.Add("$($dir.Name): front matter sem fechamento")
         return
     }
+    $allowedTopLevel = @('name', 'description', 'metadata')
+    for ($i = 1; $i -lt $end; $i++) {
+        if ($lines[$i] -match '^([a-zA-Z0-9_-]+):') {
+            $topLevelKey = $Matches[1]
+            if ($topLevelKey -notin $allowedTopLevel) {
+                $errors.Add("$($dir.Name): chave de front matter não padronizada: $topLevelKey")
+            }
+        }
+    }
     $nameLine = $lines | Where-Object { $_ -match '^name:\s*(.+)$' } | Select-Object -First 1
     if (-not $nameLine) {
         $errors.Add("$($dir.Name): campo name ausente")
@@ -56,13 +65,16 @@ Get-ChildItem -LiteralPath $skillsRoot -Directory | ForEach-Object {
         $errors.Add("$($dir.Name): name não corresponde ao diretório")
     }
     $descriptionLine = $lines | Where-Object { $_ -match '^description:\s*(.+)$' } | Select-Object -First 1
-    $structuredFields = @('domain:', 'activation_signals:', 'outputs:', 'handoffs:', 'exclusions:')
+    if (-not ($lines | Where-Object { $_ -eq 'metadata:' })) {
+        $errors.Add("$($dir.Name): campo metadata ausente")
+    }
+    $structuredFields = @('  domain:', '  activation_signals:', '  outputs:', '  handoffs:', '  exclusions:')
     foreach ($field in $structuredFields) {
         if (-not ($lines | Where-Object { $_ -match ('^' + [regex]::Escape($field)) })) {
             $errors.Add("$($dir.Name): campo estruturado ausente: $field")
         }
     }
-    foreach ($field in @('  primary:', '  concepts:', '  recognition_references:', '  downstream:')) {
+    foreach ($field in @('    primary:', '    concepts:', '    recognition_references:', '    downstream:')) {
         if (-not ($lines | Where-Object { $_ -eq $field })) {
             $errors.Add("$($dir.Name): subcampo estruturado ausente: $field")
         }
@@ -71,6 +83,13 @@ Get-ChildItem -LiteralPath $skillsRoot -Directory | ForEach-Object {
         $errors.Add("$($dir.Name): listas estruturadas sem itens")
     }
     if ($descriptionLine) {
+        $descriptionValue = ($descriptionLine -replace '^description:\s*', '').Trim()
+        if (-not ($descriptionValue.StartsWith('"') -and $descriptionValue.EndsWith('"'))) {
+            $errors.Add("$($dir.Name): description deve ser uma string YAML entre aspas")
+        }
+        if ($descriptionValue -match '[<>]') {
+            $errors.Add("$($dir.Name): description contém colchete angular proibido")
+        }
         foreach ($franchise in $franchiseNames) {
             if ($descriptionLine -match [regex]::Escape($franchise)) {
                 $errors.Add("$($dir.Name): description contém referência proibida: $franchise")
