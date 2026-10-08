@@ -211,3 +211,16 @@ The agent applying this skill calculates:
 - Frames remaining post-impact = $T(a) - t_{\text{hit}} = 32 - 11 = 21\text{ frames}$.
 - $\Delta_{\text{hit}} = 25 - 21 = +4\text{ frames}$ (Hit Advantage).
 - $\Delta_{\text{block}} = 15 - 21 = -6\text{ frames}$ (Block Disadvantage: punishable by any move with $T_{\text{startup}} \le 6\text{ frames}$).
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.frame_timing` against the input schema: `architecture/schemas/frame-timing.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill frame-based-combat-timing`.
+3. Run: `node bin/gd-codex.js execute frame-based-combat-timing --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/frame-timing.example.json`.
+<!-- gd-codex:how-to-execute:end -->

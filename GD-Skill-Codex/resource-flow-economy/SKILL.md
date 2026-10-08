@@ -201,3 +201,16 @@ $$\frac{d Q_{\text{gold}}(t)}{dt} = +10 - 2 = +8/\text{s}$$
 
 - **Analysis:** The stock is in surplus (a stock-flow result, not evidence of price inflation) ($\frac{dQ}{dt} = +8/\text{s}$). Every 6.25 seconds ($50 / 8$), the player accumulates enough gold to produce 1 soldier. Because the converter is *Interactive*, military force accumulates without bound **only under continuous player conversion**; the unbounded-growth claim is conditional on that behavior, not a property of the system alone.
 - **Recommendation:** Add a conditional Sink $\Delta R_{\text{gold}} = -0.5/\text{s}$ per active soldier.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.resource_flow` against the input schema: `architecture/schemas/resource-flow-economy.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill resource-flow-economy`.
+3. Run: `node bin/gd-codex.js execute resource-flow-economy --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/resource-flow-economy.example.json`.
+<!-- gd-codex:how-to-execute:end -->

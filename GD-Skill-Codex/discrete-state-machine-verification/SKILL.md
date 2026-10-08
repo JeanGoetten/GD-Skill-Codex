@@ -222,3 +222,16 @@ The agent applying this skill must formalize:
 - $F_{\text{victory}} = \{(3, \text{health} > 0, \text{open})\}$
 - $F_{\text{defeat}} = \{(\text{keys}, 0, \text{door})\}$
 - $\delta$ matrix formally mapping inputs `collect_key`, `take_damage`, `use_key`.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.state_system` against the input schema: `architecture/schemas/state-system.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill discrete-state-machine-verification`.
+3. Run: `node bin/gd-codex.js execute discrete-state-machine-verification --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/state-system.example.json`.
+<!-- gd-codex:how-to-execute:end -->

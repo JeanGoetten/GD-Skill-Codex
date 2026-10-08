@@ -208,3 +208,16 @@ The agent applying this skill formalizes:
 - **Punishment Window Calculation:**
 If attack misses target's hurtbox, attacker remains immobile for $50\text{ frames}$ ($833\text{ ms}$). An adversary within reach range with a response action of $T_{\text{startup}} \le 40\text{ frames}$ has enough time to advance and inflict a guaranteed critical hit.
 - **Diagnosis:** Extreme risk, massive reward action. Requires adjustment to stamina regeneration delay ($t_{\text{delay}} = 1.0\text{ s}$) to prevent disordered consecutive use.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.risk_reward_actions` against the input schema: `architecture/schemas/risk-reward-action.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill committed-risk-reward-actions`.
+3. Run: `node bin/gd-codex.js execute committed-risk-reward-actions --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/risk-reward-actions.example.json`.
+<!-- gd-codex:how-to-execute:end -->

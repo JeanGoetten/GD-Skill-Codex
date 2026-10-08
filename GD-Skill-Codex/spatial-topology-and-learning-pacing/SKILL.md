@@ -192,3 +192,16 @@ The agent applying this skill formalizes:
   3. **Room $V_3$ (Twist):** Gravity inversion must be performed mid-horizontal jump over an abyss. Tension $T = 0.65$.
   4. **Room $V_4$ (Combine):** Player must invert gravity while dodging projectiles and invoking previously learned dash mechanic ($M_{\text{dash}}$) from previous level. Tension $T = 0.90$.
   5. **Room $V_5$ (Rest):** Small room with reward, no enemies or obstacles, gravity normalized. Tension $T = 0.10$.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.spatial_pacing` against the input schema: `architecture/schemas/spatial-pacing.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill spatial-topology-and-learning-pacing`.
+3. Run: `node bin/gd-codex.js execute spatial-topology-and-learning-pacing --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/spatial-pacing.example.json`.
+<!-- gd-codex:how-to-execute:end -->

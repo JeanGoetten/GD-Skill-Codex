@@ -207,3 +207,16 @@ $$\Delta x_{\text{gain}}(R_{\text{global\_turbo}}) = 0.20 \cdot v_{\text{base}} 
 - **Matrix $M_{\text{prob}}$:**
   $P_8 \implies M_{\text{prob}}(R_{\text{global\_turbo}} \mid P_8) = 0.40$.
   $P_1 \dots P_4 \implies M_{\text{prob}}(R_{\text{global\_turbo}} \mid P_i) = 0.00$.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.competitive_feedback` against the input schema: `architecture/schemas/competitive-feedback.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill competitive-negative-feedback`.
+3. Run: `node bin/gd-codex.js execute competitive-negative-feedback --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/competitive-feedback.example.json`.
+<!-- gd-codex:how-to-execute:end -->

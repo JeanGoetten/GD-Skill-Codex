@@ -216,3 +216,16 @@ $$S_3 = f_{\text{resume}}(S_2) \implies \text{TimeScale} = 1 \implies \text{Imme
 
 - **Analysis:** Emergence occurs because the position swap method operates on the generic `SpatialEntity` class, allowing affecting projectiles without a specific "redirect projectile" script being programmed.
 - **Adjustment:** Define that $f_{\text{swap}}$ cost when affecting fast-moving entities consumes $1.5\times$ more energy to prevent boss fight trivialization.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.emergent_agency_composition` against the input schema: `architecture/schemas/emergent-agency-composition.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill emergent-agency-composition`.
+3. Run: `node bin/gd-codex.js execute emergent-agency-composition --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/emergent-agency-composition.example.json`.
+<!-- gd-codex:how-to-execute:end -->

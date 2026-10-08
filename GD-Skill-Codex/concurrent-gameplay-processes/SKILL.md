@@ -204,3 +204,16 @@ The agent applying this skill formalizes:
 - $W(p_{\text{in\_production}}, t_{\text{finish}}) = 1$
 - $W(t_{\text{finish}}, p_{\text{free\_slot}}) = 1$, $W(t_{\text{finish}}, p_{\text{unit\_ready}}) = 1$
 - Incidence matrix $C$. Liveness classification *within the formalized net*: with $M_0(p_{\text{mineral}}) = 100$ and no replenishment transition, $t_{\text{start\_production}}$ can fire at most twice and the net dies afterwards — the honest in-model classification is $L1$, not $L4$. $L4$ (live) holds only for an extended model variant that adds a mineral replenishment transition; if that variant is analyzed, add the transition to $T$ and redo the classification.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.petri_net` against the input schema: `architecture/schemas/petri-net.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill concurrent-gameplay-processes`.
+3. Run: `node bin/gd-codex.js execute concurrent-gameplay-processes --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/petri-net.example.json`.
+<!-- gd-codex:how-to-execute:end -->

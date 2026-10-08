@@ -1,0 +1,21 @@
+{
+  "$comment": "Single source of truth linking each skill to its executor contract. Consumed by bin/gd-codex.js, mcp/server.js and architecture/sync_skill_runtime.js. Verified by architecture/tests/runtime_manifest.test.js.",
+  "version": "1.0.0",
+  "skills": {
+    "cognitive-schema-disruption": { "hidden_state_key": "cognitive_schema_disruption", "schema": "cognitive-schema-disruption.schema.json", "fixture": "cognitive-schema-disruption.example.json" },
+    "committed-risk-reward-actions": { "hidden_state_key": "risk_reward_actions", "schema": "risk-reward-action.schema.json", "fixture": "risk-reward-actions.example.json" },
+    "competitive-negative-feedback": { "hidden_state_key": "competitive_feedback", "schema": "competitive-feedback.schema.json", "fixture": "competitive-feedback.example.json" },
+    "concurrent-gameplay-processes": { "hidden_state_key": "petri_net", "schema": "petri-net.schema.json", "fixture": "petri-net.example.json" },
+    "discrete-state-machine-verification": { "hidden_state_key": "state_system", "schema": "state-system.schema.json", "fixture": "state-system.example.json" },
+    "emergent-agency-composition": { "hidden_state_key": "emergent_agency_composition", "schema": "emergent-agency-composition.schema.json", "fixture": "emergent-agency-composition.example.json" },
+    "epistemic-holarchic-progression": { "hidden_state_key": "epistemic_progression", "schema": "epistemic-progression.schema.json", "fixture": "epistemic-progression.example.json" },
+    "exponential-progression-and-prestige": { "hidden_state_key": "progression_analysis", "schema": "progression-analysis.schema.json", "fixture": "progression-analysis.example.json" },
+    "frame-based-combat-timing": { "hidden_state_key": "frame_timing", "schema": "frame-timing.schema.json", "fixture": "frame-timing.example.json" },
+    "macroeconomic-resource-conversion": { "hidden_state_key": "macroeconomic_conversion", "schema": "macroeconomic-conversion.schema.json", "fixture": "macroeconomic-conversion.example.json" },
+    "nested-gameplay-loop-architecture": { "hidden_state_key": "nested_gameplay_loop_architecture", "schema": "nested-gameplay-loop-architecture.schema.json", "fixture": "nested-gameplay-loop-architecture.example.json" },
+    "procedural-expressive-range-analysis": { "hidden_state_key": "era", "schema": "procedural-expressive-range-analysis.schema.json", "fixture": "procedural-expressive-range-analysis.example.json" },
+    "procedural-level-constraint-solving": { "hidden_state_key": "csp_system", "schema": "csp-system.schema.json", "fixture": "csp-system.example.json" },
+    "resource-flow-economy": { "hidden_state_key": "resource_flow", "schema": "resource-flow-economy.schema.json", "fixture": "resource-flow-economy.example.json" },
+    "spatial-topology-and-learning-pacing": { "hidden_state_key": "spatial_pacing", "schema": "spatial-pacing.schema.json", "fixture": "spatial-pacing.example.json" }
+  }
+}

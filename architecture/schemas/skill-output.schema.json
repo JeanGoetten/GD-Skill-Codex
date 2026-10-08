@@ -42,13 +42,40 @@
                                        "type":  "object"
                                    },
                        "metrics":  {
-                                       "type":  "array"
+                                       "type":  "array",
+                                       "items": {
+                                           "type": "object",
+                                           "required": ["name", "value", "status"],
+                                           "properties": {
+                                               "name": { "type": "string", "minLength": 1 },
+                                               "value": { "type": ["number", "string", "boolean", "null"] },
+                                               "status": { "type": "string", "minLength": 1 }
+                                           }
+                                       }
                                    },
                        "evidence":  {
-                                        "type":  "array"
+                                        "type":  "array",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["type", "status"],
+                                            "properties": {
+                                                "type": { "type": "string", "minLength": 1 },
+                                                "status": { "type": "string", "minLength": 1 },
+                                                "id": { "type": "string" },
+                                                "source": { "type": "string" }
+                                            }
+                                        }
                                     },
                        "handoffs":  {
-                                        "type":  "array"
+                                        "type":  "array",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["target", "reason"],
+                                            "properties": {
+                                                "target": { "$ref": "https://gd-skill-codex.local/schemas/ids.schema.json#/$defs/skillId" },
+                                                "reason": { "type": "string", "minLength": 1 }
+                                            }
+                                        }
                                     },
                        "errors":  {
                                       "items":  { "type": "string" },

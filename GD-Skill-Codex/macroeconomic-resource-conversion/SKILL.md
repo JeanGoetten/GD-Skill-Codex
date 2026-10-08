@@ -207,3 +207,16 @@ $$\frac{dM}{dt} = +800,000\text{ coins/day} \quad (\text{sustained net emission;
   1. Add production registration tax per factory: $T_{\text{fab}} = 500,000\text{ coins/day}$.
   2. Implement 10% market sales tax on Metal and Crystal transactions ($T_{\text{market}} \approx 300,000\text{ coins/day}$).
   3. Post-adjustment result: $\frac{dM}{dt} = 1,000,000 - (200,000 + 500,000 + 300,000) = 0$ (zero net emission achieved; a price-trend conclusion still requires observed $V$ and $Y$).
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.macroeconomic_conversion` against the input schema: `architecture/schemas/macroeconomic-conversion.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill macroeconomic-resource-conversion`.
+3. Run: `node bin/gd-codex.js execute macroeconomic-resource-conversion --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/macroeconomic-conversion.example.json`.
+<!-- gd-codex:how-to-execute:end -->

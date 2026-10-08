@@ -207,3 +207,16 @@ The agent applying this skill formalizes:
   - **$H_2$ (Astronomical Observatory):** Reveals that "upper clouds generate free-fall acceleration sufficient to reach $600\text{ kPa}$" ($Out \to H_3$).
   - **$H_3$ (Synthesis Holon):** Allows player's mental model to combine $H_1 + H_2 \implies$ "I must climb the upper cloud and jump directly onto the tower".
 - **Epistemic Validation:** If a veteran player starts a *New Game* and jumps from the cloud immediately without reading $H_1$ and $H_2$, the tower opens normally. Progression was $100\%$ maintained at the player's cognitive level.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.epistemic_progression` against the input schema: `architecture/schemas/epistemic-progression.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill epistemic-holarchic-progression`.
+3. Run: `node bin/gd-codex.js execute epistemic-holarchic-progression --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/epistemic-progression.example.json`.
+<!-- gd-codex:how-to-execute:end -->

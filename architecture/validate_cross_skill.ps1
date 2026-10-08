@@ -22,6 +22,7 @@ foreach ($handoff in $handoffs.handoffs) {
     if (-not $handoff.PSObject.Properties.Name.Contains('iteration')) { $errors.Add("handoff sem iteration: $($handoff.source) -> $($handoff.target)") }
     if ($handoff.iteration.max_cycles -lt 1) { $errors.Add("handoff com max_cycles inválido: $($handoff.source) -> $($handoff.target)") }
     if ($ids -notcontains $handoff.return_to) { $errors.Add("handoff com return_to inválido: $($handoff.return_to)") }
+    elseif (@($handoff.source, $handoff.target) -notcontains $handoff.return_to) { $errors.Add("handoff return_to must be the source or the target of the pair: $($handoff.source) -> $($handoff.target) returns to $($handoff.return_to)") }
 }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output "OK: registry com 15 skills e consistência cross-skill verificada."

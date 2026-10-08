@@ -210,3 +210,16 @@ The agent applying this skill formalizes:
 - **Algorithmic Validation:**
   If generator draws a path dropping at $x=2, y=3$, room $V_{2,4}$ obligatorily assumes hard constraint of containing `S_end` or providing horizontal passage to it, reducing its domain $D(V_{2,4})$ to only compatible pieces.
 - **Result:** Under the stated domains and a successful global verifier, each accepted instance has a validated path; this is not a guarantee outside the modeled rules.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.csp_system` against the input schema: `architecture/schemas/csp-system.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill procedural-level-constraint-solving`.
+3. Run: `node bin/gd-codex.js execute procedural-level-constraint-solving --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/csp-system.example.json`.
+<!-- gd-codex:how-to-execute:end -->

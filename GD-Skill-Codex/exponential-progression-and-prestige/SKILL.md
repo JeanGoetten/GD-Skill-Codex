@@ -219,3 +219,16 @@ $$P = \lfloor \sqrt{1000} \rfloor = 31 \text{ Prestige Crystals}$$
 - If $\beta = 0.05$ (+$5\%$ bonus per crystal):
 
 $$M_{\text{prestige}} = 1 + (31 \cdot 0.05) = 2.55 \quad (\text{155\% increase in } GPS)$$
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.progression_analysis` against the input schema: `architecture/schemas/progression-analysis.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill exponential-progression-and-prestige`.
+3. Run: `node bin/gd-codex.js execute exponential-progression-and-prestige --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/progression-analysis.example.json`.
+<!-- gd-codex:how-to-execute:end -->

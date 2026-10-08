@@ -203,3 +203,16 @@ The agent applying this skill formalizes:
 - **Diagnosis:** Algorithm is highly biased towards strictly linear maps with extremely high trap density.
 - **Detected Anomaly:** Region $(BC_1 > 0.60, BC_2 < 0.30)$ has $0\%$ density. Generator incapable of producing exploratory maps with low hazard presence.
 - **Code Recommendation:** Relax edge deallocation constraint in Minimum Spanning Tree (MST) algorithm to allow deliberate creation of shortcuts and cycles in the graph.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.era` against the input schema: `architecture/schemas/procedural-expressive-range-analysis.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill procedural-expressive-range-analysis`.
+3. Run: `node bin/gd-codex.js execute procedural-expressive-range-analysis --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/procedural-expressive-range-analysis.example.json`.
+<!-- gd-codex:how-to-execute:end -->

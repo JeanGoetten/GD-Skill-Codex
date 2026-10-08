@@ -9,6 +9,8 @@
     "time_unit": { "enum": ["seconds", "minutes", "hours"] },
     "minimum_completion_offset_seconds": { "type": "number", "minimum": 0 },
     "retention_pressure_target": { "type": "number", "minimum": 0, "maximum": 1 },
+    "drought_threshold_seconds": { "type": "number", "exclusiveMinimum": 0, "description": "Heuristic: meso loops at or above this duration without intermediate rewards are flagged (default 900 s)." },
+    "excessive_retention_threshold": { "type": "number", "minimum": 0, "maximum": 1, "description": "Heuristic: pressure above this value is reported as excessive_retention (default 0.85)." },
     "loops": {
       "type": "array",
       "minItems": 3,
@@ -27,6 +29,7 @@
           "contributes_to": { "type": "array", "items": { "type": "string", "minLength": 1 } },
           "receives_from": { "type": "array", "items": { "type": "string", "minLength": 1 } },
           "completion_times_seconds": { "type": "array", "items": { "type": "number", "minimum": 0 } },
+          "intentional_completion_times_seconds": { "type": "array", "items": { "type": "number", "minimum": 0 }, "description": "Subset of completion times declared as designed synchronization (session hook, chapter finale). Coincidences where every participant declares the time are reported as intentional, not flagged." },
           "remaining_seconds": { "type": "number", "minimum": 0 },
           "progress": { "type": "number", "minimum": 0, "maximum": 1 },
           "intermediate_rewards": { "type": "array", "items": { "type": "string", "minLength": 1 } }

@@ -206,3 +206,16 @@ The agent applying this skill formalizes:
 - **Disruptive Real Transition ($\delta_{\text{real}}$):** *Logic*'s statement is a rationalist delusion induced by the protagonist's own childhood trauma (hidden state variable $S_{\text{trauma}} = \text{True}$). *Logic*'s advice leads to a wrongful accusation.
 - **Retrospective Hidden Clues:** Previous item descriptions in inventory indicated *Logic* became overly aggressive when dealing with certain family themes.
 - **Analysis:** Disruption requires player to stop blindly trusting the game interface and start analyzing "Logic" as an imperfect character with their own agenda (Cognitive Accommodation).
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.cognitive_schema_disruption` against the input schema: `architecture/schemas/cognitive-schema-disruption.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill cognitive-schema-disruption`.
+3. Run: `node bin/gd-codex.js execute cognitive-schema-disruption --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/cognitive-schema-disruption.example.json`.
+<!-- gd-codex:how-to-execute:end -->

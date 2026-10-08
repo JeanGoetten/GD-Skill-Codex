@@ -212,3 +212,16 @@ The agent applying this skill formalizes:
   - Simultaneously, Macro-Loop (Star System) will be at 30% completion on Turn 5 and 80% on Turn 13.
 
 - **Result:** On Turn 5 (completion of $A$), player is hooked by immediate opportunity to start $B$, which will carry them to Turn 13, when Macro-Loop will be nearly ready (Turn 15). The cognitive exit point is shifted into the future; whether that is desirable depends on design intent and must respect voluntary stopping — observe actual exit behavior in playtests instead of treating delayed exit as a success metric.
+
+<!-- gd-codex:how-to-execute:start -->
+## How to Execute
+
+This skill has a deterministic reference executor. Use it for the structural checks; the reasoning in the sections above still applies to interpreting the results.
+
+1. Read this file and check `hidden_state.nested_gameplay_loop_architecture` against the input schema: `architecture/schemas/nested-gameplay-loop-architecture.schema.json`.
+2. Validate: `node bin/gd-codex.js validate --world <world.json> --skill nested-gameplay-loop-architecture`.
+3. Run: `node bin/gd-codex.js execute nested-gameplay-loop-architecture --world <world.json>`, or the MCP tool `execute_skill`.
+4. If the slice is missing, do not invent values. Declare the unknowns or answer `INSUFFICIENT_EVIDENCE`.
+
+Minimal valid example: `architecture/examples/nested-gameplay-loop-architecture.example.json`.
+<!-- gd-codex:how-to-execute:end -->

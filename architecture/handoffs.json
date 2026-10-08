@@ -150,7 +150,7 @@
                                                  "hidden_coherence",
                                                  "calibration_hypotheses"
                                              ],
-                         "return_to":  "spatial-topology-and-learning-pacing",
+                         "return_to":  "epistemic-holarchic-progression",
                          "iteration":  {
                                            "max_cycles":  3,
                                            "convergence_metric":  "stable_disruption_coherence"

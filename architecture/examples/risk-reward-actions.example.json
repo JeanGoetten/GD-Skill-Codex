@@ -14,6 +14,8 @@
   "hidden_state": {
     "risk_reward_actions": {
       "reaction_min_frames": 10,
+      "opponent_punish_startup_frames": 8,
+      "opponent_punish_damage": 25,
       "action_contracts": [
         {
           "id": "heavy_slam",

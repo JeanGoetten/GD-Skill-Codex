@@ -6,6 +6,10 @@
   "required": ["action_contracts"],
   "properties": {
     "reaction_min_frames": { "type": "integer", "minimum": 0 },
+    "opponent_punish_startup_frames": { "type": "integer", "minimum": 0, "description": "Declared startup of the opponent's fastest punish; enables punish-window computation." },
+    "opponent_punish_damage": { "type": "number", "minimum": 0 },
+    "dominance_damage_ratio": { "type": "number", "exclusiveMinimum": 0, "description": "Heuristic threshold (default 1.5 x average damage)." },
+    "hurtbox_exposure_ratio": { "type": "number", "exclusiveMinimum": 0, "description": "Heuristic threshold (default 2.0 x hitbox area)." },
     "action_contracts": {
       "type": "array",
       "minItems": 1,
