@@ -62,6 +62,22 @@ npm ci
 npm run test:all
 ```
 
+### For AI agents
+
+Agents should start with [`AGENTS.md`](AGENTS.md). It covers routing, the epistemic
+rules every answer must follow, and the commands below.
+
+```bash
+node bin/gd-codex.js list                              # the 15 skills
+node bin/gd-codex.js skill <id>                        # contract + minimal example
+node bin/gd-codex.js validate --world world.json --skill <id>
+node bin/gd-codex.js execute <id> --world world.json   # needs PowerShell or pwsh
+node mcp/server.js                                     # MCP server over stdio
+```
+
+Executors are PowerShell scripts. `route`, `execute` and `pipeline` need PowerShell
+(`powershell.exe` on Windows, `pwsh` 7+ elsewhere). `list`, `skill` and `validate` need only Node.
+
 The live release gates are in [`ROADMAP.md`](ROADMAP.md). Historical implementation
 notes remain in [`docs/action-plan.md`](docs/action-plan.md), executable coverage
 is tracked in [`docs/spec-implementation-matrix.md`](docs/spec-implementation-matrix.md),

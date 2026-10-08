@@ -49,9 +49,13 @@ Net; do not extend an FSM to represent complex concurrency.
 The central registry at `architecture/skill-registry.json` is migrating to
 separate two dimensions:
 
-- **domain role**: nature of the skill (`formal`, `design`, `hybrid`);
-- **routing role**: contextual role (`primary_candidate`, `secondary`,
-  `validator`).
+- **domain role**: nature of the skill (`formal`, `design`, `validator`, `primary`);
+- **routing role**: contextual role (`primary_candidate`, `secondary_candidate`,
+  `validator_candidate`).
+
+The enumerations above are the ones enforced by `schemas/skill-registry.schema.json`.
+A hybrid model is expressed by the skill's `formalism` (for example the FSM + Petri
+combination), not by a `domain_role` value.
 
 Role migration is complete. `domain_role` and `routing_role` are the only valid dimensions for new contracts; any occurrence of `role` in the registry is an architectural error.
 The router uses problem profiles before generic signals. The score matches
