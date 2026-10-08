@@ -17,6 +17,8 @@ const steps = [
   { name: 'schemas + fixtures (AJV)', cmd: process.execPath, args: ['architecture/validate_json_schema.js'] },
   { name: 'How to Execute sections in sync', cmd: process.execPath, args: ['architecture/sync_skill_runtime.js', '--check'] },
   { name: 'executor regression tests', cmd: process.execPath, args: ['--test', 'architecture/tests/executor_fixes.test.js'] },
+  { name: 'threshold sync (executors vs calibration vs SKILL.md)', cmd: process.execPath, args: ['--test', 'architecture/tests/threshold_sync.test.js'] },
+  { name: 'world-model extraction guide skeleton', cmd: process.execPath, args: ['--test', 'architecture/tests/extraction_guide.test.js'] },
   { name: 'MCP server smoke test', cmd: process.execPath, args: ['architecture/tests/mcp_smoke.test.js'] },
   { name: 'skill front matter / headings', shell: true, needsPs: true, ps: './validate_skills.ps1' },
   { name: 'architecture aggregate (fixtures, cross-skill, playtest)', shell: true, needsPs: true, ps: './architecture/validate_all.ps1' },

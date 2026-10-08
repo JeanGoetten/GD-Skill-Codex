@@ -81,10 +81,21 @@
                                       "items":  { "type": "string" },
                                       "type":  "array"
                                   },
-                       "claims": { "type": "array" },
-                       "anomalies": { "type": "array" },
-                       "assumptions": { "type": "array" },
-                       "limitations": { "type": "array" },
+                       "claims": {
+                                     "type": "array",
+                                     "items": {
+                                         "type": "object",
+                                         "required": ["statement", "epistemic_status"],
+                                         "properties": {
+                                             "statement": { "type": "string", "minLength": 1 },
+                                             "epistemic_status": { "enum": ["formal", "derived", "heuristic", "empirical"] },
+                                             "source": { "type": "string" }
+                                         }
+                                     }
+                                 },
+                       "anomalies": { "type": "array", "items": { "type": "string" } },
+                       "assumptions": { "type": "array", "items": { "type": "string" } },
+                       "limitations": { "type": "array", "items": { "type": "string" } },
                        "conflicts": { "type": "array" },
                        "input_context": { "type": ["object", "null"] }
                    },

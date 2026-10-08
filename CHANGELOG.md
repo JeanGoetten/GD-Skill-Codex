@@ -6,9 +6,11 @@
   shared `architecture/lib/runtime.js`. See `AGENTS.md`.
 - Add a generated "How to Execute" section to all 15 skills, kept in sync by
   `architecture/sync_skill_runtime.js --check`.
-- Fix executor/spec divergences: intentional synchronization in nested loops, drought
-  threshold (900 s per spec), open-loop retention pressure, punish windows and
-  undeclared-input status in risk-reward. Thresholds are now declarable and labelled as heuristics.
+- Fix executor/spec divergences: intentional synchronization in nested loops, open-loop
+  retention pressure, punish windows and undeclared-input status in risk-reward. Thresholds
+  are now declarable and labelled as heuristics, with provenance in
+  `architecture/threshold-provenance.json`. The drought default (900 s) is the upper bound of the
+  heuristic meso-loop band; the SKILL.md does not define a drought rule.
 - Fix PowerShell pitfalls that silenced checks: integer `[math]::Min/Max` truncation,
   `@($obj.missing).Count`, and `[double]$null` creating false completions.
 - Type the `SkillOutput` `metrics`, `evidence` and `handoffs` items.

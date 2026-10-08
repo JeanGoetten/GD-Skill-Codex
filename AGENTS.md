@@ -11,6 +11,10 @@ Executors check consistency; they do not prove playtest outcomes.
 
 ## Before you answer a game-design question
 
+Read `architecture/world-model-extraction.md` before building a world model from a
+description. It covers how to separate stated from inferred facts and when to answer
+`INSUFFICIENT_EVIDENCE`.
+
 1. Route the request. Use `route_request` (MCP) or `node bin/gd-codex.js route "<request>"`.
    Treat the result as a baseline. Override it when the request clearly needs a
    different skill, and say so.

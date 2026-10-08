@@ -59,7 +59,7 @@ test('loops: partially declared alignment still counts as unplanned', () => {
   assert.deepStrictEqual(d.points[0].undeclared_loops, ['meso-upgrade']);
 });
 
-test('loops: drought threshold follows the SKILL.md band (>= 900 s) and is declarable', () => {
+test('loops: drought default is the meso-band upper bound (900 s, heuristic) and is declarable', () => {
   const run = (mutate) => runExecutor(LOOPS, LOOPS_FIXTURE, (h) => {
     const meso = h.nested_gameplay_loop_architecture.loops[1];
     meso.duration_seconds = 900;

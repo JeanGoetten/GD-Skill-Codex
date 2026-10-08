@@ -284,6 +284,6 @@ For a quick overview, start with Explorer. To study a concrete analysis, first o
 
 ## Consolidated project file
 
-[`GD-Skill-Codex.txt`](GD-Skill-Codex.txt) is the single textual distribution of the
-project. It contains the full content of all other textual files,
-organized by relative path and delimited by markers. The file is regenerated whenever any project file changes; the consolidated file itself is not included as input to prevent recursion.
+`GD-Skill-Codex.txt`, a single-file dump of the project, is no longer part of the tree. No
+script generates it, so keeping it would let it drift from the sources. Earlier versions are in
+the git history (for example `4c107ec`). Use the repository itself as the source of truth.

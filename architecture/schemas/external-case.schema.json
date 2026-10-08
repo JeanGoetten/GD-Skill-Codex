@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gd-skill-codex.local/schemas/external-case.schema.json",
+  "title": "External evaluation case record (docs/research-validity.md)",
+  "description": "One external system evaluated for one skill. Raters record their expected diagnosis BEFORE the Codex result is shown. Fixtures are not external cases and must not be recorded here.",
+  "type": "object",
+  "required": ["case_id", "skill_id", "case_type", "system_description", "raters", "expected_by_rater", "codex_result", "agreement", "outcome_status"],
+  "properties": {
+    "case_id": { "type": "string", "pattern": "^[a-z0-9-]+-ext-[0-9]{2}$" },
+    "skill_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "case_type": { "enum": ["expected_positive", "expected_negative", "ambiguous"] },
+    "system_description": { "type": "string", "minLength": 20, "description": "Enough detail to reproduce the world model. Must not be authored from the skill fixture." },
+    "source_is_external": { "const": true },
+    "raters": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["rater_id", "is_independent", "recorded_before_codex"],
+        "properties": {
+          "rater_id": { "type": "string", "minLength": 1 },
+          "is_independent": { "const": true },
+          "recorded_before_codex": { "const": true }
+        }
+      }
+    },
+    "expected_by_rater": {
+      "type": "array", "minItems": 2,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "codex_result": {
+      "type": "object",
+      "required": ["routing_top1", "routing_top3", "diagnosis_status"],
+      "properties": {
+        "routing_top1": { "type": "string" },
+        "routing_top3": { "type": "array", "items": { "type": "string" } },
+        "diagnosis_status": { "enum": ["success", "partial", "blocked", "failed", "INSUFFICIENT_EVIDENCE"] }
+      }
+    },
+    "agreement": {
+      "type": "object",
+      "required": ["inter_rater", "codex_vs_consensus"],
+      "properties": {
+        "inter_rater": { "type": "string", "enum": ["agree", "disagree", "partial"] },
+        "codex_vs_consensus": { "type": "string", "enum": ["agree", "disagree", "partial", "not_applicable"] }
+      }
+    },
+    "outcome_status": {
+      "enum": ["not_observed", "observed"],
+      "description": "Routing and diagnosis agreement can be recorded now. Empirical outcomes (player behaviour) stay not_observed until playtest data exists; never promote confidence on agreement alone."
+    },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}
